@@ -28,7 +28,7 @@ UMKM NTB
                         @if (Auth::check())
                         @else
                         <a href="{{ url('daftar') }}" class="site-btn sb-light-dark mr-4 mb-3">Daftar</a>
-                        <a href="{{ url('masuk') }}" class="site-btn sb-white">Login</a>
+                        <a href="{{ url('login') }}" class="site-btn sb-white">Login</a>
                         @endif
 
                     </div>
