@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap');
+
+body {
+    font-family: "Quicksand";
+}
+  
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.center {    
+    justify-content: center;
+    align-items: center;
+}
+
+.active {
+    background: gainsboro;
+}
+
+md-dialog.large {
+    width: 100%;
+}
+
+md-dialog.medium {
+    width: 75%;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+input.search:focus, b:focus {
+    outline: none;
+    border: 0;
+}
+
+input.search {
+    border-width: 0; 
+    margin: 16px; 
+    width: 100%;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+table.no-checkbox md-checkbox, table.no-checkbox td.md-checkbox-cell, table.no-checkbox th.md-checkbox-column {
+    display: none !important;
+}
+
+.md-datepicker-input {
+    min-width: 100% !important;
+}
+
+.md-datepicker-input-container {
+    width: calc(100% - 64px);
+}
+
+.md-input-message-animation.custom {
+    color: inherit;
+}
+
+.hint {
+    position: absolute;
+    left: 2px;
+    right: auto;
+    bottom: 7px;
+    font-size: 12px;
+    line-height: 14px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.date.hint {
+    margin-left: 65px;
+}
+
+md-toolbar.md-table-toolbar .md-toolbar-tools md-icon.white {
+    color: white;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
