@@ -17,10 +17,8 @@ class User extends Authenticatable
         'nik',
         'password',
     ];
-    
-    protected $hidden = [
-        'password',
-    ];
 
- 
+    protected $hidden = [
+        // 'password',
+    ];
 }

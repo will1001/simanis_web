@@ -156,11 +156,11 @@
               <h3 class="title">Simanis</h3>
               <div class="form-group">
                 <span class="input-icon"><i class="fa fa-user"></i></span>
-                <input class="form-control" type="string" placeholder="NIK" name="nik">
+                <input class="form-control" type="string" placeholder="NIK" name="nik" minlength="8">
               </div>
               <div class="form-group">
                 <span class="input-icon"><i class="fa fa-lock"></i></span>
-                <input class="form-control" type="password" placeholder="Password" name="password">
+                <input class="form-control" type="password" placeholder="Password" name="password" minlength="8">
               </div>
               <button class="btn signin">Daftar</button>
               <span class="register"><a href="{{url('login')}}">Login</a></span>

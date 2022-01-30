@@ -509,8 +509,8 @@ text-align: center;
 
 
                 @if (Auth::check())
-                @if (Auth::user()->tipe_user == 'admin')
-                <li><a href="#0">{{ Auth::user()->nama }}</a>
+                @if (Auth::user()->isAdmin == 1)
+                <li><a href="#0">{{ Auth::user()->nik }}</a>
                     <ul class="sub-menu">
                         <li><a href="{{ url('a/badan_usaha') }}">Dashboard</a></li>
                         <li>
@@ -523,7 +523,7 @@ text-align: center;
                     </ul>
                 </li>
                 @endif
-                @if (Auth::user()->tipe_user == 'pengusaha')
+                @if (Auth::user()->isAdmin == 0)
                 <li><a href="#0">{{ Auth::user()->nama }}</a>
                     <ul class="sub-menu">
                         

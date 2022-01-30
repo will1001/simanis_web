@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\BadanUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
-use function PHPUnit\Framework\isEmpty;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -17,17 +15,27 @@ class AuthController extends Controller
     function login(Request $r)
     {
         if ($r->isMethod('get')) {
-            return view('pages.login');
+            if (Auth::check()) {
+                if (Auth::user()->isAdmin === 1) {
+                    return redirect('/admin');
+                } else {
+                    return redirect('/member')->with('user', Auth::user());
+                }
+            } else {
+                return view('pages.login');
+            }
         } else {
             $nik = $r->input('nik');
-            $password = $r->input('password');
             $user = User::where('nik', $nik)->get();
             if (!$user->isEmpty()) {
-                if (Auth::attempt(['nik' => $nik, 'password' => $password])) {
+                $credentials = $r->only('nik', 'password');
+                if (Auth::attempt($credentials)) {
+                    $r->session()->regenerate();
+
                     if ($user[0]->isAdmin === 1) {
-                        return redirect('/admin');
+                        return redirect()->intended('admin');
                     } else {
-                        return redirect('/member');
+                        return redirect()->intended('member');
                     }
                 } else {
                     return view('pages.login', ['msg' => "Password Salah"]);
@@ -43,10 +51,19 @@ class AuthController extends Controller
     function register(Request $r)
     {
         if ($r->isMethod('get')) {
-            return view('pages.register');
+            if (Auth::check()) {
+                if (Auth::user()->isAdmin === 1) {
+                    return redirect('/admin');
+                } else {
+                    return redirect('/member')->with('user', Auth::user());;
+                }
+            } else {
+                return view('pages.register');
+            }
         } else {
             $nik = $r->input('nik');
             $password = $r->input('password');
+
 
             $users = new User([
                 'id' => (string) Str::uuid(),
@@ -57,7 +74,19 @@ class AuthController extends Controller
             // BUAT USER
             $users->save();
 
-            return view('pages.login');
+            return view('pages.login', ['msg' => "Pendaftaran Berhasil Silahkan Login"]);
         }
+    }
+
+    function logout(Request $r)
+    {
+        Session::flush();
+        Auth::logout();
+
+        $r->session()->invalidate();
+
+        $r->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

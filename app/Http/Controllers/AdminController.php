@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\BadanUsaha;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -60,11 +61,14 @@ class AdminController extends Controller
     ];
     public function getBadanUsaha()
     {
+        if (Auth::check()) {
+            $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha_new.id_kabupaten', '=', 'kabupaten.id')
+                ->paginate(100, $this->fields);
 
-        $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha_new.id_kabupaten', '=', 'kabupaten.id')
-        ->paginate(100, $this->fields);
-
-        return view('pages.Admin', ['BadanUsaha' => $BadanUsaha, 'keyword' => ""]);
+            return view('pages.Admin', ['BadanUsaha' => $BadanUsaha, 'keyword' => ""]);
+        } else {
+            return redirect('/login');
+        }
     }
 
 
@@ -73,7 +77,7 @@ class AdminController extends Controller
         $keyword = $request->input('keyword');
 
         $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha_new.id_kabupaten', '=', 'kabupaten.id')
-        ->where('badan_usaha_new.nik', 'LIKE', "%{$keyword}%");
+            ->where('badan_usaha_new.nik', 'LIKE', "%{$keyword}%");
 
 
         foreach ($this->orWhere as &$field) {
