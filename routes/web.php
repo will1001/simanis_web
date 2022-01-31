@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +28,13 @@ Route::match(['get', 'post'], '/login', [AuthController::class, 'login']);
 Route::match(['get', 'post'], '/daftar', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin', [AdminController::class, 'getBadanUsaha']);
-Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha']);
+Route::get('/admin/{pages}', [AdminController::class, 'index'])->name('admin');
+Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha'])->name('admin_search');
 Route::get('/admin/deleteAll', [AdminController::class, 'deleteAllBadanUsaha']);
 Route::post('/admin/import', [AdminController::class, 'importExcel']);
 Route::get('/admin/export', [AdminController::class, 'exportExcel']);
 
-Route::get('/member', [MemberController::class, 'index'])->name('member');
+Route::get('/member/{pages}', [MemberController::class, 'index'])->name('member');
+
+Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
+

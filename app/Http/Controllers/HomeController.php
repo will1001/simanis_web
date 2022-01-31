@@ -9,16 +9,16 @@ use App\Models\Kabupaten;
 
 class HomeController extends Controller
 {
-     public function index()
+    public function index()
     {
-        
-        $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha_new.id_kabupaten', '=', 'kabupaten.id')
-					->get();
+
+        $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->get();
 
         return view('Home', [
-                    'BadanUsaha' => $BadanUsaha,
-                    'kabupaten'=>Kabupaten::all(),
-                    'cabangIndustri'=>CabangIndustri::all(),
-                ]);
+            'BadanUsaha' => $BadanUsaha,
+            'kabupaten' => Kabupaten::all(),
+            'cabangIndustri' => CabangIndustri::all(),
+        ]);
     }
 }

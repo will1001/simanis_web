@@ -34,13 +34,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('admin_template/assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" />
-    <style>
-        .Container-Table {
-            background-color: white;
-            padding: 20px;
-            margin: 20px;
-        }
-    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -49,29 +42,37 @@
             <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="{{route('home')}}">
                 <img src="{{ asset('admin_template/assets/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold text-white">ADMIN SIMANIS</span>
+                <span class="ms-1 font-weight-bold text-white">{{Auth::user()->nik}}</span>
             </a>
         </div>
         <hr class="horizontal light mt-0 mb-2">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white {{$pages=='tabel'?'active bg-gradient-primary':''}}" href="{{url('admin/tabel')}}">
+                    <a class="nav-link text-white {{$pages=='tabel'?'active bg-gradient-primary':''}}" href="{{url('admin/dashboard')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-table"></i>
+                            <i class="fas fa-th"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Tabel</span>
+                        <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{$pages=='grafik'?'active bg-gradient-primary':''}}" href="{{url('admin/grafik')}}">
+                <!-- <li class="nav-item">
+                    <a class="nav-link text-white " href="{{url('admin/grafik')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chart-pie"></i>
                         </div>
                         <span class="nav-link-text ms-1">Grafik</span>
                     </a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
+          <a class="nav-link text-white " href="./pages/tables.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Tables</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-white " href="./pages/billing.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
@@ -145,9 +146,9 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{$pages}}</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">{{$pages}}</h6>
+                    <h6 class="font-weight-bolder mb-0">Dashboard</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">

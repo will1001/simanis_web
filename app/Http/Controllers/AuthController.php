@@ -17,9 +17,9 @@ class AuthController extends Controller
         if ($r->isMethod('get')) {
             if (Auth::check()) {
                 if (Auth::user()->isAdmin === 1) {
-                    return redirect('/admin');
+                    return redirect('/admin/tabel');
                 } else {
-                    return redirect('/member')->with('user', Auth::user());
+                    return redirect('/member/dashboard');
                 }
             } else {
                 return view('pages.login');
@@ -33,9 +33,9 @@ class AuthController extends Controller
                     $r->session()->regenerate();
 
                     if ($user[0]->isAdmin === 1) {
-                        return redirect()->intended('admin');
+                        return redirect()->intended('/admin/tabel');
                     } else {
-                        return redirect()->intended('member');
+                        return redirect()->intended('/member/dashboard');
                     }
                 } else {
                     return view('pages.login', ['msg' => "Password Salah"]);
@@ -53,9 +53,9 @@ class AuthController extends Controller
         if ($r->isMethod('get')) {
             if (Auth::check()) {
                 if (Auth::user()->isAdmin === 1) {
-                    return redirect('/admin');
+                    return redirect('/admin/tabel');
                 } else {
-                    return redirect('/member')->with('user', Auth::user());;
+                    return redirect('/member/dashboard');
                 }
             } else {
                 return view('pages.register');

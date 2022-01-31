@@ -9,10 +9,14 @@ use Illuminate\Http\Request;
 class MemberController extends Controller
 {
     //
-    function index()
+    function index($pages = "dashboard")
     {
         if (Auth::check()) {
-            return view('pages.member', ['userDataProgress' => 100]);
+            if (Auth::user()->isAdmin == 1) {
+                return redirect('admin');
+            } else {
+                return view("pages.member.{$pages}", ['userDataProgress' => 100, 'pages' => $pages]);
+            }
         } else {
             return redirect('/login');
         }

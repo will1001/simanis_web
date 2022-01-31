@@ -38,7 +38,7 @@
     <!-- template 3 -->
     <script src="{{ asset('vendor/kamscore/string.utils.js') }}" rel="stylesheet" type="text/javascript"></script>
 
-    <?php if(isset($include_chart) && $include_chart == true): ?>
+    <?php if (isset($include_chart) && $include_chart == true) : ?>
         <script src="{{ asset('vendor/chart.js/Chart.min.js') }}" rel="stylesheet" type="text/javascript"></script>
     <?php endif ?>
 
@@ -47,14 +47,14 @@
     --}}
     <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet" type="text/css">
     <style>
-         @media only screen and (min-width: 401px) {
-            canvas{
+        @media only screen and (min-width: 401px) {
+            canvas {
                 max-width: 70%;
-				width:100%;
-				max-height:300px;
+                width: 100%;
+                max-height: 300px;
             }
-          }
-	
+        }
+
 
         .grid-container {
             display: grid;
@@ -405,24 +405,28 @@
             height: auto;
         }
 
-        body .owl-prev{
-  left: 0;
-  display: flex;
-}
-body .owl-next{
-  right: 0;
-  display: flex;
-}
-body .owl-prev i, body .owl-next i{
-  margin: auto;
-}
-#owl_about_main_slider div h2{
-text-align: center;
-}
-.owl-carousel.off {
-    display: block;
-}
+        body .owl-prev {
+            left: 0;
+            display: flex;
+        }
 
+        body .owl-next {
+            right: 0;
+            display: flex;
+        }
+
+        body .owl-prev i,
+        body .owl-next i {
+            margin: auto;
+        }
+
+        #owl_about_main_slider div h2 {
+            text-align: center;
+        }
+
+        .owl-carousel.off {
+            display: block;
+        }
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -478,8 +482,7 @@ text-align: center;
                 <p style="line-height: normal"> Kec. Sekarbela, Kota Mataram</p>
                 <p style="line-height: normal"> Nusa Tenggara Barat. 83115</p>
 
-                <a href="https://www.google.co.id/maps/place/Kantor+Perindustrian/@-8.591923,116.0942243,852m/data=!3m2!1e3!4b1!4m5!3m4!1s0x2dcdbf7c73d9d6fd:0xbe73e61705537491!8m2!3d-8.5919792!4d116.0963912?hl=id"
-                    target="_blank">Lihat Lokasi</a>
+                <a href="https://www.google.co.id/maps/place/Kantor+Perindustrian/@-8.591923,116.0942243,852m/data=!3m2!1e3!4b1!4m5!3m4!1s0x2dcdbf7c73d9d6fd:0xbe73e61705537491!8m2!3d-8.5919792!4d116.0963912?hl=id" target="_blank">Lihat Lokasi</a>
             </div>
         </div> --}}
 
@@ -510,12 +513,11 @@ text-align: center;
 
                 @if (Auth::check())
                 @if (Auth::user()->isAdmin == 1)
-                <li><a href="#0">{{ Auth::user()->nik }}</a>
+                <li><a href="#0">Admin</a>
                     <ul class="sub-menu">
-                        <li><a href="{{ url('a/badan_usaha') }}">Dashboard</a></li>
+                        <li><a href="{{ url('admin/tabel') }}">Dashboard</a></li>
                         <li>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
@@ -524,13 +526,12 @@ text-align: center;
                 </li>
                 @endif
                 @if (Auth::user()->isAdmin == 0)
-                <li><a href="#0">{{ Auth::user()->nama }}</a>
+                <li><a href="#0">{{ Auth::user()->nik }}</a>
                     <ul class="sub-menu">
-                        
-                        <li><a href="{{ route('badan-usaha.tutorial') }}" >Dashboard</a></li>
+
+                        <li><a href="{{ route('member') }}">Dashboard</a></li>
                         <li>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
@@ -595,8 +596,7 @@ text-align: center;
                                 <img src="{{ asset('tmplate3/img/icons/phone.png') }}" alt="" class="">
                             </div>
                             <div class="fib-text">
-                                <p>Telepon : (0370) 647625<br>Fax : (0370) 640800<br><a
-                                        href="https://api.whatsapp.com/send?phone=6287728937983" target="_blank">
+                                <p>Telepon : (0370) 647625<br>Fax : (0370) 640800<br><a href="https://api.whatsapp.com/send?phone=6287728937983" target="_blank">
                                         Hubungi
                                         Kami Di Whatsapp</a></p>
                             </div>
@@ -617,10 +617,8 @@ text-align: center;
                         <div class="footer-social">
                             <a href="https://www.facebook.com/disperinntb"><i class="fa fa-facebook"></i></a>
                             <a href="https://twitter.com/disperinntb1"><i class="fa fa-twitter"></i></a>
-                            <a href="https://www.youtube.com/channel/UCSAkbosyXAEZf4nMvv777_g"><i
-                                    class="fa fa-youtube"></i></a>
-                            <a href="https://www.instagram.com/dinas_perindustrianntb/?hl=en"><i
-                                    class="fa fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/channel/UCSAkbosyXAEZf4nMvv777_g"><i class="fa fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/dinas_perindustrianntb/?hl=en"><i class="fa fa-instagram"></i></a>
                         </div>
                         <img src="{{ asset('img/logo1.png') }}" alt="">
                     </div>
@@ -635,8 +633,8 @@ text-align: center;
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright &copy;<script>
                                 document.write(new Date().getFullYear());
-
-                            </script> Simanis</div>
+                            </script> Simanis
+                        </div>
                     </div>
                     <!-- <div class="col-lg-7 order-1 order-lg-2 p-0">
 					<ul class="footer-menu">
@@ -672,14 +670,14 @@ text-align: center;
     <!--Custom JavaScript -->
     <script src="{{ asset('template2/custom.js') }}"></script>
     <script src="{{ asset('template2/prism.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js">    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js">    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"> </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"> </script>
 
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->
     <!-- angularJS -->
- 
+
     <script src="{{ asset('select2/js/select2.min.js') }}" type="text/javascript"></script>
 
     <!-- Template 3 -->
@@ -693,7 +691,7 @@ text-align: center;
     <script src="{{ asset('tmplate3/js/main.js') }}"></script>
     <!-- Template 3 -->
 
-   
+
     <!-- Core plugin JavaScript-->
 
     <script src="{{ asset('template_admin/vendor/jquery-easing/jquery.easing.min.js') }}">
@@ -708,14 +706,13 @@ text-align: center;
     <script src="{{ asset('angularjs/controllers.js') }}" type="text/javascript"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.select2').select2();
 
             $(".select2-dynamic").select2({
                 tags: true
             });
         });
-
     </script>
 
     <script>
@@ -723,7 +720,7 @@ text-align: center;
             var colors = ["#5E337D", "purple", "violet", "mediumorchid"];
             $.getJSON(
                 "https://spreadsheets.google.com/feeds/worksheets/1V8aWFQTxo4r2CkiKOqOrtd2r4xjxDS-C_MPzgnDeRjI/public/basic?alt=json",
-                function (data) {
+                function(data) {
                     for (var i = 0; i < 4; i++) {
                         document.getElementsByClassName("bar")[i].style.height =
                             (data.feed.entry[i].gsx$number.$t /
@@ -763,10 +760,9 @@ text-align: center;
             );
         }
         g();
-
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             if ($(window).width() < 854) {
                 startCarousel();
             } else {
@@ -774,7 +770,7 @@ text-align: center;
             }
         });
 
-     
+
         function startCarousel() {
             $("#owl_about_main_slider").owlCarousel({
                 navigation: false, // Show next and prev buttons
@@ -787,13 +783,10 @@ text-align: center;
                 nav: false,
                 responsiveClass: true,
                 autoplayTimeout: 3000,
-      autoplayHoverPause: false,
+                autoplayHoverPause: false,
 
             });
         }
-
-    
-
     </script>
 
     @yield('scripts')

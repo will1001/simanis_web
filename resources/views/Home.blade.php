@@ -60,7 +60,7 @@ $chartTitle = [
         <div style="text-align: center;">
             <h2 style="font-weight:bolder;">Data UMKM Provinsi NTB</h2>
         </div>
-
+        
         @foreach($chartTitle as $i=>$title)
         <div class="container text-center">
             <h5 class="text-center m-3">{{$title}}</h5>
