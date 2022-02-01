@@ -492,9 +492,9 @@ $chartTitle = [
                     let cccc = industriBesar.filter(param => param => param.cabang_industri?.toLowerCase() === cabangIndustri[j]['name']?.toLowerCase())
 
                     for (let filter of filters) {
-                        aaaa = aaaa.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                        bbbb = bbbb.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                        cccc = cccc.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
+                        aaaa = aaaa.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString().toLowerCase() === filter.value.toLowerCase());
+                        bbbb = bbbb.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString().toLowerCase() === filter.value.toLowerCase());
+                        cccc = cccc.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString().toLowerCase() === filter.value.toLowerCase());
                     }
 
                     ik[j] = aaaa.length;
