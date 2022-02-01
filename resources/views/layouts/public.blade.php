@@ -529,7 +529,7 @@
                 <li><a href="#0">{{ Auth::user()->nik }}</a>
                     <ul class="sub-menu">
 
-                        <li><a href="{{ route('/member/dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url('/member/dashboard') }}">Dashboard</a></li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
