@@ -106,7 +106,7 @@ class AdminController extends Controller
         return view('pages.admin.tabel', ['BadanUsaha' => $BadanUsaha, 'keyword' => $keyword, 'pages' => 'tabel']);
     }
 
-    public function deleteAllBadanUsaha(Request $request)
+    public function deleteAllBadanUsaha()
     {
 
         BadanUsaha::truncate();

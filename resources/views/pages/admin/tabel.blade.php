@@ -28,7 +28,9 @@
 
     @if(!$BadanUsaha->isEmpty())
     <button class="btn btn-primary" type="submit" id="button-addon2"><a href="{{ url('/admin/export')}}" style="text-decoration:none;color:white">Export</a></button>
-    <button onclick="return confirm_delete()" class="btn btn-primary float-right" type="submit" id="button-addon2"><a href="{{ url('/admin/deleteAll')}}" style="text-decoration:none;color:white">Hapus Semua Data</a></button>
+    <form action="{{ route('admin_delete_all')}}" method="GET">
+      <button onclick="return confirm_delete()" class="btn btn-primary float-right" type="submit" id="button-addon2">Hapus Semua Data</button>
+    </form>
     @endif
   </div>
 
