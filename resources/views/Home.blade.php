@@ -387,7 +387,7 @@ $chartTitle = [
                 value: subCabangIndustri
             },
 
-        ].filter(e => e.value !== "");
+        ].filter(e => e.value !== "" && e.value !== "Semua");
         console.log(filters);
         for (let i = 0; i < chartTitle.length; i++) {
             if (i === 0) {
