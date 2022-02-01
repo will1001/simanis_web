@@ -97,9 +97,10 @@ $forms = array(
         "options" => $CabangIndustri,
     ),
     (object)array(
-        "type" => "text",
+        "type" => "select",
         "placeholder" => "SUB CABANG INDUSTRI",
-        "prop" => "sub_cabang_industri"
+        "prop" => "sub_cabang_industri",
+        "options" => $SubCabangIndustri,
     ),
     (object)array(
         "type" => "number",
@@ -181,3 +182,8 @@ $forms = array(
     <button type="submit">Submit</button>
 </form>
 @endsection
+
+<script>
+    const a = document.getElementsByName("sub_cabang_industri");
+    console.log(a)
+</script>

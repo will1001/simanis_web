@@ -7,6 +7,7 @@ use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\CabangIndustri;
+use App\Models\SubCabangIndustri;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class FormController extends Controller
                 'Kecamatan' => Kecamatan::all(),
                 'Kelurahan' => Kelurahan::all(),
                 'CabangIndustri' => CabangIndustri::all(),
+                'SubCabangIndustri' => SubCabangIndustri::all(),
             ]);
         } else {
 
