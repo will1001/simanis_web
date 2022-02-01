@@ -7,19 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simanis</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <link href="{{ asset('admin_template/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin_template/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link id="pagestyle" href="{{ asset('admin_template/assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" />
+
 </head>
 
 <body>
-    <!-- <div class="text-center">
+    <div class="text-center">
         <h1>{{$title}}</h1>
-    </div> -->
-    <div class="row">
+    </div>
+    <!-- <div class="row">
         <div class="col-sm">
             <form name="cariForm" action="{{route('chartDetail_search')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group mb-3">
                     <input style="width:200px" type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari . . ." aria-label="Nama Badan Usaha" aria-describedby="button-addon2">
                     <input style="display:none" type="text" name="data" value="{{json_encode($data)}}">
+                    <input style="display:none" type="text" name="filter" value="{{json_encode($filter)}}">
+                    <input style="display:none" type="text" name="title" value="{{$title}}">
                     <button class="btn btn-primary" type="submit" id="button-addon2">Cari</button>
                 </div>
             </form>
@@ -32,7 +40,7 @@
     <div class="col-sm">
 
     </div>
-    </div>
+    </div> -->
 
 
     <div class="Container-Table">

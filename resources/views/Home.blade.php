@@ -206,6 +206,11 @@ $chartTitle = [
     const chartTitle = @json($chartTitle);
     const cabangIndustri = @json($cabangIndustri);
     const subCabangIndustri = @json($subCabangIndustri);
+    let idKabupatenFilterApply = "";
+    let kecamatanFilterApply = "";
+    let kelurahanFilterApply = "";
+    let cabangIndustriFilterApply = "";
+    let subCabangIndustriFilterApply = "";
     const bgColorList = [
         'rgba(54, 162, 235, 1)',
         'rgba(153, 102, 255, 1)',
@@ -218,9 +223,9 @@ $chartTitle = [
         'rgba(176,196,222, 1)',
         'rgba(255,140,0, 1)',
     ]
-    let industriKecil = badanUsaha.filter(e => parseInt(e.investasi_modal) < 1000000000);
-    let industriMenengah = badanUsaha.filter(e => parseInt(e.investasi_modal) > 1000000000 && e.investasi_modal < 15000000000);
-    let industriBesar = badanUsaha.filter(e => parseInt(e.investasi_modal) > 15000000000);
+    let industriKecil = badanUsaha.filter(e => parseInt(e.investasi_modal) <= 1000000);
+    let industriMenengah = badanUsaha.filter(e => parseInt(e.investasi_modal) > 1000000 && e.investasi_modal < 15000000);
+    let industriBesar = badanUsaha.filter(e => parseInt(e.investasi_modal) >= 15000000);
     let barChart = [];
     const renderCart = (noChart, Data, bgColor, labelsData) => {
         barChart[noChart] = new Chart(`Chart${noChart+1}`, {
@@ -248,7 +253,34 @@ $chartTitle = [
                         onClick: (_points, _event) => {
                             for (let i = 0; i < Data['dataDetailsList'].length; i++) {
                                 if (labelsData[i] === _event.text.split(":")[0].substring(0, _event.text.split(":")[0].length - 1)) {
-                                    const aaaa = JSON.stringify(Data['dataDetailsList'][i]);
+                                    // const aaaa = JSON.stringify(Data['dataDetailsList'][i]);
+                                    // const bbbb = window.btoa(unescape(encodeURIComponent(aaaa)))
+                                    // console.log(bbbb);
+                                    const aaaa = JSON.stringify([{
+                                            'prop': 'id_kabupaten',
+                                            'value': idKabupatenFilterApply
+                                        }, {
+                                            'prop': 'kecamatan',
+                                            'value': kecamatanFilterApply,
+
+                                        },
+                                        {
+                                            'prop': 'kelurahan',
+                                            'value': kelurahanFilterApply,
+
+                                        },
+                                        {
+                                            'prop': 'cabang_industri',
+                                            'value': cabangIndustriFilterApply,
+
+                                        },
+                                        {
+                                            'prop': 'sub_cabang_industri',
+                                            'value': subCabangIndustriFilterApply,
+
+                                        },
+
+                                    ].filter(e => e.value !== "" && e.value !== "Semua"))
                                     // console.log(Data['dataDetailsList'][i]);
                                     const chartDetailData = document.getElementById('chartDetailData');
                                     const chartDetailTitle = document.getElementById('chartDetailTitle');
@@ -287,11 +319,7 @@ $chartTitle = [
         });
     }
 
-    let idKabupatenFilterApply = "";
-    let kecamatanFilterApply = "";
-    let kelurahanFilterApply = "";
-    let cabangIndustriFilterApply = "";
-    let subCabangIndustriFilterApply = "";
+
 
     const changeFilterKabupaten = () => {
         const kabupatenFilter = document.getElementById('kabupatenFilter');
