@@ -13,19 +13,27 @@
     <!-- <div class="text-center">
         <h1>{{$title}}</h1>
     </div> -->
-    <form name="cariForm" action="{{route('chartDetail_search')}}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="input-group mb-3">
-            <input style="width:200px" type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari . . ." aria-label="Nama Badan Usaha" aria-describedby="button-addon2">
-            <input style="display:none" type="text" name="data" value="{{json_encode($data)}}">
-            <button class="btn btn-primary" type="submit" id="button-addon2">Cari</button>
-        </div>
-    </form>
+    <div class="row">
+        <div class="col-sm">
+            <form name="cariForm" action="{{route('chartDetail_search')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="input-group mb-3">
+                    <input style="width:200px" type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari . . ." aria-label="Nama Badan Usaha" aria-describedby="button-addon2">
+                    <input style="display:none" type="text" name="data" value="{{json_encode($data)}}">
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Cari</button>
+                </div>
+            </form>
 
-    @if($keyword != "")
-    <h5>Hasil Pencarian dari : {{$keyword}}</h5>
-    @endif
+            @if($keyword != "")
+            <h5>Hasil Pencarian dari : {{$keyword}}</h5>
+            @endif
+        </div>
     </div>
+    <div class="col-sm">
+
+    </div>
+    </div>
+
 
     <div class="Container-Table">
         <div class="table-responsive m-2" style="max-height:500px;">
