@@ -54,8 +54,8 @@ UMKM NTB
 <?php
 $chartTitle = [
     "SEBARAN INDUSTRI (IKM) NTB BERBASIS SKALA INDUSTRI",
-    "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS KABUPATEN/ KOTA",
     "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS PERIZINAN",
+    "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS KABUPATEN/ KOTA",
     "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS CABANG INDUSTRI",
     "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS SERTIFIKASI HALAL",
     "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS SERTIFIKASI MEREK",
@@ -70,6 +70,12 @@ $chartTitle = [
         <div style="text-align: center;">
             <h2 style="font-weight:bolder;">Data UMKM Provinsi NTB</h2>
         </div>
+        <form action="/chartDetail" method="POST" style="display:none;">
+            @csrf
+            <input type="text" name="chartDetailData" id="chartDetailData">
+            <input type="text" name="title" id="chartDetailTitle">
+            <button type="submit" id="submitButtonchartDetail"></button>
+        </form>
         <div class="row">
             <div class="col-sm">
                 <div class="filterChart">
@@ -239,10 +245,21 @@ $chartTitle = [
                         itemStyle: {
                             width: 90 // or whatever, auto-wrap
                         },
-                        onClick: (_points, _event, barClicked) => {
-                            console.log(_points.chart._sortedMetasets[0]._parsed);
-                            // console.log(barClicked);
-                            // console.log(_event);
+                        onClick: (_points, _event) => {
+                            for (let i = 0; i < Data['dataDetailsList'].length; i++) {
+                                if (labelsData[i] === _event.text.split(":")[0].substring(0, _event.text.split(":")[0].length - 1)) {
+                                    const aaaa = JSON.stringify(Data['dataDetailsList'][i]);
+                                    // console.log(Data['dataDetailsList'][i]);
+                                    const chartDetailData = document.getElementById('chartDetailData');
+                                    const chartDetailTitle = document.getElementById('chartDetailTitle');
+                                    const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
+                                    chartDetailData.value = aaaa;
+                                    chartDetailTitle.value = _event.text;
+                                    submitButtonchartDetail.click();
+                                }
+
+                            }
+
 
                         },
                         labels: {
@@ -585,9 +602,12 @@ $chartTitle = [
 
 
     for (let i = 0; i < chartTitle.length; i++) {
-        let ik = new Array(kabupaten.length);
-        let im = new Array(kabupaten.length);
-        let ib = new Array(kabupaten.length);
+        let ik = [];
+        let im = [];
+        let ib = [];
+        let ddik = [];
+        let ddim = [];
+        let ddib = [];
         let labelsName;
         let bgColorChart;
         if (i === 0) {
@@ -596,6 +616,13 @@ $chartTitle = [
                 industriKecil.length,
                 industriMenengah.length,
                 industriBesar.length,
+            ]
+
+
+            industriDataDetails = [
+                industriKecil,
+                industriMenengah,
+                industriBesar,
             ]
             labelsName = IndustriList;
             bgColorChart = bgColorList.slice(0, IndustriList.length);
@@ -611,6 +638,9 @@ $chartTitle = [
                 ik[j] = aaaa.length;
                 im[j] = bbbb.length;
                 ib[j] = cccc.length;
+                ddik[j] = aaaa;
+                ddim[j] = bbbb;
+                ddib[j] = cccc;
                 labelsName = formalInformalLabel;
                 bgColorChart = bgColorList.slice(0, formalInformal.length);
             }
@@ -636,6 +666,9 @@ $chartTitle = [
                 ik[j] = aaaa.length;
                 im[j] = bbbb.length;
                 ib[j] = cccc.length;
+                ddik[j] = aaaa;
+                ddim[j] = bbbb;
+                ddib[j] = cccc;
                 labelsName = kabupatenLabel;
                 bgColorChart = bgColorList;
 
@@ -658,6 +691,9 @@ $chartTitle = [
                 ik[j] = aaaa.length;
                 im[j] = bbbb.length;
                 ib[j] = cccc.length;
+                ddik[j] = aaaa;
+                ddim[j] = bbbb;
+                ddib[j] = cccc;
                 labelsName = cabangIndustriLabel;
                 bgColorChart = bgColorList.slice(0, cabangIndustri.length);
 
@@ -667,10 +703,16 @@ $chartTitle = [
             const aaaa = industriKecil.filter(param => param.nomor_sertifikat_halal_tahun !== null)
             const bbbb = industriMenengah.filter(param => param.nomor_sertifikat_halal_tahun !== null)
             const cccc = industriBesar.filter(param => param.nomor_sertifikat_halal_tahun !== null)
+            const dddd = industriKecil.filter(param => param.nomor_sertifikat_halal_tahun === null)
+            const eeee = industriMenengah.filter(param => param.nomor_sertifikat_halal_tahun === null)
+            const ffff = industriBesar.filter(param => param.nomor_sertifikat_halal_tahun === null)
 
             ik = [aaaa.length, industriKecil.length - aaaa.length];
             im = [bbbb.length, industriMenengah.length - bbbb.length];
             ib = [cccc.length, industriBesar.length - cccc.length];
+            ddik = [aaaa, dddd];
+            ddim = [bbbb, eeee];
+            ddib = [cccc, ffff];
             labelsName = sertifikatHalal;
             bgColorChart = bgColorList.slice(0, sertifikatHalal.length);
 
@@ -679,10 +721,16 @@ $chartTitle = [
             const aaaa = industriKecil.filter(param => param.sertifikat_merek_tahun !== null)
             const bbbb = industriMenengah.filter(param => param.sertifikat_merek_tahun !== null)
             const cccc = industriBesar.filter(param => param.sertifikat_merek_tahun !== null)
+            const dddd = industriKecil.filter(param => param.sertifikat_merek_tahun === null)
+            const eeee = industriMenengah.filter(param => param.sertifikat_merek_tahun === null)
+            const ffff = industriBesar.filter(param => param.sertifikat_merek_tahun === null)
 
             ik = [aaaa.length, industriKecil.length - aaaa.length];
             im = [bbbb.length, industriMenengah.length - bbbb.length];
             ib = [cccc.length, industriBesar.length - cccc.length];
+            ddik = [aaaa, dddd];
+            ddim = [bbbb, eeee];
+            ddib = [cccc, ffff];
             labelsName = sertifikatMerek;
             bgColorChart = bgColorList.slice(0, sertifikatMerek.length);
 
@@ -706,21 +754,25 @@ $chartTitle = [
         if (i === 0) {
             data = [{
                 'title': 'Industri',
-                'dataList': industriData
+                'dataList': industriData,
+                'dataDetailsList': industriDataDetails,
             }, ]
 
         } else {
             data = [{
                     'title': 'Industri Kecil',
-                    'dataList': ik
+                    'dataList': ik,
+                    'dataDetailsList': ddik,
                 },
                 {
                     'title': 'Industri Menengah',
-                    'dataList': im
+                    'dataList': im,
+                    'dataDetailsList': ddim,
                 },
                 {
                     'title': 'Industri Besar',
-                    'dataList': ib
+                    'dataList': ib,
+                    'dataDetailsList': ddib,
                 },
             ];
         }

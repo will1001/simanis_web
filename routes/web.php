@@ -23,6 +23,8 @@ use App\Http\Controllers\FormController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/chartDetail', [HomeController::class, 'chartDetail'])->name('chartDetail');
+Route::post('/chartDetail/search', [HomeController::class, 'chartDetailSearch'])->name('chartDetail_search');
 
 Route::match(['get', 'post'], '/login', [AuthController::class, 'login']);
 Route::match(['get', 'post'], '/daftar', [AuthController::class, 'register']);
