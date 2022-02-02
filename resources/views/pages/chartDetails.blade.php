@@ -58,7 +58,7 @@
                     @foreach($data as $key=>$item)
                     <tr>
 
-                        <td scope="row" style="text-align:center;">{{ ++$key }}</td>
+                        <td scope="row" style="text-align:center;">{{ (++$key + (100* ((int)$data->currentPage() -1) ) ) }}</td>
                         <td>{{$item->nama_direktur}}</td>
                         <td>{{$item->alamat_lengkap}}</td>
                         <td>{{$item->nama_usaha}}</td>
@@ -67,7 +67,9 @@
                 </tbody>
             </table>
         </div>
+        {{ $data->links() }}
     </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

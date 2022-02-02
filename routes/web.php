@@ -23,7 +23,7 @@ use App\Http\Controllers\FormController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/chartDetail', [HomeController::class, 'chartDetail'])->name('chartDetail');
+Route::get('/chartDetail/{filter}/{chartId}/{title}', [HomeController::class, 'chartDetail'])->name('chartDetail');
 Route::post('/chartDetail/search', [HomeController::class, 'chartDetailSearch'])->name('chartDetail_search');
 
 Route::match(['get', 'post'], '/login', [AuthController::class, 'login']);
@@ -39,4 +39,3 @@ Route::get('/admin/export', [AdminController::class, 'exportExcel']);
 Route::get('/member/{pages}', [MemberController::class, 'index'])->name('member');
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
-

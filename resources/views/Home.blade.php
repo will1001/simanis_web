@@ -22,6 +22,12 @@ UMKM NTB
     .filterChart select {
         margin: 5px 0;
     }
+
+    @media only screen and (max-width: 400px) {
+        .filterChart {
+            width: 100%;
+        }
+    }
 </style>
 @section('content')
 
@@ -70,10 +76,11 @@ $chartTitle = [
         <div style="text-align: center;">
             <h2 style="font-weight:bolder;">Data UMKM Provinsi NTB</h2>
         </div>
-        <form action="/chartDetail" method="POST" style="display:none;">
-            @csrf
-            <input type="text" name="chartDetailData" id="chartDetailData">
+        <form action="" method="GET" style="display:none;" id="formChartDetail">
+            <!-- @csrf -->
+            <!-- <input type="text" name="chartDetailData" id="chartDetailData">
             <input type="text" name="title" id="chartDetailTitle">
+            <input type="text" name="chartId" id="chartId"> -->
             <button type="submit" id="submitButtonchartDetail"></button>
         </form>
         <div class="row">
@@ -223,7 +230,9 @@ $chartTitle = [
         'rgba(176,196,222, 1)',
         'rgba(255,140,0, 1)',
     ]
+    // console.log(badanUsaha);
     let industriKecil = badanUsaha.filter(e => parseInt(e.investasi_modal) <= 1000000);
+    // console.log(industriKecil);
     let industriMenengah = badanUsaha.filter(e => parseInt(e.investasi_modal) > 1000000 && e.investasi_modal < 15000000);
     let industriBesar = badanUsaha.filter(e => parseInt(e.investasi_modal) >= 15000000);
     let barChart = [];
@@ -255,8 +264,9 @@ $chartTitle = [
                                 if (labelsData[i] === _event.text.split(":")[0].substring(0, _event.text.split(":")[0].length - 1)) {
                                     // const aaaa = JSON.stringify(Data['dataDetailsList'][i]);
                                     // const bbbb = window.btoa(unescape(encodeURIComponent(aaaa)))
-                                    // console.log(bbbb);
-                                    const aaaa = JSON.stringify([{
+                                    // console.log(_points.chart.canvas.id.substring(5, 6));
+
+                                    const filter = JSON.stringify([{
                                             'prop': 'id_kabupaten',
                                             'value': idKabupatenFilterApply
                                         }, {
@@ -282,11 +292,19 @@ $chartTitle = [
 
                                     ].filter(e => e.value !== "" && e.value !== "Semua"))
                                     // console.log(Data['dataDetailsList'][i]);
-                                    const chartDetailData = document.getElementById('chartDetailData');
-                                    const chartDetailTitle = document.getElementById('chartDetailTitle');
+                                    // const chartDetailData = document.getElementById('chartDetailData');
+                                    // const chartDetailTitle = document.getElementById('chartDetailTitle');
+                                    // const chartId = document.getElementById('chartId');
+                                    const formChartDetail = document.getElementById('formChartDetail');
                                     const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
-                                    chartDetailData.value = aaaa;
-                                    chartDetailTitle.value = _event.text;
+                                    // chartDetailData.value = aaaa;
+                                    // chartDetailTitle.value = _event.text;
+                                    // chartId.value = chartID.substring(5, chartID.length);
+                                    // console.log(chartID.substring(5, chartID.length))
+                                    let chartID = _points.chart.canvas.id;
+                                    chartID = chartID.substring(5, chartID.length)
+                                    const title = _event.text;
+                                    formChartDetail.action = `/chartDetail/${filter}/${chartID}/${title}`;
                                     submitButtonchartDetail.click();
                                 }
 
@@ -488,7 +506,7 @@ $chartTitle = [
                     "Lombok Timur",
                     "Sumbawa",
                     "Dompu",
-                    "Bima",
+                    "Kabupaten Bima",
                     "Sumbawa Barat",
                     "Lombok Utara",
                     "Kota Mataram",
@@ -680,7 +698,7 @@ $chartTitle = [
                 "Lombok Timur",
                 "Sumbawa",
                 "Dompu",
-                "Bima",
+                "Kabupaten Bima",
                 "Sumbawa Barat",
                 "Lombok Utara",
                 "Kota Mataram",
