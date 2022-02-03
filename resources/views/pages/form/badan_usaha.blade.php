@@ -17,18 +17,21 @@ $forms = array(
         "placeholder" => "KABUPATEN",
         "prop" => "id_kabupaten",
         "options" => $Kabupaten,
+        "change" => "",
     ),
     (object)array(
         "type" => "select",
         "placeholder" => "KECAMATAN",
         "prop" => "kecamatan",
         "options" => $Kecamatan,
+        "change" => "",
     ),
     (object)array(
         "type" => "select",
         "placeholder" => "KELURAHAN/DESA",
         "prop" => "kelurahan",
         "options" => $Kelurahan,
+        "change" => "",
     ),
     (object)array(
         "type" => "text",
@@ -95,12 +98,21 @@ $forms = array(
         "placeholder" => "CABANG INDUSTRI",
         "prop" => "cabang_industri",
         "options" => $CabangIndustri,
+        "change" => "return changeCabangIndustri()",
     ),
     (object)array(
         "type" => "select",
         "placeholder" => "SUB CABANG INDUSTRI",
         "prop" => "sub_cabang_industri",
-        "options" => $SubCabangIndustri,
+        "options" => [],
+        "change" => "",
+    ),
+    (object)array(
+        "type" => "select",
+        "placeholder" => "KBLI",
+        "prop" => "id_kbli",
+        "options" => $Kbli,
+        "change" => "",
     ),
     (object)array(
         "type" => "number",
@@ -137,6 +149,31 @@ $forms = array(
         "placeholder" => "NILAI BAHAN BAKU (RP.000)",
         "prop" => "nilai_bahan_baku_perbulan"
     ),
+    // (object)array(
+    //     "type" => "number",
+    //     "placeholder" => "Latitude",
+    //     "prop" => "lat"
+    // ),
+    // (object)array(
+    //     "type" => "number",
+    //     "placeholder" => "Longitude",
+    //     "prop" => "lng"
+    // ),
+    (object)array(
+        "type" => "text",
+        "placeholder" => "Media sosial",
+        "prop" => "media_sosial"
+    ),
+    // (object)array(
+    //     "type" => "file",
+    //     "placeholder" => "Foto Alat Produksi",
+    //     "prop" => "foto_alat_produksi"
+    // ),
+    // (object)array(
+    //     "type" => "file",
+    //     "placeholder" => "Foto Ruang Produksi",
+    //     "prop" => "foto_ruang_produksi"
+    // ),
 
 )
 
@@ -168,12 +205,14 @@ $forms = array(
     <div class="inputstyle">
         <span>{{$form->placeholder}} : </span>
         @if($form->type == 'select')
-        <select class="selectpicker" data-live-search="true" name="{{$form->prop}}" value="{{strtolower(!empty($badan_usaha) ? $badan_usaha->{$form->prop} : '')}}">
+        <select onchange="{{$form->change}}" class="selectpicker" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($badan_usaha) ? $badan_usaha->{$form->prop} : '')}}">
             <option value="" disabled selected>pilih</option>
             @foreach($form->options as $key=>$option)
-            <option value="{{$form->prop == 'id_kabupaten'?$option->id:$option->name}}" {{!empty($badan_usaha) ? strtolower($badan_usaha->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
+            <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name}}" {{!empty($badan_usaha) ? strtolower($badan_usaha->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
             @endforeach
         </select>
+        @elseif($form->type == 'file')
+        <input type="file" enctype="multipart/form-data" name="{{$form->prop}}" id="{{$form->prop}}">
         @else
         <input type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($badan_usaha) ? $badan_usaha->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
         @endif
@@ -184,6 +223,23 @@ $forms = array(
 @endsection
 
 <script>
-    const a = document.getElementsByName("sub_cabang_industri");
-    console.log(a)
+    const subCabangIndustri = @json($SubCabangIndustri);
+    const cabangIndustri = @json($CabangIndustri);
+    const changeCabangIndustri = () => {
+        const cabangIndustriFilter = document.getElementById('cabang_industri');
+        const nameCabangIndsutri = cabangIndustriFilter.options[cabangIndustriFilter.selectedIndex].value;
+        const textCabangIndsutri = cabangIndustriFilter.options[cabangIndustriFilter.selectedIndex].text;
+        renderSubCabangIndustriSelectFilter(nameCabangIndsutri)
+    }
+
+    const renderSubCabangIndustriSelectFilter = (nameCabangIndsutri) => {
+        var str = `<option value=''>Semua</option>`
+        const idCabangIndustri = cabangIndustri.filter(e => e.name == nameCabangIndsutri)[0].id;
+        const subCabangIndustriList = subCabangIndustri.filter(e => e.id_cabang_industri == idCabangIndustri);
+
+        for (let item of subCabangIndustriList) {
+            str += `<option value='${item.id}'>` + item.name + "</option>"
+        }
+        document.getElementById("sub_cabang_industri").innerHTML = str;
+    }
 </script>

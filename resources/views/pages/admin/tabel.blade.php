@@ -78,7 +78,9 @@
               <button type="submit" class="btn btn-primary btn-sm">Edit</button>
             </form>
 
-            <button type="button" class="btn btn-primary btn-sm" onclick="return confirm_delete_1()">Hapus</button>
+            <form method="GET" action="/form/badan_usaha/delete/{{$item->id}}">
+              <button type="submit" id="deleteButton" class="btn btn-primary btn-sm" onclick="return confirm_delete_1()">Hapus</button>
+            </form>
             <!-- <i onclick="return confirm_delete_1()" class="fas fa-trash-alt" style="cursor:pointer;"></i> -->
           </td>
           <td scope="row" style="text-align:center;">{{ (++$key + (100* ((int)$BadanUsaha->currentPage() -1) ) ) }}</td>
@@ -115,3 +117,21 @@
   {{ $BadanUsaha->links() }}
 </div>
 @endsection
+
+<script>
+  function validateForm() {
+    let x = document.forms["importForm"]["file"].value;
+    if (x == "") {
+      alert("Pilih file yang ingin di import");
+      return false;
+    }
+  }
+
+  function confirm_delete() {
+    return confirm('Hapus Semua Data ?');
+  }
+
+  function confirm_delete_1() {
+    return confirm('Hapus Data ?');
+  }
+</script>
