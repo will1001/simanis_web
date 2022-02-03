@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
+        "rebing/graphql-laravel": "^8.2",
         "webpatser/laravel-uuid": "3.0"
     },
     "require-dev": {

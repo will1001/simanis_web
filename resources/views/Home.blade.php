@@ -399,7 +399,7 @@ $chartTitle = [
 
     const renderKecamatanSelectFilter = (idKabupaten) => {
         var str = `<option value=''>Semua</option>`
-        const kecamatanList = kecamatan.filter(e => e.regency_id == idKabupaten);
+        const kecamatanList = kecamatan.filter(e => e.id_kabupaten == idKabupaten);
         for (let item of kecamatanList) {
             str += `<option value='${item.id}'>` + item.name + "</option>"
         }
@@ -408,7 +408,7 @@ $chartTitle = [
 
     const renderKelurahanSelectFilter = (idKecamatan) => {
         var str = `<option value=''>Semua</option>`
-        const kelurahanList = kelurahan.filter(e => e.district_id == idKecamatan);
+        const kelurahanList = kelurahan.filter(e => e.id_kecamatan == idKecamatan);
         for (let item of kelurahanList) {
             str += `<option value='${item.id}'>` + item.name + "</option>"
         }
