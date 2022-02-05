@@ -42,18 +42,18 @@ class BadanUsahaQuery extends Query
                 'name' => 'nama_direktur',
                 'type' => Type::string(),
             ],
-            'id_kabupaten' => [
-                'name' => 'id_kabupaten',
-                'type' => Type::string(),
-            ],
-            'kecamatan' => [
-                'name' => 'kecamatan',
-                'type' => Type::string(),
-            ],
-            'kelurahan' => [
-                'name' => 'kelurahan',
-                'type' => Type::string(),
-            ],
+            // 'id_kabupaten' => [
+            //     'name' => 'id_kabupaten',
+            //     'type' => Type::string(),
+            // ],
+            // 'kecamatan' => [
+            //     'name' => 'kecamatan',
+            //     'type' => Type::string(),
+            // ],
+            // 'kelurahan' => [
+            //     'name' => 'kelurahan',
+            //     'type' => Type::string(),
+            // ],
             'alamat_lengkap' => [
                 'name' => 'alamat_lengkap',
                 'type' => Type::string(),
@@ -156,6 +156,30 @@ class BadanUsahaQuery extends Query
             ],
             'offset' => [
                 'name' => 'offset',
+                'type' => Type::string(),
+            ],
+            'jenis_industri' => [
+                'name' => 'jenis_industri',
+                'type' => Type::string(),
+            ],
+            'sertifikat' => [
+                'name' => 'sertifikat',
+                'type' => Type::string(),
+            ],
+            'cabang_industri' => [
+                'name' => 'cabang_industri',
+                'type' => Type::string(),
+            ],
+            'kabupaten' => [
+                'name' => 'kabupaten',
+                'type' => Type::string(),
+            ],
+            'kecamatan' => [
+                'name' => 'kecamatan',
+                'type' => Type::string(),
+            ],
+            'kelurahan' => [
+                'name' => 'kelurahan',
                 'type' => Type::string(),
             ],
         ];
