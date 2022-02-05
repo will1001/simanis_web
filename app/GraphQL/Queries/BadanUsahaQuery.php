@@ -187,6 +187,8 @@ class BadanUsahaQuery extends Query
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        $yearNow = Carbon::now()->year;
+
         $badanUsaha = DB::table('badan_usaha');
 
         if (isset($args['id'])) {
@@ -211,8 +213,6 @@ class BadanUsahaQuery extends Query
             $badanUsaha = $badanUsaha->where('kelurahan', $args['kelurahan']);
         }
 
-        $yearNow = Carbon::now()->year;
-        $badanUsaha = DB::table('badan_usaha');
 
 
         if (isset($args['jenis_industri'])) {
