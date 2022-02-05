@@ -84,6 +84,8 @@ return [
                 App\GraphQL\Queries\KbliQuery::class,
                 App\GraphQL\Queries\UserQuery::class,
                 App\GraphQL\Queries\StatistikQuery::class,
+                App\GraphQL\Queries\SlideShowQuery::class,
+                App\GraphQL\Queries\SurveiQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -100,6 +102,8 @@ return [
                 App\GraphQL\Types\KbliType::class,
                 App\GraphQL\Types\UserType::class,
                 App\GraphQL\Types\StatistikType::class,
+                App\GraphQL\Types\SlideShowType::class,
+                App\GraphQL\Types\SurveiType::class,
             ],
 
             // Laravel HTTP middleware
