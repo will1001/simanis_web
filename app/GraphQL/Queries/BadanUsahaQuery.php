@@ -214,9 +214,9 @@ class BadanUsahaQuery extends Query
         }
         
         if (isset($args['offset'])) {
-            $badanUsaha = $badanUsaha->offset($args['offset']);
+            $badanUsaha = $badanUsaha->limit($args['offset']);
         }
 
-        return $badanUsaha->limit(10)->get();
+        return $badanUsaha->get();
     }
 }
