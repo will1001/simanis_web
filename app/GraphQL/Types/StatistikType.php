@@ -24,26 +24,38 @@ class StatistikType extends GraphQLType
                 'type' => Type::int(),
                 'description' => 'The total_ikm of Statistik',
             ],
-            'jumlah_tenaga_kerja_pria' => [
-                'type' => Type::int(),
-                'description' => 'The jumlah_tenaga_kerja_pria of Statistik',
-            ],
-            'total_tenaga_kerja_wanita' => [
-                'type' => Type::int(),
-                'description' => 'The total_tenaga_kerja_wanita of Statistik',
-            ],
             'total_tenaga_kerja' => [
                 'type' => Type::int(),
                 'description' => 'The total_tenaga_kerja of Statistik',
             ],
-            // 'total_industri_kecil' => [
-            //     'type' => Type::int(),
-            //     'description' => 'The total_industri_kecil of Statistik',
-            // ],
-            // 'total_industri_Menengah' => [
-            //     'type' => Type::int(),
-            //     'description' => 'The total_industri_Menengah of Statistik',
-            // ],
+            'total_industri_kecil' => [
+                'type' => Type::int(),
+                'description' => 'The total_industri_kecil of Statistik',
+            ],
+            'total_industri_menengah' => [
+                'type' => Type::int(),
+                'description' => 'The total_industri_menengah of Statistik',
+            ],
+            'total_industri_besar' => [
+                'type' => Type::int(),
+                'description' => 'The total_industri_besar of Statistik',
+            ],
+            'total_ikm_baru' => [
+                'type' => Type::int(),
+                'description' => 'The total_ikm_baru of Statistik',
+            ],
+            'total_ikm_sertifikat_halal' => [
+                'type' => Type::int(),
+                'description' => 'The total_ikm_sertifikat_halal of Statistik',
+            ],
+            'total_ikm_sertifikat_haki' => [
+                'type' => Type::int(),
+                'description' => 'The total_ikm_sertifikat_haki of Statistik',
+            ],
+            'total_ikm_sertifikat_sni' => [
+                'type' => Type::int(),
+                'description' => 'The total_ikm_sertifikat_sni of Statistik',
+            ],
         ];
     }
 }

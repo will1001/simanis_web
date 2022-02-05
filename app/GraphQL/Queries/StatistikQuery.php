@@ -63,31 +63,30 @@ class StatistikQuery extends Query
     {
         $yearNow = Carbon::now()->year;
         $badanUsaha = DB::table('badan_usaha');
-        
+
 
         if (isset($args['jenis_industri'])) {
             if ($args['jenis_industri'] == 'kecil') {
                 $badanUsaha = $badanUsaha->where('investasi_modal', '<', 1000000);
             } else if ($args['jenis_industri'] == 'menengah') {
                 $badanUsaha = $badanUsaha->whereBetween('investasi_modal', [1000000 + 1, 15000000 - 1]);
-            } else if($args['jenis_industri'] == 'baru'){
+            } else if ($args['jenis_industri'] == 'baru') {
                 $badanUsaha = $badanUsaha->where('tahun_berdiri', $yearNow);
-            }else{
+            } else {
                 $badanUsaha = $badanUsaha->where('investasi_modal', '>=', 15000000);
             }
-            
         }
-        
+
         if (isset($args['sertifikat'])) {
             if ($args['sertifikat'] == 'halal') {
                 $badanUsaha = $badanUsaha->whereNotNull('nomor_sertifikat_halal_tahun');
             } else if ($args['sertifikat'] == 'haki') {
                 $badanUsaha = $badanUsaha->whereNotNull('sertifikat_merek_tahun');
-            } else{
+            } else {
                 $badanUsaha = $badanUsaha->whereNotNull('sni_tahun');
             }
         }
-        
+
 
 
         if (isset($args['cabang_industri'])) {
@@ -104,13 +103,17 @@ class StatistikQuery extends Query
         }
 
         return $badanUsaha
-            ->select(DB::raw(
-                'count(*) as total_ikm,
-                sum(jumlah_tenaga_kerja_pria) as jumlah_tenaga_kerja_pria,
-                sum(jumlah_tenaga_kerja_wanita) as total_tenaga_kerja_wanita,
-                sum(jumlah_tenaga_kerja_pria)+sum(jumlah_tenaga_kerja_wanita) as total_tenaga_kerja
-                '
-            ))
+            ->select(DB::raw('
+            count(*) as total_ikm,
+            sum(jumlah_tenaga_kerja_pria)+sum(jumlah_tenaga_kerja_wanita) as total_tenaga_kerja,
+            count(case when investasi_modal <= 1000000 then 1 end) as total_industri_kecil,
+            count(case when investasi_modal between 1000000+1 and 15000000-1 then 1 end) as total_industri_menengah,
+            count(case when investasi_modal >= 15000000 then 1 end) as total_industri_besar,
+            count(case when tahun_berdiri = YEAR(NOW()) then 1 end) as total_ikm_baru,
+            count(case when nomor_sertifikat_halal_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_halal,
+            count(case when sertifikat_merek_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_haki,
+            count(case when sni_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_sni
+            '))
             ->get();
     }
 }
