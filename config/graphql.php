@@ -83,6 +83,7 @@ return [
                 App\GraphQL\Queries\KelurahanQuery::class,
                 App\GraphQL\Queries\KbliQuery::class,
                 App\GraphQL\Queries\UserQuery::class,
+                App\GraphQL\Queries\StatistikQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -98,6 +99,7 @@ return [
                 App\GraphQL\Types\KelurahanType::class,
                 App\GraphQL\Types\KbliType::class,
                 App\GraphQL\Types\UserType::class,
+                App\GraphQL\Types\StatistikType::class,
             ],
 
             // Laravel HTTP middleware

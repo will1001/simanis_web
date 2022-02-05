@@ -47,13 +47,7 @@
     --}}
     <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet" type="text/css">
     <style>
-        @media only screen and (min-width: 401px) {
-            canvas {
-                max-width: 70%;
-                width: 100%;
-                max-height: 300px;
-            }
-        }
+       
 
 
         .grid-container {

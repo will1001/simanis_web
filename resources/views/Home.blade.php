@@ -4,6 +4,15 @@ UMKM NTB
 @stop
 <style>
     @media only screen and (min-width: 401px) {
+        canvas {
+            max-width: 70%;
+            width: 100%;
+            max-height: 300px;
+        }
+    }
+
+
+    @media only screen and (min-width: 401px) {
         .pie_chart {
             width: 70%;
         }
@@ -262,9 +271,6 @@ $chartTitle = [
                         onClick: (_points, _event) => {
                             for (let i = 0; i < Data['dataDetailsList'].length; i++) {
                                 if (labelsData[i] === _event.text.split(":")[0].substring(0, _event.text.split(":")[0].length - 1)) {
-                                    // const aaaa = JSON.stringify(Data['dataDetailsList'][i]);
-                                    // const bbbb = window.btoa(unescape(encodeURIComponent(aaaa)))
-                                    // console.log(_points.chart.canvas.id.substring(5, 6));
 
                                     const filter = JSON.stringify([{
                                             'prop': 'id_kabupaten',
@@ -291,16 +297,8 @@ $chartTitle = [
                                         },
 
                                     ].filter(e => e.value !== "" && e.value !== "Semua"))
-                                    // console.log(Data['dataDetailsList'][i]);
-                                    // const chartDetailData = document.getElementById('chartDetailData');
-                                    // const chartDetailTitle = document.getElementById('chartDetailTitle');
-                                    // const chartId = document.getElementById('chartId');
                                     const formChartDetail = document.getElementById('formChartDetail');
                                     const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
-                                    // chartDetailData.value = aaaa;
-                                    // chartDetailTitle.value = _event.text;
-                                    // chartId.value = chartID.substring(5, chartID.length);
-                                    // console.log(chartID.substring(5, chartID.length))
                                     let chartID = _points.chart.canvas.id;
                                     chartID = chartID.substring(5, chartID.length)
                                     const title = _event.text;
@@ -540,11 +538,15 @@ $chartTitle = [
             } else if (i === 3) {
                 const cabangIndustriLabel = [
                     "Pangan",
+                    "Farmasi",
+                    "Tekstil",
+                    "Alat Transportasi",
+                    "Elektronika \ndan Telematika",
+                    "Pembangkit Energi",
+                    "Barang Modal",
                     "Hulu Agro",
-                    "Permesinan",
-                    "Hasil Pertambangan",
-                    "Kesehatan",
-                    "Ekonomi Kreatif",
+                    "Logam Dasar",
+                    "Kimia Dasar",
                 ];
                 let ik = [];
                 let im = [];
@@ -645,6 +647,9 @@ $chartTitle = [
 
     }
 
+    
+    
+
 
 
     for (let i = 0; i < chartTitle.length; i++) {
@@ -722,11 +727,15 @@ $chartTitle = [
         } else if (i === 3) {
             const cabangIndustriLabel = [
                 "Pangan",
+                "Farmasi",
+                "Tekstil",
+                "Alat Transportasi",
+                "Elektronika \ndan Telematika",
+                "Pembangkit Energi",
+                "Barang Modal",
                 "Hulu Agro",
-                "permesinan",
-                "Hasil Pertambangan",
-                "Kesehatan",
-                "Ekonomi Kreatif",
+                "Logam Dasar",
+                "Kimia Dasar",
             ];
             for (let j = 0; j < cabangIndustri.length; j++) {
                 const aaaa = industriKecil.filter(param => param.cabang_industri?.toLowerCase() === cabangIndustri[j]['name']?.toLowerCase())
