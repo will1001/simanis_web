@@ -11,7 +11,9 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Query;
 use Rebing\GraphQL\Support\SelectFields;
 
-use App\Models\BadanUsaha;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+
 
 class BadanUsahaQuery extends Query
 {
@@ -152,19 +154,69 @@ class BadanUsahaQuery extends Query
                 'name' => 'media_sosial',
                 'type' => Type::string(),
             ],
+            'offset' => [
+                'name' => 'offset',
+                'type' => Type::string(),
+            ],
         ];
     }
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        $badanUsaha = DB::table('badan_usaha');
+
         if (isset($args['id'])) {
-            return BadanUsaha::where('id', $args['id'])->get();
+            $badanUsaha = $badanUsaha->where('id', $args['id'])->get();
         }
 
         if (isset($args['nik'])) {
-            return BadanUsaha::where('nik', $args['nik'])->get();
+            $badanUsaha = $badanUsaha->where('nik', $args['nik'])->get();
         }
-      
-        return BadanUsaha::all();
+
+        if (isset($args['cabang_industri']) && $args['cabang_industri'] != '') {
+            $badanUsaha = $badanUsaha->where('cabang_industri', $args['cabang_industri']);
+        }
+
+        if (isset($args['kabupaten']) && $args['kabupaten'] != '') {
+            $badanUsaha = $badanUsaha->where('id_kabupaten', $args['kabupaten']);
+        }
+        if (isset($args['kecamatan']) && $args['kecamatan'] != '') {
+            $badanUsaha = $badanUsaha->where('kecamatan', $args['kecamatan']);
+        }
+        if (isset($args['kelurahan']) && $args['kelurahan'] != '') {
+            $badanUsaha = $badanUsaha->where('kelurahan', $args['kelurahan']);
+        }
+
+        $yearNow = Carbon::now()->year;
+        $badanUsaha = DB::table('badan_usaha');
+
+
+        if (isset($args['jenis_industri'])) {
+            if ($args['jenis_industri'] == 'kecil') {
+                $badanUsaha = $badanUsaha->where('investasi_modal', '<', 1000000);
+            } else if ($args['jenis_industri'] == 'menengah') {
+                $badanUsaha = $badanUsaha->whereBetween('investasi_modal', [1000000 + 1, 15000000 - 1]);
+            } else if ($args['jenis_industri'] == 'baru') {
+                $badanUsaha = $badanUsaha->where('tahun_berdiri', $yearNow);
+            } else {
+                $badanUsaha = $badanUsaha->where('investasi_modal', '>=', 15000000);
+            }
+        }
+
+        if (isset($args['sertifikat'])) {
+            if ($args['sertifikat'] == 'halal') {
+                $badanUsaha = $badanUsaha->whereNotNull('nomor_sertifikat_halal_tahun');
+            } else if ($args['sertifikat'] == 'haki') {
+                $badanUsaha = $badanUsaha->whereNotNull('sertifikat_merek_tahun');
+            } else {
+                $badanUsaha = $badanUsaha->whereNotNull('sni_tahun');
+            }
+        }
+        
+        if (isset($args['offset'])) {
+            $badanUsaha = $badanUsaha->offset($args['offset']);
+        }
+
+        return $badanUsaha->limit(10)->get();
     }
 }
