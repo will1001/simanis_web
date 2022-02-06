@@ -182,6 +182,10 @@ class BadanUsahaQuery extends Query
                 'name' => 'kelurahan',
                 'type' => Type::string(),
             ],
+            'page' => [
+                'name' => 'page',
+                'type' => Type::int(),
+            ],
         ];
     }
 
@@ -241,6 +245,6 @@ class BadanUsahaQuery extends Query
             $badanUsaha = $badanUsaha->limit($args['offset']);
         }
 
-        return $badanUsaha->paginate(20);
+        return $badanUsaha->paginate(5, ['*'], 'page', $args['page']);
     }
 }
