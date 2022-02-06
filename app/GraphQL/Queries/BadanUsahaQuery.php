@@ -241,6 +241,6 @@ class BadanUsahaQuery extends Query
             $badanUsaha = $badanUsaha->limit($args['offset']);
         }
 
-        return $badanUsaha->get();
+        return $badanUsaha->paginate(20);
     }
 }
