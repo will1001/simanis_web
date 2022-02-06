@@ -34,7 +34,7 @@ class FormController extends Controller
                 'SubCabangIndustri' => SubCabangIndustri::all(),
                 'Kbli' => Kbli::all(),
             ]);
-        }  else {
+        } else {
 
             $badan_usaha = null;
 
@@ -48,20 +48,23 @@ class FormController extends Controller
             }
 
             $input = $r->all();
-            // dd($r->file('foto_alat_produksi'));
-            // dd($r);
-            // $name = $r->file('foto_alat_produksi')->getClientOriginalName();
 
-            // $path = $r->file('foto_alat_produksi')->store('public/storage/foto alat produksi');
+            $ext = $r->file('foto_alat_produksi')->getClientOriginalExtension();
+            $name1 = 'foto_alat_produksi' . $id . '.' . $ext;
+
+            $r->file('foto_alat_produksi')->storeAs('public/foto_alat_produksi', $name1);
+
+            $ext2 = $r->file('foto_ruang_produksi')->getClientOriginalExtension();
+            $name2 = 'foto_ruang_produksi' . $id . '.' . $ext2;
 
 
-            // $save = new File;
+            $r->file('foto_ruang_produksi')->storeAs('public/foto_ruang_produksi', $name2);
 
-            // $save->name = $name;
-            // $save->path = $path;
-            // dd($input);
+            $badan_usaha->foto_alat_produksi = '/storage/foto_alat_produksi/' . $name1;
+            $badan_usaha->foto_ruang_produksi = '/storage/foto_ruang_produksi/' . $name2;
+
             $badan_usaha->fill($input)->save();
-            
+
 
             return redirect('/admin/tabel');
         }
@@ -74,6 +77,4 @@ class FormController extends Controller
         $badan_usaha->delete();
         return redirect('/admin/tabel');
     }
-
-
 }

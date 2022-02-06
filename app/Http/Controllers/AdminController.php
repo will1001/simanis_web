@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\BadanUsaha;
+use App\Models\SlideShow;
+use App\Models\Survei;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -79,6 +81,8 @@ class AdminController extends Controller
                 "pages.admin.{$pages}",
                 [
                     'BadanUsaha' => $BadanUsaha,
+                    'SlideShow' => SlideShow::all(),
+                    'Survei' => Survei::all(),
                     'keyword' => "",
                     'pages' => $pages
                 ]
@@ -127,6 +131,32 @@ class AdminController extends Controller
     {
 
         return Excel::download(new BadanUsahaExport, 'Badan Usaha.xlsx');
+    }
+
+    public function gantiSlide(Request $r, $id)
+    {
+        // dd($r->file('slide'));
+
+        $ext = $r->file('slide')->getClientOriginalExtension();
+
+        $path = $r->file('slide')->storeAs('public/slide', 'slide' .$id .'.'.$ext);
+
+        $Survei = SlideShow::find($id);
+        $Survei->img = '/storage/slide/slide' . $id . '.' . $ext;
+        $Survei->save();
+
+        return back();
+    }
+
+    public function gantiLinksurvei(Request $r, $id)
+    {
+
+        
+        $Survei = Survei::find($id);
+        $input = $r->all();
+        $Survei->fill($input)->save();
+
+        return back();
     }
     //
 }

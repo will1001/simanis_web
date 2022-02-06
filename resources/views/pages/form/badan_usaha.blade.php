@@ -164,16 +164,16 @@ $forms = array(
         "placeholder" => "Media sosial",
         "prop" => "media_sosial"
     ),
-    // (object)array(
-    //     "type" => "file",
-    //     "placeholder" => "Foto Alat Produksi",
-    //     "prop" => "foto_alat_produksi"
-    // ),
-    // (object)array(
-    //     "type" => "file",
-    //     "placeholder" => "Foto Ruang Produksi",
-    //     "prop" => "foto_ruang_produksi"
-    // ),
+    (object)array(
+        "type" => "file",
+        "placeholder" => "Foto Alat Produksi",
+        "prop" => "foto_alat_produksi"
+    ),
+    (object)array(
+        "type" => "file",
+        "placeholder" => "Foto Ruang Produksi",
+        "prop" => "foto_ruang_produksi"
+    ),
 
 )
 
@@ -199,7 +199,7 @@ $forms = array(
     }
 </style>
 @section('content')
-<form method="POST" action="/form/admin/{{!empty($badan_usaha) ? $badan_usaha->id : ''}}">
+<form method="POST" action="/form/admin/{{!empty($badan_usaha) ? $badan_usaha->id : ''}}" enctype="multipart/form-data">
     @csrf
     @foreach($forms as $key=>$form)
     <div class="inputstyle">

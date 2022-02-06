@@ -17,6 +17,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin_template/assets/img/apple-icon.png') }}">
     <!-- <link rel="icon" type="image/png" href="{{ asset('admin_template/assets/img/favicon.png') }}"> -->
@@ -64,13 +65,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white {{$pages=='setting'?'active bg-gradient-primary':''}}" href="{{url('admin/setting')}}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Setting</span>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
                     <a class="nav-link text-white {{$pages=='grafik'?'active bg-gradient-primary':''}}" href="{{url('admin/grafik')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chart-pie"></i>
                         </div>
                         <span class="nav-link-text ms-1">Grafik</span>
                     </a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
           <a class="nav-link text-white " href="./pages/billing.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -529,7 +538,7 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="./assets/js/material-dashboard.min.js?v=3.0.0"></script>
-       
+
 </body>
 
 </html>

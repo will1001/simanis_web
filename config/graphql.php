@@ -86,6 +86,7 @@ return [
                 App\GraphQL\Queries\StatistikQuery::class,
                 App\GraphQL\Queries\SlideShowQuery::class,
                 App\GraphQL\Queries\SurveiQuery::class,
+                App\GraphQL\Queries\ProdukQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -104,6 +105,7 @@ return [
                 App\GraphQL\Types\StatistikType::class,
                 App\GraphQL\Types\SlideShowType::class,
                 App\GraphQL\Types\SurveiType::class,
+                App\GraphQL\Types\ProdukType::class,
             ],
 
             // Laravel HTTP middleware

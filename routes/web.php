@@ -35,6 +35,8 @@ Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha'])->name
 Route::get('/admin/delete/deleteAll', [AdminController::class, 'deleteAllBadanUsaha'])->name('admin_delete_all');
 Route::post('/admin/import', [AdminController::class, 'importExcel']);
 Route::get('/admin/export', [AdminController::class, 'exportExcel']);
+Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
+Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
 
 Route::get('/member/{pages}', [MemberController::class, 'index'])->name('member');
 
