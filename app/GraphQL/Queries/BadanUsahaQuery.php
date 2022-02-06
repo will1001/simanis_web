@@ -245,6 +245,6 @@ class BadanUsahaQuery extends Query
             $badanUsaha = $badanUsaha->limit($args['offset']);
         }
 
-        return $badanUsaha->paginate(5, ['*'], 'page', $args['page']);
+        return $badanUsaha->paginate(50, ['*'], 'page', $args['page']);
     }
 }
