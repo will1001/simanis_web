@@ -38,7 +38,7 @@ Route::get('/admin/export', [AdminController::class, 'exportExcel']);
 Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
 Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
 
-Route::get('/member/{pages}', [MemberController::class, 'index'])->name('member');
+Route::get('/member/{pages}/{subPages?}/{id?}', [MemberController::class, 'index'])->name('member');
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
 Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBadanUsahaById']);

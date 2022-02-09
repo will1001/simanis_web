@@ -59,7 +59,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-white {{$pages=='tabel'?'active bg-gradient-primary':''}}" href="{{url('admin/tabel')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-table"></i>
+                            <i class="fas fa-table fa-2x"></i>
                         </div>
                         <span class="nav-link-text ms-1">Tabel</span>
                     </a>
@@ -67,7 +67,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-white {{$pages=='setting'?'active bg-gradient-primary':''}}" href="{{url('admin/setting')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-cog"></i>
+                            <i class="fas fa-cog fa-2x"></i>
                         </div>
                         <span class="nav-link-text ms-1">Setting</span>
                     </a>

@@ -33,6 +33,8 @@ class BadanUsaha extends Model
         'sni_tahun',
         'jenis_usaha',
         'cabang_industri',
+        'sub_cabang_industri',
+        'id_kbli',
         'investasi_modal',
         'jumlah_tenaga_kerja_pria',
         'jumlah_tenaga_kerja_wanita',
@@ -40,6 +42,11 @@ class BadanUsaha extends Model
         'satuan_produksi',
         'nilai_produksi_perbulan',
         'nilai_bahan_baku_perbulan',
+        'lat',
+        'lng',
+        'media_sosial',
+        'foto_alat_produksi',
+        'foto_ruang_produksi',
         'updated_at',
     ];
 }

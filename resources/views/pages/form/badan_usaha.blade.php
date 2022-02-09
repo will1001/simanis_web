@@ -149,16 +149,16 @@ $forms = array(
         "placeholder" => "NILAI BAHAN BAKU (RP.000)",
         "prop" => "nilai_bahan_baku_perbulan"
     ),
-    // (object)array(
-    //     "type" => "number",
-    //     "placeholder" => "Latitude",
-    //     "prop" => "lat"
-    // ),
-    // (object)array(
-    //     "type" => "number",
-    //     "placeholder" => "Longitude",
-    //     "prop" => "lng"
-    // ),
+    (object)array(
+        "type" => "number",
+        "placeholder" => "Latitude",
+        "prop" => "lat"
+    ),
+    (object)array(
+        "type" => "number",
+        "placeholder" => "Longitude",
+        "prop" => "lng"
+    ),
     (object)array(
         "type" => "text",
         "placeholder" => "Media sosial",
@@ -212,7 +212,7 @@ $forms = array(
             @endforeach
         </select>
         @elseif($form->type == 'file')
-        <input type="file" enctype="multipart/form-data" name="{{$form->prop}}" id="{{$form->prop}}">
+        <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}">
         @else
         <input type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($badan_usaha) ? $badan_usaha->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
         @endif

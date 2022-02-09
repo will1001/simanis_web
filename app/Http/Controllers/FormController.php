@@ -26,7 +26,7 @@ class FormController extends Controller
             return view('pages.form.badan_usaha', [
                 'userType' => $userType,
                 'badan_usaha' => $badan_usaha,
-                'pages' => 'tabel',
+                'pages' => $userType == 'admin' ? 'tabel' : 'dashboard',
                 'Kabupaten' => Kabupaten::all(),
                 'Kecamatan' => Kecamatan::all(),
                 'Kelurahan' => Kelurahan::all(),
@@ -49,24 +49,28 @@ class FormController extends Controller
 
             $input = $r->all();
 
-            $ext = $r->file('foto_alat_produksi')->getClientOriginalExtension();
-            $name1 = 'foto_alat_produksi' . $id . '.' . $ext;
+            if ($r->file('foto_alat_produksi_file') != null && $r->file('foto_ruang_produksi_file') != null) {
+                $ext = $r->file('foto_alat_produksi_file')->getClientOriginalExtension();
+                $name1 = 'foto_alat_produksi' . $id . '.' . $ext;
 
-            $r->file('foto_alat_produksi')->storeAs('public/foto_alat_produksi', $name1);
+                $r->file('foto_alat_produksi_file')->storeAs('public/foto_alat_produksi', $name1);
 
-            $ext2 = $r->file('foto_ruang_produksi')->getClientOriginalExtension();
-            $name2 = 'foto_ruang_produksi' . $id . '.' . $ext2;
+                $ext2 = $r->file('foto_ruang_produksi_file')->getClientOriginalExtension();
+                $name2 = 'foto_ruang_produksi' . $id . '.' . $ext2;
 
 
-            $r->file('foto_ruang_produksi')->storeAs('public/foto_ruang_produksi', $name2);
+                $r->file('foto_ruang_produksi_file')->storeAs('public/foto_ruang_produksi', $name2);
 
-            $badan_usaha->foto_alat_produksi = '/storage/foto_alat_produksi/' . $name1;
-            $badan_usaha->foto_ruang_produksi = '/storage/foto_ruang_produksi/' . $name2;
-
+                
+                $badan_usaha->foto_alat_produksi = '/storage/foto_alat_produksi/' . $name1;
+                $badan_usaha->foto_ruang_produksi = '/storage/foto_ruang_produksi/' . $name2;
+            };
+            
+            // dd($input);
             $badan_usaha->fill($input)->save();
 
 
-            return redirect('/admin/tabel');
+            return redirect('/member/dashboard');
         }
     }
 
