@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\FormController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ use App\Http\Controllers\FormController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/storagelinkcall', function ($user) {
+    Artisan::call('storage:link');
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/chartDetail/{filter}/{chartId}/{title}', [HomeController::class, 'chartDetail'])->name('chartDetail');
