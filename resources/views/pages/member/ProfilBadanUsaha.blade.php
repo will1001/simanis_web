@@ -11,7 +11,7 @@
     }
 </style>
 <?php
-$baseUrl = "http://127.0.0.1:8000";
+$baseUrl = "https://simanis.ntbprov.go.id";
 $fieldTitles = [
     'id',
     'NOMOR INDUK KEPENDUDUKAN (NIK)',

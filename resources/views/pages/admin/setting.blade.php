@@ -6,7 +6,7 @@
     }
 </style>
 <?php
-$baseUrl = "http://127.0.0.1:8000";
+$baseUrl = "https://simanis.ntbprov.go.id";
 ?>
 @section('content')
 <h1>Slide Setting</h1>
