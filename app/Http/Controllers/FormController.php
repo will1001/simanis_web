@@ -69,8 +69,11 @@ class FormController extends Controller
             // dd($input);
             $badan_usaha->fill($input)->save();
 
-
-            return redirect('/member/dashboard');
+            if($userType == 'admin'){
+                return redirect('/admin/tabel');
+            }else{
+                return redirect('/member/dashboard');
+            }
         }
     }
 
