@@ -18,7 +18,7 @@
 </div>
 <div class="row">
   <div class="col-sm">
-    <form name="importForm" action="/admin/import" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+    <form name="importForm" action="/admin/data/import" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
       @csrf
       <div class="input-group mb-3">
         <input require type="file" name="file" id="file" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -27,7 +27,7 @@
     </form>
 
     @if(!$BadanUsaha->isEmpty())
-    <button class="btn btn-primary" type="submit" id="button-addon2"><a href="{{ url('/admin/export')}}" style="text-decoration:none;color:white">Export</a></button>
+    <button class="btn btn-primary" type="submit" id="button-addon2"><a href="{{ url('/admin/data/export')}}" style="text-decoration:none;color:white">Export</a></button>
     <form action="{{ route('admin_delete_all')}}" method="GET">
       <button onclick="return confirm_delete()" class="btn btn-primary float-right" type="submit" id="button-addon2">Hapus Semua Data</button>
     </form>

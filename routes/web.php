@@ -40,8 +40,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/admin/{pages}', [AdminController::class, 'index'])->name('admin');
 Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha'])->name('admin_search');
 Route::get('/admin/delete/deleteAll', [AdminController::class, 'deleteAllBadanUsaha'])->name('admin_delete_all');
-Route::post('/admin/import', [AdminController::class, 'importExcel']);
-Route::get('/admin/export', [AdminController::class, 'exportExcel']);
+Route::post('/admin/data/import', [AdminController::class, 'importExcel']);
+Route::get('/admin/data/export', [AdminController::class, 'exportExcel']);
 Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
 Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
 
