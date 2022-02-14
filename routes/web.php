@@ -24,7 +24,8 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 
-Route::get('/storagelinkcall', function ($user) {
+
+Route::get('/storageLink', function () {
     Artisan::call('storage:link');
 });
 
