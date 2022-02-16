@@ -31,7 +31,7 @@
     <form action="{{ route('admin_delete_all')}}" method="GET">
       <button onclick="return confirm_delete()" class="btn btn-primary float-right" type="submit" id="button-addon2">Hapus Semua Data</button>
     </form>
-    <button class="btn btn-primary" type="submit" id="button-addon2"><a href="{{ url('/admin/export')}}" style="text-decoration:none;color:white">Tambah Data</a></button>
+    <button class="btn btn-primary" type="submit" id="button-addon2"><a href="{{ url('/form/admin/')}}" style="text-decoration:none;color:white">Tambah Data</a></button>
     @endif
   </div>
 
