@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
 <div class="row">
   <div class="col-sm">
     <form name="cariForm" action="{{route('admin_search')}}" method="post" enctype="multipart/form-data">

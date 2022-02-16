@@ -41,10 +41,33 @@
             padding: 20px;
             margin: 20px;
         }
+
+        .mobile-burger-menu {
+            display: none;
+        }
+
+        .black-layer-mobile {
+            width: 100%;
+            height: 300vh;
+            background-color: rgba(0, 0, 0, .1);
+            position: absolute;
+            display: none;
+            z-index: 1;
+        }
+
+        @media only screen and (max-width: 375px) {
+            .mobile-burger-menu {
+                display: block;
+                margin-right: 20px;
+            }
+        }
     </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
+    <div class="black-layer-mobile" onclick="return closeSidebar()">
+
+    </div>
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -147,10 +170,14 @@
       </div>
     </div> -->
     </aside>
+
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
+                <div class="mobile-burger-menu" onclick="return openSidebar()">
+                    <i class="fas fa-bars"></i>
+                </div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
@@ -532,6 +559,21 @@
                     damping: '0.5'
                 }
                 Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            }
+        </script>
+
+        <script>
+            const openSidebar = () => {
+                const sideNav = document.getElementsByClassName("sidenav");
+                const bglayer = document.getElementsByClassName("black-layer-mobile");
+                sideNav[0].style.transform = "translateX(0)";
+                bglayer[0].style.display = "block";
+            }
+            const closeSidebar = () => {
+                const sideNav = document.getElementsByClassName("sidenav");
+                const bglayer = document.getElementsByClassName("black-layer-mobile");
+                sideNav[0].style.transform = "translateX(-17.125rem)";
+                bglayer[0].style.display = "none";
             }
         </script>
         <!-- Github buttons -->

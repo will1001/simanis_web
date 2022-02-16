@@ -183,14 +183,14 @@ $forms = array(
     .inputstyle {
         margin: 10px 0px;
         display: flex;
-        width: 40%;
+        width: 100%;
         justify-content: space-between;
 
 
     }
 
     .inputstyle>select {
-        width: 185px;
+        width: 50px;
     }
 
     .inputstyle>span {
@@ -203,19 +203,25 @@ $forms = array(
     @csrf
     @foreach($forms as $key=>$form)
     <div class="inputstyle">
-        <span>{{$form->placeholder}} : </span>
-        @if($form->type == 'select')
-        <select onchange="{{$form->change}}" class="selectpicker" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($badan_usaha) ? $badan_usaha->{$form->prop} : '')}}">
-            <option value="" disabled selected>pilih</option>
-            @foreach($form->options as $key=>$option)
-            <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name}}" {{!empty($badan_usaha) ? strtolower($badan_usaha->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
-            @endforeach
-        </select>
-        @elseif($form->type == 'file')
-        <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}">
-        @else
-        <input type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($badan_usaha) ? $badan_usaha->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
-        @endif
+        <div class="row">
+            <div class="col-sm-12">
+                <span>{{$form->placeholder}} : </span>
+            </div>
+            <div class="col-sm-12">
+                @if($form->type == 'select')
+                <select onchange="{{$form->change}}" class="selectpicker" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($badan_usaha) ? $badan_usaha->{$form->prop} : '')}}">
+                    <option value="" disabled selected>pilih</option>
+                    @foreach($form->options as $key=>$option)
+                    <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name}}" {{!empty($badan_usaha) ? strtolower($badan_usaha->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
+                    @endforeach
+                </select>
+                @elseif($form->type == 'file')
+                <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}">
+                @else
+                <input type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($badan_usaha) ? $badan_usaha->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                @endif
+            </div>
+        </div>
     </div>
     @endforeach
     <button type="submit">Submit</button>
