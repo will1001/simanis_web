@@ -10,6 +10,7 @@ use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -58,11 +59,37 @@ class HomeController extends Controller
     public function index()
     {
 
-        $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-            ->get();
+        $data = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id');
+
+        $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->get();
+
+        $industriKecil = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->where('investasi_modal', '<=', 1000000)->get();
+        $industriMenengah = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereBetween('investasi_modal', [1000000 + 1, 15000000 - 1])->get();
+        $industriBesar = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->where('investasi_modal', '>=', 15000000)->get();
+        $totalTenagaKerja = DB::table('badan_usaha')->select(DB::raw('sum(jumlah_tenaga_kerja_pria)+sum(jumlah_tenaga_kerja_wanita) as total_tenaga_kerja'))->get();
+        $totalIKMBaru = DB::table('badan_usaha')->select(DB::raw('count(case when tahun_berdiri = YEAR(NOW()) then 1 end) as total_ikm_baru'))->get();
+        $sertifikatHalal = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereNotNull('nomor_sertifikat_halal_tahun')->get();
+        $sertifikatHaki = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereNotNull('sertifikat_merek_tahun')->get();
+        $sertifikatSNI = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereNotNull('sni_tahun')->get();
+        $sertifikatTestReport = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereNotNull('nomor_test_report_tahun')->get();
+        $formal = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->where('formal_informal', '=', 'FORMAL')->get();
+        $informal = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->where('formal_informal', '=', 'INFORMAL')->get();
+
+        // dd($informal);
 
         return view('Home', [
             'BadanUsaha' => $BadanUsaha,
+            'industriKecil' => $industriKecil,
+            'industriMenengah' => $industriMenengah,
+            'industriBesar' => $industriBesar,
+            'totalTenagaKerja' => $totalTenagaKerja,
+            'totalIKMBaru' => $totalIKMBaru,
+            'sertifikatHalal' => $sertifikatHalal,
+            'sertifikatHaki' => $sertifikatHaki,
+            'sertifikatSNI' => $sertifikatSNI,
+            'sertifikatTestReport' => $sertifikatTestReport,
+            'formal' => $formal,
+            'informal' => $informal,
             'kabupaten' => Kabupaten::all(),
             'Kecamatan' => Kecamatan::all(),
             'Kelurahan' => Kelurahan::all(),

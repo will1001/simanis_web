@@ -66,18 +66,7 @@ UMKM NTB
 </section>
 <!-- Hero section end  -->
 
-<?php
-$chartTitle = [
-    "SEBARAN INDUSTRI (IKM) NTB BERBASIS SKALA INDUSTRI",
-    "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS PERIZINAN",
-    "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS KABUPATEN/ KOTA",
-    "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS CABANG INDUSTRI",
-    "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS SERTIFIKASI HALAL",
-    "SEBARAN INDUSTRI KECIL DAN MENENGAH (IKM) NTB BERBASIS SERTIFIKASI MEREK",
-];
 
-
-?>
 
 
 <section class="services-section p-3">
@@ -128,39 +117,14 @@ $chartTitle = [
                 </div>
             </div>
         </div>
-
-        @foreach($chartTitle as $i=>$title)
         <div class="container text-center">
-            <h5 class="text-center m-3">{{$title}}</h5>
-            @if($i == 0)
+            <!-- <h5 class="text-center m-3">Data Statistik IKM</h5> -->
             <div class="row">
                 <div class="col-sm">
-                    <canvas id="Chart{{$i+$i+$i+1}}"></canvas>
+                    <canvas id="Chart1"></canvas>
                 </div>
             </div>
-            @else
-            <div class="row">
-                <div class="col-sm">
-                    <h5 class="text-center">Industri Kecil</h5>
-                    <canvas id="Chart{{$i+$i+$i+1}}"></canvas>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    <h5 class="text-center">Industri Menengah</h5>
-                    <canvas id="Chart{{$i+$i+$i+2}}"></canvas>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    <h5 class="text-center">Industri Besar</h5>
-                    <canvas id="Chart{{$i+$i+$i+3}}"></canvas>
-                </div>
-            </div>
-            @endif
         </div>
-        @endforeach
-
     </div>
 </section>
 <!-- Services section end  -->
@@ -219,7 +183,6 @@ $chartTitle = [
     const kabupaten = @json($kabupaten);
     const kecamatan = @json($Kecamatan);
     const kelurahan = @json($Kelurahan);
-    const chartTitle = @json($chartTitle);
     const cabangIndustri = @json($cabangIndustri);
     const subCabangIndustri = @json($subCabangIndustri);
     let idKabupatenFilterApply = "";
@@ -238,15 +201,25 @@ $chartTitle = [
         'rgba(244,164,96, 1)',
         'rgba(176,196,222, 1)',
         'rgba(255,140,0, 1)',
+        'rgba(110, 191, 139, 1)',
+        'rgba(54, 21, 0, 1)',
     ]
-    // console.log(badanUsaha);
-    let industriKecil = badanUsaha.filter(e => parseInt(e.investasi_modal) <= 1000000);
-    // console.log(industriKecil);
-    let industriMenengah = badanUsaha.filter(e => parseInt(e.investasi_modal) > 1000000 && e.investasi_modal < 15000000);
-    let industriBesar = badanUsaha.filter(e => parseInt(e.investasi_modal) >= 15000000);
+    let totalIKM = badanUsaha.length;
+    let industriKecil = @json($industriKecil).length;
+    let industriMenengah = @json($industriMenengah).length;
+    let industriBesar = @json($industriBesar).length;
+    let totalTenagaKerja = @json($totalTenagaKerja)[0]['total_tenaga_kerja'];
+    let totalIKMBaru = @json($totalIKMBaru)[0]['total_ikm_baru'];
+    let sertifikatHalal = @json($sertifikatHalal).length;
+    let sertifikatHaki = @json($sertifikatHaki).length;
+    let sertifikatSNI = @json($sertifikatSNI).length;
+    let sertifikatTestReport = @json($sertifikatTestReport).length;
+    let formal = @json($formal).length;
+    let informal = @json($informal).length;
+    // console.log(totalTenagaKerja);
     let barChart = [];
     const renderCart = (noChart, Data, bgColor, labelsData) => {
-        barChart[noChart] = new Chart(`Chart${noChart+1}`, {
+        barChart[noChart] = new Chart(`Chart1`, {
             type: 'pie',
             data: {
                 labels: labelsData,
@@ -449,396 +422,19 @@ $chartTitle = [
             },
 
         ].filter(e => e.value !== "" && e.value !== "Semua");
-        console.log(filters);
-        for (let i = 0; i < chartTitle.length; i++) {
-            if (i === 0) {
-                const IndustriList = ["Industri Kecil", "Industri Menengah", "Industri Besar"];
-                let ik = industriKecil;
-                let im = industriMenengah;
-                let ib = industriBesar;
-                for (let filter of filters) {
-                    ik = ik.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    im = im.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    ib = ib.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                }
-                industriData = [
-                    ik.length,
-                    im.length,
-                    ib.length,
-                ]
-                barChart[0].data.datasets[0].data = industriData;
-                barChart[0].update();
-            } else if (i === 1) {
-                const formalInformal = ["FORMAL", "INFORMAL"];
-                let ik = [];
-                let im = [];
-                let ib = [];
-                for (let j = 0; j < formalInformal.length; j++) {
-                    let aaaa = industriKecil.filter(param => param.formal_informal === formalInformal[j])
-                    let bbbb = industriMenengah.filter(param => param.formal_informal === formalInformal[j])
-                    let cccc = industriBesar.filter(param => param.formal_informal === formalInformal[j])
-
-                    for (let filter of filters) {
-                        aaaa = aaaa.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                        bbbb = bbbb.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                        cccc = cccc.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    }
-
-
-                    ik[j] = aaaa.length;
-                    im[j] = bbbb.length;
-                    ib[j] = cccc.length;
-                }
-
-                data = [ik, im, ib];
-
-                for (let k = i + i + i; k < data.length + i + i + i; k++) {
-                    barChart[k].data.datasets[0].data = data[k - i - i - i];
-                    barChart[k].update();
-                }
-
-            } else if (i === 2) {
-                const kabupatenLabel = [
-                    "Lombok Barat",
-                    "Lombok Tengah",
-                    "Lombok Timur",
-                    "Sumbawa",
-                    "Dompu",
-                    "Kabupaten Bima",
-                    "Sumbawa Barat",
-                    "Lombok Utara",
-                    "Kota Mataram",
-                    "Kota Bima",
-                ];
-                let ik = [];
-                let im = [];
-                let ib = [];
-                for (let j = 0; j < kabupaten.length; j++) {
-                    let aaaa = industriKecil.filter(param => parseInt(param.id_kabupaten) === parseInt(kabupaten[j]['id']))
-                    let bbbb = industriMenengah.filter(param => parseInt(param.id_kabupaten) === parseInt(kabupaten[j]['id']))
-                    let cccc = industriBesar.filter(param => parseInt(param.id_kabupaten) === parseInt(kabupaten[j]['id']))
-
-                    for (let filter of filters) {
-                        aaaa = aaaa.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                        bbbb = bbbb.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                        cccc = cccc.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    }
-
-                    ik[j] = aaaa.length;
-                    im[j] = bbbb.length;
-                    ib[j] = cccc.length;
-
-                }
-                data = [ik, im, ib];
-
-                for (let k = i + i + i; k < data.length + i + i + i; k++) {
-                    barChart[k].data.datasets[0].data = data[k - i - i - i];
-                    barChart[k].update();
-                }
-            } else if (i === 3) {
-                const cabangIndustriLabel = [
-                    "Pangan",
-                    "Farmasi",
-                    "Tekstil",
-                    "Alat Transportasi",
-                    "Elektronika \ndan Telematika",
-                    "Pembangkit Energi",
-                    "Barang Modal",
-                    "Hulu Agro",
-                    "Logam Dasar",
-                    "Kimia Dasar",
-                ];
-                let ik = [];
-                let im = [];
-                let ib = [];
-                for (let j = 0; j < cabangIndustri.length; j++) {
-                    let aaaa = industriKecil.filter(param => param.cabang_industri?.toLowerCase() === cabangIndustri[j]['name']?.toLowerCase())
-                    let bbbb = industriMenengah.filter(param => param => param.cabang_industri?.toLowerCase() === cabangIndustri[j]['name']?.toLowerCase())
-                    let cccc = industriBesar.filter(param => param => param.cabang_industri?.toLowerCase() === cabangIndustri[j]['name']?.toLowerCase())
-
-                    for (let filter of filters) {
-                        aaaa = aaaa.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString().toLowerCase() === filter.value.toLowerCase());
-                        bbbb = bbbb.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString().toLowerCase() === filter.value.toLowerCase());
-                        cccc = cccc.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString().toLowerCase() === filter.value.toLowerCase());
-                    }
-
-                    ik[j] = aaaa.length;
-                    im[j] = bbbb.length;
-                    ib[j] = cccc.length;
-
-                }
-                data = [ik, im, ib];
-
-                for (let k = i + i + i; k < data.length + i + i + i; k++) {
-                    barChart[k].data.datasets[0].data = data[k - i - i - i];
-                    barChart[k].update();
-                }
-            } else if (i === 4) {
-                let ik = [];
-                let im = [];
-                let ib = [];
-                const sertifikatHalal = ["Memiliki Sertifikasi Halal", "Tidak Memiliki Sertifikasi Halal"];
-
-                let aaaa = industriKecil.filter(param => param.nomor_sertifikat_halal_tahun !== null)
-                let bbbb = industriMenengah.filter(param => param.nomor_sertifikat_halal_tahun !== null)
-                let cccc = industriBesar.filter(param => param.nomor_sertifikat_halal_tahun !== null)
-
-                let dddd = industriKecil;
-                let eeee = industriMenengah;
-                let ffff = industriBesar;
-
-                for (let filter of filters) {
-                    aaaa = aaaa.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    bbbb = bbbb.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    cccc = cccc.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    dddd = dddd.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    eeee = eeee.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    ffff = ffff.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                }
-
-                ik = [aaaa.length, dddd.length - aaaa.length];
-                im = [bbbb.length, eeee.length - bbbb.length];
-                ib = [cccc.length, ffff.length - cccc.length];
-
-                data = [ik, im, ib];
-
-                for (let k = i + i + i; k < data.length + i + i + i; k++) {
-                    barChart[k].data.datasets[0].data = data[k - i - i - i];
-                    barChart[k].update();
-                }
-
-            } else if (i === 5) {
-                let ik = [];
-                let im = [];
-                let ib = [];
-                const sertifikatMerek = ["Memiliki Sertifikasi Merek", "Tidak Memiliki Sertifikasi Merek"];
-
-                let aaaa = industriKecil.filter(param => param.sertifikat_merek_tahun !== null)
-                let bbbb = industriMenengah.filter(param => param.sertifikat_merek_tahun !== null)
-                let cccc = industriBesar.filter(param => param.sertifikat_merek_tahun !== null)
-
-                let dddd = industriKecil;
-                let eeee = industriMenengah;
-                let ffff = industriBesar;
-
-                for (let filter of filters) {
-                    aaaa = aaaa.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    bbbb = bbbb.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    cccc = cccc.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    dddd = dddd.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    eeee = eeee.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                    ffff = ffff.filter(e => (e[filter.prop] !== null ? e[filter.prop] : '').toString() === filter.value);
-                }
-
-                ik = [aaaa.length, dddd.length - aaaa.length];
-                im = [bbbb.length, eeee.length - bbbb.length];
-                ib = [cccc.length, ffff.length - cccc.length];
-
-                data = [ik, im, ib];
-
-                for (let k = i + i + i; k < data.length + i + i + i; k++) {
-                    barChart[k].data.datasets[0].data = data[k - i - i - i];
-                    barChart[k].update();
-                }
-
-            }
-
-        }
-
-    }
-
-    
-    
-
-
-
-    for (let i = 0; i < chartTitle.length; i++) {
-        let ik = [];
-        let im = [];
-        let ib = [];
-        let ddik = [];
-        let ddim = [];
-        let ddib = [];
-        let labelsName;
-        let bgColorChart;
-        if (i === 0) {
-            const IndustriList = ["Industri Kecil", "Industri Menengah", "Industri Besar"];
-            industriData = [
-                industriKecil.length,
-                industriMenengah.length,
-                industriBesar.length,
-            ]
-
-
-            industriDataDetails = [
-                industriKecil,
-                industriMenengah,
-                industriBesar,
-            ]
-            labelsName = IndustriList;
-            bgColorChart = bgColorList.slice(0, IndustriList.length);
-        } else if (i === 1) {
-            const formalInformalLabel = ["Legalitas Usaha (Formal)", "Legalitas Usaha (Informal)"];
-            const formalInformal = ["FORMAL", "INFORMAL"];
-            for (let j = 0; j < formalInformal.length; j++) {
-                const aaaa = industriKecil.filter(param => param.formal_informal === formalInformal[j])
-                const bbbb = industriMenengah.filter(param => param.formal_informal === formalInformal[j])
-                const cccc = industriBesar.filter(param => param.formal_informal === formalInformal[j])
-
-
-                ik[j] = aaaa.length;
-                im[j] = bbbb.length;
-                ib[j] = cccc.length;
-                ddik[j] = aaaa;
-                ddim[j] = bbbb;
-                ddib[j] = cccc;
-                labelsName = formalInformalLabel;
-                bgColorChart = bgColorList.slice(0, formalInformal.length);
-            }
-
-        } else if (i === 2) {
-            const kabupatenLabel = [
-                "Lombok Barat",
-                "Lombok Tengah",
-                "Lombok Timur",
-                "Sumbawa",
-                "Dompu",
-                "Kabupaten Bima",
-                "Sumbawa Barat",
-                "Lombok Utara",
-                "Kota Mataram",
-                "Kota Bima",
-            ];
-            for (let j = 0; j < kabupaten.length; j++) {
-                const aaaa = industriKecil.filter(param => parseInt(param.id_kabupaten) === parseInt(kabupaten[j]['id']))
-                const bbbb = industriMenengah.filter(param => parseInt(param.id_kabupaten) === parseInt(kabupaten[j]['id']))
-                const cccc = industriBesar.filter(param => parseInt(param.id_kabupaten) === parseInt(kabupaten[j]['id']))
-
-                ik[j] = aaaa.length;
-                im[j] = bbbb.length;
-                ib[j] = cccc.length;
-                ddik[j] = aaaa;
-                ddim[j] = bbbb;
-                ddib[j] = cccc;
-                labelsName = kabupatenLabel;
-                bgColorChart = bgColorList;
-
-            }
-        } else if (i === 3) {
-            const cabangIndustriLabel = [
-                "Pangan",
-                "Farmasi",
-                "Tekstil",
-                "Alat Transportasi",
-                "Elektronika \ndan Telematika",
-                "Pembangkit Energi",
-                "Barang Modal",
-                "Hulu Agro",
-                "Logam Dasar",
-                "Kimia Dasar",
-            ];
-            for (let j = 0; j < cabangIndustri.length; j++) {
-                const aaaa = industriKecil.filter(param => param.cabang_industri?.toLowerCase() === cabangIndustri[j]['name']?.toLowerCase())
-
-                const bbbb = industriMenengah.filter(param => param.cabang_industri?.toLowerCase() === cabangIndustri[j]['name']?.toLowerCase())
-                const cccc = industriBesar.filter(param => param.cabang_industri?.toLowerCase() === cabangIndustri[j]['name']?.toLowerCase())
-
-                ik[j] = aaaa.length;
-                im[j] = bbbb.length;
-                ib[j] = cccc.length;
-                ddik[j] = aaaa;
-                ddim[j] = bbbb;
-                ddib[j] = cccc;
-                labelsName = cabangIndustriLabel;
-                bgColorChart = bgColorList.slice(0, cabangIndustri.length);
-
-            }
-        } else if (i === 4) {
-            const sertifikatHalal = ["Memiliki Sertifikasi Halal", "Tidak Memiliki Sertifikasi Halal"];
-            const aaaa = industriKecil.filter(param => param.nomor_sertifikat_halal_tahun !== null)
-            const bbbb = industriMenengah.filter(param => param.nomor_sertifikat_halal_tahun !== null)
-            const cccc = industriBesar.filter(param => param.nomor_sertifikat_halal_tahun !== null)
-            const dddd = industriKecil.filter(param => param.nomor_sertifikat_halal_tahun === null)
-            const eeee = industriMenengah.filter(param => param.nomor_sertifikat_halal_tahun === null)
-            const ffff = industriBesar.filter(param => param.nomor_sertifikat_halal_tahun === null)
-
-            ik = [aaaa.length, industriKecil.length - aaaa.length];
-            im = [bbbb.length, industriMenengah.length - bbbb.length];
-            ib = [cccc.length, industriBesar.length - cccc.length];
-            ddik = [aaaa, dddd];
-            ddim = [bbbb, eeee];
-            ddib = [cccc, ffff];
-            labelsName = sertifikatHalal;
-            bgColorChart = bgColorList.slice(0, sertifikatHalal.length);
-
-        } else if (i === 5) {
-            const sertifikatMerek = ["Memiliki Sertifikasi Merek", "Tidak Memiliki Sertifikasi Merek"];
-            const aaaa = industriKecil.filter(param => param.sertifikat_merek_tahun !== null)
-            const bbbb = industriMenengah.filter(param => param.sertifikat_merek_tahun !== null)
-            const cccc = industriBesar.filter(param => param.sertifikat_merek_tahun !== null)
-            const dddd = industriKecil.filter(param => param.sertifikat_merek_tahun === null)
-            const eeee = industriMenengah.filter(param => param.sertifikat_merek_tahun === null)
-            const ffff = industriBesar.filter(param => param.sertifikat_merek_tahun === null)
-
-            ik = [aaaa.length, industriKecil.length - aaaa.length];
-            im = [bbbb.length, industriMenengah.length - bbbb.length];
-            ib = [cccc.length, industriBesar.length - cccc.length];
-            ddik = [aaaa, dddd];
-            ddim = [bbbb, eeee];
-            ddib = [cccc, ffff];
-            labelsName = sertifikatMerek;
-            bgColorChart = bgColorList.slice(0, sertifikatMerek.length);
-
-        } else {
-            ik[j] = [];
-            im[j] = [];
-            ib[j] = [];
-            labelsName = [];
-            bgColorChart = [];
-        }
-
-
-
-
-
-        let data = [];
-
-
-
-
-        if (i === 0) {
-            data = [{
-                'title': 'Industri',
-                'dataList': industriData,
-                'dataDetailsList': industriDataDetails,
-            }, ]
-
-        } else {
-            data = [{
-                    'title': 'Industri Kecil',
-                    'dataList': ik,
-                    'dataDetailsList': ddik,
-                },
-                {
-                    'title': 'Industri Menengah',
-                    'dataList': im,
-                    'dataDetailsList': ddim,
-                },
-                {
-                    'title': 'Industri Besar',
-                    'dataList': ib,
-                    'dataDetailsList': ddib,
-                },
-            ];
-        }
-
-        for (let k = i + i + i; k < data.length + i + i + i; k++) {
-
-
-            renderCart(k, data[k - i - i - i], bgColorChart, labelsName)
-        }
 
 
     }
+
+
+
+    labelsName = ['total iKM', 'Tenaga Kerja', 'IKM Baru', 'Industri Kecil', 'Industri Menengah', 'Industri Besar', 'Sertifikikat Halal', 'Sertifikikat HAKI', 'Sertifikikat SNI', 'Sertifikat Test Report', 'Formal', 'Informal'];
+    industriData = [totalIKM, totalTenagaKerja, totalIKMBaru, industriKecil, industriMenengah, industriBesar, sertifikatHalal, sertifikatHaki, sertifikatSNI, sertifikatTestReport, formal, informal];
+    bgColorChart = bgColorList.slice(0, industriData.length);
+    data = [{
+        'title': 'Industri',
+        'dataList': industriData,
+    }, ]
+    renderCart(0, data[0], bgColorChart, labelsName)
 </script>
 @endsection
