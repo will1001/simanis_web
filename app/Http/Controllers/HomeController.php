@@ -104,8 +104,8 @@ class HomeController extends Controller
         $kabupaten = Kabupaten::all()->toArray();
         $cabangIndustri = CabangIndustri::all()->toArray();
 
-        $title = explode(":", $title)[0];
-        $title = substr($title, 0, strlen($title) - 1);
+        // $title = explode(":", $title)[0];
+        // $title = substr($title, 0, strlen($title) - 1);
 
         $data = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id');
         if (str_contains($title, 'Industri Kecil')) {
@@ -159,7 +159,7 @@ class HomeController extends Controller
         $filter = json_decode($r->filter);
 
         $title = $r->title;
-        $title = explode(":", $title)[0];
+        // $title = explode(":", $title)[0];
         $keyword = $r->keyword;
 
         $data = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id');

@@ -36,12 +36,287 @@ UMKM NTB
         .filterChart {
             width: 100%;
         }
+
+    }
+
+
+
+    .bannerimg {
+        width: 100%;
+        height: 500px;
+        object-fit: fill;
+    }
+
+    .fotobanner1 {
+        position: absolute;
+        top: -53px;
+        left: -71px;
+        width: 760px;
+    }
+
+    .fotobanner2 {
+        position: absolute;
+        top: 66px;
+        right: -5px;
+        width: 460px;
+    }
+
+    .loginRegisterContainer {
+        position: absolute;
+        top: 524px;
+        left: 108px;
+    }
+
+    .buttonreg {
+        background-color: #FECD1F;
+        padding: 10px 30px;
+        border-radius: 25px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        color: #FFFFFF;
+    }
+
+    .buttonlog {
+        background-color: #FFFFFF;
+        padding: 10px 30px;
+        border-radius: 25px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        color: #3A8EE2;
+    }
+
+    .titleSectionContainer {
+        background: linear-gradient(90deg, rgba(25, 112, 200, 0.92) 0%, rgba(15, 75, 136, 0.92) 100%);
+        padding: 15px;
+        margin-bottom: 50px;
+    }
+
+    .titleSectionContainer h2 {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 54px;
+        line-height: 81px;
+        color: #FFFFFF;
+    }
+
+    .filterChart select {
+        margin: 5px 0;
+        border-radius: 8px;
+        padding: 10px;
+        color: #C7C9D9;
+    }
+
+    .filterChart span {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        color: #404040;
+    }
+
+    .chartDescTitle {
+        background: #2081E2;
+        border-radius: 8px;
+        padding: 5px 10px;
+        display: inline;
+
+    }
+
+    .chartDescTitle span {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+    .boxChartDesc {
+        width: 15px;
+        height: 15px;
+        margin-bottom: 20px;
+    }
+
+    .titleChartDesc {
+        word-wrap: break-word;
+        hyphens: auto;
+        white-space: normal;
+    }
+
+    .titleChartDesc,
+    .valueChartDesc {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: center;
+        color: #404040;
+    }
+
+    .ChartDescContainer {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        width: 100px;
+        cursor: pointer;
+    }
+
+    .ChartContainer {
+        display: flex;
+        /* justify-content: space-between; */
+        margin-top: 20px;
+        flex-flow: row wrap;
+        width: 90%;
+    }
+
+    .client-text p {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+    .download-app-button {
+        background: #FECD1F;
+        border-radius: 8px;
+        display: inline-block;
+        padding: 10px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: center;
+        color: #FFFFFF;
+        margin-bottom: 20px;
+    }
+
+    section.clients-section.spad {
+        text-align: center;
+    }
+
+    .cta-section h2 {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 35px;
+        line-height: 52px;
+        color: #FFFFFF;
+    }
+
+    @media only screen and (max-width: 375px) {
+        .filterChart {
+            width: 100%;
+        }
+
+        .fotobanner1 {
+            top: -13px;
+            left: -35px;
+            width: 760px;
+        }
+
+        .fotobanner2 {
+            top: 208px;
+            right: 0px;
+            width: 308px;
+        }
+
+        .loginRegisterContainer {
+            position: absolute;
+            top: 469px;
+            left: 11px;
+        }
+
+        .logo-container {
+            display: none !important;
+        }
     }
 </style>
 @section('content')
+<?php
+$chartDescList = array(
+    (object)array(
+        "color" => "rgba(54, 162, 235, 1)",
+        "title" => "Total IKM",
+        "value" => count($BadanUsaha),
+    ),
+    (object)array(
+        "color" => "rgba(153, 102, 255, 1)",
+        "title" => "Tenaga Kerja",
+        "value" => $totalTenagaKerja[0]->total_tenaga_kerja,
+    ),
+    (object)array(
+        "color" => "rgba(0,255,0, 1)",
+        "title" => "IKM Baru",
+        "value" => $totalIKMBaru[0]->total_ikm_baru,
+    ),
+    (object)array(
+        "color" => "rgba(0,255,255, 1)",
+        "title" => "Industri Kecil",
+        "value" => count($industriKecil),
+    ),
+    (object)array(
+        "color" => "rgba(0,128,128, 1)",
+        "title" => "Industri Menengah",
+        "value" => count($industriMenengah),
+    ),
+    (object)array(
+        "color" => "rgba(138,43,226, 1)",
+        "title" => "Industri Besar",
+        "value" => count($industriBesar),
+    ),
+    (object)array(
+        "color" => "rgba(221,160,221, 1)",
+        "title" => "Sertifikikat Halal",
+        "value" => count($sertifikatHalal),
+    ),
+    (object)array(
+        "color" => "rgba(244,164,96, 1)",
+        "title" => "Sertifikikat HAKI",
+        "value" => count($sertifikatHaki),
+    ),
+    (object)array(
+        "color" => "rgba(176,196,222, 1)",
+        "title" => "Sertifikikat SNI",
+        "value" => count($sertifikatSNI),
+    ),
+    (object)array(
+        "color" => "rgba(255,140,0, 1)",
+        "title" => "Sertifikat Test Report",
+        "value" => count($sertifikatTestReport),
+    ),
+    (object)array(
+        "color" => "rgba(110, 191, 139, 1)",
+        "title" => "Formal",
+        "value" => count($formal),
+    ),
+    (object)array(
+        "color" => "rgba(54, 21, 0, 1)",
+        "title" => "Informal",
+        "value" => count($informal),
+    ),
+)
+?>
 
 <!-- Hero section  -->
-<section class="hero-section" style="background-color: #17172d">
+<!-- <section class="hero-section" style="background-color: #17172d">
     <div class="hero-slider owl-carousel">
         <div class="hero-item set-bg" data-setbg="{{ asset('tmplate3/img/hero-slider/1.jpg') }}">
 
@@ -63,17 +338,31 @@ UMKM NTB
         </div>
 
     </div>
+</section> -->
+
+<section class="hero-section" style="background-color: #17172d">
+    <img class="bannerimg" src="{{ asset('images/banner.png') }}" alt="">
+    <img class="fotobanner1" src="{{ asset('images/fotobanner1.png') }}" alt="">
+    <img class="fotobanner2" src="{{ asset('images/fotobanner2.png') }}" alt="">
+    @if (Auth::check())
+    @else
+    <div class="loginRegisterContainer">
+        <a href="{{ url('daftar') }}" class="buttonreg">Daftar</a>
+        <a href="{{ url('login') }}" class="buttonlog">Masuk</a>
+    </div>
+    @endif
 </section>
 <!-- Hero section end  -->
 
 
 
 
-<section class="services-section p-3">
+<section class="services-section">
+    <div class="titleSectionContainer" style="text-align: center;">
+        <h2 style="font-weight:bolder;">Data UMKM Provinsi NTB</h2>
+    </div>
     <div class="container">
-        <div style="text-align: center;">
-            <h2 style="font-weight:bolder;">Data UMKM Provinsi NTB</h2>
-        </div>
+
         <form action="" method="GET" style="display:none;" id="formChartDetail">
             <!-- @csrf -->
             <!-- <input type="text" name="chartDetailData" id="chartDetailData">
@@ -123,6 +412,20 @@ UMKM NTB
                 <div class="col-sm">
                     <canvas id="Chart1"></canvas>
                 </div>
+                <div class="col-sm">
+                    <div class="chartDescTitle">
+                        <span>Klik tombol dibawah untuk lihat detail</span>
+                    </div>
+                    <div class="ChartContainer">
+                        @foreach($chartDescList as $i=>$item)
+                        <div class="ChartDescContainer" onclick="return goTodetailsChart('{{$item->title}}');">
+                            <div class="boxChartDesc" style="background-color: {{$item->color}};"></div>
+                            <div class="titleChartDesc">{{$item->title}}</div>
+                            <div id="ChartDescID{{$i}}" class="valueChartDesc">{{$item->value}}</div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -130,15 +433,19 @@ UMKM NTB
 <!-- Services section end  -->
 
 
-<section class="clients-section spad" style="background-color: #17172d">
+<section class="clients-section spad" style="background-color: #2081E2">
     <div class="container">
 
         <div class="client-text">
-            <h2 style="color: white; font-weight:bolder;">SIMANIS</h2>
+            <h2 style="color: white;font-weight:bolder;">SIMANIS</h2>
             <p>Simanis Adalah Sistem Informasi Manajemen Industri yang berguna untuk mendata para pelaku UMKM yang ada
                 di Provinsi Nusa Tenggara Barat dan Membantu dalam memudahkan UMKM untuk melakukan pengajuan Modal.</p>
         </div>
-
+        <div class="download-app-button">
+            Download Aplikasi
+        </div>
+        <br>
+        <a href="https://play.google.com/store/apps/details?id=com.disperin.Simanis"><img class="playstoreimg" src="{{ asset('images/playstore.png') }}" alt=""></a>
     </div>
 </section>
 
@@ -150,7 +457,8 @@ UMKM NTB
                 <h2>Kami siap untuk melayani dan menjawab pertanyaan Anda</h2>
             </div>
             <div class="col-lg-3 text-md-right">
-                <a href="https://api.whatsapp.com/send?phone=6287728937983" target="_blank" class="site-btn sb-dark">Hubungi Kami</a>
+                <!-- <a href="https://api.whatsapp.com/send?phone=6287728937983" target="_blank" class="site-btn sb-dark">Hubungi Kami</a> -->
+                <a href="https://api.whatsapp.com/send?phone=6287728937983"><img class="whatsappimg" src="{{ asset('images/whatsapp.png') }}" alt=""></a>
             </div>
         </div>
     </div>
@@ -160,7 +468,7 @@ UMKM NTB
 
 <h2 style="margin:45px 0;font-family:'Montserrat',sans-serif;text-align:center;color:rgb(90,90,90)">Survei Kepuasan</h2>
 
-<section class="clients-section spad" style="background-color: #17172d">
+<section class="clients-section spad" style="background-color: #2081E2">
     <div class="container">
         <div class="row" style="text-align: center">
             <div class="col">
@@ -237,62 +545,63 @@ UMKM NTB
                 },
                 plugins: {
                     legend: {
-                        position: window.screen.availWidth <= 400 ? "bottom" : "right",
-                        itemStyle: {
-                            width: 90 // or whatever, auto-wrap
-                        },
-                        onClick: (_points, _event) => {
-                            for (let i = 0; i < Data['dataDetailsList'].length; i++) {
-                                if (labelsData[i] === _event.text.split(":")[0].substring(0, _event.text.split(":")[0].length - 1)) {
+                        display: false,
+                        // position: window.screen.availWidth <= 400 ? "bottom" : "right",
+                        // itemStyle: {
+                        //     width: 90 // or whatever, auto-wrap
+                        // },
+                        // onClick: (_points, _event) => {
+                        //     for (let i = 0; i < Data['dataDetailsList'].length; i++) {
+                        //         if (labelsData[i] === _event.text.split(":")[0].substring(0, _event.text.split(":")[0].length - 1)) {
 
-                                    const filter = JSON.stringify([{
-                                            'prop': 'id_kabupaten',
-                                            'value': idKabupatenFilterApply
-                                        }, {
-                                            'prop': 'kecamatan',
-                                            'value': kecamatanFilterApply,
+                        //             const filter = JSON.stringify([{
+                        //                     'prop': 'id_kabupaten',
+                        //                     'value': idKabupatenFilterApply
+                        //                 }, {
+                        //                     'prop': 'kecamatan',
+                        //                     'value': kecamatanFilterApply,
 
-                                        },
-                                        {
-                                            'prop': 'kelurahan',
-                                            'value': kelurahanFilterApply,
+                        //                 },
+                        //                 {
+                        //                     'prop': 'kelurahan',
+                        //                     'value': kelurahanFilterApply,
 
-                                        },
-                                        {
-                                            'prop': 'cabang_industri',
-                                            'value': cabangIndustriFilterApply,
+                        //                 },
+                        //                 {
+                        //                     'prop': 'cabang_industri',
+                        //                     'value': cabangIndustriFilterApply,
 
-                                        },
-                                        {
-                                            'prop': 'sub_cabang_industri',
-                                            'value': subCabangIndustriFilterApply,
+                        //                 },
+                        //                 {
+                        //                     'prop': 'sub_cabang_industri',
+                        //                     'value': subCabangIndustriFilterApply,
 
-                                        },
+                        //                 },
 
-                                    ].filter(e => e.value !== "" && e.value !== "Semua"))
-                                    const formChartDetail = document.getElementById('formChartDetail');
-                                    const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
-                                    let chartID = _points.chart.canvas.id;
-                                    chartID = chartID.substring(5, chartID.length)
-                                    const title = _event.text;
-                                    formChartDetail.action = `/chartDetail/${filter}/${chartID}/${title}`;
-                                    submitButtonchartDetail.click();
-                                }
+                        //             ].filter(e => e.value !== "" && e.value !== "Semua"))
+                        //             const formChartDetail = document.getElementById('formChartDetail');
+                        //             const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
+                        //             let chartID = _points.chart.canvas.id;
+                        //             chartID = chartID.substring(5, chartID.length)
+                        //             const title = _event.text;
+                        //             formChartDetail.action = `/chartDetail/${filter}/${chartID}/${title}`;
+                        //             submitButtonchartDetail.click();
+                        //         }
 
-                            }
+                        //     }
 
 
-                        },
-                        labels: {
-                            boxWidth: 10,
-                            generateLabels: (chart) => {
-                                const datasets = chart.data.datasets;
-                                return datasets[0].data.map((data, i) => ({
-                                    text: `${chart.data.labels[i]} : ${data}`,
-                                    fillStyle: datasets[0].backgroundColor[i],
-                                }))
-                            }
-                        }
+                        // },
+                        // labels: {
+                        //     boxWidth: 10,
+                        //     generateLabels: (chart) => {
+                        //         const datasets = chart.data.datasets;
+                        //         return datasets[0].data.map((data, i) => ({
+                        //             text: `${chart.data.labels[i]} : ${data}`,
+                        //             fillStyle: datasets[0].backgroundColor[i],
+                        //         }))
+                        //     }
+                        // }
                     },
                     title: {
                         display: false,
@@ -309,6 +618,40 @@ UMKM NTB
     }
 
 
+    const goTodetailsChart = (title) => {
+        const filter = JSON.stringify([{
+                'prop': 'id_kabupaten',
+                'value': idKabupatenFilterApply
+            }, {
+                'prop': 'kecamatan',
+                'value': kecamatanFilterApply,
+
+            },
+            {
+                'prop': 'kelurahan',
+                'value': kelurahanFilterApply,
+
+            },
+            {
+                'prop': 'cabang_industri',
+                'value': cabangIndustriFilterApply,
+
+            },
+            {
+                'prop': 'sub_cabang_industri',
+                'value': subCabangIndustriFilterApply,
+
+            },
+
+        ].filter(e => e.value !== "" && e.value !== "Semua"))
+        const formChartDetail = document.getElementById('formChartDetail');
+        const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
+        // let chartID = _points.chart.canvas.id;
+        // chartID = chartID.substring(5, chartID.length)
+        // const title = _event.text;
+        formChartDetail.action = `/chartDetail/${filter}/${1}/${title}`;
+        submitButtonchartDetail.click();
+    }
 
     const changeFilterKabupaten = () => {
         const kabupatenFilter = document.getElementById('kabupatenFilter');
@@ -318,6 +661,7 @@ UMKM NTB
         idKabupatenFilterApply = idKabupaten;
         kecamatanFilterApply = "";
         kelurahanFilterApply = "";
+        console.log(idKabupatenFilterApply);
         applyFilter(
             idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply
         )
@@ -423,7 +767,46 @@ UMKM NTB
 
         ].filter(e => e.value !== "" && e.value !== "Semua");
 
+        let totalIKMUpdate = badanUsaha;
+        let industriKecilUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) <= 1000000);
+        let industriMenengahUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) > 1000000 && e.investasi_modal < 15000000);
+        let industriBesarUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) >= 15000000);
+        let totalTenagaKerjaUpdate = 0;
+        let totalIKMBaruUpdate = badanUsaha.filter(e => parseInt(e.tahun_berdiri) == new Date().getFullYear());
+        let sertifikatHalalUpdate = badanUsaha.filter(e => e.nomor_sertifikat_halal_tahun !== null);
+        let sertifikatHakiUpdate = badanUsaha.filter(e => e.sertifikat_merek_tahun !== null);
+        let sertifikatSNIUpdate = badanUsaha.filter(e => e.sni_tahun !== null);
+        let sertifikatTestReportUpdate = badanUsaha.filter(e => e.nomor_test_report_tahun !== null);
+        let formalUpdate = badanUsaha.filter(e => e.formal_informal === 'FORMAL');
+        let informalUpdate = badanUsaha.filter(e => e.formal_informal === 'INFORMAL');
 
+        for (let filterData of filters) {
+            totalIKMUpdate = totalIKMUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            industriKecilUpdate = industriKecilUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            industriMenengahUpdate = industriMenengahUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            industriBesarUpdate = industriBesarUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            // totalTenagaKerjaUpdate = totalTenagaKerjaUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            totalIKMUpdate.forEach(e => {
+                totalTenagaKerjaUpdate += (parseInt(e.jumlah_tenaga_kerja_pria) + parseInt(e.jumlah_tenaga_kerja_wanita));
+            })
+            totalIKMBaruUpdate = totalIKMBaruUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            sertifikatHalalUpdate = sertifikatHalalUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            sertifikatHakiUpdate = sertifikatHakiUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            sertifikatSNIUpdate = sertifikatSNIUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            sertifikatTestReportUpdate = sertifikatTestReportUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            formalUpdate = formalUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            informalUpdate = informalUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+        }
+        industriData = [totalIKMUpdate.length, totalTenagaKerjaUpdate, totalIKMBaruUpdate.length, industriKecilUpdate.length, industriMenengahUpdate.length, industriBesarUpdate.length, sertifikatHalalUpdate.length, sertifikatHakiUpdate.length, sertifikatSNIUpdate.length, sertifikatTestReportUpdate.length, formalUpdate.length, informalUpdate.length];
+
+        for (let i = 0; i < industriData.length; i++) {
+            const descValueChart = document.getElementById('ChartDescID' + i);
+            descValueChart.innerHTML = industriData[i];
+        }
+
+
+        barChart[0].data.datasets[0].data = industriData;
+        barChart[0].update();
     }
 
 

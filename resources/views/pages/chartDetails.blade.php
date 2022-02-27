@@ -15,7 +15,25 @@
 
 </head>
 
+<style>
+    .back {
+        background-color: #2081E2;
+        padding: 10px 30px;
+        color: #FFFFFF;
+        position: absolute;
+        border-radius: 50px;
+        margin: 10px;
+    }
+
+    .back a {
+        color: #FFFFFF;
+    }
+</style>
+
 <body>
+    <div class="text-left back">
+        <a href="/">Kembali</a>
+    </div>
     <div class="text-center">
         <h1>{{$title}}</h1>
     </div>
@@ -58,7 +76,7 @@
                     @foreach($data as $key=>$item)
                     <tr>
 
-                        <td scope="row" style="text-align:center;">{{ (++$key + (100* ((int)$data->currentPage() -1) ) ) }}</td>
+                        <td scope="row" style="text-align:center;">{{ (++$key + (50* ((int)$data->currentPage() -1) ) ) }}</td>
                         <td>{{$item->nama_direktur}}</td>
                         <td>{{$item->alamat_lengkap}}</td>
                         <td>{{$item->nama_usaha}}</td>

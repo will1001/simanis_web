@@ -47,9 +47,6 @@
     --}}
     <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet" type="text/css">
     <style>
-       
-
-
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -421,6 +418,108 @@
         .owl-carousel.off {
             display: block;
         }
+
+        .menu-container {
+            width: 65%;
+            display: flex;
+            justify-content: end;
+            align-items: end;
+        }
+
+        .active-navbar {
+            color: #FECD1F !important;
+            border-bottom: 3px solid #FECD1F;
+        }
+
+        .menu-container span {
+            margin-right: 20px;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            color: #FFFFFF;
+
+        }
+
+        .logo-container {
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        .logo {
+            width: 74px;
+            height: 75px;
+        }
+
+        .logo-title {
+            width: 200px;
+            word-wrap: break-word;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .logo-container-footer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            align-content: center;
+        }
+
+        .logo-footer {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-title-footer {
+            width: 200px;
+            word-wrap: break-word;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 22px;
+            text-align: center;
+            color: #FECD1F;
+        }
+
+        .site-navbar {
+            background-color: #1970C8;
+            opacity: 0.92;
+            padding: 31px 0px 16px 128px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-section p {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 23px;
+            color: #FFFFFF;
+        }
+
+        .footer-social i {
+            font-size: 30px;
+        }
+
+        .copyright {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 24px;
+            line-height: 36px;
+            /* identical to box heigZht */
+            color: #FFFFFF;
+        }
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -450,61 +549,21 @@
 
         <div class="site-navbar">
             <!-- Logo -->
-            <a href="/" class="site-logo">
+            <!-- <a href="/" class="site-logo">
                 <img src="{{ asset('img/logo1.png') }}" alt="">
-            </a>
-            <div class="header-right">
-                {{-- <div class="header-info-box">
-					<div class="hib-icon">
-						<img src="{{ asset('tmplate3/img/icons/phone.png') }}" alt="" class="">
+            </a> -->
+            <div class="logo-container">
+                <img class=" logo" src="{{ asset('images/logo1.png') }}" alt="">
+                <div class="logo-title">
+                    <span>Dinas Perindustrian Provinsi NTB</span>
+                </div>
+                <img class="logo" src="{{ asset('images/logo2.png') }}" alt="">
             </div>
-            <div class="hib-text">
-                <h6 style="line-height: normal">(0370) 647625</h6>
-                <p style="line-height: normal">+62 877-2893-7983</p>
-                <p style="line-height: normal">industrintb@gmail.com</p>
 
-                <a href="https://api.whatsapp.com/send?phone=6287728937983" target="_blank"> Hubungi
-                    Kami Di Whatsapp</a>
-            </div>
-        </div>
-        <div class="header-info-box">
-            <div class="hib-icon">
-                <img src="img/icons/map-marker.png" alt="" class="">
-            </div>
-            <div class="hib-text">
-                <h6 style="line-height: normal">Jl. Majapahit No.17, Kekalik Jaya</h6>
-                <p style="line-height: normal"> Kec. Sekarbela, Kota Mataram</p>
-                <p style="line-height: normal"> Nusa Tenggara Barat. 83115</p>
-
-                <a href="https://www.google.co.id/maps/place/Kantor+Perindustrian/@-8.591923,116.0942243,852m/data=!3m2!1e3!4b1!4m5!3m4!1s0x2dcdbf7c73d9d6fd:0xbe73e61705537491!8m2!3d-8.5919792!4d116.0963912?hl=id" target="_blank">Lihat Lokasi</a>
-            </div>
-        </div> --}}
-
-        <!-- <button class="search-switch"><i class="fa fa-search"></i></button> -->
-        </div>
-        <!-- Menu -->
-        <nav class="site-nav-menu">
-            <ul>
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="#0">Data UMKM</a>
-                    <ul class="sub-menu">
-                        <li><a href="{{ url('/semua_ikm') }}">Semua</a></li>
-                        <li><a href="{{ url('/terverifikasi') }}">Terverifikasi</a></li>
-                        <li><a href="{{ url('/ikm_belum') }}">Belum Terverifikasi</a></li>
-                    </ul>
-                </li>
-                <li><a href="#0">Statistik Data UMKM</a>
-                    <ul class="sub-menu">
-                        <li><a href="{{ url('/data_sentra2020') }}">Data UMKM 2020</a></li>
-                        <li><a href="{{ url('/data_sentra2019') }}">Data UMKM 2019</a></li>
-                        <li><a href="{{ url('/data_sentra2018') }}">Data UMKM 2018</a></li>
-                        <li><a href="{{ url('/data_sentra2017') }}">Data UMKM 2017</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url('/p/produk') }}">Produk</a></li>
-                <li><a href="{{ url('https://disperin.ntbprov.go.id/') }}" target="_blank">Berita</a></li>
-
-
+            <div class="menu-container">
+                <span class="active-navbar">Home</span>
+                <span>Produk</span>
+                <span>Berita</span>
                 @if (Auth::check())
                 @if (Auth::user()->isAdmin == 1)
                 <li><a href="#0">Admin</a>
@@ -535,10 +594,41 @@
 
                 @endif
                 @endif
-                <!-- <li><a href="blog.html">Blog</a></li> -->
-                <!-- <li><a href="contact.html">Contact</a></li> -->
-            </ul>
-        </nav>
+            </div>
+
+
+
+            <div class="header-right">
+                {{-- <div class="header-info-box">
+					<div class="hib-icon">
+						<img src="{{ asset('tmplate3/img/icons/phone.png') }}" alt="" class="">
+            </div>
+            <div class="hib-text">
+                <h6 style="line-height: normal">(0370) 647625</h6>
+                <p style="line-height: normal">+62 877-2893-7983</p>
+                <p style="line-height: normal">industrintb@gmail.com</p>
+
+                <a href="https://api.whatsapp.com/send?phone=6287728937983" target="_blank"> Hubungi
+                    Kami Di Whatsapp</a>
+            </div>
+        </div>
+        <div class="header-info-box">
+            <div class="hib-icon">
+                <img src="img/icons/map-marker.png" alt="" class="">
+            </div>
+            <div class="hib-text">
+                <h6 style="line-height: normal">Jl. Majapahit No.17, Kekalik Jaya</h6>
+                <p style="line-height: normal"> Kec. Sekarbela, Kota Mataram</p>
+                <p style="line-height: normal"> Nusa Tenggara Barat. 83115</p>
+
+                <a href="https://www.google.co.id/maps/place/Kantor+Perindustrian/@-8.591923,116.0942243,852m/data=!3m2!1e3!4b1!4m5!3m4!1s0x2dcdbf7c73d9d6fd:0xbe73e61705537491!8m2!3d-8.5919792!4d116.0963912?hl=id" target="_blank">Lihat Lokasi</a>
+            </div>
+        </div> --}}
+
+        <!-- <button class="search-switch"><i class="fa fa-search"></i></button> -->
+        </div>
+        <!-- Menu -->
+
 
         </div>
     </header>
@@ -558,37 +648,17 @@
                         <h2 class="fw-title">Alamat</h2>
                         <p>Jl. Majapahit No.17, Kekalik Jaya, Kec. Sekarbela, Kota Mataram, Nusa Tenggara Barat 83115
                         </p>
-
                     </div>
                 </div>
-                <!-- <div class="col-lg-3 col-md-6 col-sm-6"> -->
-                <!-- <div class="footer-widget">
-						<h2 class="fw-title">Our Solutions</h2>
-						<ul>
-							<li><a href="">Metal Industry</a></li>
-							<li><a href="">Agricultural Engineering</a></li>
-							<li><a href="">Green  Energy</a></li>
-							<li><a href="">Chemical Research</a></li>
-							<li><a href="">Oil Extractions</a></li>
-							<li><a href="">Manufactoring</a></li>
-						</ul>
-					</div> -->
-                <!-- </div> -->
                 <div class="col-lg-3 col-md-6 col-sm-7">
                     <div class="footer-widget">
                         <h2 class="fw-title">Kontak</h2>
                         <div class="footer-info-box">
-                            <!-- <div class="fib-icon">
-								<img src="img/icons/map-marker.png" alt="" class="">
-							</div>
-							<div class="fib-text">
-								<p>Main Str, no 23 NY,<br>New York PK 23589</p>
-							</div> -->
                         </div>
                         <div class="footer-info-box">
-                            <div class="fib-icon">
+                            <!-- <div class="fib-icon">
                                 <img src="{{ asset('tmplate3/img/icons/phone.png') }}" alt="" class="">
-                            </div>
+                            </div> -->
                             <div class="fib-text">
                                 <p>Telepon : (0370) 647625<br>Fax : (0370) 640800<br><a href="https://api.whatsapp.com/send?phone=6287728937983" target="_blank">
                                         Hubungi
@@ -609,12 +679,18 @@
                         <h2 class="fw-title">Sosial Media</h2>
 
                         <div class="footer-social">
-                            <a href="https://www.facebook.com/disperinntb"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.facebook.com/disperinntb"><i class="fa fa-facebook-square"></i></a>
                             <a href="https://twitter.com/disperinntb1"><i class="fa fa-twitter"></i></a>
-                            <a href="https://www.youtube.com/channel/UCSAkbosyXAEZf4nMvv777_g"><i class="fa fa-youtube"></i></a>
+                            <a href="https://www.youtube.com/channel/UCSAkbosyXAEZf4nMvv777_g"><i class="fa fa-youtube-play"></i></a>
                             <a href="https://www.instagram.com/dinas_perindustrianntb/?hl=en"><i class="fa fa-instagram"></i></a>
                         </div>
-                        <img src="{{ asset('img/logo1.png') }}" alt="">
+                        <div class="logo-container-footer">
+                            <img class="logo-footer" src="{{ asset('images/logo1.png') }}" alt="">
+                            <div class="logo-title-footer">
+                                <span>Dinas Perindustrian Provinsi NTB</span>
+                            </div>
+                            <img class="logo-footer" src="{{ asset('images/logo2.png') }}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -625,9 +701,9 @@
                     <div class="col-lg-4 order-2 order-lg-1 p-0">
                         <div class="copyright">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>
+                            Copyright Simanis <script>
                                 document.write(new Date().getFullYear());
-                            </script> Simanis
+                            </script>
                         </div>
                     </div>
                     <!-- <div class="col-lg-7 order-1 order-lg-2 p-0">
