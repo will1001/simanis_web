@@ -56,6 +56,18 @@ class StatistikType extends GraphQLType
                 'type' => Type::int(),
                 'description' => 'The total_ikm_sertifikat_sni of Statistik',
             ],
+            'total_ikm_sertifikat_test_report' => [
+                'type' => Type::int(),
+                'description' => 'The total_ikm_sertifikat_sni of Statistik',
+            ],
+            'total_ikm_formal' => [
+                'type' => Type::int(),
+                'description' => 'The total_ikm_sertifikat_sni of Statistik',
+            ],
+            'total_ikm_informal' => [
+                'type' => Type::int(),
+                'description' => 'The total_ikm_sertifikat_sni of Statistik',
+            ],
         ];
     }
 }
