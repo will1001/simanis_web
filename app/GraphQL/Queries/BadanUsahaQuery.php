@@ -226,8 +226,12 @@ class BadanUsahaQuery extends Query
                 $badanUsaha = $badanUsaha->whereBetween('investasi_modal', [1000000 + 1, 15000000 - 1]);
             } else if ($args['jenis_industri'] == 'baru') {
                 $badanUsaha = $badanUsaha->where('tahun_berdiri', $yearNow);
-            } else {
+            } else if ($args['jenis_industri'] == 'besar') {
                 $badanUsaha = $badanUsaha->where('investasi_modal', '>=', 15000000);
+            } else if ($args['jenis_industri'] == 'formal') {
+                $badanUsaha = $badanUsaha->where('formal_informal', '=', 'FORMAL');
+            } else {
+                $badanUsaha = $badanUsaha->where('formal_informal', '=', 'INFORMAL');
             }
         }
 
@@ -236,11 +240,13 @@ class BadanUsahaQuery extends Query
                 $badanUsaha = $badanUsaha->whereNotNull('nomor_sertifikat_halal_tahun');
             } else if ($args['sertifikat'] == 'haki') {
                 $badanUsaha = $badanUsaha->whereNotNull('sertifikat_merek_tahun');
-            } else {
+            } else if ($args['sertifikat'] == 'sni') {
                 $badanUsaha = $badanUsaha->whereNotNull('sni_tahun');
+            } else {
+                $badanUsaha = $badanUsaha->whereNotNull('nomor_test_report_tahun');
             }
         }
-        
+
         if (isset($args['offset'])) {
             $badanUsaha = $badanUsaha->limit($args['offset']);
         }
