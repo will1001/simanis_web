@@ -105,11 +105,11 @@ class BadanUsahaType extends GraphQLType
                 'description' => 'The investasi_modal of BadanUsaha',
             ],
             'jumlah_tenaga_kerja_pria' => [
-                'type' => Type::int(),
+                'type' => Type::string(),
                 'description' => 'The jumlah_tenaga_kerja_pria of BadanUsaha',
             ],
             'jumlah_tenaga_kerja_wanita' => [
-                'type' => Type::int(),
+                'type' => Type::string(),
                 'description' => 'The jumlah_tenaga_kerja_wanita of BadanUsaha',
             ],
             'kapasitas_produksi_perbulan' => [
