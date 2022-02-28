@@ -226,7 +226,7 @@ UMKM NTB
 
 
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 900px) {
         .filterChart {
             width: 100%;
         }
