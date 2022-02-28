@@ -40,6 +40,9 @@ UMKM NTB
     }
 
 
+    .mobilebannerimg {
+        display: none;
+    }
 
     .bannerimg {
         width: 100%;
@@ -221,7 +224,9 @@ UMKM NTB
         color: #FFFFFF;
     }
 
-    @media only screen and (max-width: 375px) {
+
+
+    @media only screen and (max-width: 600px) {
         .filterChart {
             width: 100%;
         }
@@ -230,12 +235,14 @@ UMKM NTB
             top: -13px;
             left: -35px;
             width: 760px;
+            display: none;
         }
 
         .fotobanner2 {
             top: 208px;
             right: 0px;
             width: 308px;
+            display: none;
         }
 
         .loginRegisterContainer {
@@ -246,6 +253,15 @@ UMKM NTB
 
         .logo-container {
             display: none !important;
+        }
+
+        .mobilebannerimg {
+            display: block;
+            width: 100%;
+        }
+
+        .bannerimg {
+            display: none;
         }
     }
 </style>
@@ -341,7 +357,8 @@ $chartDescList = array(
 </section> -->
 
 <section class="hero-section" style="background-color: #17172d">
-    <img class="bannerimg" src="{{ asset('images/banner.png') }}" alt="">
+    <img class="bannerimg" src="{{ asset('images/bannerold.png') }}" alt="">
+    <img class="mobilebannerimg" src="{{ asset('images/mobilebanner.png') }}" alt="">
     <img class="fotobanner1" src="{{ asset('images/fotobanner1.png') }}" alt="">
     <img class="fotobanner2" src="{{ asset('images/fotobanner2.png') }}" alt="">
     @if (Auth::check())
