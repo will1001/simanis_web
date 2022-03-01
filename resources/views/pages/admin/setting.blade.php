@@ -19,11 +19,11 @@ $baseUrl = "https://simanis.ntbprov.go.id";
     <button type="submit">Submit</button>
 </form>
 @endforeach
-<h1>Survei Setting</h1>
+<!-- <h1>Survei Setting</h1>
 <form action="/admin/survei/{{$Survei[0]->id}}" method="POST">
     @csrf
     <input type="text" name="link" value="{{$Survei[0]->link}}">
     <button type="subnit">submit</button>
-</form>
+</form> -->
 
 @endsection

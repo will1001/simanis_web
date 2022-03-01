@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BadanUsaha;
+use App\Models\SurveyChart;
 use App\Models\CabangIndustri;
 use App\Models\SubCabangIndustri;
 use App\Models\Kabupaten;
@@ -11,6 +12,7 @@ use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -28,12 +30,10 @@ class HomeController extends Controller
     {
 
         if (str_contains($title, 'Legalitas Usaha (Formal)')) {
-            $data = $data->where('formal_informal', '=', 'FORMAL');
+            $data = $data->where('formal_informal', '=', 1);
         } else  if (str_contains($title, 'Legalitas Usaha (Informal)')) {
-            $data = $data->where('formal_informal', '=', 'INFORMAL');
-        } else  if (str_contains($title, 'Legalitas Usaha (Informal)')) {
-            $data = $data->where('formal_informal', '=', 'INFORMAL');
-        } else  if ($chartId >= 6 && $chartId <= 8) {
+            $data = $data->where('formal_informal', '=', 0);
+        }  else  if ($chartId >= 6 && $chartId <= 8) {
             foreach ($kabupaten as $field) {
                 if (str_contains(strtolower($field['name']), strtolower($title))) {
                     $data = $data->where('id_kabupaten', '=', $field['id']);
@@ -59,26 +59,82 @@ class HomeController extends Controller
     public function index()
     {
 
-        $data = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id');
+        // $data = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+        //     ->join('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+        //     ->join('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id');
 
-        $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->get();
+        // $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+        //     ->join('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+        //     ->join('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id');
 
-        $industriKecil = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->where('investasi_modal', '<=', 1000000)->get();
-        $industriMenengah = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereBetween('investasi_modal', [1000000 + 1, 15000000 - 1])->get();
-        $industriBesar = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->where('investasi_modal', '>=', 15000000)->get();
-        $totalTenagaKerja = DB::table('badan_usaha')->select(DB::raw('sum(jumlah_tenaga_kerja_pria)+sum(jumlah_tenaga_kerja_wanita) as total_tenaga_kerja'))->get();
-        $totalIKMBaru = DB::table('badan_usaha')->select(DB::raw('count(case when tahun_berdiri = YEAR(NOW()) then 1 end) as total_ikm_baru'))->get();
-        $sertifikatHalal = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereNotNull('nomor_sertifikat_halal_tahun')->get();
-        $sertifikatHaki = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereNotNull('sertifikat_merek_tahun')->get();
-        $sertifikatSNI = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereNotNull('sni_tahun')->get();
-        $sertifikatTestReport = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->whereNotNull('nomor_test_report_tahun')->get();
-        $formal = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->where('formal_informal', '=', 'FORMAL')->get();
-        $informal = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')->where('formal_informal', '=', 'INFORMAL')->get();
+        // $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id');
+
+        $BadanUsaha2 = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
+            ->get();
+
+        $industriKecil = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->where('investasi_modal', '<=', 1000000)->get();
+        $industriMenengah = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->whereBetween('investasi_modal', [1000000 + 1, 15000000 - 1])->get();
+        $industriBesar = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->where('investasi_modal', '>=', 15000000)->get();
+        $totalTenagaKerja = DB::table('badan_usaha')->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->select(DB::raw('sum(jumlah_tenaga_kerja_pria)+sum(jumlah_tenaga_kerja_wanita) as total_tenaga_kerja'))->get();
+        $totalIKMBaru = DB::table('badan_usaha')->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->select(DB::raw('count(case when tahun_berdiri = YEAR(NOW()) then 1 end) as total_ikm_baru'))->get();
+        $sertifikatHalal = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->whereNotNull('nomor_sertifikat_halal_tahun')->get();
+        $sertifikatHaki = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->whereNotNull('sertifikat_merek_tahun')->get();
+        $sertifikatSNI = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->whereNotNull('sni_tahun')->get();
+        $sertifikatTestReport = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->whereNotNull('nomor_test_report_tahun')->get();
+        $formal = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->where('formal_informal', '=', 1)->get();
+        $informal = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')->where('formal_informal', '=', 0)->get();
+
+        //chartsurvei
+        $surveyChartData =
+            DB::table('survey_chart')
+            ->select(DB::raw('
+            count(case when deskripsi = "Sangat Puas" then 1 end) as sp,
+            count(case when deskripsi = "Puas" then 1 end) as p,
+            count(case when deskripsi = "Tidak Puas" then 1 end) as tp,
+            count(case when deskripsi = "Sangat Tidak Puas" then 1 end) as stp
+            '))
+            ->get();
 
         // dd($informal);
 
         return view('Home', [
-            'BadanUsaha' => $BadanUsaha,
+            'BadanUsaha' => $BadanUsaha2,
             'industriKecil' => $industriKecil,
             'industriMenengah' => $industriMenengah,
             'industriBesar' => $industriBesar,
@@ -90,6 +146,7 @@ class HomeController extends Controller
             'sertifikatTestReport' => $sertifikatTestReport,
             'formal' => $formal,
             'informal' => $informal,
+            'surveyChartData' => $surveyChartData,
             'kabupaten' => Kabupaten::all(),
             'Kecamatan' => Kecamatan::all(),
             'Kelurahan' => Kelurahan::all(),
@@ -107,7 +164,10 @@ class HomeController extends Controller
         // $title = explode(":", $title)[0];
         // $title = substr($title, 0, strlen($title) - 1);
 
-        $data = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id');
+        $data = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id');
         if (str_contains($title, 'Industri Kecil')) {
             $data = $data->where('investasi_modal', '<=', 1000000);
         } else if (str_contains($title, 'Industri Menengah')) {
@@ -162,7 +222,10 @@ class HomeController extends Controller
         // $title = explode(":", $title)[0];
         $keyword = $r->keyword;
 
-        $data = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id');
+        $data = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id');
         if (str_contains($title, 'Industri Kecil')) {
             $data = $data->where('investasi_modal', '<', 1000000);
         } else if (str_contains($title, 'Industri Menengah')) {
@@ -183,5 +246,27 @@ class HomeController extends Controller
 
 
         return view('pages.chartDetails', ['data' => $data, 'title' => $title, 'keyword' => $keyword, 'filter' => $filter]);
+    }
+    public function surveyChart(Request $r, $id = null)
+    {
+
+
+        $input = $r->Input('surveiChart');
+
+        $surveyChart = SurveyChart::where('nik', $id)->first();
+        // dd($surveyChart);
+        // $surveyChart->fill($input)->save();
+        if ($surveyChart == null) {
+            $surveyChart = new SurveyChart;
+            $surveyChart->id = (string) Str::uuid();
+            $surveyChart->nik = $id;
+        }
+        $surveyChart->deskripsi = $input;
+
+        $surveyChart->save();
+
+
+
+        return back();
     }
 }

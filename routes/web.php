@@ -32,6 +32,7 @@ Route::get('/storageLink', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/chartDetail/{filter}/{chartId}/{title}', [HomeController::class, 'chartDetail'])->name('chartDetail');
 Route::post('/chartDetail/search', [HomeController::class, 'chartDetailSearch'])->name('chartDetail_search');
+Route::post('/surveyChart/{id}', [HomeController::class, 'surveyChart'])->name('surveyChart');
 
 Route::match(['get', 'post'], '/login', [AuthController::class, 'login']);
 Route::match(['get', 'post'], '/daftar', [AuthController::class, 'register']);

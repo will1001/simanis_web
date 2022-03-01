@@ -44,6 +44,10 @@ class StatistikQuery extends Query
                 'name' => 'cabang_industri',
                 'type' => Type::string(),
             ],
+            'sub_cabang_industri' => [
+                'name' => 'sub_cabang_industri',
+                'type' => Type::string(),
+            ],
             'kabupaten' => [
                 'name' => 'kabupaten',
                 'type' => Type::string(),
@@ -67,6 +71,9 @@ class StatistikQuery extends Query
 
         if (isset($args['cabang_industri']) && $args['cabang_industri'] != '') {
             $badanUsaha = $badanUsaha->where('cabang_industri', $args['cabang_industri']);
+        }
+        if (isset($args['sub_cabang_industri']) && $args['cabang_industri'] != '') {
+            $badanUsaha = $badanUsaha->where('sub_cabang_industri', $args['sub_cabang_industri']);
         }
 
         if (isset($args['kabupaten']) && $args['kabupaten'] != '') {

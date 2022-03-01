@@ -328,7 +328,30 @@ $chartDescList = array(
         "title" => "Informal",
         "value" => count($informal),
     ),
-)
+);
+$surveyChart = array(
+    (object)array(
+        "color" => "rgba(54, 21, 0, 1)",
+        "title" => "Sangat Puas",
+        "value" => $surveyChartData[0]->sp,
+    ),
+    (object)array(
+        "color" => "rgba(153, 102, 255, 1)",
+        "title" => "Puas",
+        "value" => $surveyChartData[0]->p,
+    ),
+    (object)array(
+        "color" => "rgba(0,255,0, 1)",
+        "title" => "Tidak Puas",
+        "value" => $surveyChartData[0]->tp,
+    ),
+    (object)array(
+        "color" => "rgba(0,255,255, 1)",
+        "title" => "Sangat Tidak Puas",
+        "value" => $surveyChartData[0]->stp,
+    ),
+
+);
 ?>
 
 <!-- Hero section  -->
@@ -489,7 +512,63 @@ $chartDescList = array(
     <div class="container">
         <div class="row" style="text-align: center">
             <div class="col">
-                <iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSdampdX0BstgbXIrfSj89fqN-q2TFjt0rmkifEm2n5aTQ3tfQ/viewform?embedded=true" width="auto" height="550" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
+                <!-- <iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSdampdX0BstgbXIrfSj89fqN-q2TFjt0rmkifEm2n5aTQ3tfQ/viewform?embedded=true" width="auto" height="550" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe> -->
+                <div style="display: flex;justify-content: center;">
+                    <canvas id="Chart2"></canvas>
+                </div>
+                <div style="display: flex;justify-content:space-between;margin: 20px 0px;">
+                    @foreach($surveyChart as $i=>$item)
+                    <div class="ChartDescContainer">
+                        <div class="boxChartDesc" style="background-color: {{$item->color}};color:white!important"></div>
+                        <div class="titleChartDesc" style="color:white!important">{{$item->title}}</div>
+                        <div id="ChartDescID{{$i}}" class="valueChartDesc" style="color:white!important">{{$item->value}}</div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col">
+
+                @if(Auth::check())
+                <form action="/surveyChart/{{Auth::user()->nik}}" method="POST">
+                    @csrf
+                    <div style="display:flex;flex-direction: column;align-items: flex-start;color:white;font-weight: bold;">
+                        <div>
+                            <input type="radio" name="surveiChart" value="Sangat Puas" required> Sangat Puas
+                        </div>
+                        <div>
+                            <input type="radio" name="surveiChart" value="Puas"> Puas
+                        </div>
+                        <div>
+                            <input type="radio" name="surveiChart" value="Tidak Puas"> Tidak Puas
+                        </div>
+                        <div>
+                            <input type="radio" name="surveiChart" value="Sangat Tidak Puas"> Sangat Tidak Puas
+                        </div>
+                        <button type="submit" class="download-app-button" style="cursor: pointer;">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                @else
+                <div style="display:flex;flex-direction: column;align-items: flex-start;color:white;font-weight: bold;">
+                    <div>
+                        <input type="radio" name="surveiChart" value="Sangat Puas" required> Sangat Puas
+                    </div>
+                    <div>
+                        <input type="radio" name="surveiChart" value="Puas"> Puas
+                    </div>
+                    <div>
+                        <input type="radio" name="surveiChart" value="Tidak Puas"> Tidak Puas
+                    </div>
+                    <div>
+                        <input type="radio" name="surveiChart" value="Sangat Tidak Puas"> Sangat Tidak Puas
+                    </div>
+                    <button type="submit" class="download-app-button" style="cursor: pointer;" onclick="return surveiChartSubmit()">
+                        Submit
+                    </button>
+                </div>
+                @endif
+
             </div>
         </div>
     </div>
@@ -541,10 +620,11 @@ $chartDescList = array(
     let sertifikatTestReport = @json($sertifikatTestReport).length;
     let formal = @json($formal).length;
     let informal = @json($informal).length;
+    let surveyChartData = @json($surveyChartData);
     // console.log(totalTenagaKerja);
     let barChart = [];
     const renderCart = (noChart, Data, bgColor, labelsData) => {
-        barChart[noChart] = new Chart(`Chart1`, {
+        barChart[noChart] = new Chart(`Chart${noChart}`, {
             type: 'pie',
             data: {
                 labels: labelsData,
@@ -794,8 +874,8 @@ $chartDescList = array(
         let sertifikatHakiUpdate = badanUsaha.filter(e => e.sertifikat_merek_tahun !== null);
         let sertifikatSNIUpdate = badanUsaha.filter(e => e.sni_tahun !== null);
         let sertifikatTestReportUpdate = badanUsaha.filter(e => e.nomor_test_report_tahun !== null);
-        let formalUpdate = badanUsaha.filter(e => e.formal_informal === 'FORMAL');
-        let informalUpdate = badanUsaha.filter(e => e.formal_informal === 'INFORMAL');
+        let formalUpdate = badanUsaha.filter(e => e.formal_informal === 1);
+        let informalUpdate = badanUsaha.filter(e => e.formal_informal === 0);
 
         for (let filterData of filters) {
             totalIKMUpdate = totalIKMUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
@@ -835,6 +915,23 @@ $chartDescList = array(
         'title': 'Industri',
         'dataList': industriData,
     }, ]
-    renderCart(0, data[0], bgColorChart, labelsName)
+    renderCart(1, data[0], bgColorChart, labelsName)
+
+    labelsName2 = ['Sangat Puas', 'Puas', 'Kurang Puas', 'Sangat Tidak Puas'];
+    // industriData2 = ['20%','45%','10%','25%'];
+    // console.log(surveyChartData[0]['sp']);
+    industriData2 = [surveyChartData[0]['sp'], surveyChartData[0]['p'], surveyChartData[0]['tp'], surveyChartData[0]['stp']];
+    bgColorChart2 = ['rgba(54, 21, 0, 1)', 'rgba(153, 102, 255, 1)', 'rgba(0,255,0, 1)', 'rgba(0,255,255, 1)'];
+    data2 = [{
+        'title': 'Survei Kepuasan',
+        'dataList': industriData2,
+    }, ]
+    renderCart(2, data2[0], bgColorChart2, labelsName2)
+</script>
+
+<script>
+    const surveiChartSubmit = () => {
+        alert("Login Terlebih Dahulu");
+    }
 </script>
 @endsection

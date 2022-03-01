@@ -25,14 +25,15 @@ class AdminController extends Controller
         'badan_usaha.nama_usaha',
         'badan_usaha.bentuk_usaha',
         'badan_usaha.tahun_berdiri',
-        'badan_usaha.formal_informal',
+        'legalitas_usaha.name as formal_informal',
         'badan_usaha.nib_tahun',
         'badan_usaha.nomor_sertifikat_halal_tahun',
         'badan_usaha.sertifikat_merek_tahun',
         'badan_usaha.nomor_test_report_tahun',
         'badan_usaha.sni_tahun',
         'badan_usaha.jenis_usaha',
-        'badan_usaha.cabang_industri',
+        'cabang_industri.name as cabang_industri',
+        'sub_cabang_industri.name as sub_cabang_industri',
         'badan_usaha.investasi_modal',
         'badan_usaha.jumlah_tenaga_kerja_pria',
         'badan_usaha.jumlah_tenaga_kerja_wanita',
@@ -73,7 +74,10 @@ class AdminController extends Controller
     public function index($pages = "tabel")
     {
         if (Auth::check()) {
-            $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
                 ->paginate(100, $this->fields);
 
 
@@ -97,7 +101,10 @@ class AdminController extends Controller
     {
         $keyword = $request->input('keyword');
 
-        $BadanUsaha = BadanUsaha::join('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+        $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
             ->where('badan_usaha.nik', 'LIKE', "%{$keyword}%");
 
 

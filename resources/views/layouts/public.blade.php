@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <title>@yield('title') | SIMANIS</title>
     <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('template/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('template/css/bootstrap.min.css') }}" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <!-- This is for the animation CSS -->
     <link href="{{ asset('template2/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('template2/prism.css') }}" rel="stylesheet">
@@ -431,7 +433,8 @@
             border-bottom: 3px solid #FECD1F;
         }
 
-        .menu-container span {
+        .menu-container span,
+        .menu-container .dropdown {
             margin-right: 20px;
             font-family: Poppins;
             font-style: normal;
@@ -440,6 +443,12 @@
             line-height: 30px;
             color: #FFFFFF;
 
+        }
+
+        .menu-container .dropdown button {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
         }
 
         .logo-container {
@@ -566,32 +575,36 @@
                 <span>Berita</span>
                 @if (Auth::check())
                 @if (Auth::user()->isAdmin == 1)
-                <li><a href="#0">Admin</a>
-                    <ul class="sub-menu">
-                        <li><a href="{{ url('admin/tabel') }}">Dashboard</a></li>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ url('admin/tabel') }}">Dashboard</a></li>
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                         </li>
                     </ul>
-                </li>
+                </div>
                 @endif
                 @if (Auth::user()->isAdmin == 0)
-                <li><a href="#0">{{ Auth::user()->nik }}</a>
-                    <ul class="sub-menu">
-
-                        <li><a href="{{ url('/member/dashboard') }}">Dashboard</a></li>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->nik }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ url('/member/dashboard') }}">Dashboard</a></li>
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                         </li>
                     </ul>
-                </li>
-
+                </div>
                 @endif
                 @endif
             </div>
@@ -733,7 +746,9 @@
     <script src="{{ asset('template2/jquery.min.js') }}"></script>
     <!-- Bootstrap popper Core JavaScript -->
     <script src="{{ asset('template2/popper.min.js') }}"></script>
-    <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
+    <!-- <script src="{{ asset('template/js/bootstrap.min.js') }}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
     <!-- This is for the animation -->
     <script src="{{ asset('template2/aos.js') }}"></script>
     <script src="{{ asset('template2/perfect-scrollbar.jquery.min.js') }}"></script>

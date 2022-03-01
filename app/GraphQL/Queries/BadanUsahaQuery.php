@@ -206,6 +206,10 @@ class BadanUsahaQuery extends Query
         if (isset($args['cabang_industri']) && $args['cabang_industri'] != '') {
             $badanUsaha = $badanUsaha->where('cabang_industri', $args['cabang_industri']);
         }
+      
+        if (isset($args['sub_cabang_industri']) && $args['cabang_industri'] != '') {
+            $badanUsaha = $badanUsaha->where('sub_cabang_industri', $args['sub_cabang_industri']);
+        }
 
         if (isset($args['kabupaten']) && $args['kabupaten'] != '') {
             $badanUsaha = $badanUsaha->where('id_kabupaten', $args['kabupaten']);

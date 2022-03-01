@@ -63,6 +63,7 @@
           <th scope="col">SNI/TAHUN</th>
           <th scope="col">JENIS USAHA</th>
           <th scope="col">CABANG INDUSTRI</th>
+          <th scope="col">SUB CABANG INDUSTRI</th>
           <th scope="col">INVESTASI/ MODAL (RP. 000)</th>
           <th scope="col">JUMLAH TENAGA KERJA PRIA</th>
           <th scope="col">JUMLAH TENAGA KERJA WANITA</th>
@@ -104,6 +105,7 @@
           <td>{{$item->sni_tahun}}</td>
           <td>{{$item->jenis_usaha}}</td>
           <td>{{$item->cabang_industri}}</td>
+          <td>{{$item->sub_cabang_industri}}</td>
           <td>{{$item->investasi_modal}}</td>
           <td>{{$item->jumlah_tenaga_kerja_pria}}</td>
           <td>{{$item->jumlah_tenaga_kerja_wanita}}</td>
