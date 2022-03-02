@@ -20,6 +20,7 @@ class HomeController extends Controller
         'badan_usaha.nama_direktur',
         'badan_usaha.alamat_lengkap',
         'badan_usaha.nama_usaha',
+        'badan_usaha.jenis_usaha',
     ];
     private $orWhere = [
         'badan_usaha.alamat_lengkap',

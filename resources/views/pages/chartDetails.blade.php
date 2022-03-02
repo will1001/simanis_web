@@ -60,7 +60,7 @@
     </div>
     </div> -->
 
-
+    
     <div class="Container-Table">
         <div class="table-responsive m-2" style="max-height:500px;">
             <table class="table" style="white-space: nowrap;">
@@ -70,6 +70,7 @@
                         <th scope="col">NAMA</th>
                         <th scope="col">ALAMAT LENGKAP</th>
                         <th scope="col">NAMA USAHA</th>
+                        <th scope="col">JENIS USAHA</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,6 +81,7 @@
                         <td>{{$item->nama_direktur}}</td>
                         <td>{{$item->alamat_lengkap}}</td>
                         <td>{{$item->nama_usaha}}</td>
+                        <td>{{$item->jenis_usaha}}</td>
                     </tr>
                     @endforeach
                 </tbody>

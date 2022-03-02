@@ -571,8 +571,8 @@
 
             <div class="menu-container">
                 <span class="active-navbar">Home</span>
-                <span>Produk</span>
-                <span>Berita</span>
+                <span><a style="text-decoration: none;color:white;" href="#">Produk</a></span>
+                <span> <a style="text-decoration: none;color:white;" href="{{ url('https://disperin.ntbprov.go.id/') }}">Berita</a></span>
                 @if (Auth::check())
                 @if (Auth::user()->isAdmin == 1)
                 <div class="dropdown">
