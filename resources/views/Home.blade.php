@@ -458,7 +458,7 @@ $surveyChart = array(
                     </div>
                     <div class="ChartContainer">
                         @foreach($chartDescList as $i=>$item)
-                        <div class="ChartDescContainer" onclick="return goTodetailsChart('{{$item->title}}');">
+                        <div class="ChartDescContainer" onclick="return goTodetailsChart('{{$item->title}}','{{$i}}');">
                             <div class="boxChartDesc" style="background-color: {{$item->color}};"></div>
                             <div class="titleChartDesc">{{$item->title}}</div>
                             <div id="ChartDescID{{$i}}" class="valueChartDesc">{{$item->value}}</div>
@@ -715,7 +715,7 @@ $surveyChart = array(
     }
 
 
-    const goTodetailsChart = (title) => {
+    const goTodetailsChart = (title, idChart) => {
         const filter = JSON.stringify([{
                 'prop': 'id_kabupaten',
                 'value': idKabupatenFilterApply
@@ -746,7 +746,8 @@ $surveyChart = array(
         // let chartID = _points.chart.canvas.id;
         // chartID = chartID.substring(5, chartID.length)
         // const title = _event.text;
-        formChartDetail.action = `/chartDetail/${filter}/${1}/${title}`;
+        // console.log(idChart);
+        formChartDetail.action = `/chartDetail/${filter}/${idChart}/${title}`;
         submitButtonchartDetail.click();
     }
 

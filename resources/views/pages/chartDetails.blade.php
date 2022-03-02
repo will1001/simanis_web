@@ -28,6 +28,13 @@
     .back a {
         color: #FFFFFF;
     }
+
+    @media only screen and (max-width: 900px) {
+        .text-center {
+            margin-top: 70px;
+            display: inline-block;
+        }
+    }
 </style>
 
 <body>
@@ -60,7 +67,7 @@
     </div>
     </div> -->
 
-    
+
     <div class="Container-Table">
         <div class="table-responsive m-2" style="max-height:500px;">
             <table class="table" style="white-space: nowrap;">
