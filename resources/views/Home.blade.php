@@ -869,14 +869,16 @@ $surveyChart = array(
         let industriKecilUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) <= 1000000);
         let industriMenengahUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) > 1000000 && e.investasi_modal < 15000000);
         let industriBesarUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) >= 15000000);
-        let totalTenagaKerjaUpdate = 0;
+        let totalTenagaKerjaUpdate = totalTenagaKerja;
         let totalIKMBaruUpdate = badanUsaha.filter(e => parseInt(e.tahun_berdiri) == new Date().getFullYear());
         let sertifikatHalalUpdate = badanUsaha.filter(e => e.nomor_sertifikat_halal_tahun !== null);
         let sertifikatHakiUpdate = badanUsaha.filter(e => e.sertifikat_merek_tahun !== null);
         let sertifikatSNIUpdate = badanUsaha.filter(e => e.sni_tahun !== null);
         let sertifikatTestReportUpdate = badanUsaha.filter(e => e.nomor_test_report_tahun !== null);
-        let formalUpdate = badanUsaha.filter(e => e.formal_informal === 1);
-        let informalUpdate = badanUsaha.filter(e => e.formal_informal === 0);
+        let formalUpdate = badanUsaha.filter(e => e.formal_informal === "1");
+        let informalUpdate = badanUsaha.filter(e => e.formal_informal === "0");
+        console.log(formalUpdate);
+        console.log(informalUpdate);
 
         for (let filterData of filters) {
             totalIKMUpdate = totalIKMUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
@@ -886,7 +888,7 @@ $surveyChart = array(
             // totalTenagaKerjaUpdate = totalTenagaKerjaUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             // totalTenagaKerjaUpdate = 10;
             totalIKMUpdate.forEach(e => {
-                console.log(e.jumlah_tenaga_kerja_pria === null ? 0 : e.jumlah_tenaga_kerja_pria);
+                // console.log(e);
                 // console.log(parseInt(e.jumlah_tenaga_kerja_wanita));
                 totalTenagaKerjaUpdate += (parseInt(e.jumlah_tenaga_kerja_pria === null ? 0 : e.jumlah_tenaga_kerja_pria) + parseInt(e.jumlah_tenaga_kerja_wanita === null ? 0 : e.jumlah_tenaga_kerja_wanita));
             })
