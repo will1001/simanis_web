@@ -884,8 +884,11 @@ $surveyChart = array(
             industriMenengahUpdate = industriMenengahUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             industriBesarUpdate = industriBesarUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             // totalTenagaKerjaUpdate = totalTenagaKerjaUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            // totalTenagaKerjaUpdate = 10;
             totalIKMUpdate.forEach(e => {
-                totalTenagaKerjaUpdate += (parseInt(e.jumlah_tenaga_kerja_pria) + parseInt(e.jumlah_tenaga_kerja_wanita));
+                console.log(e.jumlah_tenaga_kerja_pria === null ? 0 : e.jumlah_tenaga_kerja_pria);
+                // console.log(parseInt(e.jumlah_tenaga_kerja_wanita));
+                totalTenagaKerjaUpdate += (parseInt(e.jumlah_tenaga_kerja_pria === null ? 0 : e.jumlah_tenaga_kerja_pria) + parseInt(e.jumlah_tenaga_kerja_wanita === null ? 0 : e.jumlah_tenaga_kerja_wanita));
             })
             totalIKMBaruUpdate = totalIKMBaruUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             sertifikatHalalUpdate = sertifikatHalalUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
@@ -903,8 +906,9 @@ $surveyChart = array(
         }
 
 
-        barChart[0].data.datasets[0].data = industriData;
-        barChart[0].update();
+        barChart[1].data.datasets[0].data = industriData;
+        barChart[1].update();
+
     }
 
 

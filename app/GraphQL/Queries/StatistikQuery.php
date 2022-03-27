@@ -98,8 +98,8 @@ class StatistikQuery extends Query
             count(case when sertifikat_merek_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_haki,
             count(case when sni_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_sni,
             count(case when nomor_test_report_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_test_report,
-            count(case when formal_informal = "FORMAL" then 1 end) as total_ikm_formal,
-            count(case when formal_informal = "INFORMAL" then 1 end) as total_ikm_informal
+            count(case when formal_informal = 1 then 1 end) as total_ikm_formal,
+            count(case when formal_informal = 0 then 1 end) as total_ikm_informal
             '))
             ->get();
     }

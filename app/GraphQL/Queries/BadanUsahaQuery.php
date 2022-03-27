@@ -233,9 +233,9 @@ class BadanUsahaQuery extends Query
             } else if ($args['jenis_industri'] == 'besar') {
                 $badanUsaha = $badanUsaha->where('investasi_modal', '>=', 15000000);
             } else if ($args['jenis_industri'] == 'formal') {
-                $badanUsaha = $badanUsaha->where('formal_informal', '=', 'FORMAL');
+                $badanUsaha = $badanUsaha->where('formal_informal', '=', 1);
             } else {
-                $badanUsaha = $badanUsaha->where('formal_informal', '=', 'INFORMAL');
+                $badanUsaha = $badanUsaha->where('formal_informal', '=', 0);
             }
         }
 
