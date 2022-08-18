@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\BadanUsaha;
+use Illuminate\Support\Str;
+
 
 
 class MemberController extends Controller
@@ -55,9 +57,23 @@ class MemberController extends Controller
             if (Auth::user()->isAdmin == 1) {
                 return redirect('admin');
             } else {
+                // dd(Auth::user()->nik);
                 $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
                 $userDataProgress = array();
                 // dd(count($this->fields));
+                // dd(!$BadanUsaha->first());
+                // dd(empty($BadanUsaha));
+                if(!$BadanUsaha->first()){
+                    $NewBadanUsaha = new BadanUsaha;
+                    $NewBadanUsaha->id = (string) Str::uuid();
+                    $NewBadanUsaha->nik = Auth::user()->nik;
+
+                     // BUAT BADAN USAHA
+                        $NewBadanUsaha->save();
+
+                }
+                $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+
                 foreach ($BadanUsaha as $key => &$item) {
                     $userDataProgress[$key] = 0;
                     $totalnull = 0;
@@ -78,7 +94,7 @@ class MemberController extends Controller
 
                     return view("pages.member.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields]);
                 } else {
-
+                    // dd($BadanUsaha);
                     return view("pages.member.{$pages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields]);
                 }
             }

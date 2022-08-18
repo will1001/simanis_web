@@ -9,6 +9,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PerbankanController;
+use App\Http\Controllers\KoperasiController;
+use App\Http\Controllers\PerdaganganController;
 use App\Http\Controllers\FormController;
 use Illuminate\Support\Facades\Artisan;
 
@@ -47,6 +50,9 @@ Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
 Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
 
 Route::get('/member/{pages}/{subPages?}/{id?}', [MemberController::class, 'index'])->name('member');
+Route::get('/perbankan/{pages}/{subPages?}', [PerbankanController::class, 'index']);
+Route::get('/koperasi/{pages}/{subPages?}', [KoperasiController::class, 'index'])->name('koperasi');
+Route::get('/perdagangan/{pages}/{subPages?}', [PerdaganganController::class, 'index'])->name('perdagangan');
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
 Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBadanUsahaById']);

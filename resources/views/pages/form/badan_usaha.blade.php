@@ -199,7 +199,7 @@ $forms = array(
     }
 </style>
 @section('content')
-<form method="POST" action="/form/admin/{{!empty($badan_usaha) ? $badan_usaha->id : ''}}" enctype="multipart/form-data">
+<form method="POST" action="/form/{$userType}/{{!empty($badan_usaha) ? $badan_usaha->id : ''}}" enctype="multipart/form-data">
     @csrf
     @foreach($forms as $key=>$form)
     <div class="inputstyle">
