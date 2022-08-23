@@ -18,6 +18,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- @vite('resources/css/app.css') -->
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin_template/assets/img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('admin_template/assets/img/favicon.png') }}">
   <title>
@@ -35,119 +37,43 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('admin_template/assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" />
 </head>
-
 <body class="g-sidenav-show  bg-gray-200">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="{{route('home')}}">
-        <img src="{{ asset('admin_template/assets/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">{{Auth::user()->nik}}</span>
-      </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white {{$pages=='dashboard'?'active bg-gradient-primary':''}}" href="{{url('member/dashboard')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-th-large fa-2x"></i>
-            </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{$pages=='membercard'?'active bg-gradient-primary':''}}" href="{{url('member/membercard')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-id-card fa-2x"></i>
-            </div>
-            <span class="nav-link-text ms-1">Kartu Member</span>
-          </a>
-        </li>
-        <!-- <li class="nav-item">
-                    <a class="nav-link text-white " href="{{url('admin/grafik')}}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chart-pie"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Grafik</span>
-                    </a>
-                </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/tables.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Tables</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/billing.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/virtual-reality.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">view_in_ar</i>
-            </div>
-            <span class="nav-link-text ms-1">Virtual Reality</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/rtl.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-            </div>
-            <span class="nav-link-text ms-1">RTL</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/notifications.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">notifications</i>
-            </div>
-            <span class="nav-link-text ms-1">Notifications</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/profile.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/sign-in.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/sign-up.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">assignment</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
-        </li> -->
-      </ul>
-    </div>
-    <!-- <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
+  <div class="flex h-full p-3">
+    <aside class="flex flex-col bg-white p-3 rounded-xl items-start text-left">
+      <div class="flex justify-center items-center">
+        <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
+        <span>Simanis.</span>
       </div>
-    </div> -->
-  </aside>
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+        <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
+        <span>Dashboard</span>
+      </div>
+      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
+        <span>Kartu</span>
+      </div>
+      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <img class="mr-5" src="{{ asset('/images/pengajuan-dana.png') }}" alt="logo">
+        <span>Pengajuan Dana</span>
+      </div>
+      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <img class="mr-5" src="{{ asset('/images/pengajuan-produk.png') }}" alt="logo">
+        <span>Produk</span>
+      </div>
+      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <img class="mr-5" src="{{ asset('/images/surat-rekomendasi.png') }}" alt="logo">
+        <span>Surat Rekomendasi</span>
+      </div>
+      <hr class="w-full" />
+      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <img class="mr-5" src="{{ asset('/icon svg/profil.svg') }}" alt="logo">
+        <div class="flex flex-col">
+          <span class="text-black">Marsudi Rajasa</span>
+          <span>Profil Badan Usaha</span>
+        </div>
+      </div>
+    </aside>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
@@ -555,6 +481,10 @@
         return confirm('Hapus Data ?');
       }
     </script>
+
+
+  </div>
+
 </body>
 
 </html>
