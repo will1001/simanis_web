@@ -46,30 +46,18 @@
       </div>
       <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
-        <span>Dashboard</span>
+        <span>Daftar Pengajuan Dana</span>
       </div>
       <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
-        <span>Kartu</span>
-      </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/images/pengajuan-dana.png') }}" alt="logo">
-        <span>Pengajuan Dana</span>
-      </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/images/pengajuan-produk.png') }}" alt="logo">
-        <span>Produk</span>
-      </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/images/surat-rekomendasi.png') }}" alt="logo">
-        <span>Surat Rekomendasi</span>
+        <span>Simulasi Angsuran</span>
       </div>
       <hr class="w-full" />
       <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/icon svg/profil.svg') }}" alt="logo">
         <div class="flex flex-col">
-          <span class="text-black">Marsudi Rajasa</span>
-          <span>Profil Badan Usaha</span>
+          <span class="text-black">User Profile</span>
+          <span>Akun Koperasi</span>
         </div>
       </div>
     </aside>

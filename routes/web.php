@@ -12,6 +12,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PerbankanController;
 use App\Http\Controllers\KoperasiController;
 use App\Http\Controllers\PerdaganganController;
+use App\Http\Controllers\OjkController;
 use App\Http\Controllers\FormController;
 use Illuminate\Support\Facades\Artisan;
 
@@ -53,6 +54,7 @@ Route::get('/member/{pages}/{subPages?}/{id?}', [MemberController::class, 'index
 Route::get('/perbankan/{pages}/{subPages?}', [PerbankanController::class, 'index']);
 Route::get('/koperasi/{pages}/{subPages?}', [KoperasiController::class, 'index'])->name('koperasi');
 Route::get('/perdagangan/{pages}/{subPages?}', [PerdaganganController::class, 'index'])->name('perdagangan');
+Route::get('/ojk/{pages}/{subPages?}', [OjkController::class, 'index'])->name('ojk');
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
 Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBadanUsahaById']);

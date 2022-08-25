@@ -1,4 +1,4 @@
-@extends('layouts.perbankan')
+@extends('layouts.ojk')
 <style>
     .badan_usaha_container,
     p,
@@ -7,6 +7,6 @@
     }
 </style>
 @section('content')
-<h1>Perbankan</h1>
+<h1>OJK</h1>
 
 @endsection

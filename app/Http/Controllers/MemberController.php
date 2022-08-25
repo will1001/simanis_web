@@ -54,8 +54,16 @@ class MemberController extends Controller
     function index($pages = "dashboard", $subPages = "", $id = "")
     {
         if (Auth::check()) {
-            if (Auth::user()->isAdmin == 1) {
-                return redirect('admin');
+            if (Auth::user()->role === "ADMIN") {
+                return redirect('/admin/tabel');
+            }else if (Auth::user()->role === "BANK") {
+                return redirect('/perbankan/dashboard');
+            }else if (Auth::user()->role === "KOPERASI") {
+                return redirect('/koperasi/dashboard');
+            }else if (Auth::user()->role === "PERDAGANGAN") {
+                return redirect('/perdagangan/dashboard');
+            }else if (Auth::user()->role === "OJK") {
+                return redirect('/ojk/dashboard');
             } else {
                 // dd(Auth::user()->nik);
                 $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();

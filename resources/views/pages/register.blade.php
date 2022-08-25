@@ -165,6 +165,9 @@
               <button class="btn signin">Daftar</button>
               <span class="register"><a href="{{url('login')}}">Login</a></span>
             </form>
+            @if (!empty($msg))
+            <div>{{$msg}}</div>
+            @endif
           </div>
         </div>
       </div>

@@ -14,17 +14,28 @@ class AuthController extends Controller
 
     function login(Request $r)
     {
+
         if ($r->isMethod('get')) {
             if (Auth::check()) {
-                if (Auth::user()->isAdmin === 1) {
+                if (Auth::user()->role === "ADMIN") {
                     return redirect('/admin/tabel');
-                } else {
+                }else if (Auth::user()->role === "BANK") {
+                    return redirect('/perbankan/dashboard');
+                }else if (Auth::user()->role === "KOPERASI") {
+                    return redirect('/koperasi/dashboard');
+                }else if (Auth::user()->role === "PERDAGANGAN") {
+                    return redirect('/perdagangan/dashboard');
+                }else if (Auth::user()->role === "OJK") {
+                    return redirect('/ojk/dashboard');
+                }  else {
                     return redirect('/member/dashboard');
                 }
             } else {
                 return view('pages.login');
             }
         } else {
+
+
             $nik = $r->input('nik');
             $user = User::where('nik', $nik)->get();
             if (!$user->isEmpty()) {
@@ -32,8 +43,16 @@ class AuthController extends Controller
                 if (Auth::attempt($credentials)) {
                     $r->session()->regenerate();
 
-                    if ($user[0]->isAdmin === 1) {
+                    if ($user[0]->role === "ADMIN") {
                         return redirect()->intended('/admin/tabel');
+                    }else if ($user[0]->role === "BANK") {
+                        return redirect('/perbankan/dashboard');
+                    }else if ($user[0]->role === "KOPERASI") {
+                        return redirect('/koperasi/dashboard');
+                    }else if ($user[0]->role === "PERDAGANGAN") {
+                        return redirect('/perdagangan/dashboard');
+                    }else if ($user[0]->role === "OJK") {
+                        return redirect('/ojk/dashboard');
                     } else {
                         return redirect()->intended('/member/dashboard');
                     }
@@ -41,7 +60,7 @@ class AuthController extends Controller
                     return view('pages.login', ['msg' => "Password Salah"]);
                 }
             } else {
-                return view('pages.login', ['msg' => "NIK Tidak Terdaftar"]);
+                return view('pages.login', ['msg' => "NIK Tidak Terdaftar, Silahkan Klik Daftar Terlebih Dahulu"]);
             }
         }
     }
@@ -52,9 +71,17 @@ class AuthController extends Controller
     {
         if ($r->isMethod('get')) {
             if (Auth::check()) {
-                if (Auth::user()->isAdmin === 1) {
+                if (Auth::user()->role === "ADMIN") {
                     return redirect('/admin/tabel');
-                } else {
+                }else if (Auth::user()->role === "BANK") {
+                    return redirect('/perbankan/dashboard');
+                }else if (Auth::user()->role === "KOPERASI") {
+                    return redirect('/koperasi/dashboard');
+                }else if (Auth::user()->role === "PERDAGANGAN") {
+                    return redirect('/perdagangan/dashboard');
+                }else if (Auth::user()->role === "OJK") {
+                    return redirect('/ojk/dashboard');
+                }  else {
                     return redirect('/member/dashboard');
                 }
             } else {
@@ -63,6 +90,12 @@ class AuthController extends Controller
         } else {
             $nik = $r->input('nik');
             $password = $r->input('password');
+
+            $checkNIK = User::where('nik', $nik)->first();
+
+            if($checkNIK){
+                return view('pages.register', ['msg' => "NIK sudah terdaftar di Sistem"]);
+            }
 
 
             $users = new User([
