@@ -1,4 +1,4 @@
-@extends('layouts.member')
+@extends('layouts.koperasi')
 <style>
     .badan_usaha_container,
     p,

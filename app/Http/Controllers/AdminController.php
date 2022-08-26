@@ -74,23 +74,37 @@ class AdminController extends Controller
     public function index($pages = "tabel")
     {
         if (Auth::check()) {
-            $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+
+            if (Auth::user()->role === "PERDAGANGAN") {
+                return redirect('/perdagangan/dashboard');
+            }else if (Auth::user()->role === "BANK") {
+                return redirect('/perbankan/dashboard');
+            }else if (Auth::user()->role === "KOPERASI") {
+                return redirect('/koperasi/dashboard');
+            }else if (Auth::user()->role === "IKM") {
+                return redirect('/member/dashboard');
+            }else if (Auth::user()->role === "OJK") {
+                return redirect('/ojk/dashboard');
+            }else{
+                $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                 ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                 ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                 ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
                 ->paginate(100, $this->fields);
 
 
-            return view(
-                "pages.admin.{$pages}",
-                [
-                    'BadanUsaha' => $BadanUsaha,
-                    'SlideShow' => SlideShow::all(),
-                    'Survei' => Survei::all(),
-                    'keyword' => "",
-                    'pages' => $pages
-                ]
-            );
+                return view(
+                    "pages.admin.{$pages}",
+                    [
+                        'BadanUsaha' => $BadanUsaha,
+                        'SlideShow' => SlideShow::all(),
+                        'Survei' => Survei::all(),
+                        'keyword' => "",
+                        'pages' => $pages
+                    ]
+                );
+            }
+           
         } else {
             return redirect('/login');
         }
@@ -142,7 +156,6 @@ class AdminController extends Controller
 
     public function gantiSlide(Request $r, $id)
     {
-        // dd($r->file('slide'));
 
         $ext = $r->file('slide')->getClientOriginalExtension();
 

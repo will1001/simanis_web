@@ -9,16 +9,12 @@ class Produk extends Model
 {
     use HasFactory;
 
-    protected $table = 'produk';
+    protected $table = 'pengajuan_dana';
     public $incrementing = false;
 
     protected $fillable = [
-        'id_badan_usaha',
-        'sertifikat_halal',
-        'sertifikat_haki',
-        'sertifikat_sni',
-        'nama',
-        'deskripsi',
-        'foto',
+        'user_id',
+        'status',
+        'jumlah_dana',
     ];
 }
