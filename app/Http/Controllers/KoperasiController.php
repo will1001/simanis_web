@@ -20,8 +20,8 @@ class KoperasiController extends Controller
                 return redirect('/admin/tabel');
             }else if (Auth::user()->role === "BANK") {
                 return redirect('/perbankan/dashboard');
-            }else if (Auth::user()->role === "KOPERASI") {
-                return redirect('/koperasi/dashboard');
+            }else if (Auth::user()->role === "PERDAGANGAN") {
+                return redirect('/perdagangan/dashboard');
             }else if (Auth::user()->role === "IKM") {
                 return redirect('/member/dashboard');
             }else if (Auth::user()->role === "OJK") {

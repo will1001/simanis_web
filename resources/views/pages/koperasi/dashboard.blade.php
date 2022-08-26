@@ -8,5 +8,14 @@
 </style>
 @section('content')
 <h1>Koperasi</h1>
+<div class="flex justify-beetween">
+    <div>
+
+    </div>
+
+    <div>
+
+    </div>
+</div>
 
 @endsection

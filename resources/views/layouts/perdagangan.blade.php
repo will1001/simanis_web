@@ -22,6 +22,10 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin_template/assets/img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('admin_template/assets/img/favicon.png') }}">
+  <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
   <title>
    SIMANIS NTB
   </title>
