@@ -44,33 +44,33 @@
         <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
         <span>Simanis.</span>
       </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+      <a href="{{ url('/member/dashboard') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
         <span>Dashboard</span>
-      </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
-        <span>Kartu</span>
-      </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      </a>
+      <a href="{{ url('/member/kartu') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+          <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
+          <span>Kartu</span>
+      </a>
+      <a href="{{ url('/member/PengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/images/pengajuan-dana.png') }}" alt="logo">
         <span>Pengajuan Dana</span>
-      </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      </a>
+      <a href="{{ url('/member/produk') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/images/pengajuan-produk.png') }}" alt="logo">
         <span>Produk</span>
-      </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      </a>
+      <a href="{{ url('/member/suratRekomendasi') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/images/surat-rekomendasi.png') }}" alt="logo">
         <span>Surat Rekomendasi</span>
-      </div>
+      </a>
       <hr class="w-full" />
       <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/icon svg/profil.svg') }}" alt="logo">
-        <div class="flex flex-col">
+        <a href="{{ url('/member/settingAkun') }}" class="flex flex-col">
           <span class="text-black">Marsudi Rajasa</span>
           <span>Profil Badan Usaha</span>
-        </div>
+        </a>
       </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
