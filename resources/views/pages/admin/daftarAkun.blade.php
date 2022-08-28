@@ -3,9 +3,13 @@
     .actionContainer{
         width: 922px;
     }
+    .box{
+        width: 36px;
+        height: 33px;
+    }
 </style>
 @section('content')
-<div class="bg-slate-50 container">
+<div class="bg-slate-50 container max-w-full max-h-full">
 <h3 class="mt-14 font-extrabold w-[192px] h-[37px] text-slate-800">Daftar Akun</h3>
 <div class="flex justify-between items-center actionContainer">
     <div class="flex">
@@ -32,9 +36,9 @@
     </div>
 </div>
 
-<table class="actionContainer rounded-2xl mt-4 shadow-lg"> 
-  <tr class="bg-tableColor-900 text-white text-center p-2 h-16">
-    <th class="text-center rounded-tl-xl pl-2"><input type="checkbox" name="all" id="all" class=""></th>
+<table class="actionContainer justify-between rounded-2xl mt-4 shadow-lg"> 
+  <tr class="bg-tableColor-900 text-white text-center h-16">
+    <th class="text-center p-3 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <th class="text-center p-2">No</th>
     <th class="text-left pr-[250px]">NIK</th>
     <th class="text-left  ">Role</th>     
@@ -42,7 +46,7 @@
     <th class="text-left p-2 rounded-tr-xl">Aksi</th>   
   </tr>
   <tr class="bg-white">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">1</td>
     <td class="text-left text-slate-700 ">NIK 132138594548</td>
     <td class="text-left  text-slate-700 font-bold">IKN</td>
@@ -55,7 +59,7 @@
     </td>
   </tr>
   <tr class="bg-slate-50">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-700 ">2</td>
     <td class="text-left text-slate-700 ">NIK 132138594548</td>
     <td class="text-left text-slate-700 font-bold">IKN</td>
@@ -68,7 +72,7 @@
     </td>
   </tr>
   <tr class="bg-white">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-700 ">3</td>
     <td class="text-left text-slate-700 ">NIK 132138594548</td>
     <td class="text-left  text-slate-700 font-bold">IKN</td>
@@ -81,7 +85,7 @@
     </td>
   </tr>
   <tr class="bg-slate-50">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-400 ">4</td>
     <td class="text-left text-slate-400 ">NIK 132138594548</td>
     <td class="text-left text-slate-400 font-bold">IKN</td>
@@ -94,7 +98,7 @@
     </td>
   </tr>
   <tr class="bg-white">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-400 ">5</td>
     <td class="text-left text-slate-400 ">NIK 132138594548</td>
     <td class="text-left  text-slate-400 font-bold">IKN</td>
@@ -107,7 +111,7 @@
     </td>
   </tr>
   <tr class="bg-slate-50">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-700 ">6</td>
     <td class="text-left text-slate-700 ">NIK 132138594548</td>
     <td class="text-left text-slate-700 font-bold">IKN</td>
@@ -120,7 +124,7 @@
     </td>
   </tr>
   <tr class="bg-white">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-400 ">7</td>
     <td class="text-left text-slate-400 ">NIK 132138594548</td>
     <td class="text-left text-slate-400 font-bold">Bank</td>
@@ -133,7 +137,7 @@
     </td>
   </tr>
   <tr class="bg-slate-50">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-700 ">8</td>
     <td class="text-left text-slate-700 ">NIK 132138594548</td>
     <td class="text-left text-slate-700 font-bold">Bank</td>
@@ -146,7 +150,7 @@
     </td>
   </tr>
   <tr class="bg-white">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-700 ">9</td>
     <td class="text-left text-slate-700 ">NIK 132138594548</td>
     <td class="text-left text-slate-700 font-bold">Koperasi</td>
@@ -159,7 +163,7 @@
     </td>
   </tr>
   <tr class="bg-slate-50">
-  <td class="text-center "><input type="checkbox" name="all" id="all" class=""></td>
+  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
     <td class="text-center text-slate-700 ">10</td>
     <td class="text-left text-slate-700 ">NIK 132138594548</td>
     <td class="text-left text-slate-700 font-bold">Bank</td>
@@ -172,16 +176,32 @@
     </td>
   </tr> 
 </table>
-<div class="flex actionContainer bg-white">
-    <div class="flex ">
-            <div class="flex bg-white rounded-lg mt-4 shadow-md w-16 h-9 border-slate-200" >
-                <label for="role" class="text-slate-400 text-sm my-auto ml-4">10</label>
-                <input type="radio" id="role" name="role" class="hidden">
-                <img src="{{ asset('/icon svg/panahbawah.svg') }}" alt="role" class="flex my-auto ml-1">                                     
-            </div>
-            <div class="h-9 mt-4 my-auto"><span>showing 1 - 10 of 85</span></div>
+<div class="flex actionContainer bg-white mt-1">
+    <div class="flex  actionContainer">
+        <div class="flex bg-white rounded-lg mt-4 shadow-md w-48 h-9 border-slate-200" >
+          <div class="flex border px-3 rounded-md">
+            <label for="role" class="text-slate-400 text-sm my-auto ">10</label>
+            <button class=""></button>
+            <img src="{{ asset('/icon svg/panahbawah.svg') }}" alt="role" class="my-auto ml-1 cursor-pointer">             
+          </div>
+            <span class="text-slate-400 text-sm my-auto ml-4">showing 1 - 10 of 85</span>                                    
+        </div>
     </div>
-    <div class="">
+    <div class="flex actionContainer justify-end mt-4">  
+        <div class="flex gap-3 mx-3"> 
+          <button><img src="{{ asset('/icon svg/previous.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/icon svg/back.svg') }}" alt="icon"></button>
+        </div> 
+        <div class="flex">
+          <button><span class="bg-blue-200 text-disetujuiTextColor py-1 px-3 rounded-md">1</span></button>        
+          <button><span class="py-1 px-3 rounded-md">2</span></button>
+          <button><span class="py-1 px-3 rounded-md">3</span></button>
+          <button><span class="py-1 px-3 rounded-md">4</span></button>
+        </div>
+        <div class="flex gap-3 mx-3">
+          <button><img src="{{ asset('/icon svg/next.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/icon svg/skip.svg') }}" alt="icon"></button>
+        </div>
     </div>
 </div>
 </div>
