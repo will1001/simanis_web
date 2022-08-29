@@ -74,18 +74,19 @@
             <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
             <span>Simanis.</span>
         </div>
-        <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
-            <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
-            <span>Dashboard</span>
-        </div>
-        <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-            <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
-            <span>Daftar Akun</span>
-        </div>
-        <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <a href="{{ url('/admin/tabel') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+        <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
+        <span>Dashboard</span>
+        </a>
+        <a href="{{ url('/admin/daftarAkun') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+        <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
+        <span>Daftar Akun</span>
+        </a>
+        
+        <a href="{{ url('/admin/daftarPengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
             <img class="mr-5" src="{{ asset('/images/pengajuan-dana.png') }}" alt="logo">
             <span>Daftar Pengajuan Dana</span>
-        </div>
+        </a>
         <hr class="w-full" />
         <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
             <img class="mr-5" src="{{ asset('/icon svg/profil.svg') }}" alt="logo">
