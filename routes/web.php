@@ -58,3 +58,7 @@ Route::get('/ojk/{pages}/{subPages?}', [OjkController::class, 'index'])->name('o
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
 Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBadanUsahaById']);
+
+
+Route::post('/ajukan_dana', [MemberController::class, 'ajukan_dana'])->name('ajukan_dana');
+

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\BadanUsaha;
+use App\Models\PengajuanDana;
+
 use Illuminate\Support\Str;
 
 
@@ -109,5 +111,22 @@ class MemberController extends Controller
         } else {
             return redirect('/login');
         }
+    }
+
+    function ajukan_dana(Request $r){
+        // print_r(Auth::user()->id)
+        // dd(Auth::user()->id);
+        $pengajuanDana = new PengajuanDana([
+            'id' => (string) Str::uuid(),
+            'user_id' => Auth::user()->id,
+            'status' => "waiting",
+            'jumlah_dana' => $r->input("dana"),
+        ]);
+
+        // BUAT USER
+        $pengajuanDana->save();
+        dd("oke");
+
+        return view('pages.member.PengajuanDana', ['msg' => "Dana Telah di ajukan , menunggu verifiaksi admin"]);
     }
 }
