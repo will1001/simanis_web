@@ -2,6 +2,7 @@
 <style>
     .badan_usaha_container {
         width: 990px;
+        height:80px;
     }
     p,
     .btn {
@@ -12,11 +13,15 @@
         height: 48px;
     }
     .boxKab {
-        width: 180px;
+        width: 192px;
         height: 48px;
     }
     .boxKal {
         width: 52px;
+        height: 48px;
+    }
+    .boxStat {
+        width: 160px;
         height: 48px;
     }
     .panjangInput {
@@ -24,26 +29,30 @@
         height: 18px;
     }
     .ml1 {
-        margin-left: 125px;
+        margin-left: 145px;
     }
     .borderM {
         border-style: solid;
         border-color: red;
+    }
+    .iconSize {
+        width: 11.67px;
+        height: 5.83px;
     }
 
 </style>
 @section('content')
 <h2 class="ml-4">Daftar Pengajuan Dana</h2>
 
-<div class="flex flex-row badan_usaha_container ml-4">
+<div class="flex flex-row badan_usaha_container ml-4 mt-4">
     <div class="flex gap-2 boxCari border rounded-md shadow-md bg-white">
         <img src="{{ asset('/icon svg/medium.svg') }}" alt="icon" class="flex h-8 w-8 ml-2 my-auto">
         <input type="text" placeholder="Cari Badan Usaha" class="my-auto panjangInput ml-1 placeholder:text-sm">
     </div>
-    <div class="flex border rounded-md shadow-md ml-3 cursor-pointer whitespace-nowrap bg-white">
-        <label for="role" class="flex text-slate-800 text-sm font-bold my-auto ml-5 h-[17px]  ">Semua Status</label>
+    <div class="flex boxStat border rounded-md shadow-md ml-3 cursor-pointer whitespace-nowrap bg-white">
+        <label for="role" class="flex text-slate-800 text-sm font-bold my-auto ml-3 h-[17px]  ">Semua Status</label>
         <input type="radio" id="role" name="role" class="hidden">
-        <img src="{{ asset('/icon svg/icon.svg') }}" alt="role" class="flex mx-3 my-auto">
+        <img src="{{ asset('/icon svg/icon.svg') }}" alt="role" class="flex mx-3 my-auto ">
     </div>
     <div class="flex border rounded-md shadow-md ml-3 cursor-pointer boxKab whitespace-nowrap bg-white ">
         <label for="role" class=" text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] ">Semua Kab/Kota</label>
@@ -53,9 +62,9 @@
     <div class="flex border rounded-md shadow-md ml-3 cursor-pointer boxKal bg-white">
         <img src="{{ asset('/icon svg/iconDate.svg') }}" alt="icon" class="flex my-auto mx-auto">
     </div>
-    <div class="flex border borderM h-12 rounded-lg bg-cover  px-5 cursor-pointer ml1">       
-            <input type="button" value="Hapus Pengajuan" class="text-ditolakTextColor text-sm font-bold my-auto mx-auto h-[17px] w-[156px]">
-            <img src="{{ asset('/icon svg/sampahMerah.svg') }}" alt="role" class="flex my-auto ml-2">       
+    <div class="flex border borderM boxKab rounded-lg cursor-pointer ml1">       
+            <input type="button" value="Hapus Pengajuan" class="text-ditolakTextColor text-sm font-bold my-auto mx-auto">
+            <img src="{{ asset('/icon svg/sampahMerah.svg') }}" alt="role" class="flex my-auto mx-auto">       
     </div>
 </div>
 
@@ -90,7 +99,7 @@
         </div>
     </td>
   </tr>
-  <tr class="bg-white h-14 gap-2">
+  <tr class="bg-slate-50 h-14 gap-2">
   <td class=" cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">2</td>
     <td class="text-left text-slate-700 font-bold p-2 ">Cakradenta Agung, </br>PT</td>
@@ -122,7 +131,7 @@
         </div>
     </td>
   </tr>
-  <tr class="bg-white h-14 gap-2">
+  <tr class="bg-slate-50 h-14 gap-2">
   <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">4</td>
     <td class="text-left text-slate-700 font-bold p-2 ">Calista Alam, PT</br></td>
@@ -155,7 +164,7 @@
     </td>
   </tr>
   </tr>
-  <tr class="bg-white h-14 gap-2">
+  <tr class="bg-slate-50 h-14 gap-2">
   <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">6</td>
     <td class="text-left text-slate-700 font-bold p-2 ">Comismas</br>Wanamaja, PT</td>
@@ -188,7 +197,7 @@
         </div>
     </td>
   </tr>
-  <tr class="bg-white h-14 gap-2">
+  <tr class="bg-slate-50 h-14 gap-2">
   <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">8</td>
     <td class="text-left text-slate-700 font-bold p-2 ">Agro Indah</br>Sembada, PT</td>
@@ -220,7 +229,7 @@
         </div>
     </td>
   </tr>
-  <tr class="bg-white h-14 gap-2">
+  <tr class="bg-slate-50 h-14 gap-2">
   <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">10</td>
     <td class="text-left text-slate-700 font-bold p-2 ">Agrodesa Palmaindo,</br> PT</td>
@@ -238,9 +247,9 @@
   </tr>
 </table>
 
-<div class="flex badan_usaha_container bg-white mt-1 ml-4 justify-between">
-    <div class="flex ml-4">
-        <div class="flex bg-white rounded-lg mt-4 shadow-md w-48 h-9 border-slate-200" >
+<div class="flex badan_usaha_container bg-white ml-4 justify-between">
+    <div class="flex ml-4 my-auto">
+        <div class="flex bg-white rounded-lg shadow-md w-48 h-9 border-slate-200" >
           <div class="flex border px-3 rounded-md">
             <label for="role" class="text-slate-400 text-sm my-auto ">10</label>
             <button class=""></button>
@@ -250,18 +259,18 @@
         </div>
     </div>
      
-    <div class="flex items-end mt-4 mr-4">  
-        <div class="flex gap-3 mx-3"> 
+    <div class="flex items-end my-auto mr-4">  
+        <div class="flex gap-3 mx-3 my-auto"> 
           <button><img src="{{ asset('/icon svg/previous.svg') }}" alt="icon"></button>
           <button><img src="{{ asset('/icon svg/back.svg') }}" alt="icon"></button>
         </div> 
-        <div class="flex">
+        <div class="flex mx-3">
           <button><span class="bg-blue-200 text-disetujuiTextColor py-1 px-3 rounded-md">1</span></button>        
           <button><span class="py-1 px-3 rounded-md">2</span></button>
           <button><span class="py-1 px-3 rounded-md">3</span></button>
           <button><span class="py-1 px-3 rounded-md">4</span></button>
         </div>
-        <div class="flex gap-3 mx-3">
+        <div class="flex gap-3 my-auto">
           <button><img src="{{ asset('/icon svg/next.svg') }}" alt="icon"></button>
           <button><img src="{{ asset('/icon svg/skip.svg') }}" alt="icon"></button>
         </div>
