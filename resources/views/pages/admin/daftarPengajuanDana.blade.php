@@ -2,12 +2,12 @@
 <style>
     <style>
     .actionContainer{
-        width: 1098px;
+        width: 100px;
     }
 </style>
 @section('content')
 
-<div class="bg-slate-50 container max-w-full max-h-full shadow-lg rounded-md">
+<div class="bg-white container max-h-full shadow-lg rounded-md">
 <div class="flex ml-4 actionContainer">
     <h3 class="mt-3 font-extrabold  text-slate-800">Daftar Pengajuan Dana</h3>
 </div>
@@ -17,8 +17,8 @@
         <img src="{{ asset('/icon svg/medium.svg') }}" alt="icon" class="flex h-8 w-8 ml-2 my-auto">
         <input type="text" placeholder="Cari Badan Usaha" class="my-auto h-6 w-[50px] ml-1 placeholder:text-sm">
     </div>
-    <div class="flex border rounded-md shadow-md ml-3 cursor-pointer">
-        <label for="role" class="flex text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] w-[100px]">Semua Status</label>
+    <div class="flex border rounded-md shadow-md ml-3 cursor-pointer whitespace-nowrap">
+        <label for="role" class="flex text-slate-800 text-sm font-bold my-auto ml-5 h-[17px]  ">Semua Status</label>
         <input type="radio" id="role" name="role" class="hidden">
         <img src="{{ asset('/icon svg/icon.svg') }}" alt="role" class="flex mx-3 my-auto">
     </div>  
@@ -30,7 +30,10 @@
     <div class="flex border w-6 rounded-md shadow-md ml-3 cursor-pointer">
         <img src="{{ asset('/icon svg/iconDate.svg') }}" alt="icon" class="flex my-auto mx-auto">
     </div>
-    <div class="flex border w-[130px] h-14 bg-ditolakTextColor rounded-lg bg-cover shadow-md ml-[210px] px-5 cursor-pointer">       
+
+  </div>
+
+    <div class="flex border h-14 bg-ditolakTextColor rounded-lg bg-cover shadow-md px-5 cursor-pointer">       
             <input type="button" value="Hapus Pengajuan" class="text-white text-sm font-bold my-auto mx-auto h-[17px] w-[156px]">
             <img src="{{ asset('/icon svg/sampahPutih.svg') }}" alt="role" class="flex my-auto ml-2">       
     </div> 
