@@ -59,7 +59,7 @@
     </div>
 </div>
 
-<table class="badan_usaha_container justify-between ml-4 bg-white mt-3 h-20"> 
+<table class="badan_usaha_container ml-4 bg-white mt-3 h-20"> 
   <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
     <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <th class="text-center p-2">No</th>
@@ -70,7 +70,7 @@
     <th class="text-left">
         <div class="flex justify-center gap-1 my-auto "><img src="{{ asset('/icon svg/iconBawahAtas.svg') }}" alt="" class="flex"> Jumlah Dana</div>
     </th>              
-    <th class="text-left p-2 "><span class="flex justify-center my-auto w-[2000px] mx-6">Tanggal</span></th>   
+    <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Tanggal</span></th>   
     <th class="text-left p-2 "><span class="">Status</span></th>   
     <th class="rounded-tr-xl">Aksi</span></th>   
   </tr>
