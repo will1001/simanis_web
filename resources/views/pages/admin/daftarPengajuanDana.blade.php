@@ -12,11 +12,8 @@
     <h3 class="mt-3 font-extrabold  text-slate-800">Daftar Pengajuan Dana</h3>
 </div>
 
-<div class="flex actionContainer justify-between ml-4  mt-3 h-14 cursor-pointer">
-    
-  <div class="flex">
-
-  <div class="flex border rounded-md shadow-md">
+<div class="flex actionContainer justify-between ml-4  mt-3 h-14 cursor-pointer p-">
+    <div class="flex border rounded-md shadow-md">
         <img src="{{ asset('/icon svg/medium.svg') }}" alt="icon" class="flex h-8 w-8 ml-2 my-auto">
         <input type="text" placeholder="Cari Badan Usaha" class="my-auto h-6 w-[50px] ml-1 placeholder:text-sm">
     </div>
@@ -25,8 +22,8 @@
         <input type="radio" id="role" name="role" class="hidden">
         <img src="{{ asset('/icon svg/icon.svg') }}" alt="role" class="flex mx-3 my-auto">
     </div>  
-    <div class="flex border rounded-md shadow-md ml-3 cursor-pointer w-[100px] ">
-        <label for="role" class=" text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] ">Semua Kab/Kota</label>
+    <div class="flex border rounded-md shadow-md ml-3 cursor-pointer ">
+        <label for="role" class=" text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] w-[180px]">Semua Kab/Kota</label>
         <input type="radio" id="role" name="role" class="hidden">
         <img src="{{ asset('/icon svg/icon.svg') }}" alt="role" class="flex mx-auto my-auto">
     </div> 
