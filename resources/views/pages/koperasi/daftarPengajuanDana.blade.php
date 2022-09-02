@@ -1,4 +1,4 @@
-@extends('layouts.perbankan')
+@extends('layouts.koperasi')
 <style>
     .badan_usaha_container {
         width: 990px;
@@ -246,7 +246,7 @@
     </td>
   </tr>
 </table>
-
+ 
 <div class="flex badan_usaha_container bg-white ml-4 justify-between">
     <div class="flex ml-4 my-auto">
         <div class="flex bg-white rounded-lg shadow-md w-48 h-9 border-slate-200" >
