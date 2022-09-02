@@ -11,6 +11,7 @@ class BadanUsaha extends Model
 
     protected $table = 'badan_usaha';
     public $incrementing = false;
+    protected $casts = ['id' => 'string'];
 
 
     protected $fillable = [

@@ -11,8 +11,11 @@ class Produk extends Model
 
     protected $table = 'produk';
     public $incrementing = false;
+    protected $casts = ['id' => 'string'];
+
 
     protected $fillable = [
+        'id',
         'id_badan_usaha',
         'sertifikat_halal',
         'sertifikat_haki',

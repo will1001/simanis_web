@@ -99,7 +99,7 @@ class AuthController extends Controller
 
 
             $users = new User([
-                'id' => (string) Str::uuid(),
+                'id' => (string) Str::uuid()->getHex(),
                 'nik' => $nik,
                 'password' => Hash::make($password),
             ]);

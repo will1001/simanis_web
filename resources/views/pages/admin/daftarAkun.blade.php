@@ -19,6 +19,7 @@
 @section('content')
 <div style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
+
 <div style="visibility: collapse;" id="detailPopUp" class="fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
     <div onclick="closeDetails()" class="flex-row-reverse flex cursor-pointer"><img src="{{ asset('/icon svg/exit.svg') }}" class="iconSize mt-3 mr-2" alt="close"></div>
     <span class="font-extrabold text-xl translate-x-1 text-slate-800 ml-5 mt-2 ">Tambah Akun</span>
@@ -74,12 +75,14 @@
     <th class="text-left  ">Staus</th>          
     <th class="text-left p-2 rounded-tr-xl">Aksi</th>   
   </tr>
+  @foreach($User as $key=>$item)
+
   <tr class="bg-white">
   <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">1</td>
-    <td class="text-left text-slate-700 ">NIK 132138594548</td>
-    <td class="text-left  text-slate-700 font-bold">IKN</td>
-    <td class="text-left  "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
+    <td class="text-center text-slate-700 ">{{++$key}}</td>
+    <td class="text-left text-slate-700 ">{{$item->nik}}</td>
+    <td class="text-left  text-slate-700 font-bold">{{$item->role}}</td>
+    <td class="text-left  "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-2">
       <div class="flex ml-2">
         <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
@@ -87,123 +90,8 @@
       </div>
     </td>
   </tr>
-  <tr class="bg-slate-50">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-700 ">2</td>
-    <td class="text-left text-slate-700 ">NIK 132138594548</td>
-    <td class="text-left text-slate-700 font-bold">IKN</td>
-    <td class="text-left"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-        <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr>
-  <tr class="bg-white">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-700 ">3</td>
-    <td class="text-left text-slate-700 ">NIK 132138594548</td>
-    <td class="text-left  text-slate-700 font-bold">IKN</td>
-    <td class="text-left  "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-        <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr>
-  <tr class="bg-slate-50">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-400 ">4</td>
-    <td class="text-left text-slate-400 ">NIK 132138594548</td>
-    <td class="text-left text-slate-400 font-bold">IKN</td>
-    <td class="text-left  "><span class="bg-slate-100 text-slate-600 p-2 rounded-xl">Non Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon" class="">
-        <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr>
-  <tr class="bg-white">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-400 ">5</td>
-    <td class="text-left text-slate-400 ">NIK 132138594548</td>
-    <td class="text-left  text-slate-400 font-bold">IKN</td>
-    <td class="text-left "><span class="bg-slate-100 text-slate-600 p-2 rounded-xl">Non Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon" class="">
-        <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr>
-  <tr class="bg-slate-50">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-700 ">6</td>
-    <td class="text-left text-slate-700 ">NIK 132138594548</td>
-    <td class="text-left text-slate-700 font-bold">IKN</td>
-    <td class="text-left "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-        <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr>
-  <tr class="bg-white">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-400 ">7</td>
-    <td class="text-left text-slate-400 ">NIK 132138594548</td>
-    <td class="text-left text-slate-400 font-bold">Bank</td>
-    <td class="text-left "><span class="bg-slate-100 text-slate-600 p-2 rounded-xl">Non Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon" class="">
-        <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr>
-  <tr class="bg-slate-50">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-700 ">8</td>
-    <td class="text-left text-slate-700 ">NIK 132138594548</td>
-    <td class="text-left text-slate-700 font-bold">Bank</td>
-    <td class="text-left "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-        <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr>
-  <tr class="bg-white">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-700 ">9</td>
-    <td class="text-left text-slate-700 ">NIK 132138594548</td>
-    <td class="text-left text-slate-700 font-bold">Koperasi</td>
-    <td class="text-left "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-        <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr>
-  <tr class="bg-slate-50">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></td>
-    <td class="text-center text-slate-700 ">10</td>
-    <td class="text-left text-slate-700 ">NIK 132138594548</td>
-    <td class="text-left text-slate-700 font-bold">Bank</td>
-    <td class="text-left "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
-    <td class="text-center p-2">
-      <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-        <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-      </div>
-    </td>
-  </tr> 
+  @endforeach
+ 
   </table>
   <div class="flex actionContainer bg-white mt-1">
     <div class="flex  actionContainer">

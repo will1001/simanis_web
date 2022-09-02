@@ -5,15 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubCabangIndustri extends Model
+class Notifikasi extends Model
 {
     use HasFactory;
-    
 
-    protected $table = 'sub_cabang_industri';
+    protected $table = 'notifikasi';
     public $incrementing = false;
+    protected $casts = ['id' => 'string'];
+
 
     protected $fillable = [
-        'name',
+        'id',
+        'deskripsi',
+        'status',
+        'user_role'
     ];
 }

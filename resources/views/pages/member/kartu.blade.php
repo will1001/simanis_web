@@ -2,7 +2,7 @@
 @section('content')
 <div class="flex bg-white rounded-xl p-4">
     <div>
-        <h2>No Kartu. 098798</h2>
+        <h2>No Kartu. {{substr($BadanUsaha->nik,strlen($BadanUsaha->nik)-4,strlen($BadanUsaha->nik))}}{{$BadanUsaha->id_cabang_industri}}{{$BadanUsaha->id_kabupaten}}</h2>
      <div class="flex">
         <div>
             <div class="flex"><div class="mr-10">Nama</div></div>
@@ -12,11 +12,11 @@
             <div class="flex"><div class="mr-10">NIK</div></div>
             </div>
         <div>
-            <div class="text-left flex justify-start items-start">: Wili Rahmat Muhammad</div>
-            <div class="text-left flex justify-start items-start">: Sikur Lombok Timur</div>
-            <div class="text-left flex justify-start items-start">: Ternak Sapi</div>
-            <div class="text-left flex justify-start items-start">: Lombok Timur</div>
-            <div class="text-left flex justify-start items-start">: 138435138413251384</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_direktur}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->alamat_lengkap}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_usaha}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->kabupaten}}</div>
+            <div class="text-left flex justify-start items-start">: {{$User->nik}}</div>
         </div>
      </div>
         

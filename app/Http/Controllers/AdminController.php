@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\BadanUsaha;
 use App\Models\SlideShow;
 use App\Models\Survei;
+use App\Models\User;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -71,7 +72,7 @@ class AdminController extends Controller
         'badan_usaha.nilai_produksi_perbulan',
         'badan_usaha.nilai_bahan_baku_perbulan',
     ];
-    public function index($pages = "tabel")
+    public function index($pages)
     {
         if (Auth::check()) {
 
@@ -86,22 +87,39 @@ class AdminController extends Controller
             }else if (Auth::user()->role === "OJK") {
                 return redirect('/ojk/dashboard');
             }else{
-                $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-                ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
-                ->paginate(100, $this->fields);
-
-
-                return view(
-                    "pages.admin.{$pages}",
-                    [
+                $params;
+                if($pages == "tabel"){
+                    $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                    ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                    ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                    ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
+                    ->paginate(100, $this->fields);
+                    $params = Array(
                         'BadanUsaha' => $BadanUsaha,
                         'SlideShow' => SlideShow::all(),
                         'Survei' => Survei::all(),
                         'keyword' => "",
                         'pages' => $pages
-                    ]
+                    );
+                }
+                if($pages == "daftarAkun"){
+                    $User = User::all();
+                    $params = Array(
+                        'pages' => $pages,
+                        'User' => $User,
+                    );
+                }
+                if($pages == "daftarPengajuanDana"){
+                    $params = Array(
+                        'pages' => $pages,
+                    );
+                }
+                
+
+
+                return view(
+                    "pages.admin.{$pages}",
+                    $params
                 );
             }
            

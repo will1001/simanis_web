@@ -11,11 +11,16 @@ class PengajuanDana extends Model
 
     protected $table = 'pengajuan_dana';
     public $incrementing = false;
+    protected $casts = ['id' => 'string'];
+
 
     protected $fillable = [
         'id',
         'user_id',
         'status',
         'jumlah_dana',
+        'alasan',
+        'instansi',
+        'jenis_pengajuan',
     ];
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Survei extends Model
 {
     use HasFactory;
+    
 
     protected $table = 'survei';
     public $incrementing = false;

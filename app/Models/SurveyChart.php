@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class SurveyChart extends Model
 {
     use HasFactory;
+    protected $casts = ['id' => 'string'];
+
 
     protected $table = 'survey_chart';
     public $incrementing = false;

@@ -9,8 +9,15 @@
     }
 </style>
 @section('content')
+<div>
+   <h2>Profil Member IKM</h2>
+   <span class="mr-2"><a  href="{{ url('/member/settingAkun') }}" class="text-blue-700">1. Pengaturan Akun</a></span>
+   <span><a href="{{ url('/member/settingBadanUsaha') }}">2. Badan Usaha</a></span>
+</div>
+<br>
+<br>
 <div class="actionContainer p-5 bg-white rounded-xl">
-   <h3 class="text-textColor1">informasi akun</h3>
+   <h3 class="text-textColor1">INFORMASI AKUN</h3>
    <div class="flex justify-between">
       <span>Email</span>
       <input class="inputStyle border-1 border-gray-600 border-solid rounded-md p-2 font-bold text-black" type="text" placeholder="Email">
