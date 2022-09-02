@@ -8,6 +8,7 @@ use App\Models\BadanUsaha;
 use App\Models\SlideShow;
 use App\Models\Survei;
 use App\Models\User;
+use App\Models\PengajuanDana;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -110,7 +111,14 @@ class AdminController extends Controller
                     );
                 }
                 if($pages == "daftarPengajuanDana"){
+                    $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+                    ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                    ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                    ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('status', 'DESC')->get();
+                    // dd($PengajuanDana);
+
                     $params = Array(
+                        'PengajuanDana' => $PengajuanDana,
                         'pages' => $pages,
                     );
                 }
@@ -195,6 +203,18 @@ class AdminController extends Controller
         $Survei->fill($input)->save();
 
         return back();
+    }
+
+    public function gantiStatusPengajuanDana($id,$status)
+    {
+        $PengajuanDana = PengajuanDana::find($id);
+
+        $PengajuanDana->status = $status;
+
+        $PengajuanDana->save();
+
+        return redirect('/admin/daftarPengajuanDana');
+
     }
     //
 }
