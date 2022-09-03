@@ -22,7 +22,7 @@ class AuthController extends Controller
                 }else if (Auth::user()->role === "BANK") {
                     return redirect('/perbankan/dashboard');
                 }else if (Auth::user()->role === "KOPERASI") {
-                    return redirect('/koperasi/dashboard');
+                    return redirect('/koperasi/daftarPengajuanDana');
                 }else if (Auth::user()->role === "PERDAGANGAN") {
                     return redirect('/perdagangan/dashboard');
                 }else if (Auth::user()->role === "OJK") {
@@ -48,7 +48,7 @@ class AuthController extends Controller
                     }else if ($user[0]->role === "BANK") {
                         return redirect('/perbankan/dashboard');
                     }else if ($user[0]->role === "KOPERASI") {
-                        return redirect('/koperasi/dashboard');
+                        return redirect('/koperasi/daftarPengajuanDana');
                     }else if ($user[0]->role === "PERDAGANGAN") {
                         return redirect('/perdagangan/dashboard');
                     }else if ($user[0]->role === "OJK") {
@@ -76,7 +76,7 @@ class AuthController extends Controller
                 }else if (Auth::user()->role === "BANK") {
                     return redirect('/perbankan/dashboard');
                 }else if (Auth::user()->role === "KOPERASI") {
-                    return redirect('/koperasi/dashboard');
+                    return redirect('/koperasi/daftarPengajuanDana');
                 }else if (Auth::user()->role === "PERDAGANGAN") {
                     return redirect('/perdagangan/dashboard');
                 }else if (Auth::user()->role === "OJK") {

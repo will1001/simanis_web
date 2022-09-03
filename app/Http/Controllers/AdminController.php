@@ -9,6 +9,7 @@ use App\Models\SlideShow;
 use App\Models\Survei;
 use App\Models\User;
 use App\Models\PengajuanDana;
+use App\Models\Notifikasi;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -82,33 +83,39 @@ class AdminController extends Controller
             }else if (Auth::user()->role === "BANK") {
                 return redirect('/perbankan/dashboard');
             }else if (Auth::user()->role === "KOPERASI") {
-                return redirect('/koperasi/dashboard');
+                return redirect('/koperasi/daftarPengajuanDana');
             }else if (Auth::user()->role === "IKM") {
                 return redirect('/member/dashboard');
             }else if (Auth::user()->role === "OJK") {
                 return redirect('/ojk/dashboard');
             }else{
                 $params;
+                $Notifikasi = Notifikasi::where("user_role","ADMIN")->where("status","not read")->get();
+
                 if($pages == "tabel"){
                     $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                     ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                     ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                     ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
                     ->paginate(100, $this->fields);
-                    $params = Array(
+                    $params = [
                         'BadanUsaha' => $BadanUsaha,
                         'SlideShow' => SlideShow::all(),
                         'Survei' => Survei::all(),
                         'keyword' => "",
-                        'pages' => $pages
-                    );
+                        'pages' => $pages,
+                        'Notifikasi' => $Notifikasi
+
+                    ];
                 }
                 if($pages == "daftarAkun"){
                     $User = User::all();
-                    $params = Array(
+                    $params = [
                         'pages' => $pages,
                         'User' => $User,
-                    );
+                        'Notifikasi' => $Notifikasi
+
+                    ];
                 }
                 if($pages == "daftarPengajuanDana"){
                     $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
@@ -117,14 +124,16 @@ class AdminController extends Controller
                     ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('status', 'DESC')->get();
                     // dd($PengajuanDana);
 
-                    $params = Array(
+                    $params = [
                         'PengajuanDana' => $PengajuanDana,
                         'pages' => $pages,
-                    );
+                        'Notifikasi' => $Notifikasi
+                    ];
                 }
+
                 
-
-
+               
+                // dd($params);
                 return view(
                     "pages.admin.{$pages}",
                     $params
@@ -214,6 +223,18 @@ class AdminController extends Controller
         $PengajuanDana->save();
 
         return redirect('/admin/daftarPengajuanDana');
+
+    }
+    public function gantiStatusNotifikasi($userRole,$recentPage)
+    {
+
+        $Notifikasi = Notifikasi::where("user_role",$userRole)->update(['status'=>"read"]);
+
+        // $Notifikasi->status = "read";
+
+        // $Notifikasi->save();
+
+        return redirect('/admin/'.$recentPage);
 
     }
     //

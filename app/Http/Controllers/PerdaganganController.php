@@ -21,7 +21,7 @@ class PerdaganganController extends Controller
             }else if (Auth::user()->role === "BANK") {
                 return redirect('/perbankan/dashboard');
             }else if (Auth::user()->role === "KOPERASI") {
-                return redirect('/koperasi/dashboard');
+                return redirect('/koperasi/daftarPengajuanDana');
             }else if (Auth::user()->role === "IKM") {
                 return redirect('/member/dashboard');
             }else if (Auth::user()->role === "OJK") {

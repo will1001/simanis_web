@@ -70,7 +70,7 @@ class MemberController extends Controller
             }else if (Auth::user()->role === "BANK") {
                 return redirect('/perbankan/dashboard');
             }else if (Auth::user()->role === "KOPERASI") {
-                return redirect('/koperasi/dashboard');
+                return redirect('/koperasi/daftarPengajuanDana');
             }else if (Auth::user()->role === "PERDAGANGAN") {
                 return redirect('/perdagangan/dashboard');
             }else if (Auth::user()->role === "OJK") {
@@ -118,8 +118,8 @@ class MemberController extends Controller
                     if($pages == "kartu"){
                     $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
                     $CabangIndustri = CabangIndustri::where('name',$BadanUsaha[0]->cabang_industri)->first();
-                    $BadanUsaha[0]->kabupaten = $kabupaten->name;
-                    $BadanUsaha[0]->id_cabang_industri = $CabangIndustri->id;
+                    $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
+                    $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
 
                         $params = ['BadanUsaha' => $BadanUsaha[0],'User' => Auth::user()];
                     }

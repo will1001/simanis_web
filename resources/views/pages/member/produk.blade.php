@@ -186,7 +186,6 @@
   const produk = @json($Produk);
 
   const lihatDetails = (index)=>{
-    console.log(produk);
     const blackBg = document.getElementById('PopUpBlackbg');
     const detailPopUp = document.getElementById('detailPopUp');
     const nama = document.getElementById('nama');

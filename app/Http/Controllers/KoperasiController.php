@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\BadanUsaha;
+use App\Models\PengajuanDana;
+use App\Models\Notifikasi;
 use Illuminate\Support\Str;
 
 
@@ -31,7 +33,24 @@ class KoperasiController extends Controller
                     return view("pages.koperasi.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields]);
                 } else {
                     // dd($pages);
-                    return view("pages.koperasi.{$pages}", ['pages' => $pages]);
+                    $params;
+                    $Notifikasi = Notifikasi::where("user_role","KOPERASI")->where("status","not read")->get();
+
+                    if($pages == "daftarPengajuanDana"){
+                        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+                        ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                        ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                        ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')
+                        ->where("instansi","KOPERASI")
+                        ->orderBy('status', 'DESC')->get();
+    
+                        $params = [
+                            'PengajuanDana' => $PengajuanDana,
+                            'pages' => $pages,
+                            'Notifikasi' => $Notifikasi
+                        ];
+                    }
+                    return view("pages.koperasi.{$pages}", $params);
                 }
             }
         } else {

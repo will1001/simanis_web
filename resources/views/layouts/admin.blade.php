@@ -39,35 +39,7 @@
 </head>
 <body class="g-sidenav-show  bg-gray-200">
   <div class="flex h-full p-3">
-    <!-- <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-        <div class="sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="{{route('home')}}">
-                <img src="{{ asset('admin_template/assets/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold text-white">ADMIN SIMANIS</span>
-            </a>
-        </div>
-        <hr class="horizontal light mt-0 mb-2">
-        <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-white {{$pages=='tabel'?'active bg-gradient-primary':''}}" href="{{url('admin/tabel')}}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-table fa-2x"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tabel</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{$pages=='setting'?'active bg-gradient-primary':''}}" href="{{url('admin/setting')}}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-cog fa-2x"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Setting</span>
-                    </a>
-                </li>
-              
-    </aside> -->
+   
     <div class="flex h-full p-3">
         <aside class="flex flex-col bg-white p-3 rounded-xl items-start text-left">
         <div class="flex justify-center items-center">
@@ -116,27 +88,32 @@
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <!-- <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </a>
-            </li> -->
-            <!-- <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-              </a>
-            </li> -->
+           
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
+            <div style="visibility: collapse;" id="notifDiv" class=" overflow-scroll h-[400px] w-[300px] bg-white absolute right-[70px] top-[5px] rounded-2xl text-center z-50" >
+              <h5 class="m-3">Notifikasi Anda</h5>
+              @foreach($Notifikasi as $key=>$item)
+                <div class="flex bg-blue-50 p-3">
+                  <img src="{{ asset('/icon svg/dana.svg') }}" >
+                  <div class="ml-3 text-left">
+                      <p class="font-bold text-black">Pengajuan Dana</p>
+                      <p class="text-gray-700 leading-5">{{$item->deskripsi}}</p>
+                  </div>
+                </div>
+              @endforeach
+
+              <form action="/notifikasi/status/ADMIN/{{$pages}}" method="get">
+              <button class="p-4 absolute bottom-0 left-0 text-center w-full text-blue-700 text-sm cursor-pointer">Tandai Semua Telah Dibaca</button>
+              </form>
+            </div>
+              <div onclick="openCloseNotif()" class="p-2 bg-white mr-2 rounded-xl cursor-pointer">
+              <div class="flex">
+                <img src="{{ asset('/icon svg/notif.svg') }}">
+                @if(count($Notifikasi) != 0)
+                <div class="rounded-full p-2 absolute right-[30px] bg-red-600 w-[15px] h-[15px] flex items-center justify-center"><span class="text-white text-xs">{{count($Notifikasi)}}</span></div>
+                @endif
+              </div>
+              </div>
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user cursor-pointer"></i>
               </a>
@@ -489,6 +466,7 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="./assets/js/material-dashboard.min.js?v=3.0.0"></script>
     <script>
+      let notif_is_open = false;
       function validateForm() {
         let x = document.forms["importForm"]["file"].value;
         if (x == "") {
@@ -504,6 +482,21 @@
       function confirm_delete_1() {
         return confirm('Hapus Data ?');
       }
+
+      const openCloseNotif= ()=>{
+        let visibility;
+        if(notif_is_open){
+          visibility = "collapse";
+          notif_is_open = !notif_is_open;
+        }else{
+          visibility = "visible";
+          notif_is_open = !notif_is_open;
+        }
+        const notifDiv = document.getElementById('notifDiv');
+        notifDiv.style.visibility = visibility;
+
+      }
+     
     </script>
 
 

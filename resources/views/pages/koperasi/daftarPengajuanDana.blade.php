@@ -83,6 +83,19 @@
     <th class="text-left p-2 "><span class="">Status</span></th>   
     <th class="rounded-tr-xl">Aksi</span></th>   
   </tr>
+  @foreach($PengajuanDana as $key=>$item)
+    @php
+        $statusClass = '';
+        if($item->status == "Menunggu"){
+        $statusClass = 'bg-menungguBgColor text-menungguTextColor';
+        }
+        if($item->status == "Ditolak"){
+            $statusClass = 'bg-ditolakBgColor text-ditolakTextColor';
+        }
+        if($item->status == "Diterima"){
+            $statusClass = 'bg-disetujuiBgColor text-disetujuiTextColor';
+        }
+    @endphp
   <tr class="bg-white h-14 gap-2">
   <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">1</td>
@@ -99,152 +112,8 @@
         </div>
     </td>
   </tr>
-  <tr class="bg-slate-50 h-14 gap-2">
-  <td class=" cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">2</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Cakradenta Agung, </br>PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]"> Kota Mataram</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Menunggu</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start  cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
-  <tr class="bg-white h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">3</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Cakung Permata, </br>Nusa PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">Kab Bima</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Menunggu</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start  cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
-  <tr class="bg-slate-50 h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">4</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Calista Alam, PT</br></td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">Kab Bima</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Menunggu</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
-  <tr class="bg-white h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">5</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Cibaliung Tunggal,</br>Nusa PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">Kab Dompu</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Menunggu</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
-  </tr>
-  <tr class="bg-slate-50 h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">6</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Comismas</br>Wanamaja, PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">Kab Lombok Barat</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Menunggu</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
-  </tr>
-  <tr class="bg-white h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">7</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Bangun Nusa Indah,</br>PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">Kab Lombok Tengah</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Menunggu</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
-  <tr class="bg-slate-50 h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">8</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Agro Indah</br>Sembada, PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">Kab Lombok Timur</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Menunggu</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
-  <tr class="bg-white h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">9</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Agro Teknika</br> Pratama, PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">Kab Lombok Utara</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Disetujui</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
-  <tr class="bg-slate-50 h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">10</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Agrodesa Palmaindo,</br> PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">Kab Sumbawa Barat</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Disetujui</span></td>
-    <td class="text-center p-2">
-        <div class="flex ml-2 gap-1 justify-start cursor-pointer">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
-    </td>
-  </tr>
+  @endforeach
+ 
 </table>
  
 <div class="flex badan_usaha_container bg-white ml-4 justify-between">

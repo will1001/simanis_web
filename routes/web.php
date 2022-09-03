@@ -63,4 +63,5 @@ Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBada
 Route::post('/ajukan_dana', [MemberController::class, 'ajukan_dana'])->name('ajukan_dana');
 Route::post('/ajukan_produk', [MemberController::class, 'ajukan_produk'])->name('ajukan_produk');
 Route::get('/dana/{id}/status/{status}', [AdminController::class, 'gantiStatusPengajuanDana']);
+Route::get('/notifikasi/status/{userRole}/{recentPage}', [AdminController::class, 'gantiStatusNotifikasi']);
 
