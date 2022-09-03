@@ -48,7 +48,7 @@
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
         <span>Daftar Pengajuan Dana</span>
       </a>
-      <a href="{{ url('/koperasi/simulasiAngsuranMudharobah') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      <a href="{{ url('/koperasi/simulasiAngsuranMurobhahah') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
         <span>Simulasi Angsuran</span>
       </a>

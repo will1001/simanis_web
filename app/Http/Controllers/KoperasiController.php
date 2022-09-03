@@ -33,7 +33,7 @@ class KoperasiController extends Controller
                     return view("pages.koperasi.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields]);
                 } else {
                     // dd($pages);
-                    $params;
+                    $params=[];
                     $Notifikasi = Notifikasi::where("user_role","KOPERASI")->where("status","not read")->get();
 
                     if($pages == "daftarPengajuanDana"){

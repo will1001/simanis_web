@@ -49,9 +49,9 @@
 <h2 class="ml-4">Simulasi Angsuran</h2>
 
 <div class="flex mt-4 gap-5 ml-4">
-    <span class="text-xl font-bold text-slate-700">Murobhahah</span>
-    <span class="text-xl font-bold text-slate-700">Mudharobah</span> 
-    <span class="text-disetujuiTextColor underline text-xl font-bold">Musyarakah</span> 
+    <a href="{{ url('/koperasi/simulasiAngsuranMurobhahah') }}" class="text-xl font-bold text-slate-700">Murobhahah</a>
+    <a href="{{ url('/koperasi/simulasiAngsuranMudharobah') }}" class="text-xl font-bold text-slate-700">Mudharobah</a> 
+    <a href="{{ url('/koperasi/simulasiAngsuranMusyarakah') }}" class="text-disetujuiTextColor underline text-xl font-bold">Musyarakah</a> 
          
 </div> 
 

@@ -1,4 +1,4 @@
-        @extends('layouts.koperasi')
+@extends('layouts.koperasi')
 <style>
     .badan_usaha_container,
     p,
@@ -24,14 +24,14 @@
 </style>
 @section('content')
 
-<div class="bg1 bg-slate-150 absolute"></div>
+<!-- <div class="bg1 bg-slate-150 absolute"></div> -->
 
 <h2 class="ml-4">Simulasi Angsuran</h2>
 
 <div class="flex mt-4 gap-5 ml-4">
-    <span class="text-disetujuiTextColor underline text-xl font-bold">Murobhahah</span>
-    <span class="text-xl font-bold text-slate-700">Mudharobah</span> 
-    <span class="text-xl font-bold text-slate-700">Musyarakah</span>      
+    <a href="{{ url('/koperasi/simulasiAngsuranMurobhahah') }}" class="text-disetujuiTextColor underline text-xl font-bold">Murobhahah</a>
+    <a href="{{ url('/koperasi/simulasiAngsuranMudharobah') }}" class="text-xl font-bold text-slate-700">Mudharobah</a> 
+    <a href="{{ url('/koperasi/simulasiAngsuranMusyarakah') }}" class="text-xl font-bold text-slate-700">Musyarakah</a>      
 </div> 
 
 <div class="flex flex-col box bg-white ml-4 mt-4 gap-2 rounded-2xl shadow-lg">
