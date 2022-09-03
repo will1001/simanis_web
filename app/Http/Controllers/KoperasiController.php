@@ -42,7 +42,7 @@ class KoperasiController extends Controller
                         ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')
                         ->where("instansi","KOPERASI")
-                        ->orderBy('status', 'DESC')->get();
+                        ->orderBy('created_at', 'desc')->get();
     
                         $params = [
                             'PengajuanDana' => $PengajuanDana,

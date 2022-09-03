@@ -125,7 +125,7 @@ class MemberController extends Controller
                     }
 
                     if($pages == "PengajuanDana"){
-                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->get();
+                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
                     $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
                     // dd($BadanUsaha);
 

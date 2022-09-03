@@ -90,7 +90,7 @@
           <ul class="navbar-nav  justify-content-end">
            
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-            <div style="visibility: collapse;" id="notifDiv" class=" overflow-scroll h-[400px] w-[300px] bg-white absolute right-[70px] top-[5px] rounded-2xl text-center z-50" >
+            <div style="visibility: collapse;" id="notifDiv" class=" overflow-scroll  w-[300px] bg-white absolute right-[70px] top-[5px] rounded-2xl text-center z-50" >
               <h5 class="m-3">Notifikasi Anda</h5>
               @foreach($Notifikasi as $key=>$item)
                 <div class="flex bg-blue-50 p-3">
@@ -103,7 +103,7 @@
               @endforeach
 
               <form action="/notifikasi/status/ADMIN/{{$pages}}" method="get">
-              <button class="p-4 absolute bottom-0 left-0 text-center w-full text-blue-700 text-sm cursor-pointer">Tandai Semua Telah Dibaca</button>
+              <button class="p-4 text-center w-full text-blue-700 text-sm cursor-pointer">Tandai Semua Telah Dibaca</button>
               </form>
             </div>
               <div onclick="openCloseNotif()" class="p-2 bg-white mr-2 rounded-xl cursor-pointer">

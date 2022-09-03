@@ -99,11 +99,11 @@
   <tr class="bg-white h-14 gap-2">
   <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">1</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">Bangun Jaya Alam, </br>PT</td>
-    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]"> Kota Bima</span></td>
-    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">Rp 200.000.000</span></td>
-    <td class="text-center p-2">14/08/2022</td>
-    <td class="text-left p-2"><span class="bg-ditolakBgColor text-ditolakTextColor p-2 rounded-xl">Ditolak</span></td>
+    <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
+    <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
+    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->jumlah_dana}}</span></td>
+    <td class="text-center p-2">{{$item->created_at}}</td>
+    <td class="text-left p-2"><span class={{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-2  cursor-pointer">
         <div class="flex ml-2 gap-1 justify-start">
             <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">

@@ -121,7 +121,7 @@ class AdminController extends Controller
                     $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                     ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
                     ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-                    ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('status', 'DESC')->get();
+                    ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
                     // dd($PengajuanDana);
 
                     $params = [

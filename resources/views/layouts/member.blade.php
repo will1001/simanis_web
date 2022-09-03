@@ -45,23 +45,23 @@
         <span>Simanis.</span>
       </div>
       <a href="{{ url('/member/dashboard') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
-        <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon svg/dashboard.svg') }}" alt="logo">
         <span>Dashboard</span>
       </a>
       <a href="{{ url('/member/kartu') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-          <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
+          <img class="mr-5" src="{{ asset('/icon svg/card.svg') }}" alt="logo">
           <span>Kartu</span>
       </a>
       <a href="{{ url('/member/PengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/images/pengajuan-dana.png') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon svg/dana.svg') }}" alt="logo">
         <span>Pengajuan Dana</span>
       </a>
       <a href="{{ url('/member/produk') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/images/pengajuan-produk.png') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon svg/cart.svg') }}" alt="logo">
         <span>Produk</span>
       </a>
       <a href="{{ url('/member/suratRekomendasi') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/images/surat-rekomendasi.png') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon svg/surat.svg') }}" alt="logo">
         <span>Surat Rekomendasi</span>
       </a>
       <hr class="w-full" />

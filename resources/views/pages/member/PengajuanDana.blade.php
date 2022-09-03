@@ -19,7 +19,7 @@
     
     <div class="flex">
         
-        <div onclick="lihatDetails()" class="flex p-2 {{is_null($BadanUsaha->nama_usaha)?'bg-blue-300':'bg-buttonColor-900'}} cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/icon svg/dana.svg') }}"> <span>Pengajuan Dana</span></div>
+        <div onclick="lihatDetails()" class="flex p-2 {{is_null($BadanUsaha->nama_usaha)?'bg-blue-300':'bg-buttonColor-900'}} cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/icon svg/dana-white.svg') }}"> <span>Pengajuan Dana</span></div>
     </div>
 </div>
 <div class="flex items-center actionContainer">
@@ -30,6 +30,7 @@
     <th class="text-center p-2 rounded-tl-xl">No</th>
     <th class="text-center p-2 ">Jumlah Dana</th>
     <th class="text-center p-2 ">Tanggal</th>
+    <th class="text-center p-2 ">Instansi</th>
     <th class="text-center p-2 ">Status</th>
     <th class="text-center p-2 rounded-tr-xl">Keterangan</th>
   </tr>
@@ -51,6 +52,7 @@
     <td class="text-center p-4 ">{{++$key}}</td>
     <td class="text-center p-4 ">{{$item->jumlah_dana}}</td>
     <td class="text-center p-4 ">{{date('d-m-Y', strtotime($item->created_at))}}</td>
+    <td class="text-center p-4 ">{{$item->instansi}}</td>
     <td class="text-center p-2"><span 
       class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-4 ">{{$item->alasan}}</td>
@@ -60,31 +62,44 @@
 </table>
 <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
-<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4">
+<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
 <h4>Ajukan Dana</h4>
 <br/>
 <form action="{{url('ajukan_dana')}}" method="post">
 @csrf
-    <span>Jumlah dana</span>
-    <input class="border-1 border-black" type="number" name="jumlah_dana">
+    <div class="flex justify-between">
+      <span>Jumlah dana</span>
+      <input class="border-1 border-gray-500 w-[70%] p-2" type="number" name="jumlah_dana">
+    </div>
     <br>
-    <span>Instansi</span>
+    <div class="flex justify-between items-center">
+      <span>Instansi Tujuan</span>
+      <select onchange="instansiChange()" id="instansiSelect" class="border-1 border-gray-500 w-[70%] p-2" name="instansi">
+        <option value="BANK">BANK</option>
+        <option value="KOPERASI">KOPERASI</option>
+      </select>
+    </div>
     <br>
-    <select name="instansi">
-      <option value="BANK">BANK</option>
-      <option value="KOPERASI">KOPERASI</option>
-    </select>
+    <div id="detailKoperasi" style="visibility: collapse;">
+      <h4>Detail Koperasi</h4>
+      <br/>
+      <div class="flex justify-between items-center">
+        <span>Jenis Akad</span>
+        <select class="border-1 border-gray-500 w-[70%] p-2" name="jenis_pengajuan">
+          <option value="Murobhahah">Murobhahah</option>
+          <option value="Mudharobah">Mudharobah</option>
+          <option value="Musyarakah">Musyarakah</option>
+        </select>
+      </div>
+    </div>
     <br>
-    <span>Akad</span>
-    <br>
-    <select name="jenis_pengajuan">
-      <option value="Murobhahah">Murobhahah</option>
-      <option value="Mudharobah">Mudharobah</option>
-      <option value="Musyarakah">Musyarakah</option>
-    </select>
-    <br>
+    
+   
 
-    <button>submit</button>
+    <div class="flex items-center justify-end">
+      <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
+      <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Ajukan Sekarang</button>
+    </div>
 </form>
     
 </div>
@@ -110,5 +125,17 @@
     const detailPopUp = document.getElementById('detailPopUp');
     blackBg.style.visibility = "collapse";
     detailPopUp.style.visibility = "collapse";
+  }
+
+  const instansiChange = ()=>{
+    const instansiSelect = document.getElementById("instansiSelect");
+    const detailKoperasi = document.getElementById("detailKoperasi");
+    console.log(instansiSelect.value);
+    if(instansiSelect.value === "KOPERASI"){
+      detailKoperasi.style.visibility = "visible";
+    }else{
+
+      detailKoperasi.style.visibility = "collapse";
+    }
   }
 </script>
