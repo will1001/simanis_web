@@ -62,7 +62,7 @@
         height: 20px;
     }
     .popUpImgSize {
-        width: 250px;
+        width: 300px;
         height: 250px;
     }
     .boxPopUp {
@@ -89,7 +89,7 @@
 @section('content')
 
 <div style="visibility: collapse;" id="PopUp" class="bg absolute">
-    <div class="boxPopUp">
+    <div class="boxPopUp flex items-center">
         <div class="flex p-4 gap-4">
             <div class="flex flex-col gap-2">
                 <div class="popUpImgSize flex">
