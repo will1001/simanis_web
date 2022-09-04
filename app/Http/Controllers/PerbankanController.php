@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\BadanUsaha;
+use App\Models\Notifikasi;
+use App\Models\PengajuanDana;
 use Illuminate\Support\Str;
 
 
@@ -30,8 +32,26 @@ class PerbankanController extends Controller
                 if ($subPages != "") {
                     return view("pages.perbankan.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields]);
                 } else {
-                    // dd($BadanUsaha);
-                    return view("pages.perbankan.{$pages}", ['pages' => $pages]);
+                    $params=['pages' => $pages];
+                    $Notifikasi = Notifikasi::where("user_role","BANK")->where("status","not read")->get();
+
+                    if($pages == "daftarPengajuanDana"){
+                        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+                        ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                        ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                        ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')
+                        ->where("instansi","BANK")
+                        ->where("pengajuan_dana.status","Diterima")
+                        ->orderBy('created_at', 'desc')->get();
+                        
+                        $params = [
+                            'PengajuanDana' => $PengajuanDana,
+                            'pages' => $pages,
+                            'Notifikasi' => $Notifikasi
+                        ];
+
+                    }
+                    return view("pages.perbankan.{$pages}", $params);
                 }
             }
         } else {

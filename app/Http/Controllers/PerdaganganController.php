@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\BadanUsaha;
+use App\Models\Notifikasi;
 use Illuminate\Support\Str;
 
 
@@ -30,8 +31,22 @@ class PerdaganganController extends Controller
                 if ($subPages != "") {
                     return view("pages.perdagangan.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields]);
                 } else {
+                    
                     // dd($BadanUsaha);
-                    return view("pages.perdagangan.{$pages}", ['pages' => $pages]);
+                    $params=[];
+                    $Notifikasi = Notifikasi::where("user_role","PERDAGANGAN")->where("status","not read")->get();
+                    
+                    if($pages == "dashboard"){
+                       
+                    }
+
+                    if($pages == "produkNTBMall"){
+                       
+                    }
+                    
+                    $params['Notifikasi']= $Notifikasi;
+                    $params['pages']= $pages;
+                    return view("pages.perdagangan.{$pages}",$params);
                 }
             }
         } else {

@@ -13,6 +13,8 @@ use App\Models\Notifikasi;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class AdminController extends Controller
 {
@@ -81,7 +83,7 @@ class AdminController extends Controller
             if (Auth::user()->role === "PERDAGANGAN") {
                 return redirect('/perdagangan/dashboard');
             }else if (Auth::user()->role === "BANK") {
-                return redirect('/perbankan/dashboard');
+                return redirect('/perbankan/daftarPengajuanDana');
             }else if (Auth::user()->role === "KOPERASI") {
                 return redirect('/koperasi/daftarPengajuanDana');
             }else if (Auth::user()->role === "IKM") {
@@ -214,13 +216,54 @@ class AdminController extends Controller
         return back();
     }
 
-    public function gantiStatusPengajuanDana($id,$status)
+    public function gantiStatusPengajuanDana(Request $r,$id,$status)
     {
         $PengajuanDana = PengajuanDana::find($id);
+        $User = User::find($PengajuanDana->user_id);
+
+        $BadanUsaha = BadanUsaha::where('nik',$User->nik)->first();
+
+        // dd($BadanUsaha);
+
+        if($status == "Ditolak"){
+            $PengajuanDana->alasan = $r->input('alasan');
+        }else{
+            $PengajuanDana->alasan = "Selamat Pengajuan Dana Anda diterima";
+
+        }
 
         $PengajuanDana->status = $status;
-
+        
         $PengajuanDana->save();
+
+        if($status == "Diterima"){
+            $notifikasi = new Notifikasi([
+                'id' => (string) Str::uuid(),
+                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
+                'user_role' => $PengajuanDana->instansi,
+            ]);
+            
+            $notifikasi->save();
+
+            $notifikasi = new Notifikasi([
+                'id' => (string) Str::uuid(),
+                'deskripsi' => "Pengajuan Dana Anda Diterima",
+                'user_role' => "MEMBER",
+            ]);
+            
+            $notifikasi->save();
+        }
+        if($status == "Ditolak"){
+            $notifikasi = new Notifikasi([
+                'id' => (string) Str::uuid(),
+                'deskripsi' => "Pengajuan Dana Anda Ditolak",
+                'user_role' => "MEMBER",
+            ]);
+            
+            $notifikasi->save();
+        }
+
+      
 
         return redirect('/admin/daftarPengajuanDana');
 
