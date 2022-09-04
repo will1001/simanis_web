@@ -20,7 +20,7 @@ class AuthController extends Controller
                 if (Auth::user()->role === "ADMIN") {
                     return redirect('/admin/tabel');
                 }else if (Auth::user()->role === "BANK") {
-                    return redirect('/perbankan/dashboard');
+                    return redirect('/perbankan/daftarPengajuanDana');
                 }else if (Auth::user()->role === "KOPERASI") {
                     return redirect('/koperasi/daftarPengajuanDana');
                 }else if (Auth::user()->role === "PERDAGANGAN") {
@@ -46,7 +46,7 @@ class AuthController extends Controller
                     if ($user[0]->role === "ADMIN") {
                         return redirect()->intended('/admin/tabel');
                     }else if ($user[0]->role === "BANK") {
-                        return redirect('/perbankan/dashboard');
+                        return redirect('/perbankan/daftarPengajuanDana');
                     }else if ($user[0]->role === "KOPERASI") {
                         return redirect('/koperasi/daftarPengajuanDana');
                     }else if ($user[0]->role === "PERDAGANGAN") {
@@ -74,7 +74,7 @@ class AuthController extends Controller
                 if (Auth::user()->role === "ADMIN") {
                     return redirect('/admin/tabel');
                 }else if (Auth::user()->role === "BANK") {
-                    return redirect('/perbankan/dashboard');
+                    return redirect('/perbankan/daftarPengajuanDana');
                 }else if (Auth::user()->role === "KOPERASI") {
                     return redirect('/koperasi/daftarPengajuanDana');
                 }else if (Auth::user()->role === "PERDAGANGAN") {

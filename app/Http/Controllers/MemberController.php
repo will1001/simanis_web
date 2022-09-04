@@ -68,7 +68,7 @@ class MemberController extends Controller
             if (Auth::user()->role === "ADMIN") {
                 return redirect('/admin/tabel');
             }else if (Auth::user()->role === "BANK") {
-                return redirect('/perbankan/dashboard');
+                return redirect('/perbankan/daftarPengajuanDana');
             }else if (Auth::user()->role === "KOPERASI") {
                 return redirect('/koperasi/daftarPengajuanDana');
             }else if (Auth::user()->role === "PERDAGANGAN") {
@@ -114,6 +114,7 @@ class MemberController extends Controller
                     return view("pages.member.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields]);
                 } else {
                     $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields];
+                    $Notifikasi = Notifikasi::where("user_role","MEMBER")->where("status","not read")->get();
                     
                     if($pages == "kartu"){
                     $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
@@ -164,6 +165,9 @@ class MemberController extends Controller
                             'PengajuanDana' => $PengajuanDana,
                         ];
                     }
+                    $params['Notifikasi'] = $Notifikasi;
+                    $params['pages'] = $pages;
+
                     return view("pages.member.{$pages}", $params);
                 }
             }

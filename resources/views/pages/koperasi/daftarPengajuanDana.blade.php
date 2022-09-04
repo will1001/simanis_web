@@ -44,7 +44,7 @@
 @section('content')
 <h2 class="ml-4">Daftar Pengajuan Dana</h2>
 
-<div class="flex flex-row badan_usaha_container ml-4 mt-4">
+<!-- <div class="flex flex-row badan_usaha_container ml-4 mt-4">
     <div class="flex gap-2 boxCari border rounded-md shadow-md bg-white">
         <img src="{{ asset('/icon svg/medium.svg') }}" alt="icon" class="flex h-8 w-8 ml-2 my-auto">
         <input type="text" placeholder="Cari Badan Usaha" class="my-auto panjangInput ml-1 placeholder:text-sm">
@@ -66,7 +66,7 @@
             <input type="button" value="Hapus Pengajuan" class="text-ditolakTextColor text-sm font-bold my-auto mx-auto">
             <img src="{{ asset('/icon svg/sampahMerah.svg') }}" alt="role" class="flex my-auto mx-auto">       
     </div>
-</div>
+</div> -->
 
 <table class="badan_usaha_container ml-4 bg-white mt-3 h-20"> 
   <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
@@ -80,7 +80,7 @@
         <div class="flex justify-center gap-1 my-auto "><img src="{{ asset('/icon svg/iconBawahAtas.svg') }}" alt="" class="flex"> Jumlah Dana</div>
     </th>              
     <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Tanggal</span></th>   
-    <th class="text-left p-2 "><span class="">Status</span></th>   
+    <!-- <th class="text-left p-2 "><span class="">Status</span></th>    -->
     <th class="rounded-tr-xl">Aksi</span></th>   
   </tr>
   @foreach($PengajuanDana as $key=>$item)
@@ -98,18 +98,24 @@
     @endphp
   <tr class="bg-white h-14 gap-2">
   <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">1</td>
+    <td class="text-center text-slate-700 ">{{++$key}}</td>
     <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
     <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
     <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->jumlah_dana}}</span></td>
     <td class="text-center p-2">{{$item->created_at}}</td>
-    <td class="text-left p-2"><span class={{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
+    <!-- <td class="text-left p-2"><span class={{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td> -->
     <td class="text-center p-2  cursor-pointer">
-        <div class="flex ml-2 gap-1 justify-start">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-            <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span>
-            <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
-        </div>
+    <div class="flex ml-2 gap-1 justify-start items-center">
+                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <!-- <form action="/dana/{{$item->id}}/status/Diterima" method="get">
+                    @csrf
+                <button class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></button>
+                </form>
+                <form action="/dana/{{$item->id}}/status/Ditolak" method="get">
+                    <button class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></button>
+                </form> -->
+
+            </div>
     </td>
   </tr>
   @endforeach

@@ -47,7 +47,7 @@
 <div class="bg bg-slate-150 absolute"></div>
 <h3 class="ml-4">Daftar Pengajuan Dana</h3>
 
-<div class="flex flex-row actinContainer ml-4 mt-4">
+<!-- <div class="flex flex-row actinContainer ml-4 mt-4">
     <div class="flex gap-2 boxCari border rounded-md shadow-md bg-white">
         <img src="{{ asset('/icon svg/medium.svg') }}" alt="icon" class="flex h-8 w-8 ml-2 my-auto">
         <input type="text" placeholder="Cari Badan Usaha" class="my-auto panjangInput ml-1 placeholder:text-sm">
@@ -69,7 +69,7 @@
             <input type="button" value="Hapus Pengajuan" class="text-white text-sm font-bold my-auto ml-5 h-[20px]">
             <img src="{{ asset('/icon svg/sampahPutih.svg') }}" alt="role" class="flex my-auto mx-auto ">       
     </div>
-</div>
+</div> -->
 
     
   </div>
@@ -116,13 +116,13 @@
         <td class="text-center p-2  cursor-pointer">
             <div class="flex ml-2 gap-1 justify-start items-center">
                 <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-                <form action="/dana/{{$item->id}}/status/Diterima" method="get">
+                <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" action="/dana/{{$item->id}}/status/Diterima" method="post">
                     @csrf
-                <button class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></button>
+                    <button ><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
-                <form action="/dana/{{$item->id}}/status/Ditolak" method="get">
-                    <button class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></button>
-                </form>
+                <!-- <form action="/dana/{{$item->id}}/status/Ditolak" method="get"> -->
+                    <button onclick="openPopUp()" class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></button>
+                <!-- </form> -->
 
             </div>
         </td>
@@ -164,8 +164,43 @@
 
   </div>
 
-
+  <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
+</div>
+<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
+<h4>Ajukan Dana</h4>
+<br/>
+<form action="/dana/{{$item->id}}/status/Ditolak" method="post">
+@csrf
    
+    <div class="flex items-center justify-between">
+        <span>Alasan</span>
+        <textarea class="border-2 border-gray-300 w-[70%]" name="alasan" rows="7"></textarea>
+    </div>
 
+    <div class="flex items-center justify-end mt-[100px]">
+      <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
+      <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
+    </div>
+</form>
+    
+</div>
 
   @endsection
+  <script>
+     const openPopUp = ()=>{
+    
+      const blackBg = document.getElementById('detailPopUpBlackbg');
+      const detailPopUp = document.getElementById('detailPopUp');
+      blackBg.style.visibility = "visible";
+      detailPopUp.style.visibility = "visible";
+    
+  }
+  const closeDetails = ()=>{
+    const blackBg = document.getElementById('detailPopUpBlackbg');
+    const detailPopUp = document.getElementById('detailPopUp');
+
+    blackBg.style.visibility = "collapse";
+    detailPopUp.style.visibility = "collapse";
+
+  }
+  </script>

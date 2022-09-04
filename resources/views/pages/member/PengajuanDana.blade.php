@@ -75,6 +75,7 @@
     <div class="flex justify-between items-center">
       <span>Instansi Tujuan</span>
       <select onchange="instansiChange()" id="instansiSelect" class="border-1 border-gray-500 w-[70%] p-2" name="instansi">
+        <option value="" disabled  selected>Pilih Instansi</option>
         <option value="BANK">BANK</option>
         <option value="KOPERASI">KOPERASI</option>
       </select>
@@ -86,6 +87,7 @@
       <div class="flex justify-between items-center">
         <span>Jenis Akad</span>
         <select class="border-1 border-gray-500 w-[70%] p-2" name="jenis_pengajuan">
+          <option value="" disabled  selected>Pilih Jenis Akad</option>
           <option value="Murobhahah">Murobhahah</option>
           <option value="Mudharobah">Mudharobah</option>
           <option value="Musyarakah">Musyarakah</option>

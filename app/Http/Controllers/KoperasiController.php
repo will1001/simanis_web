@@ -21,7 +21,7 @@ class KoperasiController extends Controller
             if (Auth::user()->role === "ADMIN") {
                 return redirect('/admin/tabel');
             }else if (Auth::user()->role === "BANK") {
-                return redirect('/perbankan/dashboard');
+                return redirect('/perbankan/daftarPengajuanDana');
             }else if (Auth::user()->role === "PERDAGANGAN") {
                 return redirect('/perdagangan/dashboard');
             }else if (Auth::user()->role === "IKM") {
@@ -42,6 +42,7 @@ class KoperasiController extends Controller
                         ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')
                         ->where("instansi","KOPERASI")
+                        ->where("pengajuan_dana.status","Diterima")
                         ->orderBy('created_at', 'desc')->get();
     
                         $params = [

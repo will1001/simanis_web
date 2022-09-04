@@ -113,6 +113,30 @@
               </a>
             </li> -->
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
+            <div style="visibility: collapse;" id="notifDiv" class=" overflow-scroll  w-[300px] bg-white absolute right-[70px] top-[5px] rounded-2xl text-center z-50" >
+              <h5 class="m-3">Notifikasi Anda</h5>
+              @foreach($Notifikasi as $key=>$item)
+                <div class="flex bg-blue-50 p-3">
+                  <img src="{{ asset('/icon svg/dana.svg') }}" >
+                  <div class="ml-3 text-left">
+                      <p class="font-bold text-black">Pengajuan Dana</p>
+                      <p class="text-gray-700 leading-5">{{$item->deskripsi}}</p>
+                  </div>
+                </div>
+              @endforeach
+
+              <form action="/notifikasi/status/KOPERASI/{{$pages}}" method="get">
+              <button class="p-4 text-center w-full text-blue-700 text-sm cursor-pointer">Tandai Semua Telah Dibaca</button>
+              </form>
+            </div>
+              <div onclick="openCloseNotif()" class="p-2 bg-white mr-2 rounded-xl cursor-pointer">
+              <div class="flex">
+                <img src="{{ asset('/icon svg/notif.svg') }}">
+                @if(count($Notifikasi) != 0)
+                <div class="rounded-full p-2 absolute right-[30px] bg-red-600 w-[15px] h-[15px] flex items-center justify-center"><span class="text-white text-xs">{{count($Notifikasi)}}</span></div>
+                @endif
+              </div>
+              </div>
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user cursor-pointer"></i>
               </a>
@@ -465,6 +489,7 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="./assets/js/material-dashboard.min.js?v=3.0.0"></script>
     <script>
+      let notif_is_open = false;
       function validateForm() {
         let x = document.forms["importForm"]["file"].value;
         if (x == "") {
@@ -479,6 +504,19 @@
 
       function confirm_delete_1() {
         return confirm('Hapus Data ?');
+      }
+       const openCloseNotif= ()=>{
+        let visibility;
+        if(notif_is_open){
+          visibility = "collapse";
+          notif_is_open = !notif_is_open;
+        }else{
+          visibility = "visible";
+          notif_is_open = !notif_is_open;
+        }
+        const notifDiv = document.getElementById('notifDiv');
+        notifDiv.style.visibility = visibility;
+
       }
     </script>
 
