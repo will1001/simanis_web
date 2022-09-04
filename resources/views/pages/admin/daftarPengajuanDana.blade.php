@@ -114,7 +114,7 @@
         <td class="text-center p-2">{{$item->instansi}}</td>
         <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
         <td class="text-center p-2  cursor-pointer">
-            <div class="flex ml-2 gap-1 justify-start">
+            <div class="flex ml-2 gap-1 justify-start items-center">
                 <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
                 <form action="/dana/{{$item->id}}/status/Diterima" method="get">
                     @csrf

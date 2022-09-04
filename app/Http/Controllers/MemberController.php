@@ -153,6 +153,17 @@ class MemberController extends Controller
                             'Kbli' => Kbli::all(),
                         ];
                     }
+
+                    if($pages == "suratRekomendasi"){
+                        
+                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
+                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                    // dd($BadanUsaha);
+                        $params = [
+                            'BadanUsaha' => $BadanUsaha,
+                            'PengajuanDana' => $PengajuanDana,
+                        ];
+                    }
                     return view("pages.member.{$pages}", $params);
                 }
             }
@@ -213,6 +224,8 @@ class MemberController extends Controller
         $cek_sertifikat_haki = str_contains(json_encode($sertifikat_haki),"null");
         $cek_sertifikat_sni = str_contains(json_encode($sertifikat_sni),"null");
         
+       
+
         $data= array(
             'id' => (string) Str::uuid(),
             'id_badan_usaha' => $BadanUsaha->id,
@@ -221,8 +234,22 @@ class MemberController extends Controller
             'sertifikat_sni' => $cek_sertifikat_sni? null : json_encode($sertifikat_sni),
             'nama' => $r->input("nama"),
             'deskripsi' => $r->input("deskripsi"),
-            'foto' => "foto",
         );
+
+
+        if (!empty($r->file('foto'))) {
+            $file =$r->file('foto');
+            $extension = $file->getClientOriginalExtension(); 
+            $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
+            $filename = $BadanUsaha->id.'-'.time().'.' . $extension;
+
+            $file->move(public_path('images/'), $filename);
+            $data['foto']= 'images/'.$filename;
+
+        }
+        // dd($data);
+       
+
 
 
         $produk = new Produk($data);
