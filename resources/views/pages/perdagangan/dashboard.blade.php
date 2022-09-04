@@ -47,8 +47,8 @@
 @section('content')
 <div class="bg bg-slate-150 absolute"></div>
 <div class="flex justify-between badan_usaha_container">
-    <h2 class="text-slate-800 ml-4">Dashbord</h2>
-    <div class="boxNotif flex flex-col absolute bg-white rounded-lg justify-center">
+    <h2 class="text-slate-800 ml-4">Dashboard</h2>
+    <!-- <div class="boxNotif flex flex-col absolute bg-white rounded-lg justify-center">
         <span class="text-center text-2xl text-slate-800 font-bold my-auto">Notifikasi Anda</span>
         <div class="flex flex-row boxIsiNotif bg-disetujuiBgColor p-2 gap-3 border">
             <img class="ml-2" src="{{ asset('/icon svg/iconKeranjang.svg') }}" alt="iconKeranjang">
@@ -75,7 +75,7 @@
     </div>
     <div class="boxIcon bg-white px-3 py-3 rounded-md cursor-pointer">
         <img class="" src="{{ asset('/icon svg/iconNotif.svg') }}" alt="iconNotif">
-    </div>
+    </div> -->
 </div>
 
 <div class="ml-4 my-5 flex justify-between badan_usaha_container">

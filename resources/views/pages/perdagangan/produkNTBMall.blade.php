@@ -130,7 +130,7 @@
 </div>
 
 <div class="flex badan_usaha_container justify-between">
-    <h2 class="ml-4 bg-slate-800">Produk NTB Mall</h2>
+    <h2 class="ml-4">Produk NTB Mall</h2>
     <div class="flex gap-2">
         <div class="flex boxStat gap-2 text-slate-50 rounded-lg bg-white justify-center cursor-pointer">
             <span class="my-auto">Semua Status</span>

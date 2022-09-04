@@ -47,10 +47,11 @@ class KoperasiController extends Controller
     
                         $params = [
                             'PengajuanDana' => $PengajuanDana,
-                            'pages' => $pages,
-                            'Notifikasi' => $Notifikasi
                         ];
                     }
+
+                    $params['Notifikasi']= $Notifikasi;
+                    $params['pages']= $pages;
                     return view("pages.koperasi.{$pages}", $params);
                 }
             }

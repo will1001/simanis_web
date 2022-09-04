@@ -227,6 +227,9 @@ class AdminController extends Controller
 
         if($status == "Ditolak"){
             $PengajuanDana->alasan = $r->input('alasan');
+        }else{
+            $PengajuanDana->alasan = "Selamat Pengajuan Dana Anda diterima";
+
         }
 
         $PengajuanDana->status = $status;
