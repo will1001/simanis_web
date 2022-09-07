@@ -159,6 +159,14 @@
                 <input class="form-control" type="string" placeholder="NIK" name="nik" minlength="8">
               </div>
               <div class="form-group">
+                <span class="input-icon"><i class="fa fa-user"></i></span>
+                <input class="form-control" type="string" placeholder="Nama" name="nama_direktur">
+              </div>
+              <div class="form-group">
+                <span class="input-icon"><i class="fa fa-phone"></i></span>
+                <input class="form-control" type="number" placeholder="Nomor HP" name="no_hp">
+              </div>
+              <div class="form-group">
                 <span class="input-icon"><i class="fa fa-lock"></i></span>
                 <input class="form-control" type="password" placeholder="Password" name="password" minlength="8">
               </div>

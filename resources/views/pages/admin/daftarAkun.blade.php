@@ -17,25 +17,57 @@
     }
 </style>
 @section('content')
-<div style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
+<div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
 
-<div style="visibility: collapse;" id="detailPopUp" class="fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
+<div style="visibility: collapse;" id="detailPopUp" class=" h-[400px] fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
     <div onclick="closeDetails()" class="flex-row-reverse flex cursor-pointer"><img src="{{ asset('/icon svg/exit.svg') }}" class="iconSize mt-3 mr-2" alt="close"></div>
     <span class="font-extrabold text-xl translate-x-1 text-slate-800 ml-5 mt-2 ">Tambah Akun</span>
     <div class="flex-col ml-5">
-      <div class="flex flex-row items-center mt-4"><input type="radio" name="" id="" class="radioSize"><span class="ml-3 my-auto text-slate-800 font-semibold">IKN</span></div>
-      <div class="flex flex-row items-center mt-3"><input type="radio" name="" id="" class="radioSize"><span class="ml-3 my-auto text-slate-800 font-semibold">Bank</span></div>
-      <div class="flex flex-row items-center mt-3"><input type="radio" name="" id="" class="radioSize"><span class="ml-3 my-auto text-slate-800 font-semibold">Koperasi</span></div>
+      <form action="/create/user" method="post">
+        @csrf
+        <input class="border-1 border-gray-500 p-2" type="string" placeholder="NIK" name="nik" minlength="8" required >
+      <div class="flex flex-row items-center mt-4"><input type="radio" value="IKM" name="role" id="" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">IKM</span></div>
+      <div class="flex flex-row items-center mt-3"><input type="radio" value="BANK" name="role" id="" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">Bank</span></div>
+      <div class="flex flex-row items-center mt-3"><input type="radio" value="KOPERASI" name="role" id="" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">Koperasi</span></div>
     </div>
     <div class="flex flex-row mx-auto gap-4">
       <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4 shadow-md">
-          <input type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
+          <input onclick="closeDetails()"  type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
       </div>
       <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md">
-          <input type="button" value="Tambah Akun" class=" text-white text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
+          <button type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Tambah Akun</button>  
       </div>
     </div>  
+    </form>
+</div>
+
+<div class=" text-center h-[150px] p-2 fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl" bg-white" style="visibility: collapse;" id="popUpStatus">
+<h5 id="statusTitlePopUp"></h5>
+<form action="" method="get" id="formUserStatus">
+    <div class="flex flex-row mx-auto gap-4  justify-center">
+      <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4 shadow-md">
+          <input onclick="closeDetails()"  type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
+      </div>
+      <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md">
+          <button id="statusButtonPopUp" type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Aktifasi Akun</button>  
+      </div>
+    </div>  
+    </form>
+</div>
+
+<div style="visibility: collapse;" id="popUpDelete" class=" text-center h-[150px] p-2 fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
+<h5>Hapus Akun ? </h5>
+<form action="" method="delete" id="formUserDelete">
+    <div class="flex flex-row mx-auto gap-4  justify-center">
+      <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4 shadow-md">
+          <input onclick="closeDetails()"  type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
+      </div>
+      <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md">
+          <button id="statusButtonPopUp" type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Hapus</button>  
+      </div>
+    </div>  
+    </form>
 </div>
 
 
@@ -43,11 +75,11 @@
   <h3 class="mt-14 font-extrabold w-[192px] h-[37px] text-slate-800">Daftar Akun</h3>
   <div class="flex justify-between items-center actionContainer">
     <div class="flex">
-        <div class="flex w-[263px] h-[52px] bg-white rounded-lg bg-cover mt-4 shadow-md">
+        <div class="invisible flex w-[263px] h-[52px] bg-white rounded-lg bg-cover mt-4 shadow-md">
             <img src="{{ asset('/icon svg/medium.svg') }}" alt="search" class="h-8 w-8 ml-[18.5px] my-auto">
             <input type="text" placeholder="Cari NIK" class="my-auto h-6 w-[205px] ml-3 placeholder:text-sm ">
         </div>
-        <div class="flex">
+        <div class="invisible flex">
             <div class="flex w-[154px] h-[52px] bg-white rounded-lg bg-cover mt-4 shadow-md ml-2  text-center">
                 <label for="role" class="text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] w-[85px]">Semua Role</label>
                 <input type="radio" id="role" name="role" class="hidden">
@@ -58,7 +90,7 @@
             <input onclick="lihatDetails()" type="button" value="Tambah Akun" class=" text-white text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
         </div>
     </div>
-    <div class="">
+    <div class="invisible">
         <div class="flex w-[140px] h-[52px] bg-slate-100 rounded-lg bg-cover mt-4 shadow-md ml-2  text-center">
             <input type="button" value="Hapus Akun" class="text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] w-[85px]">
           <img src="{{ asset('/icon svg/sampah.svg') }}" alt="role" class="flex ml-2 my-auto ">
@@ -72,7 +104,7 @@
     <th class="text-center p-2">No</th>
     <th class="text-left pr-[250px]">NIK</th>
     <th class="text-left  ">Role</th>     
-    <th class="text-left  ">Staus</th>          
+    <th class="text-left  ">Status</th>          
     <th class="text-left p-2 rounded-tr-xl">Aksi</th>   
   </tr>
   @foreach($User as $key=>$item)
@@ -85,8 +117,8 @@
     <td class="text-left  "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-2">
       <div class="flex ml-2">
-        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
-        <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
+        <img onclick="openPopUpStatus('{{$item->id}}','{{$item->status}}')" class="cursor-pointer mr-2" src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+        <span onclick="openPopUpDelete('{{$item->id}}')" class="bg-ditolakTextColor text-white p-2 rounded-xl cursor-pointer"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span>
       </div>
     </td>
   </tr>
@@ -121,6 +153,7 @@
         </div>
     </div>
   </div>
+  
 
 
 
@@ -128,6 +161,9 @@
 
   
 </div>
+
+
+
 
 
 
@@ -143,7 +179,36 @@
   const closeDetails = ()=>{
     const blackBg = document.getElementById('detailPopUpBlackbg');
     const detailPopUp = document.getElementById('detailPopUp');
+    const popUpStatus = document.getElementById('popUpStatus');
+    const popUpDelete = document.getElementById('popUpDelete');
+
     blackBg.style.visibility = "collapse";
     detailPopUp.style.visibility = "collapse";
+    popUpStatus.style.visibility = "collapse";
+    popUpDelete.style.visibility = "collapse";
+
+  }
+  const openPopUpStatus = (id,status)=>{
+    
+    const blackBg = document.getElementById('detailPopUpBlackbg');
+    const popUpStatus = document.getElementById('popUpStatus');
+    const statusTitlePopUp = document.getElementById('statusTitlePopUp');
+    const statusButtonPopUp = document.getElementById('statusButtonPopUp');
+    const formUserStatus = document.getElementById('formUserStatus');
+    statusTitlePopUp.innerHTML = status === "Aktif" ? "Non Aktifkan User ?" : "Aktifkan User ?"
+    statusButtonPopUp.innerHTML = status === "Aktif" ? "Non Aktifkan Akun" : "Aktifkan Akun"
+    blackBg.style.visibility = "visible";
+    popUpStatus.style.visibility = "visible";
+    formUserStatus.action = `/user/status/${id}/${status === "Aktif" ? "Tidak Aktif": "Aktif"}`;
+  }
+  const openPopUpDelete = (id)=>{
+    
+    const blackBg = document.getElementById('detailPopUpBlackbg');
+    const popUpDelete = document.getElementById('popUpDelete');
+    const formUserDelete = document.getElementById('formUserDelete');
+    blackBg.style.visibility = "visible";
+    popUpDelete.style.visibility = "visible";
+    formUserDelete.action = `/user/delete/${id}`;
+
   }
 </script>

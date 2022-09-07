@@ -117,7 +117,10 @@
                 </div>
               @endforeach
 
-              <form action="/notifikasi/status/ADMIN/{{$pages}}" method="get">
+              <form action="/notifikasi/status/ADMIN/{{$pages}}" method="post">
+              @csrf
+              <input type="text" value="11111111" name="nik" style="display:none">
+
               <button class="p-4 text-center w-full text-blue-700 text-sm cursor-pointer">Tandai Semua Telah Dibaca</button>
               </form>
             </div>

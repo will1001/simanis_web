@@ -51,10 +51,10 @@ Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
 Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
 
 Route::get('/member/{pages}/{subPages?}/{id?}', [MemberController::class, 'index'])->name('member');
-Route::get('/perbankan/{pages}/{subPages?}', [PerbankanController::class, 'index']);
-Route::get('/koperasi/{pages}/{subPages?}', [KoperasiController::class, 'index'])->name('koperasi');
-Route::get('/perdagangan/{pages}/{subPages?}', [PerdaganganController::class, 'index'])->name('perdagangan');
-Route::get('/ojk/{pages}/{subPages?}', [OjkController::class, 'index'])->name('ojk');
+Route::get('/perbankan/{pages}/{subPages?}/{id?}', [PerbankanController::class, 'index']);
+Route::get('/koperasi/{pages}/{subPages?}/{id?}', [KoperasiController::class, 'index'])->name('koperasi');
+Route::get('/perdagangan/{pages}/{subPages?}/{id?}', [PerdaganganController::class, 'index'])->name('perdagangan');
+Route::get('/ojk/{pages}/{subPages?}/{id?}', [OjkController::class, 'index'])->name('ojk');
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
 Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBadanUsahaById']);
@@ -63,5 +63,8 @@ Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBada
 Route::post('/ajukan_dana', [MemberController::class, 'ajukan_dana'])->name('ajukan_dana');
 Route::post('/ajukan_produk', [MemberController::class, 'ajukan_produk'])->name('ajukan_produk');
 Route::post('/dana/{id}/status/{status}', [AdminController::class, 'gantiStatusPengajuanDana']);
-Route::get('/notifikasi/status/{userRole}/{recentPage}', [AdminController::class, 'gantiStatusNotifikasi']);
+Route::post('/notifikasi/status/{userRole}/{recentPage}', [AdminController::class, 'gantiStatusNotifikasi']);
+Route::post('/create/user', [AdminController::class, 'tambahUser']);
+Route::get('/user/status/{id}/{status}', [AdminController::class, 'ubahStatusUser']);
+Route::get('/user/delete/{id}', [AdminController::class, 'hapusUser']);
 

@@ -16,6 +16,7 @@ class PengajuanDana extends Model
 
     protected $fillable = [
         'id',
+        'id_instansi',
         'user_id',
         'status',
         'jumlah_dana',

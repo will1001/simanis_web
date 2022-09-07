@@ -67,17 +67,22 @@
 <br/>
 <form action="{{url('ajukan_dana')}}" method="post">
 @csrf
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
       <span>Jumlah dana</span>
       <input class="border-1 border-gray-500 w-[70%] p-2" type="number" name="jumlah_dana">
+    </div>
+    <br>
+    <div class="flex justify-between items-center">
+      <span>Waktu Pinjaman (/ Bulan)</span>
+      <input class="border-1 border-gray-500 w-[70%] p-2" type="number" name="waktu_pinjaman">
     </div>
     <br>
     <div class="flex justify-between items-center">
       <span>Instansi Tujuan</span>
       <select onchange="instansiChange()" id="instansiSelect" class="border-1 border-gray-500 w-[70%] p-2" name="instansi">
         <option value="" disabled  selected>Pilih Instansi</option>
-        <option value="BANK">BANK</option>
-        <option value="KOPERASI">KOPERASI</option>
+        <option value="96a49730f0f641fe9e770b38f78d3252">BANK</option>
+        <option value="3cda5236c97943a79f1e2a62fd7e1ee1">KOPERASI</option>
       </select>
     </div>
     <br>

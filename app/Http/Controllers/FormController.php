@@ -9,7 +9,10 @@ use App\Models\Kelurahan;
 use App\Models\CabangIndustri;
 use App\Models\SubCabangIndustri;
 use App\Models\Kbli;
+use App\Models\Notifikasi;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 
@@ -23,9 +26,13 @@ class FormController extends Controller
                 $badan_usaha = BadanUsaha::find($id);
             }
 
+        $Notifikasi = Notifikasi::where("user_role","MEMBER")->where("nik",Auth::user()->nik)->where("status","not read")->get();
+
+
             return view('pages.form.badan_usaha', [
                 'userType' => $userType,
                 'badan_usaha' => $badan_usaha,
+                'Notifikasi' => $Notifikasi,
                 'pages' => $userType == 'admin' ? 'tabel' : 'dashboard',
                 'Kabupaten' => Kabupaten::all(),
                 'Kecamatan' => Kecamatan::all(),

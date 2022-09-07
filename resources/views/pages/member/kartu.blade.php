@@ -21,7 +21,7 @@
      </div>
         
     </div>
-    <img src="{{ asset('/img/kartuPhoto.png') }}" alt="">
+    <img class="w-[200px] w-[200px] m-3" src="{{ asset($User->foto) }}" alt="">
 </div>
 
 @endsection

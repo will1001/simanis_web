@@ -106,7 +106,11 @@
     <!-- <td class="text-left p-2"><span class={{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td> -->
     <td class="text-center p-2  cursor-pointer">
     <div class="flex ml-2 gap-1 justify-start items-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+            <form method="GET" action="/koperasi/dashboard/ProfilBadanUsaha/{{$item->id}}">
+                <button>
+                    <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                </button>
+            </form>
                 <!-- <form action="/dana/{{$item->id}}/status/Diterima" method="get">
                     @csrf
                 <button class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></button>

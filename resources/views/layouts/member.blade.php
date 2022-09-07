@@ -124,8 +124,10 @@
                   </div>
                 </div>
               @endforeach
+              <form action="/notifikasi/status/MEMBER/{{$pages}}" method="post">
+                @csrf
+              <input type="text" value="{{$User->nik}}" name="nik" style="display:none">
 
-              <form action="/notifikasi/status/KOPERASI/{{$pages}}" method="get">
               <button class="p-4 text-center w-full text-blue-700 text-sm cursor-pointer">Tandai Semua Telah Dibaca</button>
               </form>
             </div>

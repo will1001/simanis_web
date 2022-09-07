@@ -113,7 +113,9 @@
                 </div>
               @endforeach
 
-              <form action="/notifikasi/status/KOPERASI/{{$pages}}" method="get">
+              <form action="/notifikasi/status/KOPERASI/{{$pages}}" method="post">
+              <input type="text" value="22222222" name="nik" style="display:none">
+
               <button class="p-4 text-center w-full text-blue-700 text-sm cursor-pointer">Tandai Semua Telah Dibaca</button>
               </form>
             </div>

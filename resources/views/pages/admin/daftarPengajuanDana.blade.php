@@ -91,6 +91,7 @@
       <th class="text-left p-2 "><span class="">Status</span></th>   
       <th class="rounded-tr-xl">Aksi</span></th>   
     </tr>
+    
     @foreach($PengajuanDana as $key=>$item)
     @php
         $statusClass = '';
@@ -118,11 +119,10 @@
                 <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
                 <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" action="/dana/{{$item->id}}/status/Diterima" method="post">
                     @csrf
+                    <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
                     <button ><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
-                <!-- <form action="/dana/{{$item->id}}/status/Ditolak" method="get"> -->
                     <button onclick="openPopUp()" class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></button>
-                <!-- </form> -->
 
             </div>
         </td>

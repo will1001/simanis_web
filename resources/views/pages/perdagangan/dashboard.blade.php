@@ -108,53 +108,21 @@
             <th class="text-center p-2 ">Nama</th>
             <th class="text-center p-2 ">NIB</th>
             <th class="text-center p-2 ">Kapasitas Produksi</th>
-            <th class="text-center p-2 ">Harga</th>
+            <!-- <th class="text-center p-2 ">Harga</th> -->
         </tr>
+        @foreach($Produk as $key=>$item)
+
         <tr class=" hTabel bg-white">
             <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></td>
-            <td class="text-center p-4 text-slate-800">1</td>
-            <td class="text-center p-1 imgSize"><img class="mx-auto" src="{{ asset('/img/produk1.png') }}" alt=""></td>
-            <td class="text-center p-4 text-slate-800">Sepatu Kain Tenun</td>
-            <td class="text-center p-4 text-slate-800">1035138021384</td>
-            <td class="text-center p-4 text-slate-800">200/bulan</td>
-            <td class="text-center p-4 text-disetujuiTextColor ">Rp 300.000</td>    
+            <td class="text-center p-4 text-slate-800">{{++$key}}</td>
+            <td class="text-center p-1 imgSize"><img class="mx-auto" src="{{ asset($item->foto) }}" alt=""></td>
+            <td class="text-center p-4 text-slate-800">{{$item->nama}}</td>
+            <td class="text-center p-4 text-slate-800">{{$item->nib_tahun}}</td>
+            <td class="text-center p-4 text-slate-800">{{$item->kapasitas_produksi_perbulan}}/Bulan</td>
+            <!-- <td class="text-center p-4 text-disetujuiTextColor ">{{$item->nama}}</td>     -->
         </tr>
-        <tr class=" hTabel bgTabel">
-            <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></td>
-            <td class="text-center p-4 text-slate-800">2</td>
-            <td class="text-center p-1 imgSize"><img class="mx-auto" src="{{ asset('/img/produk2.png') }}" alt=""></td>
-            <td class="text-center p-4 text-slate-800">Syal Bima Cowok</td>
-            <td class="text-center p-4 text-slate-800">1035138021384</td>
-            <td class="text-center p-4 text-slate-800">200/bulan</td>
-            <td class="text-center p-4 text-disetujuiTextColor ">Rp 300.000</td>    
-        </tr>
-        <tr class=" hTabel bg-white">
-            <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></td>
-            <td class="text-center p-4 text-slate-800">3</td>
-            <td class="text-center p-1 imgSize"><img class="mx-auto" src="{{ asset('/img/produk3.png') }}" alt=""></td>
-            <td class="text-center p-4 text-slate-800">Kopi Bubuk Gunung Tambora</td>
-            <td class="text-center p-4 text-slate-800">1035138021384</td>
-            <td class="text-center p-4 text-slate-800">200/bulan</td>
-            <td class="text-center p-4 text-disetujuiTextColor ">Rp 300.000</td>    
-        </tr>
-        <tr class=" hTabel bgTabel">
-            <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></td>
-            <td class="text-center p-4 text-slate-800">4</td>
-            <td class="text-center p-1 imgSize"><img class="mx-auto" src="{{ asset('/img/produk4.png') }}" alt=""></td>
-            <td class="text-center p-4 text-slate-800">Kopi Rumput Laut</td>
-            <td class="text-center p-4 text-slate-800">1035138021384</td>
-            <td class="text-center p-4 text-slate-800">200/bulan</td>
-            <td class="text-center p-4 text-disetujuiTextColor ">Rp 300.000</td>    
-        </tr>
-        <tr class=" hTabel bg-white">
-            <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></td>
-            <td class="text-center p-4 text-slate-800">5</td>
-            <td class="text-center p-1 imgSize"><img class="mx-auto" src="{{ asset('/img/produk3.png') }}" alt=""></td>
-            <td class="text-center p-4 text-slate-800">Kopi Bubuk Gunung Tambora</td>
-            <td class="text-center p-4 text-slate-800">1035138021384</td>
-            <td class="text-center p-4 text-slate-800">200/bulan</td>
-            <td class="text-center p-4 text-disetujuiTextColor ">Rp 300.000</td>    
-        </tr>
+        @endforeach
+
     </tabel>   
 </div>
 @endsection

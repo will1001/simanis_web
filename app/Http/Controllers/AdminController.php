@@ -14,6 +14,8 @@ use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class AdminController extends Controller
@@ -92,8 +94,8 @@ class AdminController extends Controller
                 return redirect('/ojk/dashboard');
             }else{
                 $params;
-                $Notifikasi = Notifikasi::where("user_role","ADMIN")->where("status","not read")->get();
-
+                $Notifikasi = Notifikasi::where("user_role","ADMIN")->where("nik",Auth::user()->nik)->where("status","not read")->get();
+                // dd(Auth::user()->nik);
                 if($pages == "tabel"){
                     $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                     ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
@@ -123,7 +125,7 @@ class AdminController extends Controller
                     $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                     ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
                     ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-                    ->select('badan_usaha.nama_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
+                    ->select('badan_usaha.nama_usaha','badan_usaha.nik','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
                     // dd($PengajuanDana);
 
                     $params = [
@@ -228,17 +230,18 @@ class AdminController extends Controller
         if($status == "Ditolak"){
             $PengajuanDana->alasan = $r->input('alasan');
         }else{
-            $PengajuanDana->alasan = "Selamat Pengajuan Dana Anda diterima";
-
+            $PengajuanDana->alasan = "Pengajuan Dana Anda diterima Dinas Perindustrian,Tinggal Menunggu Persutujuan Instansi terkait (Bank / koperasi)";
         }
 
         $PengajuanDana->status = $status;
         
         $PengajuanDana->save();
-
+        $instansi = User::find($PengajuanDana->id_instansi);
+        // dd($instansi);
         if($status == "Diterima"){
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
+                'nik' => $instansi->nik,
                 'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
                 'user_role' => $PengajuanDana->instansi,
             ]);
@@ -247,6 +250,7 @@ class AdminController extends Controller
 
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
+                'nik' => $User->nik,
                 'deskripsi' => "Pengajuan Dana Anda Diterima",
                 'user_role' => "MEMBER",
             ]);
@@ -256,6 +260,7 @@ class AdminController extends Controller
         if($status == "Ditolak"){
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
+                'nik' => $User->nik,
                 'deskripsi' => "Pengajuan Dana Anda Ditolak",
                 'user_role' => "MEMBER",
             ]);
@@ -268,16 +273,57 @@ class AdminController extends Controller
         return redirect('/admin/daftarPengajuanDana');
 
     }
-    public function gantiStatusNotifikasi($userRole,$recentPage)
+    public function gantiStatusNotifikasi(Request $r,$userRole,$recentPage)
     {
 
-        $Notifikasi = Notifikasi::where("user_role",$userRole)->update(['status'=>"read"]);
+        $Notifikasi = Notifikasi::where("user_role",$userRole)->where("nik", $r->input('nik'))->update(['status'=>"read"]);
 
         // $Notifikasi->status = "read";
 
         // $Notifikasi->save();
 
         return redirect('/admin/'.$recentPage);
+
+    }
+    public function tambahUser(Request $r)
+    {
+
+        // dd($r);
+        $users = new User([
+            'id' => (string) Str::uuid()->getHex(),
+            'nik' => $r->input("nik"),
+            'role' => $r->input("role"),
+            'password' => Hash::make("12345678"),
+        ]);
+        $users->save();
+
+
+        return redirect('/admin/daftarAkun');
+
+    }
+   
+    public function ubahStatusUser($id,$status)
+    {
+
+        $user = User::find($id);
+
+        $user->status = $status;
+        $user->save();
+
+
+
+        return redirect('/admin/daftarAkun');
+
+    }
+    
+    public function hapusUser($id)
+    {
+
+        $res=User::where('id',$id)->delete();
+
+
+
+        return redirect('/admin/daftarAkun');
 
     }
     //

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\BadanUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -91,6 +92,10 @@ class AuthController extends Controller
             $nik = $r->input('nik');
             $password = $r->input('password');
 
+            if(!$nik || !$password){
+                return view('pages.register', ['msg' => "Input NIK dan Password Terlebih dahulu"]);
+            }
+
             $checkNIK = User::where('nik', $nik)->first();
 
             if($checkNIK){
@@ -103,6 +108,15 @@ class AuthController extends Controller
                 'nik' => $nik,
                 'password' => Hash::make($password),
             ]);
+
+            $NewBadanUsaha = new BadanUsaha;
+            $NewBadanUsaha->id = (string) Str::uuid();
+            $NewBadanUsaha->nik = $nik;
+            $NewBadanUsaha->nama_direktur = $r->input('nama_direktur');
+            $NewBadanUsaha->no_hp = $r->input('no_hp');
+
+             // BUAT BADAN USAHA
+            $NewBadanUsaha->save();
 
             // BUAT USER
             $users->save();

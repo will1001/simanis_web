@@ -23,6 +23,7 @@ class BadanUsaha extends Model
         'kelurahan',
         'alamat_lengkap',
         'no_hp',
+        'email',
         'nama_usaha',
         'bentuk_usaha',
         'tahun_berdiri',

@@ -19,6 +19,8 @@ class User extends Authenticatable
         'id',
         'nik',
         'role',
+        'status',
+        'foto',
         'password',
     ];
 

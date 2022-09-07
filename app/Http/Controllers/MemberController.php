@@ -16,6 +16,7 @@ use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\SubCabangIndustri;
 use App\Models\Kbli;
+use App\Models\User;
 
 
 use Illuminate\Support\Str;
@@ -64,6 +65,8 @@ class MemberController extends Controller
     //
     function index($pages = "dashboard", $subPages = "", $id = "")
     {
+        $Notifikasi = Notifikasi::where("user_role","MEMBER")->where("nik",Auth::user()->nik)->where("status","not read")->get();
+
         if (Auth::check()) {
             if (Auth::user()->role === "ADMIN") {
                 return redirect('/admin/tabel');
@@ -92,6 +95,7 @@ class MemberController extends Controller
 
                 }
                 $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+                // dd($BadanUsaha);
 
                 foreach ($BadanUsaha as $key => &$item) {
                     $userDataProgress[$key] = 0;
@@ -111,10 +115,9 @@ class MemberController extends Controller
                 }
                 if ($subPages != "") {
 
-                    return view("pages.member.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields]);
+                    return view("pages.member.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi]);
                 } else {
                     $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields];
-                    $Notifikasi = Notifikasi::where("user_role","MEMBER")->where("status","not read")->get();
                     
                     if($pages == "kartu"){
                     $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
@@ -122,7 +125,7 @@ class MemberController extends Controller
                     $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
                     $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
 
-                        $params = ['BadanUsaha' => $BadanUsaha[0],'User' => Auth::user()];
+                        $params = ['BadanUsaha' => $BadanUsaha[0]];
                     }
 
                     if($pages == "PengajuanDana"){
@@ -167,6 +170,7 @@ class MemberController extends Controller
                     }
                     $params['Notifikasi'] = $Notifikasi;
                     $params['pages'] = $pages;
+                    $params['User'] = Auth::user();
 
                     return view("pages.member.{$pages}", $params);
                 }
@@ -176,26 +180,32 @@ class MemberController extends Controller
         }
     }
     function ajukan_dana(Request $r){
+    $instansi = User::find($r->input("instansi"));
+        // dd($r->input("instansi"));
         $pengajuanDana = new PengajuanDana([
             'id' => (string) Str::uuid(),
+            'id_instansi' => $r->input("instansi"),
             'user_id' => Auth::id(),
             'status' => "Menunggu",
             'jumlah_dana' => $r->input("jumlah_dana"),
+            'waktu_pinjaman' => $r->input("waktu_pinjaman"),
             'alasan' => $r->input("alasan"),
-            'instansi' => $r->input("instansi"),
+            'instansi' => $instansi->role,
             'jenis_pengajuan' => $r->input("jenis_pengajuan"),
         ]);
+        // dd($pengajuanDana);
 
         $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
        
 
         $notifikasi = new Notifikasi([
             'id' => (string) Str::uuid(),
+            "nik" => "00000000",
             'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
             'user_role' => "ADMIN",
         ]);
 
-        // dd($pengajuanDana);
+        // dd($notifikasi);
 
         // BUAT USER
         // dd($BadanUsaha->nama_usaha);

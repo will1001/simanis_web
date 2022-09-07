@@ -90,11 +90,15 @@
     <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
     <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
     <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->jumlah_dana}}</span></td>
-    <td class="text-center p-2">14/08/2022</td>
+    <td class="text-center p-2">{{date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
     <!-- <td class="text-left p-2"><span class="bg-ditolakBgColor text-ditolakTextColor p-2 rounded-xl">Ditolak</span></td> -->
     <td class="text-center p-2  cursor-pointer">
         <div class="flex ml-2 gap-1 justify-start">
-            <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+            <form method="GET" action="/perbankan/dashboard/ProfilBadanUsaha/{{$item->id}}">
+                <button>
+                    <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                </button>
+            </form>
             <!-- <span class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></span> -->
             <!-- <span class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></span> -->
         </div>

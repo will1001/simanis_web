@@ -50,9 +50,6 @@ $fieldTitles = [
 ?>
 @section('content')
 <h1>ProfilBadanUSaha</h1>
-<form method="GET" action="/form/member/{{$BadanUsaha->id}}" style="margin-right:10px">
-    <button type="submit" class="btn btn-primary btn-sm">Edit Profil</button>
-</form>
 @foreach($fields as $key => $field)
 @if($field == 'id')
 <span></span>
