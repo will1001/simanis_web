@@ -1,4 +1,4 @@
-@extends('layouts.member')
+@extends('layouts.perbankan')
 <style>
     .badan_usaha_container,
     p,

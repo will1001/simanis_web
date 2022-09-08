@@ -92,6 +92,7 @@
       <th class="rounded-tr-xl">Aksi</span></th>   
     </tr>
     
+    
     @foreach($PengajuanDana as $key=>$item)
     @php
         $statusClass = '';
@@ -116,7 +117,11 @@
         <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
         <td class="text-center p-2  cursor-pointer">
             <div class="flex ml-2 gap-1 justify-start items-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <form method="GET" action="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$item->id_badan_usaha}}">
+                    <button>
+                        <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                    </button>
+                </form>
                 <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" action="/dana/{{$item->id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
@@ -167,14 +172,14 @@
   <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
 <div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
-<h4>Ajukan Dana</h4>
+<h4>Penolakan Ajuan Dana</h4>
 <br/>
 <form action="/dana/{{$item->id}}/status/Ditolak" method="post">
 @csrf
    
     <div class="flex items-center justify-between">
-        <span>Alasan</span>
-        <textarea class="border-2 border-gray-300 w-[70%]" name="alasan" rows="7"></textarea>
+        <span>Alasan Penolakan</span>
+        <textarea class="border-2 border-gray-300 w-[70%]" name="alasan" rows="7" required></textarea>
     </div>
 
     <div class="flex items-center justify-end mt-[100px]">

@@ -52,6 +52,44 @@ class AdminController extends Controller
         'badan_usaha.updated_at'
     ];
 
+    private $fields2 = [
+        'id',
+        'nik',
+        'nama_direktur',
+        'id_kabupaten',
+        'kecamatan',
+        'kelurahan',
+        'alamat_lengkap',
+        'no_hp',
+        'nama_usaha',
+        'bentuk_usaha',
+        'tahun_berdiri',
+        'formal_informal',
+        'nib_tahun',
+        'nomor_sertifikat_halal_tahun',
+        'sertifikat_merek_tahun',
+        'nomor_test_report_tahun',
+        'sni_tahun',
+        'jenis_usaha',
+        'cabang_industri',
+        'sub_cabang_industri',
+        'id_kbli',
+        'investasi_modal',
+        'jumlah_tenaga_kerja_pria',
+        'jumlah_tenaga_kerja_wanita',
+        'kapasitas_produksi_perbulan',
+        'satuan_produksi',
+        'nilai_produksi_perbulan',
+        'nilai_bahan_baku_perbulan',
+        'lat',
+        'lng',
+        'media_sosial',
+        'foto_alat_produksi',
+        'foto_ruang_produksi',
+        // 'created_at',
+        // 'updated_at'
+    ];
+
     private $orWhere = [
         'badan_usaha.nama_direktur',
         'badan_usaha.kecamatan',
@@ -78,7 +116,7 @@ class AdminController extends Controller
         'badan_usaha.nilai_produksi_perbulan',
         'badan_usaha.nilai_bahan_baku_perbulan',
     ];
-    public function index($pages)
+    public function index($pages, $subPages = "", $id = "")
     {
         if (Auth::check()) {
 
@@ -93,55 +131,69 @@ class AdminController extends Controller
             }else if (Auth::user()->role === "OJK") {
                 return redirect('/ojk/dashboard');
             }else{
-                $params;
                 $Notifikasi = Notifikasi::where("user_role","ADMIN")->where("nik",Auth::user()->nik)->where("status","not read")->get();
-                // dd(Auth::user()->nik);
-                if($pages == "tabel"){
-                    $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-                    ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-                    ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-                    ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
-                    ->paginate(100, $this->fields);
-                    $params = [
-                        'BadanUsaha' => $BadanUsaha,
-                        'SlideShow' => SlideShow::all(),
-                        'Survei' => Survei::all(),
-                        'keyword' => "",
-                        'pages' => $pages,
-                        'Notifikasi' => $Notifikasi
 
-                    ];
+                if ($id != "") {
+                    // dd($id);
+                    
+                    $BadanUsaha = BadanUsaha::find($id);
+                    // dd($BadanUsaha);
+
                 }
-                if($pages == "daftarAkun"){
-                    $User = User::all();
-                    $params = [
-                        'pages' => $pages,
-                        'User' => $User,
-                        'Notifikasi' => $Notifikasi
+                if ($subPages != "") {
+                    return view("pages.admin.{$subPages}", ['BadanUsaha' => $BadanUsaha,  'pages' => $pages,'fields'=>$this->fields2, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()]);
+                } else {
+                    $params;
+                    // dd(Auth::user()->nik);
+                    if($pages == "tabel"){
+                        $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                        ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                        ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                        ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
+                        ->paginate(100, $this->fields);
+                        $params = [
+                            'BadanUsaha' => $BadanUsaha,
+                            'SlideShow' => SlideShow::all(),
+                            'Survei' => Survei::all(),
+                            'keyword' => "",
+                            'pages' => $pages,
+                            'Notifikasi' => $Notifikasi
+    
+                        ];
+                    }
+                    if($pages == "daftarAkun"){
+                        $User = User::all();
+                        $params = [
+                            'pages' => $pages,
+                            'User' => $User,
+                            'Notifikasi' => $Notifikasi
+    
+                        ];
+                    }
+                    if($pages == "daftarPengajuanDana"){
+                        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+                        ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                        ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                        ->select('badan_usaha.nama_usaha','badan_usaha.nik','badan_usaha.id as id_badan_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
+                        // dd($PengajuanDana);
+    
+                        $params = [
+                            'PengajuanDana' => $PengajuanDana,
+                            'pages' => $pages,
+                            'Notifikasi' => $Notifikasi
+                        ];
+                    }
 
-                    ];
+                    $params['User'] = Auth::User();
+                    
+                   
+                    // dd($params);
+                    return view(
+                        "pages.admin.{$pages}",
+                        $params
+                    );
                 }
-                if($pages == "daftarPengajuanDana"){
-                    $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
-                    ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
-                    ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-                    ->select('badan_usaha.nama_usaha','badan_usaha.nik','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
-                    // dd($PengajuanDana);
-
-                    $params = [
-                        'PengajuanDana' => $PengajuanDana,
-                        'pages' => $pages,
-                        'Notifikasi' => $Notifikasi
-                    ];
-                }
-
-                
                
-                // dd($params);
-                return view(
-                    "pages.admin.{$pages}",
-                    $params
-                );
             }
            
         } else {
@@ -315,7 +367,7 @@ class AdminController extends Controller
         return redirect('/admin/daftarAkun');
 
     }
-    
+
     public function hapusUser($id)
     {
 

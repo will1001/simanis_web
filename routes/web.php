@@ -42,7 +42,7 @@ Route::match(['get', 'post'], '/login', [AuthController::class, 'login']);
 Route::match(['get', 'post'], '/daftar', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin/{pages}', [AdminController::class, 'index'])->name('admin');
+Route::get('/admin/{pages}/{subPages?}/{id?}', [AdminController::class, 'index'])->name('admin');
 Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha'])->name('admin_search');
 Route::get('/admin/delete/deleteAll', [AdminController::class, 'deleteAllBadanUsaha'])->name('admin_delete_all');
 Route::post('/admin/data/import', [AdminController::class, 'importExcel']);
@@ -67,4 +67,5 @@ Route::post('/notifikasi/status/{userRole}/{recentPage}', [AdminController::clas
 Route::post('/create/user', [AdminController::class, 'tambahUser']);
 Route::get('/user/status/{id}/{status}', [AdminController::class, 'ubahStatusUser']);
 Route::get('/user/delete/{id}', [AdminController::class, 'hapusUser']);
+Route::post('/simulasi/angsuran', [PerbankanController::class, 'tambahSimulasiAngsuran']);
 

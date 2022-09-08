@@ -1,4 +1,4 @@
-@extends('layouts.koperasi')
+@extends('layouts.admin')
 <style>
     .badan_usaha_container,
     p,
@@ -49,6 +49,7 @@ $fieldTitles = [
 ];
 ?>
 @section('content')
+{{$fields[0]}}
 <h1>ProfilBadanUSaha</h1>
 @foreach($fields as $key => $field)
 @if($field == 'id')

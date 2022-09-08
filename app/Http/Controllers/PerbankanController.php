@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use App\Models\BadanUsaha;
 use App\Models\Notifikasi;
 use App\Models\PengajuanDana;
+use App\Models\JumlahPinjaman;
+use App\Models\JangkaWaktu;
+use App\Models\SimulasiAngsuran;
+use App\Models\Instansi;
 use Illuminate\Support\Str;
 
 
@@ -107,11 +111,97 @@ class PerbankanController extends Controller
                         ];
 
                     }
+
+                    if($pages == "simulasiAngsuran"){
+                    $Simulasi = SimulasiAngsuran::leftJoin('list_jangka_waktu', 'simulasi_angsuran.id_jangka_waktu', '=', 'list_jangka_waktu.id')
+                                ->leftJoin('list_jumlah_pinjaman', 'simulasi_angsuran.id_jml_pinjaman', '=', 'list_jumlah_pinjaman.id')
+                                ->leftJoin('instansi', 'simulasi_angsuran.id_instansi', '=', 'instansi.id')
+                                ->where("instansi.user_id",Auth::id())
+                                ->orderByRaw('CONVERT(list_jangka_waktu.waktu, SIGNED) asc')
+                                ->get();
+                    $Instansi = Instansi::where("user_id",Auth::id())->first();
+
+
+                        $JangkaWaktu = JangkaWaktu::where("id_instansi",$Instansi->id)->orderBy('waktu', 'ASC')->get();
+                        $JumlahPinjaman = JumlahPinjaman::where("id_instansi",$Instansi->id)->orderByRaw('CONVERT(jumlah, SIGNED) asc')->get();
+                        // dd($Simulasi);
+
+                        $params = [
+                            'pages' => $pages,
+                            'Notifikasi' => $Notifikasi,
+                            'Simulasi' => $Simulasi,
+                            'JangkaWaktu' => $JangkaWaktu,
+                            'JumlahPinjaman' => $JumlahPinjaman,
+                        ];
+                    }
                     return view("pages.perbankan.{$pages}", $params);
                 }
             }
         } else {
             return redirect('/login');
         }
+    }
+
+    function tambahSimulasiAngsuran(Request $r)
+    {
+        $Instansi = Instansi::where("user_id",Auth::id())->first();
+        $dana = JumlahPinjaman::where("id_instansi",$Instansi->id)->where("jumlah",$r->input("jumlah_dana"))->first();
+        if(!$dana){
+               $JumlahPinjaman = new JumlahPinjaman([
+                    'id' => (string) Str::uuid(),
+                    'id_instansi' => $Instansi->id,
+                    'jumlah' => $r->input("jumlah_dana"),
+                ]);
+            
+            $JumlahPinjaman->save();
+        }
+        $waktu = JangkaWaktu::where("id_instansi",$Instansi->id)->where("waktu",$r->input("jangka_waktu"))->first();
+        if(!$waktu){
+            $JangkaWaktu = new JangkaWaktu([
+                 'id' => (string) Str::uuid(),
+                 'id_instansi' => $Instansi->id,
+                 'waktu' => $r->input("jangka_waktu"),
+             ]);
+         
+         $JangkaWaktu->save();
+        }
+        $dana = JumlahPinjaman::where("id_instansi",$Instansi->id)->where("jumlah",$r->input("jumlah_dana"))->first();
+        $waktu = JangkaWaktu::where("id_instansi",$Instansi->id)->where("waktu",$r->input("jangka_waktu"))->first();
+
+            $simulasi = SimulasiAngsuran::where("id_jml_pinjaman",$dana->id)
+            ->where("id_jangka_waktu",$waktu->id)
+            ->first();
+            if(!$simulasi){
+
+                $SimulasiAngsuran = new SimulasiAngsuran([
+                    'id' => (string) Str::uuid(),
+                    'id_instansi' => $Instansi->id,
+                    'id_jml_pinjaman' => $dana->id,
+                    'id_jangka_waktu' => $waktu->id,
+                    'angsuran' => $r->input("angsuran"),
+                ]);
+            
+            $SimulasiAngsuran->save();
+            }else{
+
+                $simulasi->angsuran = $r->input("angsuran");
+                $simulasi->save();
+            }
+            // dd($simulasi);
+            // if($simulasi){
+
+            // }
+
+            // $notifikasi = new Notifikasi([
+            //     'id' => (string) Str::uuid(),
+            //     'nik' => $User->nik,
+            //     'deskripsi' => "Pengajuan Dana Anda Diterima",
+            //     'user_role' => "MEMBER",
+            // ]);
+            
+            // $notifikasi->save();
+            return redirect('/perbankan/simulasiAngsuran');
+      
+        // dd($waktu);
     }
 }
