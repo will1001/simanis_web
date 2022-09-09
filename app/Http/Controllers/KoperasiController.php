@@ -156,14 +156,14 @@ class KoperasiController extends Controller
         $instansi = User::find($PengajuanDana->id_instansi);
         // dd($instansi);
         if($status == "Diterima"){
-            $notifikasi = new Notifikasi([
-                'id' => (string) Str::uuid(),
-                'nik' => $instansi->nik,
-                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
-                'user_role' => $PengajuanDana->instansi,
-            ]);
+            // $notifikasi = new Notifikasi([
+            //     'id' => (string) Str::uuid(),
+            //     'nik' => $instansi->nik,
+            //     'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
+            //     'user_role' => $PengajuanDana->instansi,
+            // ]);
             
-            $notifikasi->save();
+            // $notifikasi->save();
 
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),

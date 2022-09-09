@@ -40,6 +40,7 @@ class BadanUsaha extends Model
         'investasi_modal',
         'jumlah_tenaga_kerja_pria',
         'jumlah_tenaga_kerja_wanita',
+        'rata_rata_pendidikan_tenaga_kerja',
         'kapasitas_produksi_perbulan',
         'satuan_produksi',
         'nilai_produksi_perbulan',

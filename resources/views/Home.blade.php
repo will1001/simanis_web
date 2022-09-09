@@ -443,6 +443,8 @@ $surveyChart = array(
                     <select onchange="return changeFilterSubCabangIndustri()" name="" id="subCabangIndustriFilter">
                         <option value="" selected>Semua</option>
                     </select>
+                    <span>Tahun :</span>
+                    <input onchange="return changeFilterTahun()" type="number" placeholder="Tahun" class="p-2 rounded-xl" id="tahunFilter">
                 </div>
             </div>
         </div>
@@ -594,6 +596,7 @@ $surveyChart = array(
     let kelurahanFilterApply = "";
     let cabangIndustriFilterApply = "";
     let subCabangIndustriFilterApply = "";
+    let tahunFilterApply = "";
     const bgColorList = [
         'rgba(54, 162, 235, 1)',
         'rgba(153, 102, 255, 1)',
@@ -739,6 +742,11 @@ $surveyChart = array(
                 'value': subCabangIndustriFilterApply,
 
             },
+            {
+                'prop': 'tahun_berdiri',
+                'value': tahunFilterApply,
+
+            },
 
         ].filter(e => e.value !== "" && e.value !== "Semua"))
         const formChartDetail = document.getElementById('formChartDetail');
@@ -761,7 +769,7 @@ $surveyChart = array(
         kelurahanFilterApply = "";
         console.log(idKabupatenFilterApply);
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
         )
     }
 
@@ -773,7 +781,7 @@ $surveyChart = array(
         kecamatanFilterApply = textKecamatan;
         kelurahanFilterApply = "";
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
         )
     }
 
@@ -783,7 +791,7 @@ $surveyChart = array(
         const textKelurahan = kelurahanFilter.options[kelurahanFilter.selectedIndex].text;
         kelurahanFilterApply = textKelurahan;
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
         )
     }
 
@@ -796,7 +804,7 @@ $surveyChart = array(
         cabangIndustriFilterApply = textCabangIndsutri;
         subCabangIndustriFilterApply = "";
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
         )
     }
 
@@ -806,7 +814,14 @@ $surveyChart = array(
         const textSubCabangIndsutri = subCabangIndustriFilter.options[subCabangIndustriFilter.selectedIndex].text;
         subCabangIndustriFilterApply = textSubCabangIndsutri;
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
+        )
+    }
+    const changeFilterTahun = () => {
+        const tahunFilter = document.getElementById('tahunFilter');
+        tahunFilterApply = tahunFilter.value;
+        applyFilter(
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
         )
     }
 
@@ -841,7 +856,7 @@ $surveyChart = array(
 
 
 
-    const applyFilter = (idKabupaten, kecamatan, kelurahan, cabang_industri, subCabangIndustri) => {
+    const applyFilter = (idKabupaten, kecamatan, kelurahan, cabang_industri, subCabangIndustri,tahun) => {
         const filters = [{
                 prop: 'id_kabupaten',
                 value: idKabupaten
@@ -861,6 +876,10 @@ $surveyChart = array(
             {
                 prop: 'sub_cabang_industri',
                 value: subCabangIndustri
+            },
+            {
+                prop: 'tahun_berdiri',
+                value: tahun
             },
 
         ].filter(e => e.value !== "" && e.value !== "Semua");

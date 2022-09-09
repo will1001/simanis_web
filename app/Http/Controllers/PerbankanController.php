@@ -219,9 +219,9 @@ class PerbankanController extends Controller
         if($status == "Diterima"){
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
-                'nik' => $instansi->nik,
-                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
-                'user_role' => $PengajuanDana->instansi,
+                'nik' => "33333333",
+                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha. "Diterima",
+                'user_role' => "OJK",
             ]);
             
             $notifikasi->save();
