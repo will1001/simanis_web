@@ -113,7 +113,7 @@
               </a>
             </li> -->
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-            <div style="visibility: collapse;" id="notifDiv" class=" overflow-scroll  w-[300px] bg-white absolute right-[70px] top-[5px] rounded-2xl text-center z-50" >
+            <div style="visibility: collapse;" id="notifDiv" class=" overflow-scroll  h-[300px]  w-[300px] bg-white absolute right-[70px] top-[5px] rounded-2xl text-center z-50" >
               <h5 class="m-3">Notifikasi Anda</h5>
               @foreach($Notifikasi as $key=>$item)
                 <div class="flex bg-blue-50 p-3">

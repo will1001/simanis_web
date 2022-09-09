@@ -163,7 +163,7 @@
 <div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
     <h4>Penolakan Ajuan Dana</h4>
     <br/>
-    <form action="/koperasi/dana/{{$item->dana_id}}/status/Ditolak" method="post" id="formPenolakan">
+    <form action="" method="post" id="formPenolakan">
     @csrf
     
         <div class="flex items-center justify-between">
@@ -181,7 +181,7 @@
 <div style="visibility: collapse;" id="detailPopUpTerima" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
     <h4>Penerimaan Ajuan Dana</h4>
     <br/>
-    <form action="/koperasi/dana/{{$item->dana_id}}/status/Diterima" method="post" id="formPenerimaan" enctype="multipart/form-data">
+    <form action="" method="post" id="formPenerimaan" enctype="multipart/form-data">
     @csrf
     
         <div class="flex items-center justify-between">

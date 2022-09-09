@@ -49,7 +49,7 @@ $fieldTitles = [
 ];
 ?>
 @section('content')
-<h1>ProfilBadanUSaha</h1>
+<h1>Profil Badan Usaha</h1>
 @foreach($fields as $key => $field)
 @if($field == 'id')
 <span></span>

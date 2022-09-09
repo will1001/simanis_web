@@ -27,8 +27,8 @@
 <h5>Ganti Foto</h5>
 <form action="/ganti/foto" method="post" enctype="multipart/form-data">
     @csrf
-    <input type="file" name="foto" accept="image/x-png,image/gif,image/jpeg" >
-    <button type="submit">Submit</button>
+    <input type="file" name="foto" accept="image/x-png,image/gif,image/jpeg" required>
+    <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
 </form>
 
 @endsection
