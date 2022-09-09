@@ -47,7 +47,7 @@
           <input onclick="closeDetails()"  type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
       </div>
       <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md">
-          <button type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Tambah Akun</button>  
+          <button type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Tambah Data</button>  
       </div>
     </div>  
     </form>
@@ -61,14 +61,14 @@
           <input onclick="closeDetails()"  type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
       </div>
       <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md">
-          <button id="statusButtonPopUp" type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Aktifasi Akun</button>  
+          <button id="statusButtonPopUp" type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Aktifasi Data</button>  
       </div>
     </div>  
     </form>
 </div>
 
 <div style="visibility: collapse;" id="popUpDelete" class=" text-center h-[150px] p-2 fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
-<h5>Hapus Akun ? </h5>
+<h5>Hapus Data ? </h5>
 <form action="" method="delete" id="formUserDelete">
     <div class="flex flex-row mx-auto gap-4  justify-center">
       <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4 shadow-md">
@@ -83,7 +83,7 @@
 
 
 <div id="popUpBlackbg" class="bg-slate-50 container max-w-full max-h-full actinContainer" >
-  <h3 class="mt-14 font-extrabold w-[192px] h-[37px] text-slate-800">Daftar Akun</h3>
+  <h3 class="mt-14 font-extrabold w-[192px] h-[37px] text-slate-800">Daftar Data</h3>
   <div class="flex justify-between items-center actionContainer">
     <div class="flex">
         <div class="invisible flex w-[263px] h-[52px] bg-white rounded-lg bg-cover mt-4 shadow-md">
@@ -98,12 +98,12 @@
             </div>
         </div>
          <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md ml-[210px]">
-            <input onclick="lihatDetails()" type="button" value="Tambah Akun" class=" text-white text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
+            <input onclick="lihatDetails()" type="button" value="Tambah Data" class=" text-white text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
         </div>
     </div>
     <div class="invisible">
         <div class="flex w-[140px] h-[52px] bg-slate-100 rounded-lg bg-cover mt-4 shadow-md ml-2  text-center">
-            <input type="button" value="Hapus Akun" class="text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] w-[85px]">
+            <input type="button" value="Hapus Data" class="text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] w-[85px]">
           <img src="{{ asset('/icon svg/sampah.svg') }}" alt="role" class="flex ml-2 my-auto ">
         </div>
     </div>
@@ -207,7 +207,7 @@
     const statusButtonPopUp = document.getElementById('statusButtonPopUp');
     const formUserStatus = document.getElementById('formUserStatus');
     statusTitlePopUp.innerHTML = status === "Aktif" ? "Non Aktifkan User ?" : "Aktifkan User ?"
-    statusButtonPopUp.innerHTML = status === "Aktif" ? "Non Aktifkan Akun" : "Aktifkan Akun"
+    statusButtonPopUp.innerHTML = status === "Aktif" ? "Non Aktifkan Data" : "Aktifkan Data"
     blackBg.style.visibility = "visible";
     popUpStatus.style.visibility = "visible";
     formUserStatus.action = `/user/status/${id}/${status === "Aktif" ? "Tidak Aktif": "Aktif"}`;

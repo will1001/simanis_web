@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 use App\Models\BadanUsaha;
 use App\Models\PengajuanDana;
 use App\Models\Notifikasi;
+use App\Models\JumlahPinjaman;
+use App\Models\JangkaWaktu;
+use App\Models\SimulasiAngsuran;
+use App\Models\Instansi;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 
@@ -114,5 +119,65 @@ class KoperasiController extends Controller
         } else {
             return redirect('/login');
         }
+    }
+
+    public function gantiStatusPengajuanDana(Request $r,$id,$status)
+    {
+        $PengajuanDana = PengajuanDana::find($id);
+        // dd($id);
+
+        $User = User::find($PengajuanDana->user_id);
+
+        $BadanUsaha = BadanUsaha::where('nik',$User->nik)->first();
+
+        // dd($BadanUsaha);
+        // dd($BadanUsaha);
+
+        if($status == "Ditolak"){
+            $PengajuanDana->alasan = $r->input('alasan');
+        }else{
+            $PengajuanDana->alasan = "Selamat Pengajuan Dana Anda diterima";
+        }
+
+        $PengajuanDana->status = $status;
+        
+        $PengajuanDana->save();
+        $instansi = User::find($PengajuanDana->id_instansi);
+        // dd($instansi);
+        if($status == "Diterima"){
+            $notifikasi = new Notifikasi([
+                'id' => (string) Str::uuid(),
+                'nik' => $instansi->nik,
+                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
+                'user_role' => $PengajuanDana->instansi,
+            ]);
+            
+            $notifikasi->save();
+
+            $notifikasi = new Notifikasi([
+                'id' => (string) Str::uuid(),
+                'nik' => $User->nik,
+                'deskripsi' => "Pengajuan Dana Anda Diterima",
+                'user_role' => "MEMBER",
+            ]);
+            
+            $notifikasi->save();
+        }
+        if($status == "Ditolak"){
+            $notifikasi = new Notifikasi([
+                'id' => (string) Str::uuid(),
+                'nik' => $User->nik,
+                'deskripsi' => "Pengajuan Dana Anda Ditolak",
+                'user_role' => "MEMBER",
+            ]);
+            
+            $notifikasi->save();
+        }
+
+      
+        // dd($id);
+
+        return redirect('/koperasi/daftarPengajuanDana');
+
     }
 }

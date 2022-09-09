@@ -44,23 +44,23 @@
         <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
         <span>Simanis.</span>
       </div>
-      <a href="{{ url('/member/dashboard') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+      <a href="{{ url('/member/dashboard') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='dashboard'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md">
         <img class="mr-5" src="{{ asset('/icon svg/dashboard.svg') }}" alt="logo">
         <span>Dashboard</span>
       </a>
-      <a href="{{ url('/member/kartu') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      <a href="{{ url('/member/kartu') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='kartu'?'bg-blue-200 p-2 rounded-md':''}}">
           <img class="mr-5" src="{{ asset('/icon svg/card.svg') }}" alt="logo">
           <span>Kartu</span>
       </a>
-      <a href="{{ url('/member/PengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      <a href="{{ url('/member/PengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='PengajuanDana'?'bg-blue-200 p-2 rounded-md':''}}">
         <img class="mr-5" src="{{ asset('/icon svg/dana.svg') }}" alt="logo">
         <span>Pengajuan Dana</span>
       </a>
-      <a href="{{ url('/member/produk') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      <a href="{{ url('/member/produk') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='produk'?'bg-blue-200 p-2 rounded-md':''}}">
         <img class="mr-5" src="{{ asset('/icon svg/cart.svg') }}" alt="logo">
         <span>Produk</span>
       </a>
-      <a href="{{ url('/member/suratRekomendasi') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      <a href="{{ url('/member/suratRekomendasi') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='suratRekomendasi'?'bg-blue-200 p-2 rounded-md':''}}">
         <img class="mr-5" src="{{ asset('/icon svg/surat.svg') }}" alt="logo">
         <span>Surat Rekomendasi</span>
       </a>

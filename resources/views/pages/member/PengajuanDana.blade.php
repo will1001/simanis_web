@@ -72,8 +72,9 @@
       <span>Instansi Tujuan</span>
       <select onchange="instansiChange()" id="instansiSelect" class="border-1 border-gray-500 w-[70%] p-2" name="instansi">
         <option value="" disabled  selected>Pilih Instansi</option>
-        <option value="96a49730f0f641fe9e770b38f78d3252">BANK</option>
-        <option value="3cda5236c97943a79f1e2a62fd7e1ee1">KOPERASI</option>
+        @foreach($Instansi as $key=>$item)
+        <option value="{{$item->user_id}}">{{$item->nama}}</option>
+        @endforeach
       </select>
     </div>
     <br>
@@ -82,19 +83,9 @@
       <input class="border-1 border-gray-500 w-[70%] p-2" type="number" name="jumlah_dana">
     </div>
     <div class="flex justify-between items-center" id="jmlDanaSelect"  style="visibility: collapse;">
-      <span>Jumlah Pinjaman</span>
-      <select onchange="" id="jmlDanaSelectChild"  class="border-1 border-gray-500 w-[70%] p-2" name="jumlah_dana_bank">
+      <span>Jumlah Pinjaman</span> 
+      <select onchange="pinjamanChange()" id="jmlDanaSelectChild"  class="border-1 border-gray-500 w-[70%] p-2" name="jumlah_dana_bank">
         <option value="" disabled  selected>Pilih Jumlah Pinjaman</option>
-        <option value="5000000">5.000.000</option>
-        <option value="10000000">10.000.000</option>
-        <option value="15000000">15.000.000</option>
-        <option value="20000000">20.000.000</option>
-        <option value="25000000">25.000.000</option>
-        <option value="30000000">30.000.000</option>
-        <option value="35000000">35.000.000</option>
-        <option value="40000000">40.000.000</option>
-        <option value="45000000">45.000.000</option>
-        <option value="50000000">50.000.000</option>
       </select>
     </div>
     <div class="flex justify-between items-center" id="waktuPinjaman"  style="visibility: collapse;">
@@ -103,13 +94,8 @@
     </div>
     <div class="flex justify-between items-center"  style="visibility: collapse;" id="waktuPinjamanSelect">
       <span>Waktu Pinjaman</span>
-      <select onchange="jangkaWaktuChange()" id="waktuPinjamanSelectChild"  class="border-1 border-gray-500 w-[70%] p-2" name="jumlah_dana_bank">
-        <option value="" disabled  selected>Pilih Jumlah Pinjaman</option>
-        <option value="12">12</option>
-        <option value="24">24</option>
-        <option value="36">36</option>
-        <option value="48">48</option>
-        <option value="60">60</option>
+      <select onchange="jangkaWaktuChange()" id="waktuPinjamanSelectChild"  class="border-1 border-gray-500 w-[70%] p-2" name="jangka_waktu_bank">
+        <option value="" disabled  selected>Pilih Jangka Waktu</option>
       </select>
     </div>
     <br>
@@ -142,6 +128,11 @@
 
 <script>
   const badanUsaha = @json($BadanUsaha);
+  const JumlahPinjaman = @json($JumlahPinjaman);
+  const JangkaWaktu = @json($JangkaWaktu);
+  const SimulasiAngsuran = @json($SimulasiAngsuran);
+  const Instansi = @json($Instansi);
+
  
   
 
@@ -185,6 +176,10 @@
     const jmlDanaSelect = document.getElementById("jmlDanaSelect");
     const waktuPinjamanSelect = document.getElementById("waktuPinjamanSelect");
     const angsuranDiv = document.getElementById("angsuranDiv");
+    const jmlDanaSelectChild = document.getElementById('jmlDanaSelectChild');
+    const waktuPinjamanSelectChild = document.getElementById('waktuPinjamanSelectChild');
+    const instansi_user_id = Instansi.filter(e=>e.user_id === instansiSelect.value);
+
     if(instansiSelect.value === "3cda5236c97943a79f1e2a62fd7e1ee1"){
       detailKoperasi.style.visibility = "visible";
       jmlPinjaman.style.visibility = "visible";
@@ -192,6 +187,12 @@
       jmlDanaSelect.style.visibility = "collapse";
       waktuPinjamanSelect.style.visibility = "collapse";
       angsuranDiv.style.visibility = "collapse";
+
+        jmlDanaSelectChild.innerHTML=`<option value="" disabled  selected>Pilih Jumlah Pinjaman</option>`;
+        waktuPinjamanSelectChild.innerHTML=`<option value="" disabled  selected>Pilih Jangka Waktu</option>`;
+
+     
+
     }else{
 
       detailKoperasi.style.visibility = "collapse";
@@ -200,40 +201,44 @@
       jmlDanaSelect.style.visibility = "visible";
       waktuPinjamanSelect.style.visibility = "visible";
       angsuranDiv.style.visibility = "visible";
+      for (const item of JumlahPinjaman.filter(e=>e.id_instansi === instansi_user_id[0].id).sort((a, b) => a.jumlah - b.jumlah)) {
+        let opt = document.createElement('option');
+        opt.value=item.id;
+        opt.innerHTML=item.jumlah;
+        jmlDanaSelectChild.appendChild(opt);
+      }
+      for (const item of JangkaWaktu.filter(e=>e.id_instansi === instansi_user_id[0].id).sort((a, b) => a.waktu - b.waktu)) {
+        let opt = document.createElement('option');
+        opt.value=item.id;
+        opt.innerHTML=item.waktu;
+        waktuPinjamanSelectChild.appendChild(opt);
+      }
+
+      // 
     }
   }
 
+  const pinjamanChange = ()=>{
+
+    const angsuranValue = document.getElementById('angsuranValue');
+    
+    const waktuPinjamanSelectChild = document.getElementById('waktuPinjamanSelectChild');
+
+    waktuPinjamanSelectChild.value="";
+    angsuranValue.innerHTML = "";
+    
+  }
   const jangkaWaktuChange = ()=>{
      
+     
     const angsuranValue = document.getElementById('angsuranValue');
+    
     const jmlDanaSelectChild = document.getElementById('jmlDanaSelectChild');
     const waktuPinjamanSelectChild = document.getElementById('waktuPinjamanSelectChild');
-    let angsuran = 0;
-    if(waktuPinjamanSelectChild.value === 12){
-      angsuran = 451292;
-    }
-    switch (Number(waktuPinjamanSelectChild.value)) {
-      case 12:
-      angsuran = 451292;
-        break;
-      case 24:
-      angsuran = 242433;
-        break;
-      case 36:
-      angsuran = 173327;
-        break;
-      case 48:
-      angsuran = 139154;
-        break;
-      case 60:
-      angsuran = 118950;
-        break;
-    
-      default:
-      angsuran = 10;
-        break;
-    }
-    angsuranValue.innerHTML = (Number((jmlDanaSelectChild.value)/5000000) * angsuran).toString();
-    console.log(waktuPinjamanSelectChild.value);
+
+    const instansi_user_id = Instansi.filter(e=>e.user_id === instansiSelect.value);
+
+    const simulasi = SimulasiAngsuran.filter(e=>e.id_instansi === instansi_user_id[0].id && e.id_jml_pinjaman ===  jmlDanaSelectChild.value && e.id_jangka_waktu === waktuPinjamanSelectChild.value)
+    angsuranValue.innerHTML = Number(simulasi[0].angsuran).toString();
   }
 </script>

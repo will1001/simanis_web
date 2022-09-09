@@ -17,6 +17,10 @@ use App\Models\Kelurahan;
 use App\Models\SubCabangIndustri;
 use App\Models\Kbli;
 use App\Models\User;
+use App\Models\JumlahPinjaman;
+use App\Models\JangkaWaktu;
+use App\Models\SimulasiAngsuran;
+use App\Models\Instansi;
 
 
 use Illuminate\Support\Str;
@@ -131,10 +135,21 @@ class MemberController extends Controller
                     if($pages == "PengajuanDana"){
                     $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
                     $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
-                    // dd($BadanUsaha);
+                    $JumlahPinjaman = JumlahPinjaman::all();
+                    $JangkaWaktu = JangkaWaktu::all();
+                    $SimulasiAngsuran = SimulasiAngsuran::all();
+                    $Instansi = Instansi::all();
+                    // dd($Instansi);
 
 
-                        $params = ['PengajuanDana' => $PengajuanDana,'BadanUsaha' => $BadanUsaha];
+                        $params = [
+                            'PengajuanDana' => $PengajuanDana,
+                            'BadanUsaha' => $BadanUsaha,
+                            'JumlahPinjaman' => $JumlahPinjaman,
+                            'JangkaWaktu' => $JangkaWaktu,
+                            'SimulasiAngsuran' => $SimulasiAngsuran,
+                            'Instansi' => $Instansi,
+                        ];
                     }
                     if($pages == "produk"){
                         
@@ -180,15 +195,34 @@ class MemberController extends Controller
         }
     }
     function ajukan_dana(Request $r){
-    $instansi = User::find($r->input("instansi"));
-        // dd($r->input("instansi"));
+        $instansi = User::find($r->input("instansi"));
+        $jumlah_dana;
+        $waktu_pinjaman;
+    // dd($r->input("jumlah_dana_bank") != null);
+
+        if($r->input("jumlah_dana_bank") != null){
+
+            $JumlahPinjaman = JumlahPinjaman::find($r->input("jumlah_dana_bank"));
+            $JangkaWaktu = JangkaWaktu::find($r->input("jangka_waktu_bank"));
+            $jumlah_dana=$JumlahPinjaman->jumlah;
+            $waktu_pinjaman=$JangkaWaktu->waktu;
+        
+
+
+        }else{
+            $jumlah_dana=$r->input("jumlah_dana");
+            $waktu_pinjaman=$r->input("waktu_pinjaman");
+        
+        }
+        // dd($waktu_pinjaman);
+
         $pengajuanDana = new PengajuanDana([
             'id' => (string) Str::uuid(),
             'id_instansi' => $r->input("instansi"),
             'user_id' => Auth::id(),
             'status' => "Menunggu",
-            'jumlah_dana' => $r->input("jumlah_dana"),
-            'waktu_pinjaman' => $r->input("waktu_pinjaman"),
+            'jumlah_dana' => $jumlah_dana,
+            'waktu_pinjaman' => "12",
             'alasan' => $r->input("alasan"),
             'instansi' => $instansi->role,
             'jenis_pengajuan' => $r->input("jenis_pengajuan"),
@@ -276,5 +310,34 @@ class MemberController extends Controller
         // $Produk = Produk::where('id_badan_usaha',$BadanUsaha->id)->get();
 
         // return view('pages.member.produk', ['Produk' => $Produk,'msg' => "produk Telah di atambahakan"]);
+    }
+
+    function ganti_foto(Request $r){
+
+        $User = User::find(Auth::id());
+
+
+
+        if (!empty($r->file('foto'))) {
+            $file =$r->file('foto');
+            $extension = $file->getClientOriginalExtension(); 
+            $filename = Auth::id().'.' . $extension;
+
+            $file->move(public_path('images/'), $filename);
+            // $data['foto']= 'images/'.$filename;
+
+        }
+        // dd($data);
+       
+
+
+
+        $User->foto = 'images/'.$filename;
+
+        // BUAT produk
+        $User->save();
+        return redirect('/member/kartu');
+
+      
     }
 }

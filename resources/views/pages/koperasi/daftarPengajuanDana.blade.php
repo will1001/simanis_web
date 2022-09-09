@@ -83,6 +83,7 @@
     <!-- <th class="text-left p-2 "><span class="">Status</span></th>    -->
     <th class="rounded-tr-xl">Aksi</span></th>   
   </tr>
+  
   @foreach($PengajuanDana as $key=>$item)
     @php
         $statusClass = '';
@@ -111,13 +112,13 @@
                     <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
                 </button>
             </form>
-                <!-- <form action="/dana/{{$item->id}}/status/Diterima" method="get">
+            <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" action="/koperasi/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
-                <button class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]"><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></button>
+                    <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
+                    <button ><img src="{{ asset('/icon svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
-                <form action="/dana/{{$item->id}}/status/Ditolak" method="get">
-                    <button class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></button>
-                </form> -->
+                    <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/icon svg/dilarang.svg') }}" alt="icon"></button>
+        </div>
 
             </div>
     </td>
@@ -156,4 +157,45 @@
     </div>
 </div> 
 
+<div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
+</div>
+<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
+    <h4>Penolakan Ajuan Dana</h4>
+    <br/>
+    <form action="/bank/dana/{{$item->id}}/status/Ditolak" method="post" id="formPenolakan">
+    @csrf
+    
+        <div class="flex items-center justify-between">
+            <span>Alasan Penolakan</span>
+            <textarea class="border-2 border-gray-300 w-[70%]" name="alasan" rows="7" required></textarea>
+        </div>
+
+        <div class="flex items-center justify-end mt-[100px]">
+        <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
+        <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
+        </div>
+    </form>
+    
+</div>
+
 @endsection
+<script>
+     const openPopUp = (id_pengajuan_dana)=>{
+    
+    const blackBg = document.getElementById('detailPopUpBlackbg');
+    const detailPopUp = document.getElementById('detailPopUp');
+    const formPenolakan = document.getElementById('formPenolakan');
+    blackBg.style.visibility = "visible";
+    detailPopUp.style.visibility = "visible";
+    formPenolakan.action = `/koperasi/dana/${id_pengajuan_dana}/status/Ditolak`;
+  
+}
+const closeDetails = ()=>{
+    const blackBg = document.getElementById('detailPopUpBlackbg');
+    const detailPopUp = document.getElementById('detailPopUp');
+
+    blackBg.style.visibility = "collapse";
+    detailPopUp.style.visibility = "collapse";
+
+  }
+</script>

@@ -63,9 +63,13 @@ Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBada
 Route::post('/ajukan_dana', [MemberController::class, 'ajukan_dana'])->name('ajukan_dana');
 Route::post('/ajukan_produk', [MemberController::class, 'ajukan_produk'])->name('ajukan_produk');
 Route::post('/dana/{id}/status/{status}', [AdminController::class, 'gantiStatusPengajuanDana']);
+Route::post('/bank/dana/{id}/status/{status}', [PerbankanController::class, 'gantiStatusPengajuanDana']);
+Route::post('/koperasi/dana/{id}/status/{status}', [KoperasiController::class, 'gantiStatusPengajuanDana']);
 Route::post('/notifikasi/status/{userRole}/{recentPage}', [AdminController::class, 'gantiStatusNotifikasi']);
 Route::post('/create/user', [AdminController::class, 'tambahUser']);
 Route::get('/user/status/{id}/{status}', [AdminController::class, 'ubahStatusUser']);
 Route::get('/user/delete/{id}', [AdminController::class, 'hapusUser']);
 Route::post('/simulasi/angsuran', [PerbankanController::class, 'tambahSimulasiAngsuran']);
+Route::post('/ganti/foto', [MemberController::class, 'ganti_foto'])->name('ganti_foto');
+
 

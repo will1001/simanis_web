@@ -23,5 +23,12 @@
     </div>
     <img class="w-[200px] w-[200px] m-3" src="{{ asset($User->foto) }}" alt="">
 </div>
+<br>
+<h5>Ganti Foto</h5>
+<form action="/ganti/foto" method="post" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="foto" accept="image/x-png,image/gif,image/jpeg" >
+    <button type="submit">Submit</button>
+</form>
 
 @endsection

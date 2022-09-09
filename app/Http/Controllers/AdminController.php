@@ -10,6 +10,7 @@ use App\Models\Survei;
 use App\Models\User;
 use App\Models\PengajuanDana;
 use App\Models\Notifikasi;
+use App\Models\Instansi;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -163,6 +164,7 @@ class AdminController extends Controller
                     }
                     if($pages == "daftarAkun"){
                         $User = User::all();
+                        // dd($User);
                         $params = [
                             'pages' => $pages,
                             'User' => $User,
@@ -184,7 +186,7 @@ class AdminController extends Controller
                         ];
                     }
 
-                    $params['User'] = Auth::User();
+                    // $params['User'] = Auth::User();
                     
                    
                     // dd($params);
@@ -341,14 +343,25 @@ class AdminController extends Controller
     {
 
         // dd($r);
+        $id = (string) Str::uuid()->getHex();
         $users = new User([
-            'id' => (string) Str::uuid()->getHex(),
-            'nik' => $r->input("nik"),
+            'id' =>$id  ,
             'role' => $r->input("role"),
             'password' => Hash::make("12345678"),
         ]);
-        $users->save();
+        $users->nik = $r->input("nik");
 
+        if($r->input("role") == "BANK" || $r->input("role") == "KOPERASI"){
+        $users->nik = (string) Str::uuid()->getHex();
+            
+            $Instansi = new Instansi([
+                'id' => (string) Str::uuid()->getHex(),
+                'user_id' => $id,
+                'nama' => $r->input("nama_instansi"),
+            ]);
+            $Instansi->save();
+        }
+        $users->save();
 
         return redirect('/admin/daftarAkun');
 

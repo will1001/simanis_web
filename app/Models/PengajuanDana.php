@@ -20,6 +20,7 @@ class PengajuanDana extends Model
         'user_id',
         'status',
         'jumlah_dana',
+        'waktu_pinjaman',
         'alasan',
         'instansi',
         'jenis_pengajuan',

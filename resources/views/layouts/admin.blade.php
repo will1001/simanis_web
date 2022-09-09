@@ -46,16 +46,16 @@
             <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
             <span>Simanis.</span>
         </div>
-        <a href="{{ url('/admin/tabel') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+        <a href="{{ url('/admin/tabel') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='tabel'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md">
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
         <span>Dashboard</span>
         </a>
-        <a href="{{ url('/admin/daftarAkun') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+        <a href="{{ url('/admin/daftarAkun') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='daftarAkun'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md">
         <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
         <span>Daftar Akun</span>
         </a>
         
-        <a href="{{ url('/admin/daftarPengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <a href="{{ url('/admin/daftarPengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='daftarPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}}">
             <img class="mr-5" src="{{ asset('/images/pengajuan-dana.png') }}" alt="logo">
             <span>Daftar Pengajuan Dana</span>
         </a>

@@ -20,16 +20,19 @@
 <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
 
-<div style="visibility: collapse;" id="detailPopUp" class=" h-[400px] fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
+<div style="visibility: collapse;" id="detailPopUp" class=" h-[450px] fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
     <div onclick="closeDetails()" class="flex-row-reverse flex cursor-pointer"><img src="{{ asset('/icon svg/exit.svg') }}" class="iconSize mt-3 mr-2" alt="close"></div>
     <span class="font-extrabold text-xl translate-x-1 text-slate-800 ml-5 mt-2 ">Tambah Akun</span>
     <div class="flex-col ml-5">
       <form action="/create/user" method="post">
         @csrf
-        <input class="border-1 border-gray-500 p-2" type="string" placeholder="NIK" name="nik" minlength="8" required >
-      <div class="flex flex-row items-center mt-4"><input type="radio" value="IKM" name="role" id="" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">IKM</span></div>
-      <div class="flex flex-row items-center mt-3"><input type="radio" value="BANK" name="role" id="" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">Bank</span></div>
-      <div class="flex flex-row items-center mt-3"><input type="radio" value="KOPERASI" name="role" id="" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">Koperasi</span></div>
+        
+      <div onchange="selectRole('IKM')" class="flex flex-row items-center mt-4"><input type="radio" value="IKM" name="role" id="radioRole" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">IKM</span></div>
+      <div onchange="selectRole('BANK')" class="flex flex-row items-center mt-3"><input type="radio" value="BANK" name="role" id="radioRole" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">Bank</span></div>
+      <div onchange="selectRole('KOPERASI')" class="flex flex-row items-center mt-3"><input type="radio" value="KOPERASI" name="role" id="radioRole" class="radioSize" required ><span class="ml-3 my-auto text-slate-800 font-semibold">Koperasi</span></div>
+      <br>
+      <input style="visibility: collapse;" id="nikInput" class="border-1 border-gray-500 p-2" type="string" placeholder="NIK" name="nik" minlength="8" >
+      <input style="visibility: collapse;" id="namaInstansiInput" class="border-1 border-gray-500 p-2" type="string" placeholder="Nama Instansi" name="nama_instansi" >
     </div>
     <div class="flex flex-row mx-auto gap-4">
       <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4 shadow-md">
@@ -209,6 +212,29 @@
     blackBg.style.visibility = "visible";
     popUpDelete.style.visibility = "visible";
     formUserDelete.action = `/user/delete/${id}`;
+
+  }
+  const selectRole = (role)=>{
+    
+    const nikInput = document.getElementById('nikInput');
+    const namaInstansiInput = document.getElementById('namaInstansiInput');
+    if(role === "IKM"){
+      nikInput.style.visibility = "visible";
+      nikInput.required =true;
+      namaInstansiInput.required =false;
+
+      namaInstansiInput.style.visibility = "collapse";
+      
+
+    }else{
+      nikInput.style.visibility = "collapse";
+
+      namaInstansiInput.style.visibility = "visible";
+      nikInput.required =false;
+      namaInstansiInput.required =true;
+
+    }
+    
 
   }
 </script>
