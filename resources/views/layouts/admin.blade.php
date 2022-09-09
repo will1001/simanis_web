@@ -110,7 +110,7 @@
             </div>
               <div onclick="openCloseNotif()" class="p-2 bg-white mr-2 rounded-xl cursor-pointer">
               <div class="flex">
-                <img src="{{ asset('/icon svg/notif.svg') }}">
+                <img src="{{ asset('/Icon-svg/notif.svg') }}">
                 @if(count($Notifikasi) != 0)
                 <div class="rounded-full p-2 absolute right-[30px] bg-red-600 w-[15px] h-[15px] flex items-center justify-center"><span class="text-white text-xs">{{count($Notifikasi)}}</span></div>
                 @endif
