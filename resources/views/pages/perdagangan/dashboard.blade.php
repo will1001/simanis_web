@@ -51,21 +51,21 @@
     <!-- <div class="boxNotif flex flex-col absolute bg-white rounded-lg justify-center">
         <span class="text-center text-2xl text-slate-800 font-bold my-auto">Notifikasi Anda</span>
         <div class="flex flex-row boxIsiNotif bg-disetujuiBgColor p-2 gap-3 border">
-            <img class="ml-2" src="{{ asset('/icon svg/iconKeranjang.svg') }}" alt="iconKeranjang">
+            <img class="ml-2" src="{{ asset('/icon-svg/iconKeranjang.svg') }}" alt="iconKeranjang">
             <p class="my-auto text-sm text-slate-800"><span class="text-lg font-bold">Pengajuan Produk Diterima</span><br>
             <span class="font-bold">Produk Sepatu Kain Lokal</span> yang diajukan oleh<br>
             <span class="font-bold">IKN Tani Maju </span>telah disetujui <br>
             </p>
         </div>
         <div class="flex flex-row boxIsiNotif bg-disetujuiBgColor p-2 gap-3 border">
-            <img class="ml-2" src="{{ asset('/icon svg/iconKeranjang.svg') }}" alt="iconKeranjang">
+            <img class="ml-2" src="{{ asset('/icon-svg/iconKeranjang.svg') }}" alt="iconKeranjang">
             <p class="my-auto text-sm text-slate-800"><span class="text-lg font-bold">Pengajuan Produk Diterima</span><br>
             <span class="font-bold">Produk Sepatu Kain Lokal</span> yang diajukan oleh<br>
             <span class="font-bold">IKN Tani Maju </span>telah disetujui <br>
             </p>
         </div>
         <div class="flex flex-row boxIsiNotif bg-disetujuiBgColor p-2 gap-3 border">
-            <img class="ml-2" src="{{ asset('/icon svg/iconKeranjang.svg') }}" alt="iconKeranjang">
+            <img class="ml-2" src="{{ asset('/icon-svg/iconKeranjang.svg') }}" alt="iconKeranjang">
             <p class="my-auto text-sm text-slate-800"><span class="text-lg font-bold">Pengajuan Produk Diterima</span><br>
             <span class="font-bold">Produk Sepatu Kain Lokal</span> yang diajukan oleh<br>
             <span class="font-bold">IKN Tani Maju </span>telah disetujui <br>
@@ -74,7 +74,7 @@
         <span class="text-center text-md font-bold text-disetujuiTextColor my-auto cursor-pointer">Tandai Semua Telah Dibaca</span>
     </div>
     <div class="boxIcon bg-white px-3 py-3 rounded-md cursor-pointer">
-        <img class="" src="{{ asset('/icon svg/iconNotif.svg') }}" alt="iconNotif">
+        <img class="" src="{{ asset('/icon-svg/iconNotif.svg') }}" alt="iconNotif">
     </div> -->
 </div>
 

@@ -45,28 +45,28 @@
         <span>Simanis.</span>
       </div>
       <a href="{{ url('/member/dashboard') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='dashboard'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md">
-        <img class="mr-5" src="{{ asset('/icon svg/dashboard.svg') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon-svg/dashboard.svg') }}" alt="logo">
         <span>Dashboard</span>
       </a>
       <a href="{{ url('/member/kartu') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='kartu'?'bg-blue-200 p-2 rounded-md':''}}">
-          <img class="mr-5" src="{{ asset('/icon svg/card.svg') }}" alt="logo">
+          <img class="mr-5" src="{{ asset('/icon-svg/card.svg') }}" alt="logo">
           <span>Kartu</span>
       </a>
       <a href="{{ url('/member/PengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='PengajuanDana'?'bg-blue-200 p-2 rounded-md':''}}">
-        <img class="mr-5" src="{{ asset('/icon svg/dana.svg') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon-svg/dana.svg') }}" alt="logo">
         <span>Pengajuan Dana</span>
       </a>
       <a href="{{ url('/member/produk') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='produk'?'bg-blue-200 p-2 rounded-md':''}}">
-        <img class="mr-5" src="{{ asset('/icon svg/cart.svg') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon-svg/cart.svg') }}" alt="logo">
         <span>Produk</span>
       </a>
       <a href="{{ url('/member/suratRekomendasi') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='suratRekomendasi'?'bg-blue-200 p-2 rounded-md':''}}">
-        <img class="mr-5" src="{{ asset('/icon svg/surat.svg') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon-svg/surat.svg') }}" alt="logo">
         <span>Surat Rekomendasi</span>
       </a>
       <hr class="w-full" />
       <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/icon svg/profil.svg') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/icon-svg/profil.svg') }}" alt="logo">
         <a href="{{ url('/member/settingAkun') }}" class="flex flex-col">
           <span class="text-black">Marsudi Rajasa</span>
           <span>Profil Badan Usaha</span>
@@ -117,7 +117,7 @@
               <h5 class="m-3">Notifikasi Anda</h5>
               @foreach($Notifikasi as $key=>$item)
                 <div class="flex bg-blue-50 p-3">
-                  <img src="{{ asset('/icon svg/dana.svg') }}" >
+                  <img src="{{ asset('/icon-svg/dana.svg') }}" >
                   <div class="ml-3 text-left">
                       <p class="font-bold text-black">Pengajuan Dana</p>
                       <p class="text-gray-700 leading-5">{{$item->deskripsi}}</p>
@@ -133,7 +133,7 @@
             </div>
               <div onclick="openCloseNotif()" class="p-2 bg-white mr-2 rounded-xl cursor-pointer">
               <div class="flex">
-                <img src="{{ asset('/icon svg/notif.svg') }}">
+                <img src="{{ asset('/icon-svg/notif.svg') }}">
                 @if(count($Notifikasi) != 0)
                 <div class="rounded-full p-2 absolute right-[30px] bg-red-600 w-[15px] h-[15px] flex items-center justify-center"><span class="text-white text-xs">{{count($Notifikasi)}}</span></div>
                 @endif

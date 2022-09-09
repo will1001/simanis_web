@@ -75,7 +75,7 @@
 <div class="mt-4 marginContainer">
     <h2 class="sla">Tambah Akun IKN</h2>
     <div class="flex boxer my-auto justify-between ml-10 cursor-pointer mt-4">          
-        <img src="{{ asset('/icon svg/backTerang.svg') }}" alt="back" class="ml-2 mt-1">
+        <img src="{{ asset('/icon-svg/backTerang.svg') }}" alt="back" class="ml-2 mt-1">
         <span class="underline text-slate-700">kembali</span>
     </div> 
     <div class="flex mt-4 gap-5">
@@ -96,7 +96,7 @@
         </div>
         <div class=" flex flex-row boxer2 my-auto cursor-pointer gap-2 items-center justify-center bg-disetujuiTextColor rounded-md">
             <span class="text-xl font-semibold text-white">Next</span>
-            <img class="my-auto" src="{{ asset('/icon svg/iconMail.svg') }}" alt="">
+            <img class="my-auto" src="{{ asset('/icon-svg/iconMail.svg') }}" alt="">
         </div>
     </div>
     

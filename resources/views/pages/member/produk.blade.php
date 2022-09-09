@@ -72,8 +72,8 @@
 
 @section('content')
 <div class="flex justify-end items-center actionContainer">
-    <!-- <div class="p-2 bg-white mr-2 rounded-xl cursor-pointer"><img src="{{ asset('/icon svg/notif.svg') }}"></div> -->
-    <div onclick="openForm()" class="flex p-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/icon svg/dana-white.svg') }}"> <span>Tambah Produk</span></div>
+    <!-- <div class="p-2 bg-white mr-2 rounded-xl cursor-pointer"><img src="{{ asset('/icon-svg/notif.svg') }}"></div> -->
+    <div onclick="openForm()" class="flex p-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/icon-svg/dana-white.svg') }}"> <span>Tambah Produk</span></div>
 </div>
 <div class="flex items-center actionContainer">
    <h5>Produk</h5>
@@ -170,7 +170,7 @@
   <div class="flex justify-center items-center w-full">
     <label for="dropzone-file" class="flex flex-col justify-center items-center w-[600px] h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
         <div class="flex flex-col justify-center items-center pt-5 pb-6">
-            <img src="{{ asset('/icon svg/file.svg') }}" />
+            <img src="{{ asset('/icon-svg/file.svg') }}" />
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
         </div>

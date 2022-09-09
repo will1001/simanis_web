@@ -79,7 +79,7 @@
 <div class="mt-4 marginContainer">
     <h2 class="sla">Tambah Akun IKN</h2>
     <div class="flex boxer my-auto justify-between ml-10 cursor-pointer mt-4">          
-        <img src="{{ asset('/icon svg/backTerang.svg') }}" alt="back" class="ml-2 mt-1">
+        <img src="{{ asset('/icon-svg/backTerang.svg') }}" alt="back" class="ml-2 mt-1">
         <span class="underline text-slate-700">kembali</span>
     </div> 
     <div class="flex mt-4 gap-5">
@@ -95,21 +95,21 @@
             <span class="flex my-auto">ID Kabupaten</span> 
             <span class="flex">
                 <input type="text" class="inputText rounded-md border">
-                <img class="flex absolute iconSize mlicon cursor-pointer" src="{{ asset('/icon svg/panahbawah.svg') }}" alt="icon">
+                <img class="flex absolute iconSize mlicon cursor-pointer" src="{{ asset('/icon-svg/panahbawah.svg') }}" alt="icon">
             </span>
         </div>       
         <div class="mlt32 flex flex-row justify-between mr-5 text-slate-800">          
             <span class="flex my-auto">Kecamatan</span> 
             <span class="flex">
                 <input type="text" class="inputText rounded-md border">
-                <img class="flex absolute iconSize mlicon cursor-pointer" src="{{ asset('/icon svg/panahbawah.svg') }}" alt="icon">
+                <img class="flex absolute iconSize mlicon cursor-pointer" src="{{ asset('/icon-svg/panahbawah.svg') }}" alt="icon">
             </span>
         </div>       
         <div class="mlt32 flex flex-row justify-between mr-5 text-slate-800">          
             <span class="flex my-auto">Kelurahan</span> 
             <span class="flex">
                 <input type="text" class="inputText rounded-md border">
-                <img class="flex absolute iconSize mlicon cursor-pointer" src="{{ asset('/icon svg/panahbawah.svg') }}" alt="icon">
+                <img class="flex absolute iconSize mlicon cursor-pointer" src="{{ asset('/icon-svg/panahbawah.svg') }}" alt="icon">
             </span>
         </div>   
         <div class="mlt32 flex justify-between mr-5 text-slate-800">
@@ -125,7 +125,7 @@
             <span class="flex my-auto">Bentuk Usaha</span> 
             <span class="flex">
                 <input type="text" class="inputText rounded-md border">
-                <img class="flex absolute iconSize mlicon cursor-pointer" src="{{ asset('/icon svg/panahbawah.svg') }}" alt="icon">
+                <img class="flex absolute iconSize mlicon cursor-pointer" src="{{ asset('/icon-svg/panahbawah.svg') }}" alt="icon">
             </span>
         </div> 
         <div class="mlt32 flex justify-between mr-5 text-slate-800">

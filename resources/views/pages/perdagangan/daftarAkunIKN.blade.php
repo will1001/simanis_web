@@ -83,7 +83,7 @@
         <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
         <td class="text-center p-2 cursor-pointer">
             <div class="flex justify-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <img src="{{ asset('/icon-svg/mata.svg') }}" alt="icon">
             </div>
         </td>
   </tr>
@@ -95,7 +95,7 @@
         <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
         <td class="text-center p-2 cursor-pointer">
             <div class="flex justify-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <img src="{{ asset('/icon-svg/mata.svg') }}" alt="icon">
             </div>
         </td>
   </tr>
@@ -107,7 +107,7 @@
         <td class="text-center p-2"><span class="bg-slate-100 text-slate-800 p-2 rounded-xl">Non Aktif</span></td>
         <td class="text-center p-2 cursor-pointer">
             <div class="flex justify-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <img src="{{ asset('/icon-svg/mata.svg') }}" alt="icon">
             </div>
         </td>
   </tr>
@@ -119,7 +119,7 @@
         <td class="text-center p-2"><span class="bg-slate-100 text-slate-800 p-2 rounded-xl">Non Aktif</span></td>
         <td class="text-center p-2 cursor-pointer">
             <div class="flex justify-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <img src="{{ asset('/icon-svg/mata.svg') }}" alt="icon">
             </div>
         </td>
   </tr>
@@ -131,7 +131,7 @@
         <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
         <td class="text-center p-2 cursor-pointer">
             <div class="flex justify-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <img src="{{ asset('/icon-svg/mata.svg') }}" alt="icon">
             </div>
         </td>
   </tr>
@@ -143,7 +143,7 @@
         <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
         <td class="text-center p-2 cursor-pointer">
             <div class="flex justify-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <img src="{{ asset('/icon-svg/mata.svg') }}" alt="icon">
             </div>
         </td>
   </tr>
@@ -155,7 +155,7 @@
         <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
         <td class="text-center p-2 cursor-pointer">
             <div class="flex justify-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <img src="{{ asset('/icon-svg/mata.svg') }}" alt="icon">
             </div>
         </td>
   </tr>
@@ -167,7 +167,7 @@
         <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Aktif</span></td>
         <td class="text-center p-2 cursor-pointer">
             <div class="flex justify-center">
-                <img src="{{ asset('/icon svg/mata.svg') }}" alt="icon">
+                <img src="{{ asset('/icon-svg/mata.svg') }}" alt="icon">
             </div>
         </td>
   </tr>
@@ -180,7 +180,7 @@
           <div class="flex border px-3 rounded-md">
             <label for="role" class="text-slate-400 text-sm my-auto ">10</label>
             <button class=""></button>
-            <img src="{{ asset('/icon svg/panahbawah.svg') }}" alt="role" class="my-auto ml-1 cursor-pointer">             
+            <img src="{{ asset('/icon-svg/panahbawah.svg') }}" alt="role" class="my-auto ml-1 cursor-pointer">             
           </div>
             <span class="text-slate-400 text-sm my-auto ml-4">showing 1 - 10 of 85</span>                                    
         </div>
@@ -188,8 +188,8 @@
      
     <div class="flex items-end my-auto mr-4 hFooter rounded-xl">  
         <div class="flex gap-3 mx-3 my-auto"> 
-          <button><img src="{{ asset('/icon svg/previous.svg') }}" alt="icon"></button>
-          <button><img src="{{ asset('/icon svg/back.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/icon-svg/previous.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/icon-svg/back.svg') }}" alt="icon"></button>
         </div> 
         <div class="flex mx-3 my-auto">
           <button><span class="bg-blue-200 text-disetujuiTextColor py-1 px-3 rounded-md">1</span></button>        
@@ -198,8 +198,8 @@
           <button><span class="py-1 px-3 rounded-md">4</span></button>
         </div>
         <div class="flex gap-3 my-auto">
-          <button><img src="{{ asset('/icon svg/next.svg') }}" alt="icon"></button>
-          <button><img src="{{ asset('/icon svg/skip.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/icon-svg/next.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/icon-svg/skip.svg') }}" alt="icon"></button>
         </div>
     </div>
 
