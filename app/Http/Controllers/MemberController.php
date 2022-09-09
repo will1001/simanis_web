@@ -119,7 +119,7 @@ class MemberController extends Controller
                 }
                 if ($subPages != "") {
 
-                    return view("pages.member.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi]);
+                    return view("pages.member.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi,'User' => Auth::user()]);
                 } else {
                     $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields];
                     

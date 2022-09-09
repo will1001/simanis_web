@@ -124,7 +124,6 @@ class KoperasiController extends Controller
     public function gantiStatusPengajuanDana(Request $r,$id,$status)
     {
         $PengajuanDana = PengajuanDana::find($id);
-        // dd($id);
 
         $User = User::find($PengajuanDana->user_id);
 
@@ -136,7 +135,19 @@ class KoperasiController extends Controller
         if($status == "Ditolak"){
             $PengajuanDana->alasan = $r->input('alasan');
         }else{
-            $PengajuanDana->alasan = "Selamat Pengajuan Dana Anda diterima";
+            if (!empty($r->file('pinjaman'))) {
+                $file =$r->file('pinjaman');
+                $extension = $file->getClientOriginalExtension(); 
+                $filename = 'koperasi-pinjaman-'.$BadanUsaha->id.'.' . $extension;
+    
+                $file->move(public_path('pinjaman/'), $filename);
+                // $data['foto']= 'images/'.$filename;
+    
+            }
+            $PengajuanDana->alasan = "Selamat Pengajuan Dana Anda diterima Download file pada link untuk melihat detail pinjaman anda";
+            $PengajuanDana->file_pinjaman = 'pinjaman/'.$filename; 
+            $PengajuanDana->save();
+    
         }
 
         $PengajuanDana->status = $status;

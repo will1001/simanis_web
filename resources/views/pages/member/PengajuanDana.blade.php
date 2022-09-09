@@ -1,9 +1,12 @@
 @extends('layouts.member')
 <style>
     .actionContainer{
-        width: 800px;
+        width: 1000px;
     }
 </style>
+<?php
+$baseUrl = env('APP_URL').'/';
+?>
 @section('content')
 <div class="flex justify-between items-center actionContainer">
   @if(is_null($BadanUsaha->nama_usaha))
@@ -51,11 +54,15 @@
   <tr>
     <td class="text-center p-4 ">{{++$key}}</td>
     <td class="text-center p-4 ">{{$item->jumlah_dana}}</td>
-    <td class="text-center p-4 ">{{date('d-m-Y', strtotime($item->created_at))}}</td>
+    <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
     <td class="text-center p-4 ">{{$item->instansi}}</td>
     <td class="text-center p-2"><span 
       class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
-    <td class="text-center p-4 ">{{$item->alasan}}</td>
+    <td class="text-center p-4 ">{{$item->alasan}} <br> 
+    @if($item->instansi == "KOPERASI")
+      <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
+    @endif
+  </td>
   </tr>
   @endforeach
 
