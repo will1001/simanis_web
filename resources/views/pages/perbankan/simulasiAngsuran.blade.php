@@ -22,7 +22,7 @@
 
 
 <div style="visibility: collapse;" id="detailPopUp" class=" h-[400px] fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
-    <div onclick="closeDetails()" class="flex-row-reverse flex cursor-pointer"><img src="{{ asset('/icon-svg/exit.svg') }}" class="iconSize mt-3 mr-2" alt="close"></div>
+    <div onclick="closeDetails()" class="flex-row-reverse flex cursor-pointer"><img src="{{ asset('/Icon-svg/exit.svg') }}" class="iconSize mt-3 mr-2" alt="close"></div>
     <span class="font-extrabold text-xl translate-x-1 text-slate-800 ml-5 mt-2 ">Tambah Data</span>
     <div class="flex-col ml-5">
       <form action="/simulasi/angsuran" method="post">
@@ -87,14 +87,14 @@
   <div class="flex justify-between items-center actionContainer">
     <div class="flex">
         <div class="invisible flex w-[263px] h-[52px] bg-white rounded-lg bg-cover mt-4 shadow-md">
-            <img src="{{ asset('/icon-svg/medium.svg') }}" alt="search" class="h-8 w-8 ml-[18.5px] my-auto">
+            <img src="{{ asset('/Icon-svg/medium.svg') }}" alt="search" class="h-8 w-8 ml-[18.5px] my-auto">
             <input type="text" placeholder="Cari NIK" class="my-auto h-6 w-[205px] ml-3 placeholder:text-sm ">
         </div>
         <div class="invisible flex">
             <div class="flex w-[154px] h-[52px] bg-white rounded-lg bg-cover mt-4 shadow-md ml-2  text-center">
                 <label for="role" class="text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] w-[85px]">Semua Role</label>
                 <input type="radio" id="role" name="role" class="hidden">
-                <img src="{{ asset('/icon-svg/icon.svg') }}" alt="role" class="flex ml-[18.5px] my-auto">
+                <img src="{{ asset('/Icon-svg/icon.svg') }}" alt="role" class="flex ml-[18.5px] my-auto">
             </div>
         </div>
          <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md ml-[210px]">
@@ -104,7 +104,7 @@
     <div class="invisible">
         <div class="flex w-[140px] h-[52px] bg-slate-100 rounded-lg bg-cover mt-4 shadow-md ml-2  text-center">
             <input type="button" value="Hapus Data" class="text-slate-800 text-sm font-bold my-auto ml-5 h-[17px] w-[85px]">
-          <img src="{{ asset('/icon-svg/sampah.svg') }}" alt="role" class="flex ml-2 my-auto ">
+          <img src="{{ asset('/Icon-svg/sampah.svg') }}" alt="role" class="flex ml-2 my-auto ">
         </div>
     </div>
   </div>
@@ -142,15 +142,15 @@
           <div class="flex border px-3 rounded-md">
             <label for="role" class="text-slate-400 text-sm my-auto ">10</label>
             <button class=""></button>
-            <img src="{{ asset('/icon-svg/panahbawah.svg') }}" alt="role" class="my-auto ml-1 cursor-pointer">             
+            <img src="{{ asset('/Icon-svg/panahbawah.svg') }}" alt="role" class="my-auto ml-1 cursor-pointer">             
           </div>
             <span class="text-slate-400 text-sm my-auto ml-4">showing 1 - 10 of 85</span>                                    
         </div>
     </div>
     <div class="flex actionContainer justify-end mt-4">  
         <div class="flex gap-3 mx-3"> 
-          <button><img src="{{ asset('/icon-svg/previous.svg') }}" alt="icon"></button>
-          <button><img src="{{ asset('/icon-svg/back.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/Icon-svg/previous.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/Icon-svg/back.svg') }}" alt="icon"></button>
         </div> 
         <div class="flex">
           <button><span class="bg-blue-200 text-disetujuiTextColor py-1 px-3 rounded-md">1</span></button>        
@@ -159,8 +159,8 @@
           <button><span class="py-1 px-3 rounded-md">4</span></button>
         </div>
         <div class="flex gap-3 mx-3">
-          <button><img src="{{ asset('/icon-svg/next.svg') }}" alt="icon"></button>
-          <button><img src="{{ asset('/icon-svg/skip.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/Icon-svg/next.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/Icon-svg/skip.svg') }}" alt="icon"></button>
         </div>
     </div>
   </div>

@@ -55,7 +55,7 @@
       </a>
       <hr class="w-full" />
       <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
-        <img class="mr-5" src="{{ asset('/icon-svg/profil.svg') }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/Icon-svg/profil.svg') }}" alt="logo">
         <div class="flex flex-col">
           <span class="text-black">User Profile</span>
           <span>Akun Koperasi</span>
@@ -106,7 +106,7 @@
               <h5 class="m-3">Notifikasi Anda</h5>
               @foreach($Notifikasi as $key=>$item)
                 <div class="flex bg-blue-50 p-3">
-                  <img src="{{ asset('/icon-svg/dana.svg') }}" >
+                  <img src="{{ asset('/Icon-svg/dana.svg') }}" >
                   <div class="ml-3 text-left">
                       <p class="font-bold text-black">Pengajuan Dana</p>
                       <p class="text-gray-700 leading-5">{{$item->deskripsi}}</p>
@@ -123,7 +123,7 @@
             </div>
               <div onclick="openCloseNotif()" class="p-2 bg-white mr-2 rounded-xl cursor-pointer">
               <div class="flex">
-                <img src="{{ asset('/icon-svg/notif.svg') }}">
+                <img src="{{ asset('/Icon-svg/notif.svg') }}">
                 @if(count($Notifikasi) != 0)
                 <div class="rounded-full p-2 absolute right-[30px] bg-red-600 w-[15px] h-[15px] flex items-center justify-center"><span class="text-white text-xs">{{count($Notifikasi)}}</span></div>
                 @endif

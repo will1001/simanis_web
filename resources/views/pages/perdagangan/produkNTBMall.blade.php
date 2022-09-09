@@ -96,9 +96,9 @@
                     <img class="" src="{{ asset('/img/produk1.png') }}" alt="produk1">
                 </div>
                 <div class="flex justify-center gap-2">
-                    <img class="cursor-pointer" src="{{ asset('/icon-svg/Ellipse 3.svg') }}" alt="Ellipse 3">
-                    <img class="cursor-pointer" src="{{ asset('/icon-svg/Ellipse 4.svg') }}" alt="Ellipse 4">
-                    <img class="cursor-pointer" src="{{ asset('/icon-svg/Ellipse 4.svg') }}" alt="Ellipse 4">
+                    <img class="cursor-pointer" src="{{ asset('/Icon-svg/Ellipse 3.svg') }}" alt="Ellipse 3">
+                    <img class="cursor-pointer" src="{{ asset('/Icon-svg/Ellipse 4.svg') }}" alt="Ellipse 4">
+                    <img class="cursor-pointer" src="{{ asset('/Icon-svg/Ellipse 4.svg') }}" alt="Ellipse 4">
                 </div>
             </div>
             <div class="flex flex-col gap-2 text-slate-800">
@@ -134,14 +134,14 @@
     <div class="flex gap-2">
         <div class="flex boxStat gap-2 text-slate-50 rounded-lg bg-white justify-center cursor-pointer">
             <span class="my-auto">Semua Status</span>
-            <img class="iconSize my-auto" src="{{ asset('/icon-svg/panahBawah.svg') }}" alt="panahBawah">
+            <img class="iconSize my-auto" src="{{ asset('/Icon-svg/panahBawah.svg') }}" alt="panahBawah">
         </div>
         <div class="flex boxProduk gap-2 rounded-lg bg-white justify-center cursor-pointer">           
-            <img class="iconSize my-auto" src="{{ asset('/icon-svg/Medium.svg') }}" alt="Medium">
+            <img class="iconSize my-auto" src="{{ asset('/Icon-svg/Medium.svg') }}" alt="Medium">
             <input class="boxInput my-auto" type="text" placeholder="Cari Produk">
         </div>
         <div class="flex boxIcon justify-center bg-white rounded-lg cursor-pointer">
-            <img class="iconSize my-auto" src="{{ asset('/icon-svg/iconDate.svg') }}" alt="iconDate">
+            <img class="iconSize my-auto" src="{{ asset('/Icon-svg/iconDate.svg') }}" alt="iconDate">
         </div>
     </div>
 </div>
@@ -210,7 +210,7 @@
           <div class="flex border px-3 rounded-md">
             <label for="role" class="text-slate-400 text-sm my-auto ">10</label>
             <button class=""></button>
-            <img src="{{ asset('/icon-svg/panahbawah.svg') }}" alt="role" class="my-auto ml-1 cursor-pointer">             
+            <img src="{{ asset('/Icon-svg/panahbawah.svg') }}" alt="role" class="my-auto ml-1 cursor-pointer">             
           </div>
             <span class="text-slate-400 text-sm my-auto ml-4">showing 1 - 10 of 85</span>                                    
         </div>
@@ -218,8 +218,8 @@
      
     <div class="flex items-end my-auto mr-4 hFooter rounded-xl">  
         <div class="flex gap-3 mx-3 my-auto"> 
-          <button><img src="{{ asset('/icon-svg/previous.svg') }}" alt="icon"></button>
-          <button><img src="{{ asset('/icon-svg/back.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/Icon-svg/previous.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/Icon-svg/back.svg') }}" alt="icon"></button>
         </div> 
         <div class="flex mx-3 my-auto">
           <button><span class="bg-blue-200 text-disetujuiTextColor py-1 px-3 rounded-md">1</span></button>        
@@ -228,8 +228,8 @@
           <button><span class="py-1 px-3 rounded-md">4</span></button>
         </div>
         <div class="flex gap-3 my-auto">
-          <button><img src="{{ asset('/icon-svg/next.svg') }}" alt="icon"></button>
-          <button><img src="{{ asset('/icon-svg/skip.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/Icon-svg/next.svg') }}" alt="icon"></button>
+          <button><img src="{{ asset('/Icon-svg/skip.svg') }}" alt="icon"></button>
         </div>
     </div>
 

@@ -14,8 +14,8 @@
 
 @section('content')
 <div class="flex justify-end items-center actionContainer">
-    <!-- <div class="p-2 bg-white mr-2 rounded-xl cursor-pointer"><img src="{{ asset('/icon-svg/notif.svg') }}"></div> -->
-    <div class="flex p-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/icon-svg/dana.svg') }}"> <span>Tambah Produk</span></div>
+    <!-- <div class="p-2 bg-white mr-2 rounded-xl cursor-pointer"><img src="{{ asset('/Icon-svg/notif.svg') }}"></div> -->
+    <div class="flex p-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana.svg') }}"> <span>Tambah Produk</span></div>
 </div>
 <div class="flex items-center actionContainer">
    <h5>Produk</h5>
