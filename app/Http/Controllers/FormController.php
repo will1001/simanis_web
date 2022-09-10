@@ -40,6 +40,7 @@ class FormController extends Controller
                 'CabangIndustri' => CabangIndustri::all(),
                 'SubCabangIndustri' => SubCabangIndustri::all(),
                 'Kbli' => Kbli::all(),
+                'User' => Auth::user(),
             ]);
         } else {
 
