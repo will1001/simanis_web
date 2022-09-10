@@ -23,5 +23,6 @@ class Produk extends Model
         'nama',
         'deskripsi',
         'foto',
+        'harga',
     ];
 }

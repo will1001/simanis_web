@@ -222,9 +222,12 @@
 const closeDetails = ()=>{
     const blackBg = document.getElementById('detailPopUpBlackbg');
     const detailPopUp = document.getElementById('detailPopUp');
+    const detailPopUpTerima = document.getElementById('detailPopUpTerima');
+
 
     blackBg.style.visibility = "collapse";
     detailPopUp.style.visibility = "collapse";
+    detailPopUpTerima.style.visibility = "collapse";
 
   }
 </script>
