@@ -78,8 +78,22 @@ class PerbankanController extends Controller
                     $BadanUsaha = BadanUsaha::find($id);
                 }
                 if ($subPages != "") {
+                    $params =['BadanUsaha' => $BadanUsaha, 'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi];
+                    if($subPages == "suratRekomendasi"){
+                        
+                        $BadanUsaha = BadanUsaha::where('id',$id)->get();
+                        $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                        // dd($BadanUsaha);
+                            $params = [
+                                'BadanUsaha' => $BadanUsaha,
+                                'PengajuanDana' => $PengajuanDana,
+                                'pages' => $pages,
+                                'fields'=>$this->fields,
+                                'Notifikasi' => $Notifikasi
+                            ];
+                        }
 
-                    return view("pages.perbankan.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi]);
+                    return view("pages.perbankan.{$subPages}", $params);
                 } else {
                     $params=['pages' => $pages];
 
@@ -135,6 +149,8 @@ class PerbankanController extends Controller
                             'JumlahPinjaman' => $JumlahPinjaman,
                         ];
                     }
+
+                   
                     return view("pages.perbankan.{$pages}", $params);
                 }
             }
