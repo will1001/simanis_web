@@ -51,10 +51,10 @@
                     <span>No. Telepon</span>
                 </div>
                 <div class="flex flex-col">
-                    <span>: {{$BadanUsaha->nama_usaha}}</span>
-                    <span>: {{$BadanUsaha->alamat_lengkap}}</span>
-                    <span>: {{$BadanUsaha->nama_direktur}}</span>
-                    <span>: {{$BadanUsaha->no_hp}}</span>
+                    <span>: {{$BadanUsaha[0]->nama_usaha}}</span>
+                    <span>: {{$BadanUsaha[0]->alamat_lengkap}}</span>
+                    <span>: {{$BadanUsaha[0]->nama_direktur}}</span>
+                    <span>: {{$BadanUsaha[0]->no_hp}}</span>
                 </div>
             </div>
         </div>

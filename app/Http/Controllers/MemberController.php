@@ -176,7 +176,7 @@ class MemberController extends Controller
 
                     if($pages == "suratRekomendasi"){
                         
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
+                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
                     $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
                     // dd($BadanUsaha);
                         $params = [
