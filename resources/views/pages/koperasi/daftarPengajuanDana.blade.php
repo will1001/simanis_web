@@ -216,7 +216,7 @@
     const formPenolakan = document.getElementById('formPenolakan');
     blackBg.style.visibility = "visible";
     detailPopUp.style.visibility = "visible";
-    formPenolakan.action = `/koperasi/dana/${id_pengajuan_dana}/status/Diterima`;
+    formPenerimaan.action = `/koperasi/dana/${id_pengajuan_dana}/status/Diterima`;
   
 }
 const closeDetails = ()=>{

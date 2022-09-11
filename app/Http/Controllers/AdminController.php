@@ -186,6 +186,18 @@ class AdminController extends Controller
                             'Notifikasi' => $Notifikasi
                         ];
                     }
+                    if($pages == "setting"){
+                        $User = User::all();
+                        // dd($User);
+                        $params = [
+                            'pages' => $pages,
+                            'User' => $User,
+                            'Notifikasi' => $Notifikasi,
+                            'SlideShow' => SlideShow::all(),
+                            'Survei' => Survei::all()
+    
+                        ];
+                    }
 
                     // $params['User'] = Auth::User();
                     
