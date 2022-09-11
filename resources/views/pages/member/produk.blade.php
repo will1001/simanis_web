@@ -108,7 +108,83 @@
  
  
 </table>
+<div onclick="closeDetails()" style="visibility: collapse;" id="PopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
+</div>
 
+<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 flex overflow-scroll p-3">
+  <img id="fotoProduk" class="h-[400px] w-[400px] object-fill" src="{{ asset('/images/placeholder-image.png') }}" alt="">
+  <div class="p-4">
+      <h3 id="nama">Sepatu Kain Tenun</h3>
+      <div class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat Halal</span> <span id="sertifikat_halal"  class="bg-halalBgColor text-halalTextColor p-2 rounded-xl">Ada</span></div>
+      <div  class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat HAKI</span> <span id="sertifikat_sni" class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Ada</span></div>
+      <div  class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat SNI</span> <span id="sertifikat_haki" class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Ada</span></div>
+      <h5 >Deskripsi Produk</h5>
+      <p id="deskripsi"></p>
+    <div  onclick="closeDetails()" class="flex justify-end items-center mt-5 cursor-pointer">
+          <div class="flex pl-16 pr-16 pt-2 pb-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl font-bold text-xl"><span>Ok</span></div>
+    </div>
+  </div>
+</div>
+
+<div style="visibility: collapse;" id="formPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-3 overflow-scroll">
+<h1>Ajukan Produk</h1>
+<br>
+<form action="{{url('ajukan_produk')}}" method="post" enctype="multipart/form-data">
+@csrf
+<div class="flex justify-between items-center">
+  <span>Nama Produk</span>
+  <input class="border-2 border-gray-300 w-[70%] p-2"type="text" name="nama">
+</div>
+<br>
+<div class="flex justify-between items-center">
+  <span>No Sertifikat Halal</span>
+  <input class="border-2 border-gray-300" type="number" name="sertifikat_halal_no">
+  <span>Tahun</span>
+  <input class="border-2 border-gray-300" type="number" name="sertifikat_halal_thn">
+</div>
+<br>
+<div class="flex justify-between items-center">
+  <span>No Sertifikat HAKI</span>
+  <input class="border-2 border-gray-300" type="number" name="sertifikat_haki_no">
+  <span>Tahun</span>
+  <input class="border-2 border-gray-300" type="number" name="sertifikat_haki_thn">
+</div>
+<br>
+<div class="flex justify-between items-center">
+  <span>No Sertifikat SNI</span>
+  <input class="border-2 border-gray-300" type="number" name="sertifikat_sni_no">
+  <span>Tahun</span>
+  <input class="border-2 border-gray-300" type="number" name="sertifikat_sni_thn">
+</div>
+<br>
+<div class="flex items-center justify-between">
+  <span>Deskripsi Produk</span>
+  <textarea class="border-2 border-gray-300 w-[70%]" name="deskripsi" rows="7"></textarea>
+</div>
+<br>
+<div class="flex items-center justify-between">
+  <span class="mr-[20px] whitespace-nowrap">Upload Foto</span>
+  <div class="flex justify-center items-center w-full">
+    <label for="dropzone-file" class="flex flex-col justify-center items-center w-[600px] h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <div class="flex flex-col justify-center items-center pt-5 pb-6">
+            <img src="{{ asset('/Icon-svg/file.svg') }}" />
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
+        </div>
+        <input id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="foto" type="file" class="hidden" />
+    </label>
+</div> 
+
+  <input/>
+</div>
+<br>
+<div class="flex items-center justify-start">
+      <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
+      <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Ajukan Sekarang</button>
+    </div>
+</form>
+
+</div>
 
 @endsection
 <script>
