@@ -189,7 +189,7 @@ $forms = array(
 <br>
 <div class="actionContainer p-5 bg-white rounded-xl">
    <h3 class="text-textColor1">PROFIL BADAN USAHA</h3>
-   <form method="POST" action="/form/member/{{!empty($badan_usaha) ? $badan_usaha->id : ''}}" enctype="multipart/form-data">
+   <form method="POST" action="/form/member/{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->id : ''}}" enctype="multipart/form-data">
     @csrf
     @foreach($forms as $key=>$form)
     <div class="inputstyle">
@@ -199,16 +199,16 @@ $forms = array(
             </div>
             <div class="col-sm-12">
                 @if($form->type == 'select')
-                <select onchange="{{$form->change}}" class="selectpicker" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($badan_usaha) ? $badan_usaha->{$form->prop} : '')}}">
+                <select onchange="{{$form->change}}" class="selectpicker" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty([$BadanUsaha[0]]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
-                    <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name}}" {{!empty($badan_usaha) ? strtolower($badan_usaha->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
+                    <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
                     @endforeach
                 </select>
                 @elseif($form->type == 'file')
                 <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}">
                 @else
-                <input type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($badan_usaha) ? $badan_usaha->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                <input type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 @endif
             </div>
         </div>

@@ -130,7 +130,7 @@ class MemberController extends Controller
                     $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
                     $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
 
-                        $params = ['BadanUsaha' => $BadanUsaha[0]];
+                        $params = ['BadanUsaha' => $BadanUsaha];
                     }
 
                     if($pages == "PengajuanDana"){
@@ -161,10 +161,10 @@ class MemberController extends Controller
                     }
                     if($pages == "settingBadanUsaha"){
                         
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
+                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
 
                         $params = [
-                            'badan_usaha' => $BadanUsaha,
+                            'BadanUsaha' => $BadanUsaha,
                             'Kabupaten' => Kabupaten::all(),
                             'Kecamatan' => Kecamatan::all(),
                             'Kelurahan' => Kelurahan::all(),

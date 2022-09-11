@@ -70,7 +70,7 @@
         <a href="{{ url('/member/settingAkun') }}" class="flex flex-col">
           <span class="text-black">{{$BadanUsaha[0]->nama_direktur}}</span>
           <span>Profil Badan Usaha</span>
-        </a>\
+        </a>
       </div>
     </aside>
     

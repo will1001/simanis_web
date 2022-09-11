@@ -2,7 +2,7 @@
 @section('content')
 <div class="flex bg-white rounded-xl p-4">
     <div>
-        <h2>No Kartu. {{substr($BadanUsaha->nik,strlen($BadanUsaha->nik)-4,strlen($BadanUsaha->nik))}}{{$BadanUsaha->id_cabang_industri}}{{$BadanUsaha->id_kabupaten}}</h2>
+        <h2>No Kartu. {{substr($BadanUsaha[0]->nik,strlen($BadanUsaha[0]->nik)-4,strlen($BadanUsaha[0]->nik))}}{{$BadanUsaha[0]->id_cabang_industri}}{{$BadanUsaha[0]->id_kabupaten}}</h2>
      <div class="flex">
         <div>
             <div class="flex"><div class="mr-10">Nama</div></div>
@@ -12,10 +12,10 @@
             <div class="flex"><div class="mr-10">NIK</div></div>
             </div>
         <div>
-            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_direktur}}</div>
-            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->alamat_lengkap}}</div>
-            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_usaha}}</div>
-            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->kabupaten}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha[0]->nama_direktur}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha[0]->alamat_lengkap}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha[0]->nama_usaha}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha[0]->kabupaten}}</div>
             <div class="text-left flex justify-start items-start">: {{$User->nik}}</div>
         </div>
      </div>
