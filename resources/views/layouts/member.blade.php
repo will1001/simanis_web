@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin_template/assets/img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('admin_template/assets/img/favicon.png') }}">
   <title>
-   SIMANIS NTB 212
+   SIMANIS NTB
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -68,11 +68,12 @@
       <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/Icon-svg/profil.svg') }}" alt="logo">
         <a href="{{ url('/member/settingAkun') }}" class="flex flex-col">
-          <span class="text-black">Marsudi Rajasa</span>
+          <span class="text-black">{{$BadanUsaha[0]->nama_direktur}}</span>
           <span>Profil Badan Usaha</span>
-        </a>
+        </a>\
       </div>
     </aside>
+    
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">

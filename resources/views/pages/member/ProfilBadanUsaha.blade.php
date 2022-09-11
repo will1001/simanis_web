@@ -50,7 +50,7 @@ $fieldTitles = [
 ?>
 @section('content')
 <h1>Profil Badan Usaha</h1>
-<form method="GET" action="/form/member/{{$BadanUsaha->id}}" style="margin-right:10px">
+<form method="GET" action="/form/member/{{$BadanUsaha[0]->id}}" style="margin-right:10px">
     <button type="submit" class="btn btn-primary btn-sm">Edit Profil</button>
 </form>
 @foreach($fields as $key => $field)
@@ -59,10 +59,10 @@ $fieldTitles = [
 @elseif($field == 'foto_alat_produksi' || $field == 'foto_ruang_produksi')
 <div>
     <h5>{{$fieldTitles[$key]}}</h5>
-    <img src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
+    <img src="{{$baseUrl.$BadanUsaha[0]->$field}}" alt="img">
 </div>
 @else
-<p>{{$fieldTitles[$key]}} : <strong>{{$BadanUsaha->$field}}</strong></p>
+<p>{{$fieldTitles[$key]}} : <strong>{{$BadanUsaha[0]->$field}}</strong></p>
 @endif
 @endforeach
 

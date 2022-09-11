@@ -23,15 +23,16 @@ class FormController extends Controller
         if ($r->isMethod('get')) {
             $badan_usaha = BadanUsaha::find(null);
             if ($id != null) {
-                $badan_usaha = BadanUsaha::find($id);
+                $badan_usaha = BadanUsaha::where("id",$id)->get();
             }
+            // dd($badan_usaha);
 
         $Notifikasi = Notifikasi::where("user_role","MEMBER")->where("nik",Auth::user()->nik)->where("status","not read")->get();
 
 
             return view('pages.form.badan_usaha', [
                 'userType' => $userType,
-                'badan_usaha' => $badan_usaha,
+                'BadanUsaha' => $badan_usaha,
                 'Notifikasi' => $Notifikasi,
                 'pages' => $userType == 'admin' ? 'tabel' : 'dashboard',
                 'Kabupaten' => Kabupaten::all(),

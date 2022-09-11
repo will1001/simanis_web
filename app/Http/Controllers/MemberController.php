@@ -115,7 +115,8 @@ class MemberController extends Controller
 
                 if ($id != "") {
                     
-                    $BadanUsaha = BadanUsaha::find($id);
+                    $BadanUsaha = BadanUsaha::where("id",$id)->get();
+                    // dd($BadanUsaha);
                 }
                 if ($subPages != "") {
 

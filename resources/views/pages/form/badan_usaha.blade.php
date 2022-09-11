@@ -17,20 +17,20 @@ $forms = array(
         "placeholder" => "KABUPATEN",
         "prop" => "id_kabupaten",
         "options" => $Kabupaten,
-        "change" => "",
+        "change" => "return changeKabupaten()",
     ),
     (object)array(
         "type" => "select",
         "placeholder" => "KECAMATAN",
         "prop" => "kecamatan",
-        "options" => $Kecamatan,
-        "change" => "",
+        "options" => [],
+        "change" => "return changeKecamatan()",
     ),
     (object)array(
         "type" => "select",
         "placeholder" => "KELURAHAN/DESA",
         "prop" => "kelurahan",
-        "options" => $Kelurahan,
+        "options" => [],
         "change" => "",
     ),
     (object)array(
@@ -229,8 +229,12 @@ $forms = array(
 @endsection
 
 <script>
+    const Kabupaten = @json($Kabupaten);
+    const Kecamatan = @json($Kecamatan);
+    const Kelurahan = @json($Kelurahan);
     const subCabangIndustri = @json($SubCabangIndustri);
     const cabangIndustri = @json($CabangIndustri);
+    const Kbli = @json($Kbli);
     const changeCabangIndustri = () => {
         const cabangIndustriFilter = document.getElementById('cabang_industri');
         const nameCabangIndsutri = cabangIndustriFilter.options[cabangIndustriFilter.selectedIndex].value;
@@ -248,4 +252,53 @@ $forms = array(
         }
         document.getElementById("sub_cabang_industri").innerHTML = str;
     }
+
+    const changeKabupaten = () => {
+        const kabupatenFilter = document.getElementById('id_kabupaten');
+        const idKabupaten = kabupatenFilter.options[kabupatenFilter.selectedIndex].value;
+        renderKecamatan(idKabupaten)
+    }
+
+    const renderKecamatan = (idKabupaten) => {
+        var str = `<option value=''>Semua</option>`
+        const kecamatanList = Kecamatan.filter(e => e.id_kabupaten == idKabupaten);
+
+        for (let item of kecamatanList) {
+            str += `<option value='${item.id}'>` + item.name + "</option>"
+        }
+        document.getElementById("kecamatan").innerHTML = str;
+    }
+
+    const changeKecamatan = () => {
+        const KecamatanFilter = document.getElementById('kecamatan');
+        const idKecamatan = KecamatanFilter.options[KecamatanFilter.selectedIndex].value;
+        renderKelurahan(idKecamatan)
+    }
+
+    const renderKelurahan = (idKecamatan) => {
+        var str = `<option value=''>Semua</option>`
+        const kelurahanList = Kelurahan.filter(e => e.id_kecamatan == idKecamatan);
+
+        for (let item of kelurahanList) {
+            str += `<option value='${item.id}'>` + item.name + "</option>"
+        }
+        document.getElementById("kelurahan").innerHTML = str;
+    }
+
+    // const changeSubCabangIndustri = () => {
+    //     const subCabangIndustriFilter = document.getElementById('sub_cabang_industri');
+    //     const nameSubCabangIndsutri = subCabangIndustriFilter.options[subCabangIndustriFilter.selectedIndex].value;
+    //     const textSubCabangIndsutri = subCabangIndustriFilter.options[subCabangIndustriFilter.selectedIndex].text;
+    //     renderKBLISelectFilter(nameSubCabangIndsutri)
+    // }
+    // const renderKBLISelectFilter = (nameSubCabangIndsutri) => {
+    //     var str = `<option value=''>Semua</option>`
+    //     const idSubCabangIndustri = subCabangIndustri.filter(e => e.name == nameSubCabangIndsutri)[0].id;
+    //     const KBLIList = Kbli.filter(e => e.id_cabang_industri == idCabangIndustri);
+
+    //     for (let item of subCabangIndustriList) {
+    //         str += `<option value='${item.id}'>` + item.name + "</option>"
+    //     }
+    //     document.getElementById("sub_cabang_industri").innerHTML = str;
+    // }
 </script>
