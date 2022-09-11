@@ -135,7 +135,7 @@ class MemberController extends Controller
 
                     if($pages == "PengajuanDana"){
                     $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
+                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
                     $JumlahPinjaman = JumlahPinjaman::all();
                     $JangkaWaktu = JangkaWaktu::all();
                     $SimulasiAngsuran = SimulasiAngsuran::all();
@@ -154,10 +154,11 @@ class MemberController extends Controller
                     }
                     if($pages == "produk"){
                         
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
-                    $Produk = Produk::where('id_badan_usaha',$BadanUsaha->id)->get();
+                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
+                    $Produk = Produk::where('id_badan_usaha',$BadanUsaha[0]->id)->get();
+                    // dd($Produk);
 
-                        $params = ['Produk' => $Produk];
+                        $params = ['Produk' => $Produk,'BadanUsaha' => $BadanUsaha];
                     }
                     if($pages == "settingBadanUsaha"){
                         

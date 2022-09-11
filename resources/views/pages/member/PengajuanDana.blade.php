@@ -9,7 +9,7 @@ $baseUrl = env('APP_URL').'/';
 ?>
 @section('content')
 <div class="flex justify-between items-center actionContainer">
-  @if(is_null($BadanUsaha->nama_usaha))
+  @if(is_null($BadanUsaha[0]->nama_usaha))
     <div class="flex items-center p-3 rounded-xl bg-ditolakBgColor text-ditolakTextColor">
         <img class="mr-2" src="{{ asset('/Icon-svg/warning.svg') }}" alt="">
         <span>Data nama badan usaha belum diisi, <strong>Klik Disini </strong> untuk melengkapi</span>
@@ -22,7 +22,7 @@ $baseUrl = env('APP_URL').'/';
     
     <div class="flex">
         
-        <div onclick="lihatDetails()" class="flex p-2 {{is_null($BadanUsaha->nama_usaha)?'bg-blue-300':'bg-buttonColor-900'}} cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pengajuan Dana</span></div>
+        <div onclick="lihatDetails()" class="flex p-2 {{is_null($BadanUsaha[0]->nama_usaha)?'bg-blue-300':'bg-buttonColor-900'}} cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pengajuan Dana</span></div>
     </div>
 </div>
 <div class="flex items-center actionContainer">
@@ -134,7 +134,7 @@ $baseUrl = env('APP_URL').'/';
 @endsection
 
 <script>
-  const badanUsaha = @json($BadanUsaha);
+  const badanUsaha = @json($BadanUsaha[0]);
   const JumlahPinjaman = @json($JumlahPinjaman);
   const JangkaWaktu = @json($JangkaWaktu);
   const SimulasiAngsuran = @json($SimulasiAngsuran);
