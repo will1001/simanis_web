@@ -157,9 +157,9 @@ class HomeController extends Controller
         ]);
     }
 
-    public function chartDetail($filter, $chartId, $title)
+    public function chartDetail(Request $r, $chartId, $title)
     {
-        $filter = json_decode($filter);
+        $filter = json_decode($r->input("filter"));
         $kabupaten = Kabupaten::all()->toArray();
         $cabangIndustri = CabangIndustri::all()->toArray();
         $yearNow = Carbon::now()->year;

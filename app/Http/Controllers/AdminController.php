@@ -220,6 +220,8 @@ class AdminController extends Controller
     public function searchBadanUsaha(Request $request)
     {
         $keyword = $request->input('keyword');
+        $Notifikasi = Notifikasi::where("user_role","ADMIN")->where("nik",Auth::user()->nik)->where("status","not read")->get();
+
 
         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
@@ -234,7 +236,7 @@ class AdminController extends Controller
 
         $BadanUsaha = $BadanUsaha->paginate(100, $this->fields);
 
-        return view('pages.admin.tabel', ['BadanUsaha' => $BadanUsaha, 'keyword' => $keyword, 'pages' => 'tabel']);
+        return view('pages.admin.tabel', ['BadanUsaha' => $BadanUsaha, 'keyword' => $keyword, 'pages' => 'tabel', 'Notifikasi' => $Notifikasi]);
     }
 
     public function deleteAllBadanUsaha()

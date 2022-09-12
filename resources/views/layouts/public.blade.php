@@ -788,6 +788,7 @@
     <!-- angularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
     <script src="{{ asset('angularjs/app.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('angularjs/controllers.js') }}" type="text/javascript"></script>
 
     <script>

@@ -32,11 +32,10 @@ class AuthController extends Controller
                     return redirect('/member/dashboard');
                 }
             } else {
+              
                 return view('pages.login');
             }
         } else {
-
-
             $nik = $r->input('nik');
             $user = User::where('nik', $nik)->get();
             if (!$user->isEmpty()) {
@@ -55,6 +54,10 @@ class AuthController extends Controller
                     }else if ($user[0]->role === "OJK") {
                         return redirect('/ojk/dashboard');
                     } else {
+                        // dd(Auth::user());
+                        if(Auth::user()->status == "Tidak Aktif"){
+                            return view('pages.login', ['msg' => "Akun Anda Di Non Aktifkan"]);
+                        }
                         return redirect()->intended('/member/dashboard');
                     }
                 } else {

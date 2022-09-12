@@ -403,8 +403,9 @@ $surveyChart = array(
     </div>
     <div class="container">
 
-        <form action="" method="GET" style="display:none;" id="formChartDetail">
-            <!-- @csrf -->
+        <form action="" method="POST" style="display:none;" id="formChartDetail">
+            @csrf
+            <input type="text" name="filter" id="filterChartDetail" >
             <!-- <input type="text" name="chartDetailData" id="chartDetailData">
             <input type="text" name="title" id="chartDetailTitle">
             <input type="text" name="chartId" id="chartId"> -->
@@ -584,8 +585,8 @@ $surveyChart = array(
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script>
+  
     const badanUsaha = @json($BadanUsaha);
-    // console.log(badanUsaha);
     const kabupaten = @json($kabupaten);
     const kecamatan = @json($Kecamatan);
     const kelurahan = @json($Kelurahan);
@@ -646,62 +647,6 @@ $surveyChart = array(
                 plugins: {
                     legend: {
                         display: false,
-                        // position: window.screen.availWidth <= 400 ? "bottom" : "right",
-                        // itemStyle: {
-                        //     width: 90 // or whatever, auto-wrap
-                        // },
-                        // onClick: (_points, _event) => {
-                        //     for (let i = 0; i < Data['dataDetailsList'].length; i++) {
-                        //         if (labelsData[i] === _event.text.split(":")[0].substring(0, _event.text.split(":")[0].length - 1)) {
-
-                        //             const filter = JSON.stringify([{
-                        //                     'prop': 'id_kabupaten',
-                        //                     'value': idKabupatenFilterApply
-                        //                 }, {
-                        //                     'prop': 'kecamatan',
-                        //                     'value': kecamatanFilterApply,
-
-                        //                 },
-                        //                 {
-                        //                     'prop': 'kelurahan',
-                        //                     'value': kelurahanFilterApply,
-
-                        //                 },
-                        //                 {
-                        //                     'prop': 'cabang_industri',
-                        //                     'value': cabangIndustriFilterApply,
-
-                        //                 },
-                        //                 {
-                        //                     'prop': 'sub_cabang_industri',
-                        //                     'value': subCabangIndustriFilterApply,
-
-                        //                 },
-
-                        //             ].filter(e => e.value !== "" && e.value !== "Semua"))
-                        //             const formChartDetail = document.getElementById('formChartDetail');
-                        //             const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
-                        //             let chartID = _points.chart.canvas.id;
-                        //             chartID = chartID.substring(5, chartID.length)
-                        //             const title = _event.text;
-                        //             formChartDetail.action = `/chartDetail/${filter}/${chartID}/${title}`;
-                        //             submitButtonchartDetail.click();
-                        //         }
-
-                        //     }
-
-
-                        // },
-                        // labels: {
-                        //     boxWidth: 10,
-                        //     generateLabels: (chart) => {
-                        //         const datasets = chart.data.datasets;
-                        //         return datasets[0].data.map((data, i) => ({
-                        //             text: `${chart.data.labels[i]} : ${data}`,
-                        //             fillStyle: datasets[0].backgroundColor[i],
-                        //         }))
-                        //     }
-                        // }
                     },
                     title: {
                         display: false,
@@ -750,12 +695,11 @@ $surveyChart = array(
 
         ].filter(e => e.value !== "" && e.value !== "Semua"))
         const formChartDetail = document.getElementById('formChartDetail');
+        const filterChartDetail = document.getElementById('filterChartDetail');
         const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
-        // let chartID = _points.chart.canvas.id;
-        // chartID = chartID.substring(5, chartID.length)
-        // const title = _event.text;
-        // console.log(idChart);
-        formChartDetail.action = `/chartDetail/${filter}/${idChart}/${title}`;
+        // formChartDetail.action = `/chartDetail/${filter}/${idChart}/${title}`;
+        filterChartDetail.value=filter;
+        formChartDetail.action = `/chartDetail/${idChart}/${title}`;
         submitButtonchartDetail.click();
     }
 
