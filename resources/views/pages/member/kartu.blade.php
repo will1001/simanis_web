@@ -21,7 +21,7 @@
      </div>
         
     </div>
-    <img class="w-[200px] w-[200px] m-3" src="{{ asset($User->foto) }}" alt="">
+    <img class="w-[200px] m-3" src="{{ asset($User->foto) }}" alt="">
 </div>
 <br>
 <h5>Ganti Foto</h5>

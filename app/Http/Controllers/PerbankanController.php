@@ -150,6 +150,18 @@ class PerbankanController extends Controller
                         ];
                     }
 
+                    if($pages == "settingAkun"){
+                        // $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
+                        // dd("asdad");
+                        // $params = [
+                        //     'BadanUsaha' => $BadanUsaha
+                        // ];
+                    }
+
+                    $params['User'] = Auth::user();
+                    $params['Notifikasi'] = $Notifikasi;
+                    $params['Instansi'] = Instansi::where("user_id",Auth::id())->first();
+
                    
                     return view("pages.perbankan.{$pages}", $params);
                 }

@@ -136,4 +136,30 @@ class AuthController extends Controller
 
         return redirect('/');
     }
+
+    function changePassword(Request $r,$pages){
+        $users = User::find($r->input("id"));
+        // dd('/member'.$pages.'/settingAkun');
+
+        if (Hash::check($r->input("password_lama"), $users->password)) {
+            // dd("true");
+            if($pages === "member"){
+                $BadanUsaha = BadanUsaha::where("nik",$users->nik)->first();
+                $BadanUsaha->email =  $r->input("email");
+                $BadanUsaha->save();
+            }
+            $users->password =  Hash::make($r->input("password"));
+            
+            $users->save();
+            return redirect('/'.$pages.'/settingAkun')->with('success', 'Password Berhasil Dirubah');
+
+        }else{
+            // dd("pass salah");
+            return redirect('/'.$pages.'/settingAkun')->with('failed', 'Password Lama Salah');
+        }
+
+     
+
+
+    }
 }

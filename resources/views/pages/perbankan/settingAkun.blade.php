@@ -1,4 +1,4 @@
-@extends('layouts.member')
+@extends('layouts.perbankan')
 <style>
     .actionContainer{
         width: 1000px;
@@ -18,13 +18,9 @@
 <br>
 <div class="actionContainer p-5 bg-white rounded-xl">
    <h3 class="text-textColor1">INFORMASI AKUN</h3>
-   <form action="/changePassword/member" method="post">
+   <form action="/changePassword/perbankan" method="post">
       @csrf
-   <div class="flex justify-between">
-      <input name="id" type="text" value="{{$User->id}}" class="hidden">
-      <span>Email</span>
-      <input value="{{$BadanUsaha[0]->email}}" name="email" class="inputStyle border-1 border-gray-600 border-solid rounded-md p-2 font-bold text-black" type="text" placeholder="Email">
-   </div>
+   <input name="id" type="text" value="{{$User->id}}" class="hidden">
    <h3 class="text-textColor1">ubah password</h3>
    <div class="flex justify-between mt-5">
       <span>Password Lama</span>

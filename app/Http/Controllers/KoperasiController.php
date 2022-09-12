@@ -113,6 +113,9 @@ class KoperasiController extends Controller
 
                     $params['Notifikasi']= $Notifikasi;
                     $params['pages']= $pages;
+                    $params['User'] = Auth::user();
+                    $params['Instansi'] = Instansi::where("user_id",Auth::id())->first();
+
                     return view("pages.koperasi.{$pages}", $params);
                 }
             }

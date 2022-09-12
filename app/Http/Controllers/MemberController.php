@@ -119,6 +119,7 @@ class MemberController extends Controller
                     // dd($BadanUsaha);
                 }
                 if ($subPages != "") {
+                    // dd($BadanUsaha);
 
                     return view("pages.member.{$subPages}", ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi,'User' => Auth::user()]);
                 } else {
@@ -183,6 +184,14 @@ class MemberController extends Controller
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,
+                        ];
+                    }
+
+                    if($pages == "settingAkun"){
+                        $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
+
+                        $params = [
+                            'BadanUsaha' => $BadanUsaha
                         ];
                     }
                     $params['Notifikasi'] = $Notifikasi;

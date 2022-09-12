@@ -41,6 +41,7 @@ Route::post('/surveyChart/{id}', [HomeController::class, 'surveyChart'])->name('
 Route::match(['get', 'post'], '/login', [AuthController::class, 'login']);
 Route::match(['get', 'post'], '/daftar', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/changePassword/{pages}', [AuthController::class, 'changePassword'])->name('changePassword');
 
 Route::get('/admin/{pages}/{subPages?}/{id?}', [AdminController::class, 'index'])->name('admin');
 Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha'])->name('admin_search');
