@@ -53,13 +53,13 @@
         <span>Simulasi Angsuran</span>
       </div> -->
       <hr class="w-full" />
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+      <a href="{{ url('/ojk/settingAkun') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/Icon-svg/profil.svg') }}" alt="logo">
         <div class="flex flex-col">
-          <span class="text-black">User Profile</span>
-          <span>Akun Koperasi</span>
+          <span class="text-black">OJK</span>
+          <span>Akun {{$User->role}}</span>
         </div>
-      </div>
+      </a>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->

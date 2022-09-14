@@ -51,6 +51,8 @@ class PerdaganganController extends Controller
                     if($pages == "produkNTBMall"){
                        
                     }
+
+                    $params['User'] = Auth::user();
                     
                     $params['Notifikasi']= $Notifikasi;
                     $params['pages']= $pages;

@@ -110,6 +110,10 @@ class OjkController extends Controller
                         ];
                     }
 
+                    $params['Notifikasi']= $Notifikasi;
+                    $params['pages']= $pages;
+                    $params['User'] = Auth::user();
+
                     return view("pages.ojk.{$pages}", $params);
                 }
             }

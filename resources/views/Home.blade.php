@@ -587,7 +587,7 @@ $surveyChart = array(
 <script>
   
     const badanUsaha = @json($BadanUsaha);
-    const kabupaten = @json($kabupaten);
+k    const kabupaten = @json($kabupaten);
     const kecamatan = @json($Kecamatan);
     const kelurahan = @json($Kelurahan);
     const cabangIndustri = @json($cabangIndustri);
