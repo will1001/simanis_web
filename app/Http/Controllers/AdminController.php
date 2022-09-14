@@ -158,7 +158,8 @@ class AdminController extends Controller
                             'Survei' => Survei::all(),
                             'keyword' => "",
                             'pages' => $pages,
-                            'Notifikasi' => $Notifikasi
+                            'Notifikasi' => $Notifikasi,
+                            'fields'=>$this->fields2
     
                         ];
                     }

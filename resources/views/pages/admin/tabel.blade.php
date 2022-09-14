@@ -7,7 +7,46 @@
 </style>
 @section('content')
 
-<div class="actionContainer">
+<?php
+$baseUrl = env('APP_URL');
+$fieldTitles = [
+    'id',
+    'NOMOR INDUK KEPENDUDUKAN (NIK)',
+    'NAMA',
+    'KAB/KOTA',
+    'KECAMATAN',
+    'KELURAHAN/DESA',
+    'ALAMAT LENGKAP',
+    'NO. HP',
+    'NAMA USAHA',
+    'BENTUK USAHA',
+    'TAHUN BERDIRI',
+    'LEGALITAS USAHA',
+    'NIB/TAHUN',
+    'NOMOR SERTIFIKAT HALAL/ TAHUN',
+    'SERTIFIKAT MEREK/TAHUN',
+    'NOMOR TEST REPORT/TAHUN',
+    'SNI/TAHUN',
+    'JENIS USAHA',
+    'CABANG INDUSTRI',
+    'SUB CABANG INDUSTRI',
+    'KBLI',
+    'INVESTASI/ MODAL (RP. 000)',
+    'JUMLAH TENAGA KERJA PRIA',
+    'JUMLAH TENAGA KERJA WANITA',
+    'KAPASITAS PRODUKSI (RP. 000)',
+    'SATUAN PRODUKSI',
+    'NILAI PRODUKSI (RP.000)',
+    'NILAI BAHAN BAKU (RP.000)',
+    'LATITUDE',
+    'LONGITUDE',
+    'MEDIA SOSIAL',
+    'FOTO ALAT PRODUKSI',
+    'FOTO RUANG PRODUKSI',
+];
+?>
+
+<!-- <div class="actionContainer">
   <div class="row">
     <div class="col-sm">
       <form name="cariForm" action="{{route('admin_search')}}" method="post" enctype="multipart/form-data">
@@ -23,9 +62,23 @@
       @endif
     </div>
     <div class="col-sm"></div>
-  </div>
-  <div class="row">
-    <div class="col-sm">
+  </div> -->
+  <div class="flex justify-between">
+    <form name="cariForm" action="{{route('admin_search')}}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="flex">
+          <div class="flex items-center shadow-md py-1 px-2 rounded-xl mr-2">
+              <i class="fa fa-search mr-3"></i>
+              <input style="width:200px" type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari . . ." aria-label="Nama Badan Usaha" aria-describedby="button-addon2">
+          </div>
+          <button class="bg-buttonColor-900 px-[30px] py-[10px] rounded-xl text-white" type="submit" id="button-addon2">Cari</button>
+        </div>
+      </form>
+     <div class="flex">
+        <a href="#" class="flex items-center bg-buttonDelete px-[10px] py-[5px] rounded-xl text-white h-[50px] mr-[10px]">Hapus Per Kabupaten</a>
+        <a href="{{ url('/form/admin/')}}" class="flex items-center bg-buttonColor-900 px-[10px] py-[5px] rounded-xl text-white h-[50px]">Tambah Data</a>
+     </div>
+    <!-- <div class="col-sm">
       <form name="importForm" action="/admin/data/import" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
         @csrf
         <div class="input-group mb-3">
@@ -36,87 +89,54 @@
 
       @if(!$BadanUsaha->isEmpty())
       <button class="btn btn-primary" type="submit" id="button-addon2"><a href="{{ url('/admin/data/export')}}" style="text-decoration:none;color:white">Export</a></button>
-      <!-- <form action="{{ route('admin_delete_all')}}" method="GET">
+      <form action="{{ route('admin_delete_all')}}" method="GET">
         <button onclick="return confirm_delete()" class="btn btn-primary float-right" type="submit" id="button-addon2">Hapus Semua Data</button>
-      </form> -->
+      </form> 
       <button class="btn btn-primary" type="submit" id="button-addon2"><a href="{{ url('/form/admin/')}}" style="text-decoration:none;color:white">Tambah Data</a></button>
       @endif
-    </div>
+    </div> -->
 
   </div>
+  @php
+    $index = 0;
+  @endphp
 
   <div class="Container-Table">
-    <div class="table-responsive m-2" style="max-height:500px;">
+    <div class="table-responsive m-2 " style="max-height:500px;">
     <table class="actionContainer rounded-2xl whitespace-nowrap">
     <tr class="bg-tableColor-900 text-center text-white p-2">
-      <th class="text-center p-2 rounded-tl-xl">#</th>
-      <th class="text-center p-2 ">No</th>
-      <th class="text-center p-2 ">NOMOR INDUK KEPENDUDUKAN (NIK)</th>
-      <th class="text-center p-2 ">NAMA</th>
-      <th class="text-center p-2 ">KAB/KOTA</th>
-      <th class="text-center p-2 ">KECAMATAN</th>
-      <th class="text-center p-2 ">KELURAHAN/DESA</th>
-      <th class="text-center p-2 ">ALAMAT LENGKAP</th>
-      <th class="text-center p-2 ">NO. HP</th>
-      <th class="text-center p-2 ">NAMA USAHA</th>
-      <th class="text-center p-2 ">BENTUK USAHA</th>
-      <th class="text-center p-2 ">TAHUN BERDIRI</th>
-      <th class="text-center p-2 ">LEGALITAS USAHA</th>
-      <th class="text-center p-2 ">NIB/TAHUN</th>
-      <th class="text-center p-2 ">NOMOR SERTIFIKAT HALAL/ TAHUN</th>
-      <th class="text-center p-2 ">SERTIFIKAT MEREK/TAHUN</th>
-      <th class="text-center p-2 ">NOMOR TEST REPORT/TAHUN</th>
-      <th class="text-center p-2 ">SNI/TAHUN</th>
-      <th class="text-center p-2 ">JENIS USAHA</th>
-      <th class="text-center p-2 ">CABANG INDUSTRI</th>
-      <th class="text-center p-2 ">SUB CABANG INDUSTRI</th>
-      <th class="text-center p-2 ">INVESTASI/ MODAL (RP. 000)</th>
-      <th class="text-center p-2 ">JUMLAH TENAGA KERJA PRIA</th>
-      <th class="text-center p-2 ">JUMLAH TENAGA KERJA WANITA</th>
-      <th class="text-center p-2 ">KAPASITAS PRODUKSI (RP. 000)</th>
-      <th class="text-center p-2 ">SATUAN PRODUKSI</th>
-      <th class="text-center p-2 ">NILAI PRODUKSI (RP.000)</th>
-      <th class="text-center p-2 rounded-tr-xl">NILAI BAHAN BAKU (RP.000)</th>
+      <!-- <th class="text-center p-2 rounded-tl-xl">#</th> -->
+      <th class="text-center p-2 rounded-tl-xl">No</th>
+      <th class="text-center p-2 ">Nama Usaha</th>
+      <th class="text-center p-2 ">NIK</th>
+      <th class="text-center p-2 ">Kab/Kota</th>
+      <th class="text-center p-2 rounded-tr-xl">Aksi</th>
     </tr>
     @foreach($BadanUsaha as $key=>$item)
-    <tr>
-    <td style="display: flex;">
-      <form method="GET" action="/form/admin/{{$item->id}}" style="margin-right:10px">
-        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-      </form>
 
-      <form method="GET" action="/form/badan_usaha/delete/{{$item->id}}">
-        <button type="submit" id="deleteButton" class="btn btn-primary btn-sm" onclick="return confirm_delete_1()">Hapus</button>
-      </form>
-      
-    </td>
-    <td class="text-center p-4 ">{{ (++$key + (100* ((int)$BadanUsaha->currentPage() -1) ) ) }}</td>
-    <td class="text-center p-4 ">{{$item->nik}}</td>
-    <td class="text-center p-4 ">{{$item->nama_direktur}}</td>
-    <td class="text-center p-4 ">{{$item->kabupaten}}</td>
-    <td class="text-center p-4 ">{{$item->kecamatan}}</td>
-    <td class="text-center p-4 ">{{$item->kelurahan}}</td>
-    <td class="text-center p-4 ">{{$item->alamat_lengkap}}</td>
-    <td class="text-center p-4 ">{{$item->no_hp}}</td>
-    <td class="text-center p-4 ">{{$item->nama_usaha}}</td>
-    <td class="text-center p-4 ">{{$item->bentuk_usaha}}</td>
-    <td class="text-center p-4 ">{{$item->tahun_berdiri}}</td>
-    <td class="text-center p-4 ">{{$item->formal_informal}}</td>
-    <td class="text-center p-4 ">{{$item->nib_tahun}}</td>
-    <td class="text-center p-4 ">{{$item->nomor_sertifikat_halal_tahun}}</td>
-    <td class="text-center p-4 ">{{$item->sertifikat_merek_tahun}}</td>
-    <td class="text-center p-4 ">{{$item->nomor_test_report_tahun}}</td>
-    <td class="text-center p-4 ">{{$item->sni_tahun}}</td>
-    <td class="text-center p-4 ">{{$item->jenis_usaha}}</td>
-    <td class="text-center p-4 ">{{$item->cabang_industri}}</td>
-    <td class="text-center p-4 ">{{$item->sub_cabang_industri}}</td>
-    <td class="text-center p-4 ">{{$item->investasi_modal}}</td>
-    <td class="text-center p-4 ">{{$item->jumlah_tenaga_kerja_pria}}</td>
-    <td class="text-center p-4 ">{{$item->jumlah_tenaga_kerja_wanita}}</td>
-    <td class="text-center p-4 ">{{$item->kapasitas_produksi_perbulan}}</td>
-    <td class="text-center p-4 ">{{$item->satuan_produksi}}</td>
-    <td class="text-center p-4 ">{{$item->nilai_produksi_perbulan}}</td>
-    <td class="text-center p-4 ">{{$item->nilai_bahan_baku_perbulan}}</td>
+    <tr >
+   
+      <td class="text-center p-4 ">{{ (++$key + (100* ((int)$BadanUsaha->currentPage() -1) ) ) }}</td>
+      <td class="text-center p-4 ">{{$item->nama_usaha}}</td>
+      <td class="text-center p-4 ">{{$item->nik}}</td>
+      <td class="text-center p-4 ">{{$item->kabupaten}}</td>
+      <td class="text-center p-4 flex items-center">
+        <form method="GET" action="" class="mr-2">
+          <button onclick="lihatDetails('{{$item->id}}',event)">
+              <img src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
+          </button>
+        </form>
+        <form method="GET" action="">
+        <button class="bg-buttonColor-900 px-[30px] py-[10px] rounded-xl text-white mr-2" type="submit" id="button-addon2">Edit</button>
+
+        </form>
+        <form method="GET" action="" class="p-2 bg-buttonDelete rounded-md">
+          <button>
+              <img src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
+          </button>
+        </form>
+      </td>
+
     </tr>
     @endforeach
     </table>
@@ -125,9 +145,101 @@
     {{ $BadanUsaha->links() }}
   </div>
 </div>
+
+
+<div onclick="closeDetails()" style="visibility: collapse;" id="PopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
+</div>
+
+<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 flex overflow-scroll p-3">
+<div>
+  <h3>Detail Badan Usaha</h3>  
+  <div id="listDataBadanUsaha" class="w-[500px] h-[300px] px-3 pb-[100px] overflow-auto"></div>
+  <div class="flex justify-center">
+      <button onclick="closeDetails()" class="bg-buttonColor-900 px-4 py-2 text-white">OK</button>
+  </div>
+</div>
+</div>
 @endsection
 
 <script>
+
+  const BadanUsaha = @json($BadanUsaha);
+  const fields = @json($fields);
+  const fieldTitles = @json($fieldTitles);
+  const baseUrl = @json($baseUrl);
+
+const lihatDetails = (id,e)=>{
+  // alert(index);
+    e.preventDefault();
+    const blackBg = document.getElementById('PopUpBlackbg');
+    const detailPopUp = document.getElementById('detailPopUp');
+    const listDataBadanUsaha = document.getElementById('listDataBadanUsaha');
+
+    blackBg.style.visibility = "visible";
+    detailPopUp.style.visibility = "visible";
+    listDataBadanUsaha.style.visibility = "visible";
+
+    let i = 0;
+    const badan_usaha_by_id = BadanUsaha.data.filter(e=>e.id === id);
+    // console.log(BadanUsaha.data);
+    console.log(badan_usaha_by_id);
+    listDataBadanUsaha.innerHTML = ``;
+    for (const field of fields) {
+      console.log(field);
+     
+
+      if(field === 'id'){
+        let span = document.createElement('span');
+
+        listDataBadanUsaha.appendChild(span);
+      }else if(field == 'foto_alat_produksi' || field == 'foto_ruang_produksi'){
+        let div = document.createElement('div');
+        let h5 = document.createElement('h5');
+        let img = document.createElement('img');
+        h5.innerHTML = fieldTitles[i];
+        img.src= baseUrl + badan_usaha_by_id[0][field];
+        div.appendChild(h5);
+        div.appendChild(img);
+        listDataBadanUsaha.appendChild(div);
+
+
+
+      }else{
+        let p = document.createElement('div');
+        let span = document.createElement('span');
+        let strong = document.createElement('strong');
+
+        p.className = "flex items-center justify-between";
+
+        span.innerHTML = fieldTitles[i] + " : ";
+        console.log(badan_usaha_by_id[0][field])
+        strong.innerHTML = badan_usaha_by_id[0][field];
+
+        p.appendChild(span);
+        p.appendChild(strong);
+
+        listDataBadanUsaha.appendChild(p);
+
+
+      }
+      i++;
+    }
+    
+
+
+}
+
+const closeDetails = ()=>{
+    const blackBg = document.getElementById('PopUpBlackbg');
+    const detailPopUp = document.getElementById('detailPopUp');
+    const listDataBadanUsaha = document.getElementById('listDataBadanUsaha');
+
+    blackBg.style.visibility = "collapse";
+    detailPopUp.style.visibility = "collapse";
+    listDataBadanUsaha.style.visibility = "collapse";
+
+  }
+
   function validateForm() {
     let x = document.forms["importForm"]["file"].value;
     if (x == "") {

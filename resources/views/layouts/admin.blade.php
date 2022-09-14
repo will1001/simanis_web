@@ -37,7 +37,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('admin_template/assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" />
 </head>
-<body class="g-sidenav-show  bg-gray-200">
+<body class="g-sidenav-show  bg-white">
   <div class="flex h-full p-3">
    
     <div class="flex h-full p-3">
@@ -78,10 +78,6 @@
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
-          </ol>
           <h6 class="font-weight-bolder mb-0">Dashboard</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -94,6 +90,20 @@
           <ul class="navbar-nav  justify-content-end">
            
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              @if($pages == "tabel")
+            <div class="flex items-center mt-[10px]">
+              <form name="importForm" action="/admin/data/import" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" class="mr-3">
+                @csrf
+                <div class="flex items-center">
+                  <input require type="file" name="file" id="file" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                  <button onclick="import()" class="flex items-center bg-white rounded-xl px-3 py-2 border-1 border-gray-400 w-[170px]" type="submit" id="button-addon2"><img src="{{ asset('/Icon-svg/impor.svg') }}" class="mr-2"> <span>Import</span></button>
+                </div>
+              </form>
+              <form action="{{ url('/admin/data/export')}}" method="GET">
+                <button class="flex items-center bg-menungguTextColor rounded-xl text-white px-3 py-2" type="submit" id="button-addon2"><img src="{{ asset('/Icon-svg/ekspor.svg') }}" class="mr-2"> <span>Export</span></button>
+              </form>
+            </div>
+            @endif
             <div style="visibility: collapse;" id="notifDiv" class=" overflow-scroll  h-[300px] w-[300px] bg-white absolute right-[70px] top-[5px] rounded-2xl text-center z-50" >
               <h5 class="m-3">Notifikasi Anda</h5>
               @foreach($Notifikasi as $key=>$item)
@@ -121,7 +131,7 @@
               </div>
               </div>
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-user cursor-pointer"></i>
+                <i class="fa fa-user cursor-poi nter"></i>
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <!-- <li class="mb-2">

@@ -183,7 +183,6 @@
       <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Ajukan Sekarang</button>
     </div>
 </form>
-
 </div>
 
 @endsection
