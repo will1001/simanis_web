@@ -126,11 +126,11 @@ $fieldTitles = [
               <img src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
           </button>
         </form>
-        <form method="GET" action="">
+        <form method="GET" action="/form/admin/{{$item->id}}">
         <button class="bg-buttonColor-900 px-[30px] py-[10px] rounded-xl text-white mr-2" type="submit" id="button-addon2">Edit</button>
 
         </form>
-        <form method="GET" action="" class="p-2 bg-buttonDelete rounded-md">
+        <form method="GET" action="/form/badan_usaha/delete/{{$item->id}}" class="p-2 bg-buttonDelete rounded-md">
           <button>
               <img src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
           </button>
