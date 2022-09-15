@@ -240,6 +240,16 @@ class AdminController extends Controller
         return view('pages.admin.tabel', ['BadanUsaha' => $BadanUsaha, 'keyword' => $keyword, 'pages' => 'tabel', 'Notifikasi' => $Notifikasi]);
     }
 
+    public function deleteBadanUsahaPerKabupaten(Request $r)
+    {
+        // dd($r);
+
+        // $BadanUsaha = BadanUsaha::find(1);
+        // $BadanUsaha->delete();
+
+        return redirect('/admin/tabel');
+    }
+
     public function deleteAllBadanUsaha()
     {
 

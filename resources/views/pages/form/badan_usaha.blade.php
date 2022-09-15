@@ -201,30 +201,42 @@ $forms = array(
 @section('content')
 <form method="POST" action="/form/{$userType}/{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->id : ''}}" enctype="multipart/form-data">
     @csrf
+    <h3 class="text-gray-400">Detail badan usaha</h3>
     @foreach($forms as $key=>$form)
-    <div class="inputstyle">
-        <div class="row">
-            <div class="col-sm-12">
-                <span>{{$form->placeholder}} : </span>
+    <div class="w-[1000px]">
+        <div class="flex justify-between items-center">
+            <div class="w-[300px] text-gray-700">
+                <span>{{$form->placeholder}} </span>
             </div>
-            <div class="col-sm-12">
+            
+            <div class="w-[500px]">
                 @if($form->type == 'select')
-                <select onchange="{{$form->change}}" class="selectpicker" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
+                <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 pr-[150px] py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
                     <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
                     @endforeach
                 </select>
                 @elseif($form->type == 'file')
-                <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}">
+                <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
+                <label for="dropzone-file" class="flex flex-col justify-center items-center w-[340px] h-32 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                        <img src="{{ asset('/Icon-svg/file.svg') }}" />
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
+                    </div>
+                    <input id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="{{$form->prop}}_file" type="file" class="hidden" id="{{$form->prop}}"/>
+                </label>
                 @else
-                <input type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                <input class="border-1 border-gray-400 pl-2 pr-[150px] py-2 text-black mb-2" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 @endif
             </div>
         </div>
     </div>
     @endforeach
-    <button type="submit">Submit</button>
+    <div class="flex justify-end">
+     <button class="bg-buttonColor-900 text-white p-3 mr-[150px] mt-3 rounded-xl" type="submit">Simpan Akun IKM</button>
+    </div>
 </form>
 @endsection
 

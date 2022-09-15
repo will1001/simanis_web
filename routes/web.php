@@ -46,8 +46,9 @@ Route::post('/changePassword/{pages}', [AuthController::class, 'changePassword']
 Route::get('/admin/{pages}/{subPages?}/{id?}', [AdminController::class, 'index'])->name('admin');
 Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha'])->name('admin_search');
 Route::get('/admin/delete/deleteAll', [AdminController::class, 'deleteAllBadanUsaha'])->name('admin_delete_all');
-Route::post('/admin/data/import', [AdminController::class, 'importExcel']);
-Route::get('/admin/data/export', [AdminController::class, 'exportExcel']);
+Route::post('/kabupaten/delete/admin', [AdminController::class, 'deleteBadanUsahaPerKabupaten'])->name('admin_delete_per_kabupaten');
+Route::post('/import/data/admin', [AdminController::class, 'importExcel'])->name('importExcel');
+Route::get('/export/data/admin', [AdminController::class, 'exportExcel'])->name('exportExcel');
 Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
 Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
 

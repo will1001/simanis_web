@@ -46,7 +46,7 @@
             <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
             <span>Simanis.</span>
         </div>
-        <a href="{{ url('/admin/tabel') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='tabel'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
+        <a href="{{ url('/admin/tabel') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='tabel' || $pages=='admin'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
         <span>Dashboard</span>
         </a>
@@ -92,14 +92,14 @@
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               @if($pages == "tabel")
             <div class="flex items-center mt-[10px]">
-              <form name="importForm" action="/admin/data/import" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" class="mr-3">
+              <form name="importForm" action="{{route('importExcel')}}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" class="mr-3">
                 @csrf
                 <div class="flex items-center">
                   <input require type="file" name="file" id="file" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
                   <button onclick="import()" class="flex items-center bg-white rounded-xl px-3 py-2 border-1 border-gray-400 w-[170px]" type="submit" id="button-addon2"><img src="{{ asset('/Icon-svg/impor.svg') }}" class="mr-2"> <span>Import</span></button>
                 </div>
               </form>
-              <form action="{{ url('/admin/data/export')}}" method="GET">
+              <form action="{{route('exportExcel')}}" method="GET">
                 <button class="flex items-center bg-menungguTextColor rounded-xl text-white px-3 py-2" type="submit" id="button-addon2"><img src="{{ asset('/Icon-svg/ekspor.svg') }}" class="mr-2"> <span>Export</span></button>
               </form>
             </div>

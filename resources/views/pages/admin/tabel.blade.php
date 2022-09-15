@@ -75,7 +75,7 @@ $fieldTitles = [
         </div>
       </form>
      <div class="flex">
-        <a href="#" class="flex items-center bg-buttonDelete px-[10px] py-[5px] rounded-xl text-white h-[50px] mr-[10px]">Hapus Per Kabupaten</a>
+        <a onclick="openHapusBadanUsahaPopUp()" href="#" class="flex items-center bg-buttonDelete px-[10px] py-[5px] rounded-xl text-white h-[50px] mr-[10px]">Hapus Per Kabupaten</a>
         <a href="{{ url('/form/admin/')}}" class="flex items-center bg-buttonColor-900 px-[10px] py-[5px] rounded-xl text-white h-[50px]">Tambah Data</a>
      </div>
     <!-- <div class="col-sm">
@@ -159,6 +159,22 @@ $fieldTitles = [
   </div>
 </div>
 </div>
+<div style="visibility: collapse;" id="detailPopUpHapusBadanUsaha" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 flex overflow-scroll p-3">
+<div>
+  <h3>Hapus Data Per Kabupaten/Kota</h3>  
+ <form action="{{route('admin_delete_per_kabupaten')}}" method="post">
+  @csrf
+  <input type="checkbox" name="kabupaten"><span>bima</span>
+  <input type="checkbox" name="kabupaten"><span>mataram</span>
+  <div class="flex justify-center">
+      <button class="bg-buttonDelete px-4 py-2 text-white">Hapus Data Kab/Kota</button>
+  </div>
+ </form>
+  <div class="flex justify-center">
+      <button onclick="closeDetails()" class="bg-buttonColor-900 px-4 py-2 text-white">OK</button>
+  </div>
+</div>
+</div>
 @endsection
 
 <script>
@@ -233,10 +249,12 @@ const closeDetails = ()=>{
     const blackBg = document.getElementById('PopUpBlackbg');
     const detailPopUp = document.getElementById('detailPopUp');
     const listDataBadanUsaha = document.getElementById('listDataBadanUsaha');
+        const detailPopUpHapusBadanUsaha = document.getElementById('detailPopUpHapusBadanUsaha');
 
     blackBg.style.visibility = "collapse";
     detailPopUp.style.visibility = "collapse";
     listDataBadanUsaha.style.visibility = "collapse";
+        detailPopUpHapusBadanUsaha.style.visibility = "collapse";
 
   }
 
@@ -255,4 +273,14 @@ const closeDetails = ()=>{
   function confirm_delete_1() {
     return confirm('Hapus Data ?');
   }
+
+
+const openHapusBadanUsahaPopUp = ()=>{
+    const blackBg = document.getElementById('PopUpBlackbg');
+    const detailPopUpHapusBadanUsaha = document.getElementById('detailPopUpHapusBadanUsaha');
+
+    blackBg.style.visibility = "visible";
+    detailPopUpHapusBadanUsaha.style.visibility = "visible";
+}
+
 </script>

@@ -34,7 +34,7 @@ class FormController extends Controller
                 'userType' => $userType,
                 'BadanUsaha' => $badan_usaha,
                 'Notifikasi' => $Notifikasi,
-                'pages' => $userType == 'admin' ? 'tabel' : 'dashboard',
+                'pages' => $userType == 'admin' ? 'admin' : 'dashboard',
                 'Kabupaten' => Kabupaten::all(),
                 'Kecamatan' => Kecamatan::all(),
                 'Kelurahan' => Kelurahan::all(),
