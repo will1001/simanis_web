@@ -66,7 +66,7 @@ UMKM NTB
 
     .loginRegisterContainer {
         position: absolute;
-        top: 524px;
+        top: 600px;
         left: 108px;
     }
 
@@ -379,11 +379,12 @@ $surveyChart = array(
     </div>
 </section> -->
 
-<section class="hero-section" style="background-color: #17172d">
-    <img class="bannerimg" src="{{ asset('images/bannerold.png') }}" alt="">
+<section class="" style="background-color: #17172d">
+    <img class="h-[550px] w-full object-cover" src="{{ asset('images/banner.png') }}" alt="">
+    <!-- <img class="bannerimg" src="{{ asset('images/bannerold.png') }}" alt="">
     <img class="mobilebannerimg" src="{{ asset('images/mobilebanner.png') }}" alt="">
     <img class="fotobanner1" src="{{ asset('images/fotobanner1.png') }}" alt="">
-    <img class="fotobanner2" src="{{ asset('images/fotobanner2.png') }}" alt="">
+    <img class="fotobanner2" src="{{ asset('images/fotobanner2.png') }}" alt=""> -->
     @if (Auth::check())
     @else
     <div class="loginRegisterContainer">
@@ -587,7 +588,7 @@ $surveyChart = array(
 <script>
   
     const badanUsaha = @json($BadanUsaha);
-k    const kabupaten = @json($kabupaten);
+    const kabupaten = @json($kabupaten);
     const kecamatan = @json($Kecamatan);
     const kelurahan = @json($Kelurahan);
     const cabangIndustri = @json($cabangIndustri);
