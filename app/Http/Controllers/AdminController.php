@@ -146,6 +146,10 @@ class AdminController extends Controller
                 } else {
                     $params;
                     // dd(Auth::user()->nik);
+                    $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                    ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
+                    ->select('badan_usaha.*','instansi.*','users.*','users.nik as nik')
+                    ->get();
                     if($pages == "tabel"){
                         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
@@ -164,9 +168,7 @@ class AdminController extends Controller
                         ];
                     }
                     if($pages == "daftarAkun"){
-                        $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
-                        ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
-                        ->get();
+                      
                         // dd($User);
                         $params = [
                             'pages' => $pages,
@@ -200,9 +202,7 @@ class AdminController extends Controller
     
                         ];
                     }
-                    $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
-                    ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
-                    ->get();
+                  
 
                     $params['Notifikasi']= $Notifikasi;
                     $params['pages']= $pages;
