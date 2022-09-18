@@ -106,6 +106,7 @@ class PerbankanController extends Controller
                             'kabupaten.name as kabupaten',
                             'pengajuan_dana.id as dana_id',
                             'pengajuan_dana.jumlah_dana',
+                            'pengajuan_dana.waktu_pinjaman',
                             'pengajuan_dana.status',
                             'pengajuan_dana.instansi',
                             'pengajuan_dana.jenis_pengajuan',

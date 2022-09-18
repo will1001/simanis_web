@@ -79,6 +79,7 @@
     <th class="text-left">
         <div class="flex justify-center gap-1 my-auto "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Jumlah Dana</div>
     </th>              
+    <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Waktu Pinjaman</span></th>   
     <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Tanggal</span></th>   
     <!-- <th class="text-left p-2 "><span class="">Status</span></th>    -->
     <th class="rounded-tr-xl">Aksi</span></th>   
@@ -102,6 +103,7 @@
     <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
     <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
     <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->jumlah_dana}}</span></td>
+    <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
     <td class="text-center p-2">{{$item->created_at}}</td>
     <!-- <td class="text-left p-2"><span class={{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td> -->
     <td class="text-center p-2  cursor-pointer">

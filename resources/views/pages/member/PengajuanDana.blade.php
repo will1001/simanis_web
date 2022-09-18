@@ -32,6 +32,7 @@ $baseUrl = env('APP_URL').'/';
   <tr class="bg-tableColor-900 text-center text-white p-2">
     <th class="text-center p-2 rounded-tl-xl">No</th>
     <th class="text-center p-2 ">Jumlah Dana</th>
+    <th class="text-center p-2 ">Waktu Pinjaman</th>
     <th class="text-center p-2 ">Tanggal</th>
     <th class="text-center p-2 ">Instansi</th>
     <th class="text-center p-2 ">Status</th>
@@ -54,6 +55,7 @@ $baseUrl = env('APP_URL').'/';
   <tr>
     <td class="text-center p-4 ">{{++$key}}</td>
     <td class="text-center p-4 ">{{$item->jumlah_dana}}</td>
+    <td class="text-center p-4 ">{{$item->waktu_pinjaman}}</td>
     <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
     <td class="text-center p-4 ">{{$item->instansi}}</td>
     <td class="text-center p-2"><span 

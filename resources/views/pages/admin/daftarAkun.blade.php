@@ -106,6 +106,7 @@
     <th class="text-center p-3 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <th class="text-center p-2">No</th>
     <th class="text-left pr-[250px]">NIK</th>
+    <th class="text-left pr-[250px]">Nama Akun</th>
     <th class="text-left  ">Role</th>     
     <th class="text-left  ">Status</th>          
     <th class="text-left p-2 rounded-tr-xl">Aksi</th>   
@@ -116,6 +117,13 @@
   <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">{{++$key}}</td>
     <td class="text-left text-slate-700 ">{{$item->nik}}</td>
+    @if($item->role == 'KOPERASI' || $item->role == 'BANK')
+      <td class="text-left text-slate-700 ">{{$item->nama}}</td>
+    @elseif($item->role == 'IKM')
+      <td class="text-left text-slate-700 ">{{$item->nama_direktur}}</td>
+    @else
+      <td class="text-left text-slate-700 ">{{$item->role}}</td>
+    @endif
     <td class="text-left  text-slate-700 font-bold">{{$item->role}}</td>
     <td class="text-left  "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-2">

@@ -164,13 +164,14 @@ class AdminController extends Controller
                         ];
                     }
                     if($pages == "daftarAkun"){
-                        $User = User::all();
+                        $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                        ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
+                        ->get();
                         // dd($User);
                         $params = [
                             'pages' => $pages,
                             'User' => $User,
-                            'Notifikasi' => $Notifikasi
-    
+                            'Notifikasi' => $Notifikasi,
                         ];
                     }
                     if($pages == "daftarPengajuanDana"){
@@ -199,10 +200,14 @@ class AdminController extends Controller
     
                         ];
                     }
+                    $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                    ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
+                    ->get();
 
                     $params['Notifikasi']= $Notifikasi;
                     $params['pages']= $pages;
-                    $params['User'] = Auth::user();
+                    $params['User'] = $User;
+                    $params['Instansi'] = Instansi::all();
 
                     // $params['User'] = Auth::User();
                     

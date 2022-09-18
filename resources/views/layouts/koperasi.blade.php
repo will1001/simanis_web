@@ -45,7 +45,7 @@
         <span>Simanis.</span>
       </div>
       <a href="{{ url('/koperasi/daftarPengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='daftarPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md">
-        <img class="mr-5" src="{{ asset('/Icon-svg/dana.svg) }}" alt="logo">
+        <img class="mr-5" src="{{ asset('/Icon-svg/dana.svg') }}" alt="logo">
         <span>Daftar Pengajuan Dana</span>
       </a>
       <!-- <a href="{{ url('/koperasi/simulasiAngsuranMurobhahah') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='simulasiAngsuranMurobhahah'?'bg-blue-200 p-2 rounded-md':''}}">
