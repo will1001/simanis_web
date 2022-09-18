@@ -64,13 +64,13 @@
             <span>Daftar Pengajuan Dana</span>
         </a>
         <hr class="w-full" />
-        <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <a href="{{ url('/admin/settingAkun') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
             <img class="mr-5" src="{{ asset('/Icon-svg/profil.svg') }}" alt="logo">
             <div class="flex flex-col">
-            <span class="text-black">User Admin</span>
+            <span class="text-black">Admin</span>
             <span>Admin Account</span>
             </div>
-        </div>
+        </a>
         </aside>
    
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">

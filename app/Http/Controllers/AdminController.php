@@ -200,6 +200,10 @@ class AdminController extends Controller
                         ];
                     }
 
+                    $params['Notifikasi']= $Notifikasi;
+                    $params['pages']= $pages;
+                    $params['User'] = Auth::user();
+
                     // $params['User'] = Auth::User();
                     
                    
