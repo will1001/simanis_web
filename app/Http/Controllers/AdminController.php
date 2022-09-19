@@ -202,6 +202,9 @@ class AdminController extends Controller
     
                         ];
                     }
+                    if($pages == "settingAkun"){
+                        $params['UserAdmin'] = Auth::User();
+                    }
                   
 
                     $params['Notifikasi']= $Notifikasi;
@@ -209,7 +212,6 @@ class AdminController extends Controller
                     $params['User'] = $User;
                     $params['Instansi'] = Instansi::all();
 
-                    // $params['User'] = Auth::User();
                     
                    
                     // dd($params);

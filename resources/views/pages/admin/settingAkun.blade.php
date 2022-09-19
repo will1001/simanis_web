@@ -20,7 +20,7 @@
    <h3 class="text-textColor1">INFORMASI AKUN</h3>
    <form action="/changePassword/admin" method="post">
       @csrf
-   <input name="id" type="text" value="{{$User->id}}" class="hidden">
+   <input name="id" type="text" value="{{$UserAdmin->id}}" class="hidden">
    <h3 class="text-textColor1">ubah password</h3>
    <div class="flex justify-between mt-5">
       <span>Password Lama</span>
