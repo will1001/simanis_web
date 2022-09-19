@@ -248,7 +248,13 @@ class AdminController extends Controller
 
         $BadanUsaha = $BadanUsaha->paginate(100, $this->fields);
 
-        return view('pages.admin.tabel', ['BadanUsaha' => $BadanUsaha, 'keyword' => $keyword, 'pages' => 'tabel', 'Notifikasi' => $Notifikasi]);
+        return view('pages.admin.tabel', 
+        ['BadanUsaha' => $BadanUsaha, 
+        'keyword' => $keyword, 
+        'pages' => 'tabel', 
+        'Notifikasi' => $Notifikasi,
+        'fields'=>$this->fields2
+    ]);
     }
 
     public function deleteBadanUsahaPerKabupaten(Request $r)
