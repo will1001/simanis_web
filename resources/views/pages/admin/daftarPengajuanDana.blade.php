@@ -122,12 +122,14 @@
                         <img src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                     </button>
                 </form>
-                <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" action="/dana/{{$item->id}}/status/Diterima" method="post">
+                <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex " action="/dana/{{$item->id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
                     <button ><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
-                    <button onclick="openPopUp('{{$item->id}}')" class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+                <form class="bg-ditolakTextColor text-white p-2 rounded-xl" onclick="openPopUp('{{$item->id}}')" action="#" method="get">
+                    <button  type="submit"><img src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+                </form>
 
             </div>
         </td>
