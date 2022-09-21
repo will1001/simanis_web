@@ -73,6 +73,8 @@ class KoperasiController extends Controller
             }else if (Auth::user()->role === "OJK") {
                 return redirect('/ojk/dashboard');
             } else {
+                $Instansi = Instansi::where("user_id",Auth::id())->first();
+
                 if ($id != "") {
                     // dd($id);
                     
@@ -80,7 +82,19 @@ class KoperasiController extends Controller
                     // dd($BadanUsaha);
                 }
                 if ($subPages != "") {
-                    return view("pages.koperasi.{$subPages}", ['BadanUsaha' => $BadanUsaha,  'pages' => $pages,'fields'=>$this->fields, 'Notifikasi' => $Notifikasi]);
+                    $params= ['BadanUsaha' => $BadanUsaha,  'pages' => $subPages,'fields'=>$this->fields, 'Notifikasi' => $Notifikasi];
+                    if($subPages == "ProfilBadanUsaha"){
+                        $params = [
+                            'BadanUsaha' => $BadanUsaha,
+                            'pages' => $subPages,
+                            'fields'=>$this->fields,
+                            'Notifikasi' => $Notifikasi
+                        ];
+                    }
+                    $params['Instansi'] = $Instansi;
+                    $params['User'] = Auth::user();
+
+                    return view("pages.koperasi.{$subPages}", $params);
                 } else {
                     // dd($pages);
                     $params=[];

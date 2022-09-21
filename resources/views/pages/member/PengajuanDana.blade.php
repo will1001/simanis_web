@@ -108,7 +108,7 @@ $baseUrl = env('APP_URL').'/';
       </select>
     </div>
     <br>
-    <div id="angsuranDiv" style="visibility: collapse;">
+    <div class="flex justify-between items-center" id="angsuranDiv" style="visibility: collapse;">
       <span>Angsuran Perbulan : </span><span id="angsuranValue"></span>
     </div>
     <div id="detailKoperasi" style="visibility: collapse;">
@@ -248,6 +248,7 @@ $baseUrl = env('APP_URL').'/';
     const instansi_user_id = Instansi.filter(e=>e.user_id === instansiSelect.value);
 
     const simulasi = SimulasiAngsuran.filter(e=>e.id_instansi === instansi_user_id[0].id && e.id_jml_pinjaman ===  jmlDanaSelectChild.value && e.id_jangka_waktu === waktuPinjamanSelectChild.value)
+    angsuranValue.className = "border-1 border-gray-500 w-[70%] p-2";
     angsuranValue.innerHTML = Number(simulasi[0].angsuran).toString();
   }
 </script>

@@ -70,12 +70,14 @@ class OjkController extends Controller
             } else {
 
         $Notifikasi = Notifikasi::where("user_role","OJK")->where("nik",Auth::user()->nik)->where("status","not read")->get();
-
+                
                 if ($id != "") {
                     $BadanUsaha = BadanUsaha::find($id);
                 }
                 if ($subPages != "") {
-                    return view("pages.ojk.{$subPages}", ['BadanUsaha' => $BadanUsaha,  'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi]);
+                    $params=['BadanUsaha' => $BadanUsaha,  'pages' => $subPages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi];
+                    $params['User'] = Auth::user();
+                    return view("pages.ojk.{$subPages}", $params);
                 } else {
                     // dd($BadanUsaha);
                     $params=['pages' => $pages];

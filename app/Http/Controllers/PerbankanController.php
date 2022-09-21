@@ -73,12 +73,15 @@ class PerbankanController extends Controller
             }else if (Auth::user()->role === "OJK") {
                 return redirect('/ojk/dashboard');
             } else {
+                $Instansi = Instansi::where("user_id",Auth::id())->first();
+
                 if ($id != "") {
                     
                     $BadanUsaha = BadanUsaha::find($id);
+
                 }
                 if ($subPages != "") {
-                    $params =['BadanUsaha' => $BadanUsaha, 'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi];
+                    $params =['BadanUsaha' => $BadanUsaha, 'pages' => $subPages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi];
                     if($subPages == "suratRekomendasi"){
                         
                         $BadanUsaha = BadanUsaha::where('id',$id)->get();
@@ -87,14 +90,26 @@ class PerbankanController extends Controller
                             $params = [
                                 'BadanUsaha' => $BadanUsaha,
                                 'PengajuanDana' => $PengajuanDana,
-                                'pages' => $pages,
+                                'pages' => $subPages,
                                 'fields'=>$this->fields,
                                 'Notifikasi' => $Notifikasi
                             ];
                         }
 
+                        if($subPages == "ProfilBadanUsaha"){
+                            $params = [
+                                'BadanUsaha' => $BadanUsaha,
+                                'pages' => $subPages,
+                                'fields'=>$this->fields,
+                                'Notifikasi' => $Notifikasi
+                            ];
+                        }
+                        $params['Instansi'] = $Instansi;
+                        $params['User'] = Auth::user();
+                    // dd($subPages);
                     return view("pages.perbankan.{$subPages}", $params);
                 } else {
+
                     $params=['pages' => $pages];
 
                     if($pages == "daftarPengajuanDana"){
@@ -135,7 +150,6 @@ class PerbankanController extends Controller
                                 ->where("instansi.user_id",Auth::id())
                                 ->orderByRaw('CONVERT(list_jangka_waktu.waktu, SIGNED) asc')
                                 ->get();
-                    $Instansi = Instansi::where("user_id",Auth::id())->first();
 
 
                         $JangkaWaktu = JangkaWaktu::where("id_instansi",$Instansi->id)->orderBy('waktu', 'ASC')->get();
