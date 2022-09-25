@@ -133,6 +133,14 @@ class MemberController extends Controller
 
                         $params = ['BadanUsaha' => $BadanUsaha];
                     }
+                    if($pages == "downloadKartu"){
+                    $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
+                    $CabangIndustri = CabangIndustri::where('name',$BadanUsaha[0]->cabang_industri)->first();
+                    $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
+                    $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
+
+                        $params = ['BadanUsaha' => $BadanUsaha];
+                    }
 
                     if($pages == "PengajuanDana"){
                     $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
@@ -177,6 +185,17 @@ class MemberController extends Controller
                     }
 
                     if($pages == "suratRekomendasi"){
+                        
+                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
+                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                    // dd($BadanUsaha);
+                        $params = [
+                            'BadanUsaha' => $BadanUsaha,
+                            'PengajuanDana' => $PengajuanDana,
+                        ];
+                    }
+
+                    if($pages == "downloadSurat"){
                         
                     $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
                     $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();

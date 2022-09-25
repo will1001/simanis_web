@@ -63,4 +63,37 @@ $fieldTitles = [
 @endif
 @endforeach
 
+<h1>Kartu Member</h1>
+
+<div class="flex bg-white rounded-xl p-4">
+    <div>
+        <h2>No Kartu. {{substr($BadanUsaha->nik,strlen($BadanUsaha->nik)-4,strlen($BadanUsaha->nik))}}{{$BadanUsaha->id_cabang_industri}}{{$BadanUsaha->id_kabupaten}}</h2>
+     <div class="flex">
+        <div>
+            <div class="flex"><div class="mr-10">Nama</div></div>
+            <div class="flex"><div class="mr-10">Alamat</div></div>
+            <div class="flex"><div class="mr-10">Usaha</div></div>
+            <div class="flex"><div class="mr-10">Kabupaten</div></div>
+            <div class="flex"><div class="mr-10">NIK</div></div>
+            </div>
+        <div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_direktur}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->alamat_lengkap}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_usaha}}</div>
+            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->kabupaten}}</div>
+            <div class="text-left flex justify-start items-start">: {{$User->nik}}</div>
+        </div>
+     </div>
+        
+    </div>
+    <img class="w-[200px] m-3" src="{{ asset($User->foto) }}" alt="">
+</div>
+<br>
+<h5>Ganti Foto</h5>
+<div>
+        <form action="{{ url('/admin/downloadKartu') }}" method="get">
+            <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
+        </form>
+    </div>
+
 @endsection

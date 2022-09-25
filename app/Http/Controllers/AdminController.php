@@ -142,7 +142,25 @@ class AdminController extends Controller
 
                 }
                 if ($subPages != "") {
-                    return view("pages.admin.{$subPages}", ['BadanUsaha' => $BadanUsaha,  'pages' => $pages,'fields'=>$this->fields2, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()]);
+                    $subPagesParams = ['BadanUsaha' => $BadanUsaha,  'pages' => $subPages,'fields'=>$this->fields2, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()];
+                    if($pages == "downloadKartu"){
+                        $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
+                        $CabangIndustri = CabangIndustri::where('name',$BadanUsaha[0]->cabang_industri)->first();
+                        $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
+                        $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
+    
+                            $subPagesParams['BadanUsaha'] = $BadanUsaha;
+                        }
+                    if($pages == "ProfilBadanUsaha"){
+                        $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
+                        $CabangIndustri = CabangIndustri::where('name',$BadanUsaha[0]->cabang_industri)->first();
+                        $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
+                        $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
+    
+                            $subPagesParams['BadanUsaha'] = $BadanUsaha;
+                        }
+                        // dd($subPagesParams);
+                    return view("pages.admin.{$subPages}", $subPagesParams);
                 } else {
                     $params;
                     // dd(Auth::user()->nik);
@@ -358,7 +376,7 @@ class AdminController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => $User->nik,
-                'deskripsi' => "Pengajuan Dana Anda Ditolak",
+                'deskripsi' => $r->input('alasan'),
                 'user_role' => "MEMBER",
             ]);
             

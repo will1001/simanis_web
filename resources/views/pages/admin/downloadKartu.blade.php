@@ -1,5 +1,13 @@
-@extends('layouts.member')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <title>Simanis</title>
+</head>
+<body>
 <div class="flex bg-white rounded-xl p-4">
     <div>
         <h2>No Kartu. {{substr($BadanUsaha[0]->nik,strlen($BadanUsaha[0]->nik)-4,strlen($BadanUsaha[0]->nik))}}{{$BadanUsaha[0]->id_cabang_industri}}{{$BadanUsaha[0]->id_kabupaten}}</h2>
@@ -23,17 +31,8 @@
     </div>
     <img class="w-[200px] m-3" src="{{ asset($User->foto) }}" alt="">
 </div>
-<br>
-<h5>Ganti Foto</h5>
-<form action="/ganti/foto" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="foto" accept="image/x-png,image/gif,image/jpeg" required>
-    <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
-</form>
-<div>
-        <form action="{{ url('/member/downloadKartu') }}" method="get">
-            <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
-        </form>
-    </div>
-
-@endsection
+</body>
+<script>
+    print();
+</script>
+</html>

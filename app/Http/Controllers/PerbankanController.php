@@ -282,7 +282,7 @@ class PerbankanController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => $User->nik,
-                'deskripsi' => "Pengajuan Dana Anda Ditolak",
+                'deskripsi' => $r->input('alasan'),
                 'user_role' => "MEMBER",
             ]);
             
