@@ -47,12 +47,18 @@
 <div class="bg bg-slate-150 absolute"></div>
 <h3 class="ml-4">Daftar Pengajuan Dana</h3>
 
-<!-- <div class="flex flex-row actinContainer ml-4 mt-4">
+<div class="flex flex-row actinContainer ml-4 mt-4">
     <div class="flex gap-2 boxCari border rounded-md shadow-md bg-white">
-        <img src="{{ asset('/Icon-svg/medium.svg') }}" alt="icon" class="flex h-8 w-8 ml-2 my-auto">
-        <input type="text" placeholder="Cari Badan Usaha" class="my-auto panjangInput ml-1 placeholder:text-sm">
+        <img onclick="clickbuttonSearch()" src="{{ asset('/Icon-svg/medium.svg') }}" alt="icon" class="flex h-8 w-8 ml-2 my-auto cursor-pointer">
+        <form action="/admin/search/pengajuanDana/admin" method="post" class="my-auto panjangInput ml-1 placeholder:text-sm">
+            @csrf
+            <input type="text" placeholder="Cari Badan Usaha" name="keyword" >
+            <input type="text" placeholder="Cari Badan Usaha" name="role" value="ADMIN" class="hidden">
+            <button type="submit" id="buttonSearch"></button>
+
+        </form>
     </div>
-    <div class="flex boxStat border rounded-md shadow-md ml-3 cursor-pointer bg-white">
+    <!-- <div class="flex boxStat border rounded-md shadow-md ml-3 cursor-pointer bg-white">
         <label for="role" class="flex panjangInput text-slate-800 text-sm font-bold my-auto ml-3 h-[17px] whitespace-nowrap ">Semua Status</label>
         <input type="radio" id="role" name="role" class="hidden">
         <img src="{{ asset('/Icon-svg/icon.svg') }}" alt="role" class="flex mx-3 my-auto ">
@@ -68,8 +74,8 @@
     <div class="flex border boxKab rounded-lg cursor-pointer ml1 bg-ditolakTextColor">       
             <input type="button" value="Hapus Pengajuan" class="text-white text-sm font-bold my-auto ml-5 h-[20px]">
             <img src="{{ asset('/Icon-svg/sampahPutih.svg') }}" alt="role" class="flex my-auto mx-auto ">       
-    </div>
-</div> -->
+    </div> -->
+</div>
 
     
   </div>
@@ -212,4 +218,8 @@
     detailPopUp.style.visibility = "collapse";
 
   }
+
+    const clickbuttonSearch = ()=>{
+        document.getElementById('buttonSearch').click();
+    }
   </script>

@@ -274,6 +274,29 @@ class AdminController extends Controller
         'fields'=>$this->fields2
     ]);
     }
+    public function searchPengajuanDana(Request $request, $pages)
+    {
+        $keyword = $request->input('keyword');
+        $Notifikasi = Notifikasi::where("user_role",$request->input('role'))->where("nik",Auth::user()->nik)->where("status","not read")->get();
+
+
+        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+                        ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                        ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                        // ->where("pengajuan_dana.status","Menunggu")
+                        ->where('badan_usaha.nama_usaha', 'LIKE', "%{$keyword}%")
+                        ->select('badan_usaha.nama_usaha','badan_usaha.nik','badan_usaha.id as id_badan_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
+                        // dd($PengajuanDana);
+    
+                        $params = [
+                            'PengajuanDana' => $PengajuanDana,
+                            'pages' => $pages,
+                            'Notifikasi' => $Notifikasi
+                        ];
+                        
+                        // dd($PengajuanDana);
+        return view('pages.'.$pages.'.daftarPengajuanDana', $params);
+    }
 
     public function deleteBadanUsahaPerKabupaten(Request $r)
     {
