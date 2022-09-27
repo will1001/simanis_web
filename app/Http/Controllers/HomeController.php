@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use App\Models\SlideShow;
+
 
 class HomeController extends Controller
 {
@@ -154,6 +156,7 @@ class HomeController extends Controller
             'Kelurahan' => Kelurahan::all(),
             'cabangIndustri' => CabangIndustri::all(),
             'subCabangIndustri' => SubCabangIndustri::all(),
+            'SlideShow' => SlideShow::where("type","website")->get(),
         ]);
     }
 

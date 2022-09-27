@@ -113,7 +113,7 @@ UMKM NTB
         margin: 5px 0;
         border-radius: 8px;
         padding: 10px;
-        color: #C7C9D9;
+        color: #63646C;
     }
 
     .filterChart span {
@@ -378,9 +378,11 @@ $surveyChart = array(
 
     </div>
 </section> -->
-
+<?php
+$baseUrl = env('APP_URL');
+?>
 <section class="" style="background-color: #17172d">
-    <img class="h-[550px] w-full object-cover" src="{{ asset('images/banner.png') }}" alt="">
+    <img class="h-[600px] w-full object-cover" src="{{$baseUrl.$SlideShow[0]->img}}" alt="">
     <!-- <img class="bannerimg" src="{{ asset('images/bannerold.png') }}" alt="">
     <img class="mobilebannerimg" src="{{ asset('images/mobilebanner.png') }}" alt="">
     <img class="fotobanner1" src="{{ asset('images/fotobanner1.png') }}" alt="">

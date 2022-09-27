@@ -1,6 +1,11 @@
 @extends('layouts.member')
 @section('content')
 @if($PengajuanDana)
+{{$PengajuanDana->updated_at}}
+@php
+$kopBulan=date("m",strtotime($PengajuanDana->updated_at));
+$kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
+@endphp
 <div >
     <div>
         <form action="{{ url('/member/downloadSurat') }}" method="get">
@@ -25,7 +30,7 @@
         <div class="flex justify-center">
             <div class="text-center flex flex-col">
                 <span class="font-bold text-black">SURAT REKOMENDASI</span>
-                <span>Nomor : 1726/DPK-NTB/VII/2022/</span>
+                <span>Nomor : 1726/DPK-NTB/{{$kopBulan}}/{{$kopTahun}}/</span>
             </div>
         </div>
 

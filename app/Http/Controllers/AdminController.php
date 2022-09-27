@@ -339,7 +339,9 @@ class AdminController extends Controller
         $path = $r->file('slide')->storeAs('public/slide', 'slide' .$id .'.'.$ext);
 
         $Survei = SlideShow::find($id);
+
         $Survei->img = '/storage/slide/slide' . $id . '.' . $ext;
+
         $Survei->save();
 
         return back();
