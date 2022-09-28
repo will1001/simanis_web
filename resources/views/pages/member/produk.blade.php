@@ -126,45 +126,45 @@
   </div>
 </div>
 
-<div style="visibility: collapse;" id="formPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-3 overflow-scroll">
+<div style="visibility: collapse;" id="formPopUp" class="bg-white text-textColor2 rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-3 overflow-scroll">
 <h1>Ajukan Produk</h1>
 <br>
 <form action="{{url('ajukan_produk')}}" method="post" enctype="multipart/form-data">
 @csrf
 <div class="flex justify-between items-center">
   <span>Nama Produk</span>
-  <input class="border-2 border-gray-300 w-[70%] p-2"type="text" name="nama">
+  <input class="border-2 border-gray-300 w-[73%] p-1 rounded-md" type="text" name="nama">
 </div>
 <br>
 <div class="flex justify-between items-center">
   <span>No Sertifikat Halal</span>
-  <input class="border-2 border-gray-300" type="number" name="sertifikat_halal_no">
+  <input class="border-2 border-gray-300 p-1 ml-[77px] w-[40%] rounded-md" type="number" name="sertifikat_halal_no">
   <span>Tahun</span>
-  <input class="border-2 border-gray-300" type="number" name="sertifikat_halal_thn">
+  <input class="border-2 border-gray-300 p-1 rounded-md" type="number" name="sertifikat_halal_thn">
 </div>
 <br>
 <div class="flex justify-between items-center">
   <span>No Sertifikat HAKI</span>
-  <input class="border-2 border-gray-300" type="number" name="sertifikat_haki_no">
+  <input class="border-2 border-gray-300 p-1 ml-[79px] w-[40%] rounded-md" type="number" name="sertifikat_haki_no">
   <span>Tahun</span>
-  <input class="border-2 border-gray-300" type="number" name="sertifikat_haki_thn">
+  <input class="border-2 border-gray-300 p-1 rounded-md" type="number" name="sertifikat_haki_thn">
 </div>
 <br>
 <div class="flex justify-between items-center">
   <span>No Sertifikat SNI</span>
-  <input class="border-2 border-gray-300" type="number" name="sertifikat_sni_no">
+  <input class="border-2 border-gray-300 p-1 ml-[90px] w-[40%] rounded-md" type="number" name="sertifikat_sni_no">
   <span>Tahun</span>
-  <input class="border-2 border-gray-300" type="number" name="sertifikat_sni_thn">
+  <input class="border-2 border-gray-300 p-1 rounded-md" type="number" name="sertifikat_sni_thn">
 </div>
 <br>
 <div class="flex items-center justify-between">
   <span>Deskripsi Produk</span>
-  <textarea class="border-2 border-gray-300 w-[70%]" name="deskripsi" rows="7"></textarea>
+  <textarea class="border-2 border-gray-300 w-[73%] rounded-md" name="deskripsi" rows="7"></textarea>
 </div>
 <br>
 <div class="flex items-center justify-between">
   <span class="mr-[20px] whitespace-nowrap">Upload Foto</span>
-  <div class="flex justify-center items-center w-full">
+  <div class="flex justify-center items-center w-full ml-[120px]">
     <label for="dropzone-file" class="flex flex-col justify-center items-center w-[600px] h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
         <div class="flex flex-col justify-center items-center pt-5 pb-6">
             <img src="{{ asset('/Icon-svg/file.svg') }}" />
@@ -179,7 +179,7 @@
 </div>
 <br>
 <div class="flex items-center justify-start">
-      <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
+      <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Cancel</div>
       <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Ajukan Sekarang</button>
     </div>
 </form>

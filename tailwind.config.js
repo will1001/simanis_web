@@ -39,6 +39,7 @@ module.exports = {
                 halalTextColor: "#A332AD",
                 halalBgColor: "#FFD8F9",
                 textColor1: "#D1D5DB",
+                textColor2: "#374151",
                 buttonDelete: "#B91C1C",
             },
         },

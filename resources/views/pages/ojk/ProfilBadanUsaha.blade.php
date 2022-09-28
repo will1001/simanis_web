@@ -59,8 +59,11 @@ $fieldTitles = [
     <img src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
 </div>
 @else
-<p>{{$fieldTitles[$key]}} : <strong>{{$BadanUsaha->$field}}</strong></p>
+<div class="flex justify-start text-textColor2">
+<p class="w-[400px]">{{$fieldTitles[$key]}}</p>
+<p class="w-[10px]">:</p>
+<p class="w-[300px]"><strong>{{$BadanUsaha->$field}}</strong></p>
+</div>
 @endif
 @endforeach
-
 @endsection

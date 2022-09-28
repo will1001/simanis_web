@@ -23,12 +23,6 @@
     @else
     <p class="text-success">Selamat Profilmu sudah lengkap, sekarang kamu bisa mengakses fitur lain, seperti pengajuan dana , kartu member, dan lain lain.</p>
     @endif
-    @if($item->status_verifikasi == 0)
-    <button disabled type="submit" class="btn btn-info btn-sm">Ajukan Dana</button>
-    @else
-    <button type="submit" class="btn btn-info btn-sm">Ajukan Dana</button>
-    @endif
-
 </div>
 @endforeach
 @endsection

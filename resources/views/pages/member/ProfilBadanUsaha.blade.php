@@ -51,7 +51,7 @@ $fieldTitles = [
 @section('content')
 <h1>Profil Badan Usaha</h1>
 <form method="GET" action="/form/member/{{$BadanUsaha[0]->id}}" style="margin-right:10px">
-    <button type="submit" class="btn btn-primary btn-sm">Edit Profil</button>
+    <button type="submit" class="rounded-lg text-white bg-blue-500 p-2">Edit Profil</button>
 </form>
 @foreach($fields as $key => $field)
 @if($field == 'id')
@@ -62,7 +62,12 @@ $fieldTitles = [
     <img src="{{$baseUrl.$BadanUsaha[0]->$field}}" alt="img">
 </div>
 @else
-<p>{{$fieldTitles[$key]}} : <strong>{{$BadanUsaha[0]->$field}}</strong></p>
+<div class="flex justify-start text-textColor2">
+<p class="w-[400px]">{{$fieldTitles[$key]}}</p>
+<p class="w-[10px]">:</p>
+<p class="w-[300px]"><strong>{{$BadanUsaha[0]->$field}}</strong></p>
+
+</div>
 @endif
 @endforeach
 

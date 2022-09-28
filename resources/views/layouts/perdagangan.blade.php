@@ -41,7 +41,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('admin_template/assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" />
 </head>
-<body class="g-sidenav-show  bg-gray-200">
+<body class="g-sidenav-show  bg-white">
   <div class="flex h-full p-3">
     <aside class="flex flex-col bg-white p-3 rounded-xl items-start text-left">
       <div class="flex justify-center items-center">
