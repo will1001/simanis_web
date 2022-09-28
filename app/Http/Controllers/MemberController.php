@@ -21,6 +21,7 @@ use App\Models\JumlahPinjaman;
 use App\Models\JangkaWaktu;
 use App\Models\SimulasiAngsuran;
 use App\Models\Instansi;
+use App\Models\Surat;
 
 
 use Illuminate\Support\Str;
@@ -188,10 +189,13 @@ class MemberController extends Controller
                         
                     $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
                     $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                    $surat = Surat::find(1);
+                   
                     // dd($BadanUsaha);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,
+                            'Surat' => $surat,
                         ];
                     }
 

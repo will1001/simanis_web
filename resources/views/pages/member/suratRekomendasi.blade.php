@@ -45,10 +45,10 @@ $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
                         <span>Alamat</span>
                     </div>
                     <div class="flex flex-col">
-                        <span>: Nurhayati, SE., ME</span>
-                        <span>: 19760104 199902 2 002</span>
-                        <span>: Kepala Dinas Perindustrian Provinsi NTB</span>
-                        <span>: Jl Majapahit No 17 Mataram</span>
+                        <span>: {{$Surat->nama_kadis}}</span>
+                        <span>: {{$Surat->nip}}</span>
+                        <span>: {{$Surat->jabatan}}</span>
+                        <span>: {{$Surat->alamat}}</span>
                     </div>
                 </div>
             </div>
@@ -83,8 +83,8 @@ $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
                 <span>Mataram, {{date('d-m-Y', strtotime($PengajuanDana->updated_at))}} </span>
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
                 <img src="{{ asset('/images/signKadis.png') }}">
-                <span class="font-bold text-black">Nurhayati, Se., ME</span>
-                <span>NIP. 19760104 199902 2 002</span>
+                <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
+                <span>{{$Surat->nip}}</span>
         </div>
     </div>
 </div>

@@ -486,7 +486,7 @@ class AdminController extends Controller
     {
         $surat=Surat::find(1);
         // dd($surat);
-        $surat->alamat_kop =$r->alamat_kop;
+        // $surat->alamat_kop =$r->alamat_kop;
         $surat->nama_kadis =$r->nama_kadis;
         $surat->nip =$r->nip;
         $surat->jabatan =$r->jabatan;
