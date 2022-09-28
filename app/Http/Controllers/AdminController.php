@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\PengajuanDana;
 use App\Models\Notifikasi;
 use App\Models\Instansi;
+use App\Models\Surat;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -222,6 +223,9 @@ class AdminController extends Controller
                     }
                     if($pages == "settingAkun"){
                         $params['UserAdmin'] = Auth::User();
+                    }
+                    if($pages == "settingSurat"){
+                        $params['surat'] = Surat::first();
                     }
                   
 
@@ -475,6 +479,21 @@ class AdminController extends Controller
 
 
         return redirect('/admin/daftarAkun');
+
+    }
+    //
+    public function settingSurat(Request $r)
+    {
+        $surat=Surat::find(1);
+        // dd($surat);
+        $surat->alamat_kop =$r->alamat_kop;
+        $surat->nama_kadis =$r->nama_kadis;
+        $surat->nip =$r->nip;
+        $surat->jabatan =$r->jabatan;
+        $surat->alamat =$r->alamat;
+        $surat->save();
+
+        return redirect('/admin/settingSurat');
 
     }
     //

@@ -1,3 +1,5 @@
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 <style>
   .Container {
     height: 100%;
@@ -154,13 +156,19 @@
             <form class="form-horizontal" method="POST" action="{{url('login')}}">
               @csrf
               <h3 class="title">Simanis</h3>
-              <div class="form-group">
-                <span class="input-icon"><i class="fa fa-user"></i></span>
-                <input class="form-control" type="string" placeholder="NIK" name="nik">
+             
+               <div class="flex items-center">
+                <span class="mr-2 mb-4 w-[100px]">NIK : </span>
+                   <div class="form-group p-1">
+                    <input class="form-control" type="string" placeholder="NIK" name="nik">
+                  </div>
               </div>
-              <div class="form-group">
-                <span class="input-icon"><i class="fa fa-lock"></i></span>
-                <input class="form-control" type="password" placeholder="Password" name="password">
+              
+               <div class="flex items-center">
+                <span class="mr-2 mb-4 w-[100px]">Password : </span>
+                 <div class="form-group p-1">
+                    <input class="form-control" type="password" placeholder="Password" name="password">
+                  </div>
               </div>
               <button class="btn signin">Log in</button>
               <span class="register"><a href="{{url('daftar')}}">Daftar</a></span>

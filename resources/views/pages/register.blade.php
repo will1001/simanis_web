@@ -1,3 +1,6 @@
+
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 <style>
   .Container {
     height: 100%;
@@ -154,22 +157,33 @@
             <form class="form-horizontal" method="POST" action="{{url('daftar')}}">
               @csrf
               <h3 class="title">Simanis</h3>
-              <div class="form-group">
-                <span class="input-icon"><i class="fa fa-user"></i></span>
-                <input class="form-control" type="string" placeholder="NIK" name="nik" minlength="8">
+              <div class="flex items-center">
+                <span class="mr-2 mb-4 w-[100px]">NIK : </span>
+                <div class="form-group p-1">
+                  <input class="form-control" type="string" placeholder="NIK" name="nik" minlength="8">
+                </div>
               </div>
-              <div class="form-group">
-                <span class="input-icon"><i class="fa fa-user"></i></span>
-                <input class="form-control" type="string" placeholder="Nama" name="nama_direktur">
+              <div class="flex items-center">
+                <span class="mr-2 mb-4 w-[100px]">Nama : </span>
+                <div class="form-group p-1">
+                  <input class="form-control" type="string" placeholder="Nama" name="nama_direktur">
+                </div>
               </div>
-              <div class="form-group">
-                <span class="input-icon"><i class="fa fa-phone"></i></span>
-                <input class="form-control" type="number" placeholder="Nomor HP" name="no_hp">
+              <div class="flex items-center">
+                <span class="mr-2 mb-4 w-[100px]">Nomor HP : </span>
+                  <div class="form-group p-1">
+                  <input class="form-control" type="number" placeholder="Nomor HP" name="no_hp">
+                </div>
               </div>
-              <div class="form-group">
-                <span class="input-icon"><i class="fa fa-lock"></i></span>
-                <input class="form-control" type="password" placeholder="Password" name="password" minlength="8">
+              <div class="flex items-center">
+                <span class="mr-2 mb-4 w-[100px]">Password : </span>
+                 <div class="form-group p-1">
+                  <input class="form-control" type="password" placeholder="Password" name="password" minlength="8">
+                </div>
               </div>
+             
+            
+             
               <button class="btn signin">Daftar</button>
               <span class="register"><a href="{{url('login')}}">Login</a></span>
             </form>

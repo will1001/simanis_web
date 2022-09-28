@@ -1,6 +1,30 @@
 @extends("layouts.{$userType}")
 
 <?php
+$bentukUsaha = [
+    (object)array(
+        "id" => "PT",
+        "name" => "PT"
+    ),
+    (object)array(
+        "id" => "CV",
+        "name" => "CV"
+    ),
+    (object)array(
+        "id" => "UD",
+        "name" => "UD"
+    )
+];
+$legalitasUsaha = [
+    (object)array(
+        "id" => "FORMAL",
+        "name" => "FORMAL"
+    ),
+    (object)array(
+        "id" => "INFORMAL",
+        "name" => "INFORMAL"
+    )
+];
 $forms = array(
     (object)array(
         "type" => "text",
@@ -49,9 +73,11 @@ $forms = array(
         "prop" => "nama_usaha"
     ),
     (object)array(
-        "type" => "text",
+        "type" => "select",
         "placeholder" => "BENTUK USAHA",
-        "prop" => "bentuk_usaha"
+        "options" => $bentukUsaha,
+        "prop" => "bentuk_usaha",
+        "change" => ""
     ),
     (object)array(
         "type" => "number",
@@ -59,9 +85,11 @@ $forms = array(
         "prop" => "tahun_berdiri"
     ),
     (object)array(
-        "type" => "text",
+        "type" => "select",
         "placeholder" => "LEGALITAS USAHA",
-        "prop" => "formal_informal"
+        "options" => $legalitasUsaha,
+        "prop" => "formal_informal",
+        "change" => ""
     ),
     (object)array(
         "type" => "text",

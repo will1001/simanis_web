@@ -54,6 +54,10 @@
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
         <span>Setting Slide</span>
         </a>
+        <a href="{{ url('/admin/settingSurat') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='setting'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
+        <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
+        <span>Setting Surat</span>
+        </a>
         <a href="{{ url('/admin/daftarAkun') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='daftarAkun'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
         <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
         <span>Daftar Akun</span>
