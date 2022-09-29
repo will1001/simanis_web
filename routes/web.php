@@ -74,6 +74,8 @@ Route::post('/create/user', [AdminController::class, 'tambahUser']);
 Route::get('/user/status/{id}/{status}', [AdminController::class, 'ubahStatusUser']);
 Route::get('/user/delete/{id}', [AdminController::class, 'hapusUser']);
 Route::post('/simulasi/angsuran', [PerbankanController::class, 'tambahSimulasiAngsuran']);
+Route::post('/simulasi/angsuran/delete/{jumlah_dana}', [PerbankanController::class, 'hapusSimulasiAngsuran']);
+Route::post('/simulasi/angsuran/edit/{id}', [PerbankanController::class, 'editSimulasiAngsuran']);
 Route::post('/ganti/foto', [MemberController::class, 'ganti_foto'])->name('ganti_foto');
 
 

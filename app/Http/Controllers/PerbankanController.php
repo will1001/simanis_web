@@ -147,9 +147,11 @@ class PerbankanController extends Controller
                     $Simulasi = SimulasiAngsuran::leftJoin('list_jangka_waktu', 'simulasi_angsuran.id_jangka_waktu', '=', 'list_jangka_waktu.id')
                                 ->leftJoin('list_jumlah_pinjaman', 'simulasi_angsuran.id_jml_pinjaman', '=', 'list_jumlah_pinjaman.id')
                                 ->leftJoin('instansi', 'simulasi_angsuran.id_instansi', '=', 'instansi.id')
+                                ->select('list_jangka_waktu.*','list_jumlah_pinjaman.*','instansi.*','simulasi_angsuran.*','list_jangka_waktu.id as id_jangka_waktu','list_jumlah_pinjaman.id as id_jumlah_pinjaman','instansi.id as id_instansi','simulasi_angsuran.id as id')
                                 ->where("instansi.user_id",Auth::id())
                                 ->orderByRaw('CONVERT(list_jangka_waktu.waktu, SIGNED) asc')
                                 ->get();
+                                // dd($Simulasi);
 
 
                         $JangkaWaktu = JangkaWaktu::where("id_instansi",$Instansi->id)->orderBy('waktu', 'ASC')->get();
@@ -231,6 +233,30 @@ class PerbankanController extends Controller
                 $simulasi->angsuran = $r->input("angsuran");
                 $simulasi->save();
             }
+           
+            return redirect('/perbankan/simulasiAngsuran');
+      
+        // dd($waktu);
+    }
+
+    function hapusSimulasiAngsuran(Request $r,$jumlah_dana)
+    {
+        $Instansi = Instansi::where("user_id",Auth::id())->first();
+        $dana = JumlahPinjaman::where("id_instansi",$Instansi->id)->where("jumlah",$jumlah_dana)->first();
+        // dd($dana);
+        $simulasi = SimulasiAngsuran::where("id_jml_pinjaman",$dana->id)->delete();
+        $dana->delete();
+           
+            return redirect('/perbankan/simulasiAngsuran');
+      
+        // dd($waktu);
+    }
+    function editSimulasiAngsuran(Request $r,$id)
+    {
+        $simulasi = SimulasiAngsuran::find($id);
+        // dd($simulasi);
+        $simulasi->angsuran = $r->input('angsuran');
+        $simulasi->save();
            
             return redirect('/perbankan/simulasiAngsuran');
       

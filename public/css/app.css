@@ -688,6 +688,9 @@ video {
 .mb-1 {
   margin-bottom: 0.25rem;
 }
+.mb-4 {
+  margin-bottom: 1rem;
+}
 .ml-5 {
   margin-left: 1.25rem;
 }
@@ -721,9 +724,6 @@ video {
 .mr-\[150px\] {
   margin-right: 150px;
 }
-.mb-4 {
-  margin-bottom: 1rem;
-}
 .mt-\[50px\] {
   margin-top: 50px;
 }
@@ -756,12 +756,6 @@ video {
 }
 .ml-\[120px\] {
   margin-left: 120px;
-}
-.mr-\[100px\] {
-  margin-right: 100px;
-}
-.mr-\[\] {
-  margin-right: ;
 }
 .block {
   display: block;
@@ -862,12 +856,6 @@ video {
 .h-64 {
   height: 16rem;
 }
-.h-\[\] {
-  height: ;
-}
-.h-\[200px\] {
-  height: 200px;
-}
 .max-h-full {
   max-height: 100%;
 }
@@ -897,6 +885,9 @@ video {
 }
 .w-\[15px\] {
   width: 15px;
+}
+.w-\[100px\] {
+  width: 100px;
 }
 .w-\[140px\] {
   width: 140px;
@@ -943,11 +934,14 @@ video {
 .w-\[37px\] {
   width: 37px;
 }
-.w-\[700px\] {
-  width: 700px;
-}
 .w-\[400px\] {
   width: 400px;
+}
+.w-\[10px\] {
+  width: 10px;
+}
+.w-\[700px\] {
+  width: 700px;
 }
 .w-\[73\%\] {
   width: 73%;
@@ -958,26 +952,11 @@ video {
 .w-\[600px\] {
   width: 600px;
 }
-.w-\[100px\] {
-  width: 100px;
+.w-\[70px\] {
+  width: 70px;
 }
-.w-\[50\] {
-  width: 50;
-}
-.w-\[50\%\] {
-  width: 50%;
-}
-.w-\[30\%\] {
-  width: 30%;
-}
-.w-\[60\%\] {
-  width: 60%;
-}
-.w-\[10px\] {
-  width: 10px;
-}
-.w-\[\] {
-  width: ;
+.w-\[20px\] {
+  width: 20px;
 }
 .max-w-6xl {
   max-width: 72rem;
@@ -1081,9 +1060,6 @@ video {
 .rounded-full {
   border-radius: 9999px;
 }
-.rounded-sm {
-  border-radius: 0.125rem;
-}
 .rounded-tl-xl {
   border-top-left-radius: 0.75rem;
 }
@@ -1166,10 +1142,6 @@ video {
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-.bg-gray-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 .bg-transparent {
   background-color: transparent;
@@ -1337,6 +1309,10 @@ video {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+.px-\[15px\] {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1494,6 +1470,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
+.text-textColor2 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
@@ -1505,10 +1485,6 @@ video {
 .text-slate-50 {
   --tw-text-opacity: 1;
   color: rgb(248 250 252 / var(--tw-text-opacity));
-}
-.text-textColor2 {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;

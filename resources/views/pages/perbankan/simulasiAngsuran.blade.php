@@ -53,6 +53,28 @@
     </form>
 </div>
 
+<div style="visibility: collapse;" id="detailPopUpEdit" class=" h-[400px] fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
+    <div onclick="closeDetails()" class="flex-row-reverse flex cursor-pointer"><img src="{{ asset('/Icon-svg/exit.svg') }}" class="iconSize mt-3 mr-2" alt="close"></div>
+    <span class="font-extrabold text-xl translate-x-1 text-slate-800 ml-5 mt-2 ">Edit Data</span>
+    <div class="flex-col ml-5">
+      <form id="formEdit" action="" method="post">
+        @csrf
+        <div class="flex justify-between items-center mr-[20px]"  >
+          <span>Angsuran</span>
+          <input id="angsuran_edit" class="border-1 border-gray-500  p-2" type="number" name="angsuran" required>
+        </div>
+    </div>
+    <div class="flex flex-row mx-auto gap-4">
+      <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4 shadow-md">
+          <input onclick="closeDetails()"  type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
+      </div>
+      <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md">
+          <button type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Submit</button>  
+      </div>
+    </div>  
+    </form>
+</div>
+
 <div class=" text-center h-[150px] p-2 fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl" bg-white" style="visibility: collapse;" id="popUpStatus">
 <h5 id="statusTitlePopUp"></h5>
 <form action="" method="get" id="formUserStatus">
@@ -114,13 +136,13 @@
   <tr class="bg-tableColor-900 text-white text-center h-16">
     <td rowspan="2">Platfond</td>
     <th class="text-center border-1 border-white" colspan="{{count($JangkaWaktu)}}" scope="colgroup">Jangka Waktu</th>
+    <td rowspan="2">Hapus</td>
   </tr>
   <tr class="bg-tableColor-900 text-white text-center">
 
   @foreach($JangkaWaktu as $key=>$item)
     <th class="text-center border-1 border-white p-2" scope="col">{{$item->waktu}}</th>
   @endforeach
-
 
   </tr>
   @foreach($JumlahPinjaman as $key1=>$item)
@@ -129,10 +151,27 @@
     @foreach($Simulasi as $key2=>$item2)
     @foreach($JangkaWaktu as $key3=>$item3)
           @if($item2->id_jml_pinjaman == $item->id && $item2->id_jangka_waktu == $item3->id)
-            <td class="text-center">{{ $item2->angsuran}}</td>
+            <td class="text-center">
+                <div class="flex items-center">
+                    <span class="mr-2 w-[70px]">{{ $item2->angsuran}}</span>
+                    <a onclick="lihatDetailsEdit('{{ $item2->id}}')" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a>
+                </div>
+            </td>
           @endif
         @endforeach
       @endforeach
+    <td class="text-center">
+      <div class="flex justify-center items-center">
+      
+        <form method="POST" action="/simulasi/angsuran/delete/{{$item->jumlah}}" class="p-2 bg-buttonDelete rounded-md">
+        @csrf  
+        <button>
+              <img class="w-[20px]" src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
+          </button>
+        </form>
+      </div>
+    </td>
+
   </tr>
   @endforeach
 </table>
@@ -187,14 +226,25 @@
     blackBg.style.visibility = "visible";
     detailPopUp.style.visibility = "visible";
   }
+ const lihatDetailsEdit = (id)=>{
+    const blackBg = document.getElementById('detailPopUpBlackbg');
+    const detailPopUpEdit = document.getElementById('detailPopUpEdit');
+    const formEdit = document.getElementById('formEdit');
+    blackBg.style.visibility = "visible";
+    detailPopUpEdit.style.visibility = "visible";
+    formEdit.action="/simulasi/angsuran/edit/"+id;
+  }
   const closeDetails = ()=>{
     const blackBg = document.getElementById('detailPopUpBlackbg');
     const detailPopUp = document.getElementById('detailPopUp');
+    const detailPopUpEdit = document.getElementById('detailPopUpEdit');
+
     const popUpStatus = document.getElementById('popUpStatus');
     const popUpDelete = document.getElementById('popUpDelete');
 
     blackBg.style.visibility = "collapse";
     detailPopUp.style.visibility = "collapse";
+    detailPopUpEdit.style.visibility = "collapse";
     popUpStatus.style.visibility = "collapse";
     popUpDelete.style.visibility = "collapse";
 
