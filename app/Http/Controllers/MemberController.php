@@ -204,9 +204,11 @@ class MemberController extends Controller
                     $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
                     $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
                     // dd($BadanUsaha);
+                        $surat = Surat::find(1);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,
+                            'Surat' => $surat,
                         ];
                     }
 

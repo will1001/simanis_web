@@ -14,6 +14,7 @@ use App\Models\JangkaWaktu;
 use App\Models\SimulasiAngsuran;
 use App\Models\Instansi;
 use App\Models\User;
+use App\Models\Surat;
 use Illuminate\Support\Str;
 
 
@@ -85,14 +86,34 @@ class PerbankanController extends Controller
                     if($subPages == "suratRekomendasi"){
                         
                         $BadanUsaha = BadanUsaha::where('id',$id)->get();
-                        $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                        $user= User::where('nik',$BadanUsaha[0]->nik)->first();
+                        $surat = Surat::find(1);
+
+                        // dd($user);
+                        $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
                         // dd($BadanUsaha);
                             $params = [
                                 'BadanUsaha' => $BadanUsaha,
                                 'PengajuanDana' => $PengajuanDana,
                                 'pages' => $subPages,
                                 'fields'=>$this->fields,
-                                'Notifikasi' => $Notifikasi
+                                'Notifikasi' => $Notifikasi,
+                                'Surat' => $surat,
+
+                            ];
+                        }
+                        if($subPages == "downloadSurat"){
+                            $BadanUsaha = BadanUsaha::where('id',$id)->get();
+                            $user= User::where('nik',$BadanUsaha[0]->nik)->first();
+                            $surat = Surat::find(1);
+                            $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                            $params = [
+                                'BadanUsaha' => $BadanUsaha,
+                                'PengajuanDana' => $PengajuanDana,
+                                'pages' => $subPages,
+                                'fields'=>$this->fields,
+                                'Notifikasi' => $Notifikasi,
+                                'Surat' => $surat,
                             ];
                         }
 

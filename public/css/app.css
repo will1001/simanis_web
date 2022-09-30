@@ -883,6 +883,9 @@ video {
 .h-\[100px\] {
   height: 100px;
 }
+.h-\[1px\] {
+  height: 1px;
+}
 .max-h-full {
   max-height: 100%;
 }
@@ -1005,6 +1008,12 @@ video {
 }
 .w-\[40px\] {
   width: 40px;
+}
+.w-\[100\] {
+  width: 100;
+}
+.w-\[100\%\] {
+  width: 100%;
 }
 .max-w-6xl {
   max-width: 72rem;

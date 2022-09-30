@@ -1,7 +1,6 @@
 @extends('layouts.member')
 @section('content')
 @if($PengajuanDana)
-{{$PengajuanDana->updated_at}}
 @php
 $kopBulan=date("m",strtotime($PengajuanDana->updated_at));
 $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));

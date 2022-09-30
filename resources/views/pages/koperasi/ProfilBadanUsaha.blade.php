@@ -49,7 +49,13 @@ $fieldTitles = [
 ];
 ?>
 @section('content')
-<h1>Profil Badan Usaha</h1>
+<div>
+   <h2>Profil Badan Usaha</h2>
+   <span class="mr-2"><a  href="/koperasi/dashboard/ProfilBadanUsaha/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">1. Profil Badan Usaha</a></span>
+   <span><a href="/koperasi/dashboard/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
+</div>
+<div class="bg-black w-[100%] h-[1px] mt-2"></div>
+<br>
 @foreach($fields as $key => $field)
 @if($field == 'id')
 <span></span>
