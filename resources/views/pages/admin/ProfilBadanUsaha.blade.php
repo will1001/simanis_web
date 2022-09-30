@@ -89,7 +89,6 @@ $fieldTitles = [
     <img class="w-[200px] m-3" src="{{ asset($User->foto) }}" alt="">
 </div>
 <br>
-<h5>Ganti Foto</h5>
 <div>
         <form action="{{ url('/admin/downloadKartu') }}" method="get">
             <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>

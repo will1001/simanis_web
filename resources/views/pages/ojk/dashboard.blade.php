@@ -61,7 +61,7 @@
         <div class="flex ml-2 gap-1 justify-start items-center ">
             <form method="GET" action="/ojk/dashboard/ProfilBadanUsaha/{{$item->id}}">
                 <button>
-                    <img src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
+                    <img class="w-[30px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                 </button>
             </form>
             <!-- <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">

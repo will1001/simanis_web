@@ -98,15 +98,17 @@
         <div class="flex ml-2 gap-1 justify-start items-center ">
             <form method="GET" action="/perbankan/dashboard/ProfilBadanUsaha/{{$item->id}}">
                 <button>
-                    <img src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
+                    <img class="w-[60px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                 </button>
             </form>
-            <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
+            <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button ><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                    <button ><img class="w-[40px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
-                    <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+                    <form action="#">
+                    <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[50px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+                    </form>
         </div>
     </td>
 </tr>

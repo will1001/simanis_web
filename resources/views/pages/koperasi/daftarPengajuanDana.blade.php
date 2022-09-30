@@ -110,17 +110,15 @@
     <div class="flex ml-2 gap-1 justify-start items-center">
             <form method="GET" action="/koperasi/dashboard/ProfilBadanUsaha/{{$item->id}}">
                 <button>
-                    <img src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
+                    <img class="w-[40px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                 </button>
             </form>
-            <!-- <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" action="/koperasi/dana/{{$item->dana_id}}/status/Diterima" method="post">
-                    @csrf
-                    <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button ><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
-                </form> -->
-                <button class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" onclick="openPopUpTerima('{{$item->dana_id}}')"><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
-
-                    <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-2 rounded-xl"><img src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+            <form action="#">
+                <button class="bg-disetujuiTextColor text-white p-2 rounded-xl flex h-[36px] w-[37px]" onclick="openPopUpTerima('{{$item->dana_id}}')"><img class="w-[20px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+            </form>
+            <form action="#">
+                <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-2 rounded-xl"><img class="w-[30px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+            </form>
         </div>
 
             </div>

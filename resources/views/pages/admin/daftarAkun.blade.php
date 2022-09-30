@@ -35,10 +35,10 @@
       <input style="visibility: collapse;" id="namaInstansiInput" class="border-1 border-gray-500 p-2" type="string" placeholder="Nama Instansi" name="nama_instansi" >
     </div>
     <div class="flex flex-row mx-auto gap-4">
-      <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4 shadow-md">
+      <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4  shadow-md">
           <input onclick="closeDetails()"  type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
       </div>
-      <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md">
+      <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 ml-[122px] shadow-md">
           <button type="submit"  class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Tambah Akun</button>  
       </div>
     </div>  
@@ -89,7 +89,7 @@
                 <img src="{{ asset('/Icon-svg/icon.svg') }}" alt="role" class="flex ml-[18.5px] my-auto">
             </div>
         </div>
-         <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md ml-[210px]">
+         <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md ml-[350px]">
             <input onclick="lihatDetails()" type="button" value="Tambah Akun" class=" text-white text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
         </div>
     </div>
@@ -106,7 +106,7 @@
     <th class="text-center p-3 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <th class="text-center p-2">No</th>
     <th class="text-left pr-[250px]">NIK</th>
-    <th class="text-left pr-[250px]">Nama Akun</th>
+    <th class="text-left pr-[100px]">Nama Akun</th>
     <th class="text-left  ">Role</th>     
     <th class="text-left  ">Status</th>          
     <th class="text-left p-2 rounded-tr-xl">Aksi</th>   
@@ -128,8 +128,10 @@
     <td class="text-left  "><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-2">
       <div class="flex ml-2">
-        <img onclick="openPopUpStatus('{{$item->id}}','{{$item->status}}')" class="cursor-pointer mr-2" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
-        <span onclick="openPopUpDelete('{{$item->id}}')" class="bg-ditolakTextColor text-white p-2 rounded-xl cursor-pointer"><img src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></span>
+        <img onclick="openPopUpStatus('{{$item->id}}','{{$item->status}}')" class="cursor-pointer mr-2 w-[30px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
+        <div class="bg-ditolakTextColor p-2 rounded-lg w-[30px]">
+        <img onclick="openPopUpStatus('{{$item->id}}','{{$item->status}}')" class="cursor-pointer mr-2 w-[50px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon">
+        </div>
       </div>
     </td>
   </tr>

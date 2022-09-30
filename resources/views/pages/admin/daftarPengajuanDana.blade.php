@@ -125,16 +125,16 @@
             <div class="flex ml-2 gap-1 justify-start items-center">
                 <form method="GET" action="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$item->id_badan_usaha}}">
                     <button>
-                        <img src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
+                        <img class="w-[250px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                     </button>
                 </form>
-                <form class="bg-disetujuiTextColor text-white p-2 rounded-xl flex " action="/dana/{{$item->id}}/status/Diterima" method="post">
+                <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex " action="/dana/{{$item->id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button ><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                    <button ><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon" class="w-[150px]"></button>
                 </form>
-                <form class="bg-ditolakTextColor text-white p-2 rounded-xl" onclick="openPopUp('{{$item->id}}')" action="#" method="get">
-                    <button  type="submit"><img src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+                <form class="bg-ditolakTextColor text-white p-1 rounded-lg" onclick="openPopUp('{{$item->id}}')" action="#" method="get">
+                    <button  type="submit"><img src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon" class="w-[150px]"></button>
                 </form>
 
             </div>
