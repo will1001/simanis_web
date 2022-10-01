@@ -12,6 +12,7 @@ use App\Models\PengajuanDana;
 use App\Models\Notifikasi;
 use App\Models\Instansi;
 use App\Models\Surat;
+use App\Models\Kabupaten;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -175,6 +176,7 @@ class AdminController extends Controller
                         ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                         ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
                         ->paginate(100, $this->fields);
+                        $Kabupaten = Kabupaten::all();
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'SlideShow' => SlideShow::all(),
@@ -182,6 +184,7 @@ class AdminController extends Controller
                             'keyword' => "",
                             'pages' => $pages,
                             'Notifikasi' => $Notifikasi,
+                            'Kabupaten' => $Kabupaten,
                             'fields'=>$this->fields2
     
                         ];
@@ -304,9 +307,12 @@ class AdminController extends Controller
 
     public function deleteBadanUsahaPerKabupaten(Request $r)
     {
-        // dd($r);
+        // dd(count($r->request));
+        $filter= $r->except(['_token']);
+        // unset($filter['KABUPATEN_LOMBOK_BARAT']);
+        $BadanUsaha=BadanUsaha::whereIn('id_kabupaten', $filter)->delete();
+        // dd($BadanUsaha);
 
-        // $BadanUsaha = BadanUsaha::find(1);
         // $BadanUsaha->delete();
 
         return redirect('/admin/tabel');

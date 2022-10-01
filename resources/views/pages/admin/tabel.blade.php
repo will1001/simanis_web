@@ -147,7 +147,7 @@ $fieldTitles = [
 </div>
 
 
-<div onclick="closeDetails()" style="visibility: collapse;" id="PopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
+<div onclick="closeDetails(event)" style="visibility: collapse;" id="PopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
 
 <div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 flex overflow-scroll p-3">
@@ -155,7 +155,7 @@ $fieldTitles = [
   <h3>Detail Badan Usaha</h3>  
   <div id="listDataBadanUsaha" class="w-[500px] h-[300px] px-3 pb-[100px] overflow-auto"></div>
   <div class="flex justify-center">
-      <button onclick="closeDetails()" class="bg-buttonColor-900 px-4 py-2 text-white">OK</button>
+      <button onclick="closeDetails(event)" class="bg-buttonColor-900 px-4 py-2 text-white">OK</button>
   </div>
 </div>
 </div>
@@ -164,15 +164,20 @@ $fieldTitles = [
   <h3>Hapus Data Per Kabupaten/Kota</h3>  
  <form action="{{route('admin_delete_per_kabupaten')}}" method="post">
   @csrf
-  <input type="checkbox" name="kabupaten"><span>bima</span>
-  <input type="checkbox" name="kabupaten"><span>mataram</span>
-  <div class="flex justify-center">
-      <button class="bg-buttonDelete px-4 py-2 text-white">Hapus Data Kab/Kota</button>
-  </div>
+  @foreach($Kabupaten as $key=>$item)
+    <input type="checkbox" name="{{$item->name}}" value="{{$item->id}}"><span class="ml-2">{{$item->name}}</span>
+    <br>
+  @endforeach
+ <div class="flex justify-center">
+    <div class="flex justify-center mr-3">
+        <button onclick="closeDetails(event)" class="bg-transparent px-4 py-2 text-textColor2 border-1 border-gray-300 rounded-md">Batalkan</button>
+    </div>
+    <div class="flex justify-center">
+        <button class="bg-buttonDelete px-4 py-2 text-white rounded-md">Hapus Data Kab/Kota</button>
+    </div>
+ </div>
  </form>
-  <div class="flex justify-center">
-      <button onclick="closeDetails()" class="bg-buttonColor-900 px-4 py-2 text-white">OK</button>
-  </div>
+ 
 </div>
 </div>
 @endsection
@@ -245,7 +250,8 @@ const lihatDetails = (id,e)=>{
 
 }
 
-const closeDetails = ()=>{
+const closeDetails = (e)=>{
+  e.preventDefault();
     const blackBg = document.getElementById('PopUpBlackbg');
     const detailPopUp = document.getElementById('detailPopUp');
     const listDataBadanUsaha = document.getElementById('listDataBadanUsaha');
