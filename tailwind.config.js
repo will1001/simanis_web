@@ -41,6 +41,7 @@ module.exports = {
                 textColor1: "#D1D5DB",
                 textColor2: "#374151",
                 buttonDelete: "#B91C1C",
+                boxColor1: "#FEF2F2",
             },
         },
     },

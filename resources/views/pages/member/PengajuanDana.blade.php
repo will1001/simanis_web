@@ -64,12 +64,63 @@ $baseUrl = env('APP_URL').'/';
     @if($item->instansi == "KOPERASI")
       <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
     @endif
+    @if($item->alasan == "Pengajuan Dana Anda diterima Dinas Perindustrian")
+      <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>
+    @endif
   </td>
   </tr>
   @endforeach
 
 </table>
 <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
+</div>
+<div style="visibility: collapse;" id="detailPopUpDataTambahan" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
+<h4>Upload KTP & KK</h4>
+<div class="flex w-full">
+  <div>
+      <p>Upload Dokumen Pendukung</p>
+      <div class="bg-boxColor1 p-4">
+          <div>1. Kartu Tanda Penduduk (KTP)</div>
+          <div>2. Kartu keluarga (KK)</div>
+      </div>
+  </div>
+  <div class="flex justify-around items-end w-[500px]">
+    <form action="/member/data/pendukung" method="post" enctype="multipart/form-data">
+      @csrf
+      <div class="flex">
+        <span class="mr-[100px]">KTP : </span>
+        <label for="dropzone-filektp" class="flex flex-col justify-center items-center h-32 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 p-3">
+            <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                <img src="{{ asset('/Icon-svg/file.svg') }}" />
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
+            </div>
+            <input onchange="uploadKtp(event)" id="dropzone-filektp" accept="image/x-png,image/gif,image/jpeg" name="ktp" type="file" class="hidden" />
+        </label>
+      </div>
+      <h5 id="ktpLabel"></h5>
+      <div class="flex">
+        <span class="mr-[110px]">KK  : </span>
+        <label for="dropzone-filekk" class="flex flex-col justify-center items-center h-32 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 p-3">
+            <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                <img src="{{ asset('/Icon-svg/file.svg') }}" />
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
+            </div>
+            <input onchange="uploadKK(event)" id="dropzone-filekk" accept="image/x-png,image/gif,image/jpeg" name="kk" type="file" class="hidden" />
+        </label>
+      </div>
+      <h5 id="kkLabel"></h5>
+
+      <br>
+      <div class="flex justify-end">
+        <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit Pengajuan</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
 </div>
 <div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
 <h4>Ajukan Dana</h4>
@@ -155,6 +206,16 @@ $baseUrl = env('APP_URL').'/';
       blackBg.style.visibility = "visible";
       detailPopUp.style.visibility = "visible";
     }
+    
+  }
+
+  const lihatDetailsDataTambahan = ()=>{
+    const blackBg = document.getElementById('detailPopUpBlackbg');
+    const detailPopUpDataTambahan = document.getElementById('detailPopUpDataTambahan');
+   
+
+      blackBg.style.visibility = "visible";
+      detailPopUpDataTambahan.style.visibility = "visible";
     
   }
   const closeDetails = ()=>{
@@ -250,5 +311,14 @@ $baseUrl = env('APP_URL').'/';
     const simulasi = SimulasiAngsuran.filter(e=>e.id_instansi === instansi_user_id[0].id && e.id_jml_pinjaman ===  jmlDanaSelectChild.value && e.id_jangka_waktu === waktuPinjamanSelectChild.value)
     angsuranValue.className = "border-1 border-gray-500 w-[70%] p-2";
     angsuranValue.innerHTML = Number(simulasi[0].angsuran).toString();
+  }
+
+  const uploadKtp = (e)=>{
+    const ktpLabel = document.getElementById('ktpLabel');
+    ktpLabel.innerHTML = e.target.value.split("\\").pop();
+  }
+  const uploadKK = (e)=>{
+    const kkLabel = document.getElementById('kkLabel');
+    kkLabel.innerHTML = e.target.value.split("\\").pop();
   }
 </script>

@@ -55,6 +55,7 @@ Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
 Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
 
 Route::get('/member/{pages}/{subPages?}/{id?}', [MemberController::class, 'index'])->name('member');
+Route::post('/member/data/pendukung', [MemberController::class, 'uploadDataPendukung']);
 Route::get('/perbankan/{pages}/{subPages?}/{id?}', [PerbankanController::class, 'index']);
 Route::get('/koperasi/{pages}/{subPages?}/{id?}', [KoperasiController::class, 'index'])->name('koperasi');
 Route::get('/perdagangan/{pages}/{subPages?}/{id?}', [PerdaganganController::class, 'index'])->name('perdagangan');

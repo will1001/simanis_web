@@ -376,4 +376,12 @@ class MemberController extends Controller
 
       
     }
+    function uploadDataPendukung(Request $r){
+        dd($r);
+
+        
+        return redirect('member/PengajuanDana');
+
+      
+    }
 }

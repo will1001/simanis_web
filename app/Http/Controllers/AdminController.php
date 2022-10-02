@@ -380,7 +380,7 @@ class AdminController extends Controller
         if($status == "Ditolak"){
             $PengajuanDana->alasan = $r->input('alasan');
         }else{
-            $PengajuanDana->alasan = "Pengajuan Dana Anda diterima Dinas Perindustrian,Tinggal Menunggu Persutujuan Instansi terkait (Bank / koperasi)";
+            $PengajuanDana->alasan = "Pengajuan Dana Anda diterima Dinas Perindustrian";
         }
 
         $PengajuanDana->status = $status;
@@ -502,5 +502,5 @@ class AdminController extends Controller
         return redirect('/admin/settingSurat');
 
     }
-    //
+   
 }
