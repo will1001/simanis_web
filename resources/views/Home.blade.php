@@ -66,7 +66,7 @@ UMKM NTB
 
     .loginRegisterContainer {
         position: absolute;
-        top: 600px;
+        top: 680px;
         left: 108px;
     }
 
@@ -382,7 +382,7 @@ $surveyChart = array(
 $baseUrl = env('APP_URL');
 ?>
 <section class="" style="background-color: #17172d">
-    <img class="h-[600px] w-full object-cover" src="{{$baseUrl.$SlideShow[0]->img}}" alt="">
+    <img class="h-[700px] w-full object-cover" src="{{$baseUrl.$SlideShow[0]->img}}" alt="">
     <!-- <img class="bannerimg" src="{{ asset('images/bannerold.png') }}" alt="">
     <img class="mobilebannerimg" src="{{ asset('images/mobilebanner.png') }}" alt="">
     <img class="fotobanner1" src="{{ asset('images/fotobanner1.png') }}" alt="">
