@@ -47,6 +47,7 @@ class AdminController extends Controller
         'badan_usaha.investasi_modal',
         'badan_usaha.jumlah_tenaga_kerja_pria',
         'badan_usaha.jumlah_tenaga_kerja_wanita',
+        'badan_usaha.rata_rata_pendidikan_tenaga_kerja',
         'badan_usaha.kapasitas_produksi_perbulan',
         'badan_usaha.satuan_produksi',
         'badan_usaha.nilai_produksi_perbulan',
@@ -80,6 +81,7 @@ class AdminController extends Controller
         'investasi_modal',
         'jumlah_tenaga_kerja_pria',
         'jumlah_tenaga_kerja_wanita',
+        'rata_rata_pendidikan_tenaga_kerja',
         'kapasitas_produksi_perbulan',
         'satuan_produksi',
         'nilai_produksi_perbulan',
@@ -258,6 +260,8 @@ class AdminController extends Controller
     {
         $keyword = $request->input('keyword');
         $Notifikasi = Notifikasi::where("user_role","ADMIN")->where("nik",Auth::user()->nik)->where("status","not read")->get();
+        $Kabupaten = Kabupaten::all();
+
 
 
         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
@@ -278,6 +282,7 @@ class AdminController extends Controller
         'keyword' => $keyword, 
         'pages' => 'tabel', 
         'Notifikasi' => $Notifikasi,
+        'Kabupaten' => $Kabupaten,
         'fields'=>$this->fields2
     ]);
     }

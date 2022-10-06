@@ -128,7 +128,7 @@
                         <img class="w-[250px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                     </button>
                 </form>
-                <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex " action="/dana/{{$item->id}}/status/Diterima" method="post">
+                <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex " action="/dana/{{$item->id}}/status/Menunggu" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
                     <button ><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon" class="w-[150px]"></button>

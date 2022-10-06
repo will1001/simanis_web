@@ -8,6 +8,7 @@ use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\CabangIndustri;
 use App\Models\SubCabangIndustri;
+use App\Models\User;
 use App\Models\Kbli;
 use App\Models\Notifikasi;
 use Illuminate\Support\Str;
@@ -54,6 +55,16 @@ class FormController extends Controller
                 $r->merge([
                     'id' => Str::uuid(36),
                 ]);
+                $User=User::where('nik',$r->input('nik'))->first();
+                if(empty($User)){
+                    $users = new User([
+                        'id' => (string) Str::uuid()->getHex(),
+                        'nik' => $r->input('nik'),
+                        'password' => Hash::make('12345678'),
+                    ]);
+                    $users->save();
+
+                }
             }
 
             $input = $r->all();

@@ -16,6 +16,8 @@ use App\Models\Instansi;
 use App\Models\User;
 use App\Models\Surat;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PengajuanDanaKoperasiExport;
 
 
 
@@ -152,7 +154,7 @@ class KoperasiController extends Controller
                             'pengajuan_dana.updated_at as dana_updated_at',
                             )
                         ->where("instansi","KOPERASI")
-                        ->where("pengajuan_dana.status","Diterima")
+                        ->where("pengajuan_dana.status","Menunggu")
                         ->orderBy('created_at', 'desc')->get();
     
                         $params = [
@@ -242,5 +244,11 @@ class KoperasiController extends Controller
 
         return redirect('/koperasi/daftarPengajuanDana');
 
+    }
+
+    public function exportExcel()
+    {
+
+        return Excel::download(new PengajuanDanaKoperasiExport, 'Pengajuan Dana.xlsx');
     }
 }

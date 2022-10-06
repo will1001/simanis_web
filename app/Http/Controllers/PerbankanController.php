@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Models\BadanUsaha;
 use App\Models\Notifikasi;
@@ -16,6 +17,8 @@ use App\Models\Instansi;
 use App\Models\User;
 use App\Models\Surat;
 use Illuminate\Support\Str;
+use App\Exports\PengajuanDanaPerbankanExport;
+
 
 
 
@@ -152,7 +155,7 @@ class PerbankanController extends Controller
                             'pengajuan_dana.updated_at as dana_updated_at',
                             )
                         ->where("instansi","BANK")
-                        ->where("pengajuan_dana.status","Diterima")
+                        ->where("pengajuan_dana.status","Menunggu")
                         ->orderBy('created_at', 'desc')->get();
                         // dd($PengajuanDana);
                         $params = [
@@ -340,5 +343,11 @@ class PerbankanController extends Controller
 
         return redirect('/admin/daftarPengajuanDana');
 
+    }
+
+    public function exportExcel()
+    {
+
+        return Excel::download(new PengajuanDanaPerbankanExport, 'Pengajuan Dana.xlsx');
     }
 }

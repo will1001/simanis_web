@@ -10,6 +10,9 @@ use App\Models\BadanUsaha;
 use App\Models\Notifikasi;
 use App\Models\PengajuanDana;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PengajuanDanaOJKExport;
+
 
 
 
@@ -91,6 +94,7 @@ class OjkController extends Controller
                             'kabupaten.name as kabupaten',
                             'pengajuan_dana.id as dana_id',
                             'pengajuan_dana.jumlah_dana',
+                            'pengajuan_dana.waktu_pinjaman',
                             'pengajuan_dana.status',
                             'pengajuan_dana.instansi',
                             'pengajuan_dana.jenis_pengajuan',
@@ -100,8 +104,8 @@ class OjkController extends Controller
                             'pengajuan_dana.updated_at as dana_updated_at',
                             )
                         ->where("instansi","BANK")
-                        ->where("pengajuan_dana.status","Diterima")
-                        ->where("pengajuan_dana.alasan","Selamat Pengajuan Dana Anda diterima")
+                        // ->where("pengajuan_dana.status","Diterima")
+                        // ->where("pengajuan_dana.alasan","Selamat Pengajuan Dana Anda diterima")
                         ->orderBy('created_at', 'desc')->get();
     
                         $params = [
@@ -122,5 +126,10 @@ class OjkController extends Controller
         } else {
             return redirect('/login');
         }
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new PengajuanDanaOJKExport, 'Pengajuan Dana.xlsx');
     }
 }

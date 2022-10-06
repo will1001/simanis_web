@@ -130,7 +130,7 @@
       <div class="flex ml-2">
         <img onclick="openPopUpStatus('{{$item->id}}','{{$item->status}}')" class="cursor-pointer mr-2 w-[30px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
         <div class="bg-ditolakTextColor p-2 rounded-lg w-[30px]">
-        <img onclick="openPopUpStatus('{{$item->id}}','{{$item->status}}')" class="cursor-pointer mr-2 w-[50px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon">
+        <img onclick="openPopUpDelete('{{$item->id}}')" class="cursor-pointer mr-2 w-[50px]" src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
         </div>
       </div>
     </td>

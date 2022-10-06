@@ -790,8 +790,8 @@ video {
 .hidden {
   display: none;
 }
-.h-\[600px\] {
-  height: 600px;
+.h-\[700px\] {
+  height: 700px;
 }
 .h-5 {
   height: 1.25rem;
@@ -870,12 +870,6 @@ video {
 }
 .h-64 {
   height: 16rem;
-}
-.h-\[500px\] {
-  height: 500px;
-}
-.h-\[700px\] {
-  height: 700px;
 }
 .max-h-full {
   max-height: 100%;

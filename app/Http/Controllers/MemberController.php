@@ -22,6 +22,7 @@ use App\Models\JangkaWaktu;
 use App\Models\SimulasiAngsuran;
 use App\Models\Instansi;
 use App\Models\Surat;
+use App\Models\DataPendukung;
 
 
 use Illuminate\Support\Str;
@@ -150,6 +151,7 @@ class MemberController extends Controller
                     $JangkaWaktu = JangkaWaktu::all();
                     $SimulasiAngsuran = SimulasiAngsuran::all();
                     $Instansi = Instansi::all();
+                    $DataPendukung = DataPendukung::where('id_badan_usaha',$BadanUsaha[0]->id)->first();
                     // dd($Instansi);
 
 
@@ -160,6 +162,7 @@ class MemberController extends Controller
                             'JangkaWaktu' => $JangkaWaktu,
                             'SimulasiAngsuran' => $SimulasiAngsuran,
                             'Instansi' => $Instansi,
+                            'DataPendukung' => $DataPendukung,
                         ];
                     }
                     if($pages == "produk"){
@@ -281,6 +284,17 @@ class MemberController extends Controller
         // dd($BadanUsaha->nama_usaha);
 
         $notifikasi->save();
+        if($instansi == "BANK"){
+            $notifikasi = new Notifikasi([
+                'id' => (string) Str::uuid(),
+                'nik' => "33333333",
+                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
+                'user_role' => "OJK",
+            ]);
+            
+            $notifikasi->save();
+        }
+        
         $pengajuanDana->save();
         return redirect('/member/PengajuanDana');
         // $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->get();
@@ -350,8 +364,8 @@ class MemberController extends Controller
 
     function ganti_foto(Request $r){
 
+        $filename;
         $User = User::find(Auth::id());
-
 
 
         if (!empty($r->file('foto'))) {
@@ -377,7 +391,59 @@ class MemberController extends Controller
       
     }
     function uploadDataPendukung(Request $r){
-        dd($r);
+        // dd($r);
+        $filenameKTP;
+        $filenameKK;
+        $User = User::find(Auth::id());
+        $BadanUsaha = BadanUsaha::where('nik',$User->nik)->first();
+        // $DataPendukung = DataPendukung::where('id_badan_usaha',$BadanUsaha->id)->first();
+        // dd($r);
+
+        
+        // if (!empty($DataPendukung)) {
+        //     dd("data ada");
+        // }else{
+        //     dd("data kosong");
+
+        // }
+
+
+        if (!empty($r->file('ktp'))) {
+            $file =$r->file('ktp');
+            $extension = $file->getClientOriginalExtension(); 
+            $filenameKTP = Auth::id().'.' . $extension;
+
+            $file->move(public_path('data_tambahan/'), $filenameKTP);
+            // $data['foto']= 'images/'.$filename;
+
+        }
+        // dd($data);
+       
+
+
+        if (!empty($r->file('kk'))) {
+            $file =$r->file('kk');
+            $extension = $file->getClientOriginalExtension(); 
+            $filenameKK = Auth::id().'.' . $extension;
+
+            $file->move(public_path('data_tambahan/'), $filenameKK);
+            // $data['foto']= 'images/'.$filename;
+
+        }
+        // dd($data);
+       
+
+
+
+        $data= array(
+            'id' => (string) Str::uuid(),
+            'id_badan_usaha' => $BadanUsaha->id,
+            'ktp' => 'data_tambahan/'.$filenameKTP,
+            'kk' => 'data_tambahan/'.$filenameKK,
+        );
+        // dd($data);
+        $DataPendukung = new DataPendukung($data);
+        $DataPendukung->save();
 
         
         return redirect('member/PengajuanDana');

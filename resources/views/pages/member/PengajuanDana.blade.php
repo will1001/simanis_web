@@ -60,12 +60,20 @@ $baseUrl = env('APP_URL').'/';
     <td class="text-center p-4 ">{{$item->instansi}}</td>
     <td class="text-center p-2"><span 
       class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
-    <td class="text-center p-4 ">{{$item->alasan}} <br> 
+    <td class="text-center p-4 ">
     @if($item->instansi == "KOPERASI")
-      <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
+      {{$item->alasan}} <br> 
+      @if($item->status == "Diterima")
+        <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
+      @endif
     @endif
     @if($item->alasan == "Pengajuan Dana Anda diterima Dinas Perindustrian")
-      <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>
+      @if(empty($DataPendukung))
+      {{$item->alasan}} <br> 
+        <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>
+      @else
+        <span>Menunggu Persutujuan dari Instansi Terkait</span>
+      @endif
     @endif
   </td>
   </tr>
@@ -228,6 +236,8 @@ $baseUrl = env('APP_URL').'/';
     const jmlDanaSelect = document.getElementById("jmlDanaSelect");
     const waktuPinjamanSelect = document.getElementById("waktuPinjamanSelect");
     const angsuranDiv = document.getElementById("angsuranDiv");
+    const detailPopUpDataTambahan = document.getElementById('detailPopUpDataTambahan');
+
     blackBg.style.visibility = "collapse";
     detailPopUp.style.visibility = "collapse";
     detailKoperasi.style.visibility = "collapse";
@@ -236,6 +246,7 @@ $baseUrl = env('APP_URL').'/';
       jmlDanaSelect.style.visibility = "collapse";
       waktuPinjamanSelect.style.visibility = "collapse";
       angsuranDiv.style.visibility = "collapse";
+      detailPopUpDataTambahan.style.visibility = "collapse";
   }
 
   const instansiChange = ()=>{

@@ -4,8 +4,9 @@ namespace App\Exports;
 
 use App\Models\BadanUsaha;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class BadanUsahaExport implements FromCollection
+class BadanUsahaExport implements FromCollection,WithHeadings
 {
     public function collection()
     {
@@ -42,5 +43,38 @@ class BadanUsahaExport implements FromCollection
                 'badan_usaha.created_at',
                 'badan_usaha.updated_at',
             ]);
+    }
+
+    public function headings(): array
+    {
+        return [
+            'nik',
+            'nama_direktur',
+            'kabupaten.name as kabupaten',
+            'kecamatan',
+            'kelurahan',
+            'alamat_lengkap',
+            'no_hp',
+            'nama_usaha',
+            'bentuk_usaha',
+            'tahun_berdiri',
+            'formal_informal',
+            'nib_tahun',
+            'nomor_sertifikat_halal_tahun',
+            'sertifikat_merek_tahun',
+            'nomor_test_report_tahun',
+            'sni_tahun',
+            'jenis_usaha',
+            'cabang_industri',
+            'investasi_modal',
+            'jumlah_tenaga_kerja_pria',
+            'jumlah_tenaga_kerja_wanita',
+            'kapasitas_produksi_perbulan',
+            'satuan_produksi',
+            'nilai_produksi_perbulan',
+            'nilai_bahan_baku_perbulan',
+            'created_at',
+            'updated_at',
+        ];
     }
 }

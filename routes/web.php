@@ -51,6 +51,9 @@ Route::get('/admin/delete/deleteAll', [AdminController::class, 'deleteAllBadanUs
 Route::post('/kabupaten/delete/admin', [AdminController::class, 'deleteBadanUsahaPerKabupaten'])->name('admin_delete_per_kabupaten');
 Route::post('/import/data/admin', [AdminController::class, 'importExcel'])->name('importExcel');
 Route::get('/export/data/admin', [AdminController::class, 'exportExcel'])->name('exportExcel');
+Route::get('/export/dana/perbankan', [PerbankanController::class, 'exportExcel']);
+Route::get('/export/dana/koperasi', [KoperasiController::class, 'exportExcel']);
+Route::get('/export/dana/ojk', [OjkController::class, 'exportExcel']);
 Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
 Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
 

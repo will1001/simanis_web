@@ -68,6 +68,12 @@
     </div>
 </div> -->
 
+<div class="flex justify-end">
+    <form action="/export/dana/koperasi" method="GET">
+        <button class="flex items-center bg-menungguTextColor rounded-xl text-white px-3 py-2" type="submit" id="button-addon2"><img src="{{ asset('/Icon-svg/ekspor.svg') }}" class="mr-2"> <span>Export</span></button>
+    </form>
+</div>
+
 <table class="badan_usaha_container ml-4 bg-white mt-3 h-20"> 
   <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
     <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
