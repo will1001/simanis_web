@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
 use App\Models\BadanUsaha;
+use App\Models\Kabupaten;
 use App\Models\Notifikasi;
 use App\Models\Produk;
 use Illuminate\Support\Str;
@@ -36,7 +37,26 @@ class PerdaganganController extends Controller
                     $BadanUsaha = BadanUsaha::find($id);
                 }
                 if ($subPages != "") {
-                    return view("pages.perdagangan.{$subPages}", ['BadanUsaha' => $BadanUsaha,  'pages' => $pages,'fields'=>$this->fields, 'Notifikasi' => $Notifikasi]);
+                    $params = [
+                        'pages' => $pages, 
+                        'Notifikasi' => $Notifikasi,
+                        'User' => Auth::user()
+                    ];
+
+                 
+
+                    if($subPages == "formTambahToko"){
+                        $Kabupaten = Http::withHeaders([
+                            'signature' => 'mns-1275151',
+                        ])->get('https://absensinow.id/api/city');
+
+                        // dd($Kabupaten['return']);
+
+                        $Kabupaten2 = Http::get('https://jsonplaceholder.typicode.com/todos');
+                        $params['Kabupaten'] = $Kabupaten;
+                    }
+
+                    return view("pages.perdagangan.{$subPages}", $params);
                 } else {
                     
                     // dd($BadanUsaha);
@@ -50,6 +70,10 @@ class PerdaganganController extends Controller
 
                     if($pages == "produkNTBMall"){
                        
+                    }
+                    if($pages == "daftarToko"){
+                        $ListToko = [];
+                        $params = ['ListToko' => $ListToko];
                     }
 
                     $params['User'] = Auth::user();

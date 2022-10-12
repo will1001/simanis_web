@@ -20,6 +20,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- @vite('resources/css/app.css') -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  
+
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin_template/assets/img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('admin_template/assets/img/favicon.png') }}">
   <link
@@ -48,9 +50,13 @@
         <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
         <span>Simanis.</span>
       </div>
-      <a href="{{ url('/perdagangan/dashboard') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+      <a href="{{ url('/perdagangan/dashboard') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='dashboard'?'bg-blue-200':''}} p-2 rounded-md">
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
         <span>Dashboard</span>
+      </a>
+      <a href="{{ url('/perdagangan/daftarToko') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='daftarToko'?'bg-blue-200':''}} p-2 rounded-md">
+        <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
+        <span>Daftar Toko</span>
       </a>
       <a href="{{ url('/perdagangan/produkNTBMall') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
         <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
@@ -218,6 +224,7 @@
       @yield('content')
     </div>
     <!--   Core JS Files   -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('admin_template/assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('admin_template/assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin_template/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
