@@ -17,11 +17,11 @@ $bentukUsaha = [
 ];
 $legalitasUsaha = [
     (object)array(
-        "id" => "FORMAL",
+        "id" => "1",
         "name" => "FORMAL"
     ),
     (object)array(
-        "id" => "INFORMAL",
+        "id" => "0",
         "name" => "INFORMAL"
     )
 ];
@@ -242,7 +242,7 @@ $forms = array(
                 <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 pr-[150px] py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
-                    <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
+                    <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'formal_informal'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
                     @endforeach
                 </select>
                 @elseif($form->type == 'file')

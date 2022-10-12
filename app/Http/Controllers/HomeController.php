@@ -163,6 +163,7 @@ class HomeController extends Controller
     public function chartDetail(Request $r, $chartId, $title)
     {
         $filter = json_decode($r->input("filter"));
+        dd($filter);
         $kabupaten = Kabupaten::all()->toArray();
         $cabangIndustri = CabangIndustri::all()->toArray();
         $yearNow = Carbon::now()->year;
