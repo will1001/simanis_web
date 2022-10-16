@@ -87,12 +87,24 @@
     <th class="text-left">
         <div class="flex justify-center gap-1 my-auto "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Jumlah Dana</div>
     </th>              
-    <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Waktu Pinjaman</span></th>   
+    <th class="text-left p-2 "><span class="flex justify-center my-auto" >Waktu Pinjaman</span></th>   
     <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Tanggal</span></th>   
-    <!-- <th class="text-left p-2 "><span class="">Status</span></th>    -->
+    <th class="text-left p-2 "><span class="">Status</span></th>   
     <th class="rounded-tr-xl">Aksi</span></th>   
   </tr>
   @foreach($PengajuanDana as $key=>$item)
+  @php
+            $statusClass = '';
+            if($item->status == "Menunggu"){
+            $statusClass = 'bg-menungguBgColor text-menungguTextColor';
+            }
+            if($item->status == "Ditolak"){
+                $statusClass = 'bg-ditolakBgColor text-ditolakTextColor';
+            }
+            if($item->status == "Diterima"){
+                $statusClass = 'bg-disetujuiBgColor text-disetujuiTextColor';
+            }
+        @endphp
   <tr class="bg-white h-14 gap-2">
   <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
     <td class="text-center text-slate-700 ">{{++$key}}</td>
@@ -101,7 +113,7 @@
     <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->jumlah_dana}}</span></td>
     <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
     <td class="text-center p-2">{{date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
-    <!-- <td class="text-left p-2"><span class="bg-ditolakBgColor text-ditolakTextColor p-2 rounded-xl">Ditolak</span></td> -->
+    <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-2  cursor-pointer">
         <div class="flex ml-2 gap-1 justify-start items-center ">
             <form method="GET" action="/perbankan/dashboard/ProfilBadanUsaha/{{$item->id}}">
