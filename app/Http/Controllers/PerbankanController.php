@@ -13,6 +13,7 @@ use App\Models\PengajuanDana;
 use App\Models\JumlahPinjaman;
 use App\Models\JangkaWaktu;
 use App\Models\SimulasiAngsuran;
+use App\Models\DataPendukung;
 use App\Models\Instansi;
 use App\Models\User;
 use App\Models\Surat;
@@ -86,6 +87,16 @@ class PerbankanController extends Controller
                 }
                 if ($subPages != "") {
                     $params =['BadanUsaha' => $BadanUsaha, 'pages' => $subPages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi];
+                    if($subPages == "dataTambahan"){
+                        $dataPendukung = DataPendukung::where('id_badan_usaha',$id)->first();
+                        $params = [
+                            'BadanUsaha' => $BadanUsaha,
+                            'dataPendukung' => $dataPendukung,
+                            'pages' => $subPages,
+                            'Notifikasi' => $Notifikasi
+
+                        ];
+                    }
                     if($subPages == "suratRekomendasi"){
                         
                         $BadanUsaha = BadanUsaha::where('id',$id)->get();
@@ -135,6 +146,8 @@ class PerbankanController extends Controller
                 } else {
 
                     $params=['pages' => $pages];
+
+                  
 
                     if($pages == "daftarPengajuanDana"){
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')

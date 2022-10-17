@@ -13,6 +13,7 @@ use App\Models\Notifikasi;
 use App\Models\Instansi;
 use App\Models\Surat;
 use App\Models\Kabupaten;
+use App\Models\CabangIndustri;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -81,7 +82,7 @@ class AdminController extends Controller
         'investasi_modal',
         'jumlah_tenaga_kerja_pria',
         'jumlah_tenaga_kerja_wanita',
-        'rata_rata_pendidikan_tenaga_kerja',
+        // 'rata_rata_pendidikan_tenaga_kerja',
         'kapasitas_produksi_perbulan',
         'satuan_produksi',
         'nilai_produksi_perbulan',
@@ -146,8 +147,10 @@ class AdminController extends Controller
 
                 }
                 if ($subPages != "") {
+                    
                     $subPagesParams = ['BadanUsaha' => $BadanUsaha,  'pages' => $subPages,'fields'=>$this->fields2, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()];
-                    if($pages == "downloadKartu"){
+                    
+                    if($subPages == "downloadKartu"){
                         $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
                         $CabangIndustri = CabangIndustri::where('name',$BadanUsaha[0]->cabang_industri)->first();
                         $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
@@ -155,13 +158,19 @@ class AdminController extends Controller
     
                             $subPagesParams['BadanUsaha'] = $BadanUsaha;
                         }
-                    if($pages == "ProfilBadanUsaha"){
-                        $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
-                        $CabangIndustri = CabangIndustri::where('name',$BadanUsaha[0]->cabang_industri)->first();
-                        $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
-                        $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
-    
+
+                    if($subPages == "ProfilBadanUsaha"){
+
+                        $kabupaten = Kabupaten::find($BadanUsaha->id_kabupaten);
+
+                        $CabangIndustri = CabangIndustri::where('name',$BadanUsaha->cabang_industri)->first();
+
+                        $BadanUsaha->kabupaten = $kabupaten ? $kabupaten->name : null;
+
+                        $BadanUsaha->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
+
                             $subPagesParams['BadanUsaha'] = $BadanUsaha;
+
                         }
                         // dd($subPagesParams);
                     return view("pages.admin.{$subPages}", $subPagesParams);
