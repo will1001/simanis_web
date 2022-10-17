@@ -411,7 +411,7 @@ class MemberController extends Controller
         if (!empty($r->file('ktp'))) {
             $file =$r->file('ktp');
             $extension = $file->getClientOriginalExtension(); 
-            $filenameKTP = Auth::id().'.' . $extension;
+            $filenameKTP = Auth::id().'_ktp.' . $extension;
 
             $file->move(public_path('data_tambahan/'), $filenameKTP);
             // $data['foto']= 'images/'.$filename;
@@ -424,7 +424,7 @@ class MemberController extends Controller
         if (!empty($r->file('kk'))) {
             $file =$r->file('kk');
             $extension = $file->getClientOriginalExtension(); 
-            $filenameKK = Auth::id().'.' . $extension;
+            $filenameKK = Auth::id().'_kk.' . $extension;
 
             $file->move(public_path('data_tambahan/'), $filenameKK);
             // $data['foto']= 'images/'.$filename;
@@ -433,7 +433,8 @@ class MemberController extends Controller
         // dd($data);
        
 
-
+        dd($filenameKTP);
+        dd($filenameKK);
 
         $data= array(
             'id' => (string) Str::uuid(),
