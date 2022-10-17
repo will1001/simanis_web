@@ -186,6 +186,7 @@ class PerbankanController extends Controller
                             )
                         ->where("instansi","BANK")
                         ->where("pengajuan_dana.status","Diterima")
+                        ->orWhere("pengajuan_dana.status","Ditolak")
                         ->orderBy('created_at', 'desc')->get();
                         // dd($PengajuanDana);
                         $params = [
