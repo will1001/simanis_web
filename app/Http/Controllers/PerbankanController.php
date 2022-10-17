@@ -166,6 +166,36 @@ class PerbankanController extends Controller
                         ];
 
                     }
+                    if($pages == "historyPengajuanDana"){
+                        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+                        ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                        ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                        ->select(
+                            'badan_usaha.*',
+                            'kabupaten.name as kabupaten',
+                            'pengajuan_dana.id as dana_id',
+                            'pengajuan_dana.jumlah_dana',
+                            'pengajuan_dana.waktu_pinjaman',
+                            'pengajuan_dana.status',
+                            'pengajuan_dana.instansi',
+                            'pengajuan_dana.jenis_pengajuan',
+                            'pengajuan_dana.alasan',
+                            'pengajuan_dana.user_id',
+                            'pengajuan_dana.created_at as dana_created_at',
+                            'pengajuan_dana.updated_at as dana_updated_at',
+                            )
+                        ->where("instansi","BANK")
+                        ->where("pengajuan_dana.status","Diterima")
+                        ->orderBy('created_at', 'desc')->get();
+                        // dd($PengajuanDana);
+                        $params = [
+                            'PengajuanDana' => $PengajuanDana,
+                            'pages' => $pages,
+                            'Notifikasi' => $Notifikasi,
+                            'fields'=>$this->fields
+                        ];
+
+                    }
 
                     if($pages == "simulasiAngsuran"){
                     $Simulasi = SimulasiAngsuran::leftJoin('list_jangka_waktu', 'simulasi_angsuran.id_jangka_waktu', '=', 'list_jangka_waktu.id')

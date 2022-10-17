@@ -13,6 +13,8 @@ use App\Models\Kbli;
 use App\Models\Notifikasi;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 
 use Illuminate\Http\Request;
