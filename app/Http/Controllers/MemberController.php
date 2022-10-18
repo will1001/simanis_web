@@ -433,8 +433,7 @@ class MemberController extends Controller
         // dd($data);
        
 
-        // dd($filenameKTP);
-        // dd($filenameKK);
+        
 
         $data= array(
             'id' => (string) Str::uuid(),
