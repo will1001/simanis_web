@@ -392,7 +392,59 @@ class MemberController extends Controller
     }
     function uploadDataPendukung(Request $r){
         // dd($r);
+        $filenameKTP;
+        $filenameKK;
+        $User = User::find(Auth::id());
+        $BadanUsaha = BadanUsaha::where('nik',$User->nik)->first();
+        // $DataPendukung = DataPendukung::where('id_badan_usaha',$BadanUsaha->id)->first();
+        // dd($r);
+
         
+        // if (!empty($DataPendukung)) {
+        //     dd("data ada");
+        // }else{
+        //     dd("data kosong");
+
+        // }
+
+
+        if (!empty($r->file('ktp'))) {
+            $file =$r->file('ktp');
+            $extension = $file->getClientOriginalExtension(); 
+            $filenameKTP = Auth::id().'_ktp.' . $extension;
+
+            $file->move(public_path('data_tambahan/'), $filenameKTP);
+            // $data['foto']= 'images/'.$filename;
+
+        }
+        // dd($data);
+       
+
+
+        if (!empty($r->file('kk'))) {
+            $file =$r->file('kk');
+            $extension = $file->getClientOriginalExtension(); 
+            $filenameKK = Auth::id().'_kk.' . $extension;
+
+            $file->move(public_path('data_tambahan/'), $filenameKK);
+            // $data['foto']= 'images/'.$filename;
+
+        }
+        // dd($data);
+       
+
+        dd($filenameKTP);
+        dd($filenameKK);
+
+        $data= array(
+            'id' => (string) Str::uuid(),
+            'id_badan_usaha' => $BadanUsaha->id,
+            'ktp' => 'data_tambahan/'.$filenameKTP,
+            'kk' => 'data_tambahan/'.$filenameKK,
+        );
+        // dd($data);
+        $DataPendukung = new DataPendukung($data);
+        $DataPendukung->save();
 
         
         return redirect('member/PengajuanDana');
