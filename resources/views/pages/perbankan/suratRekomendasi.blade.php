@@ -4,6 +4,7 @@
    <h2>Surat Rekomendasi</h2>
    <span class="mr-2"><a  href="/perbankan/dashboard/ProfilBadanUsaha/{{$BadanUsaha[0]->id}}" >1. Profil Badan Usaha</a></span>
    <span><a class="text-disetujuiTextColor" href="/perbankan/dashboard/suratRekomendasi/{{$BadanUsaha[0]->id}}">2. Surat Rekomendasi</a></span>
+   <span><a href="/perbankan/dashboard/dataTambahan/{{$BadanUsaha[0]->id}}">3. Data Tambahan</a></span>
 </div>
 <div class="bg-black w-[100%] h-[1px] mt-2"></div>
 <br>
