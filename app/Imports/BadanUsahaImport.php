@@ -18,8 +18,6 @@ class BadanUsahaImport implements ToModel
 
     public function model(array $row)
     {
-       
-
 
         return new BadanUsaha([
             'id' => Uuid::generate(),

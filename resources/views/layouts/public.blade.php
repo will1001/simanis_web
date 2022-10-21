@@ -563,6 +563,9 @@
                 <img src="{{ asset('img/logo1.png') }}" alt="">
             </a> -->
             <div class="logo-container">
+                <div class="">
+                    <img class=" logo mr-2" src="{{ asset('images/LOGO_TPAKD.png') }}" alt="">
+                </div>
                 <img class=" logo" src="{{ asset('images/logo1.png') }}" alt="">
                 <div class="logo-title">
                     <span>Dinas Perindustrian Provinsi NTB</span>
