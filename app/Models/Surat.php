@@ -19,5 +19,7 @@ class Surat extends Model
         'nip',
         'jabatan',
         'alamat',
+        'nomor_surat',
+        'ttd',
     ];
 }

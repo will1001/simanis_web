@@ -28,6 +28,11 @@
         <input value="{{$surat->alamat}}" class="border-2 border-gray-300 w-[300px] p-1 rounded-md ml-2" type="text" name="alamat">
     </div>
     <br>
+    <div class="flex justify-between items-center">
+        <span>Nomor Surat</span>
+        <input value="{{$surat->nomor_surat}}" class="border-2 border-gray-300 w-[300px] p-1 rounded-md ml-2" type="text" name="nomor_surat">
+    </div>
+    <br>
     <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Simpan</button>
 </form>
 @endsection

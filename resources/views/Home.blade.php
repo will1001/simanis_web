@@ -1,6 +1,6 @@
 @extends('layouts.public', ['include_chart' => true])
 @section('title')
-UMKM NTB
+IKM NTB
 @stop
 <style>
     @media only screen and (min-width: 401px) {
@@ -300,17 +300,17 @@ $chartDescList = array(
     ),
     (object)array(
         "color" => "rgba(221,160,221, 1)",
-        "title" => "Sertifikikat Halal",
+        "title" => "Sertifikat Halal",
         "value" => count($sertifikatHalal),
     ),
     (object)array(
         "color" => "rgba(244,164,96, 1)",
-        "title" => "Sertifikikat HAKI",
+        "title" => "Sertifikat HAKI",
         "value" => count($sertifikatHaki),
     ),
     (object)array(
         "color" => "rgba(176,196,222, 1)",
-        "title" => "Sertifikikat SNI",
+        "title" => "Sertifikat SNI",
         "value" => count($sertifikatSNI),
     ),
     (object)array(
@@ -402,7 +402,7 @@ $baseUrl = env('APP_URL');
 
 <section class="services-section">
     <div class="titleSectionContainer" style="text-align: center;">
-        <h2 style="font-weight:bolder;">Data UMKM Provinsi NTB</h2>
+        <h2 style="font-weight:bolder;">Data IKM Provinsi NTB</h2>
     </div>
     <div class="container">
 
@@ -484,8 +484,8 @@ $baseUrl = env('APP_URL');
 
         <div class="client-text">
             <h2 style="color: white;font-weight:bolder;">SIMANIS</h2>
-            <p>Simanis Adalah Sistem Informasi Manajemen Industri yang berguna untuk mendata para pelaku UMKM yang ada
-                di Provinsi Nusa Tenggara Barat dan Membantu dalam memudahkan UMKM untuk melakukan pengajuan Modal.</p>
+            <p>Simanis Adalah Sistem Informasi Manajemen Industri yang berguna untuk mendata para pelaku IKM yang ada
+                di Provinsi Nusa Tenggara Barat dan Membantu dalam memudahkan IKM untuk mengajukan pembiayaan yang di kelola oleh tim percepatan akses keuangan daerah (TPKAD) provinsi NTB dan Dinas Perindustrian NTB.</p>
         </div>
         <div class="download-app-button">
             Download Aplikasi
@@ -881,7 +881,7 @@ $baseUrl = env('APP_URL');
 
 
 
-    labelsName = ['total iKM', 'Tenaga Kerja', 'IKM Baru', 'Industri Kecil', 'Industri Menengah', 'Industri Besar', 'Sertifikikat Halal', 'Sertifikikat HAKI', 'Sertifikikat SNI', 'Sertifikat Test Report', 'Formal', 'Informal'];
+    labelsName = ['total iKM', 'Tenaga Kerja', 'IKM Baru', 'Industri Kecil', 'Industri Menengah', 'Industri Besar', 'Sertifikat Halal', 'Sertifikat HAKI', 'Sertifikat SNI', 'Sertifikat Test Report', 'Formal', 'Informal'];
     industriData = [totalIKM, totalTenagaKerja, totalIKMBaru, industriKecil, industriMenengah, industriBesar, sertifikatHalal, sertifikatHaki, sertifikatSNI, sertifikatTestReport, formal, informal];
     bgColorChart = bgColorList.slice(0, industriData.length);
     data = [{
