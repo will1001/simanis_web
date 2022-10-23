@@ -45,7 +45,7 @@
 
 
 <div class="bg bg-slate-150 absolute"></div>
-<h3 class="ml-4">Daftar Pengajuan Dana</h3>
+<h3 class="ml-4">Daftar Pembiayaan Usaha</h3>
 
 <div class="flex flex-row actinContainer ml-4 mt-4">
     <div class="flex gap-2 boxCari border rounded-md shadow-md bg-white">

@@ -117,7 +117,7 @@
                 <div class="flex bg-blue-50 p-3">
                   <img src="{{ asset('/Icon-svg/dana.svg') }}" >
                   <div class="ml-3 text-left">
-                      <p class="font-bold text-black">Pengajuan Dana</p>
+                      <p class="font-bold text-black">Pembiayaan Usaha</p>
                       <p class="text-gray-700 leading-5">{{$item->deskripsi}}</p>
                   </div>
                 </div>

@@ -13,6 +13,14 @@ $bentukUsaha = [
     (object)array(
         "id" => "UD",
         "name" => "UD"
+    ),
+    (object)array(
+        "id" => "Lainnya",
+        "name" => "Lainnya"
+    ),
+    (object)array(
+        "id" => "Belum Ada",
+        "name" => "Belum Ada"
     )
 ];
 $legalitasUsaha = [
@@ -120,6 +128,11 @@ $forms = array(
         "type" => "text",
         "placeholder" => "JENIS USAHA",
         "prop" => "jenis_usaha"
+    ),
+    (object)array(
+        "type" => "text",
+        "placeholder" => "MEREK USAHA",
+        "prop" => "merek_usaha"
     ),
     (object)array(
         "type" => "select",
@@ -239,7 +252,7 @@ $forms = array(
             
             <div class="w-[500px]">
                 @if($form->type == 'select')
-                <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 pr-[150px] py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
+                <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
                     <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'formal_informal'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>

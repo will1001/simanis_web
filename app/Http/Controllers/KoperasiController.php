@@ -198,7 +198,7 @@ class KoperasiController extends Controller
                 // $data['foto']= 'images/'.$filename;
     
             }
-            $PengajuanDana->alasan = "Selamat Pengajuan Dana Anda diterima Download file pada link untuk melihat detail pinjaman anda";
+            $PengajuanDana->alasan = "Selamat Pembiayaan Usaha Anda diterima Download file pada link untuk melihat detail pinjaman anda";
             $PengajuanDana->file_pinjaman = 'pinjaman/'.$filename; 
             $PengajuanDana->save();
     
@@ -213,7 +213,7 @@ class KoperasiController extends Controller
             // $notifikasi = new Notifikasi([
             //     'id' => (string) Str::uuid(),
             //     'nik' => $instansi->nik,
-            //     'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
+            //     'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
             //     'user_role' => $PengajuanDana->instansi,
             // ]);
             
@@ -222,7 +222,7 @@ class KoperasiController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => $User->nik,
-                'deskripsi' => "Pengajuan Dana Anda Diterima",
+                'deskripsi' => "Pembiayaan Usaha Anda Diterima",
                 'user_role' => "MEMBER",
             ]);
             
@@ -232,7 +232,7 @@ class KoperasiController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => $User->nik,
-                'deskripsi' => "Pengajuan Dana Anda Ditolak",
+                'deskripsi' => "Pembiayaan Usaha Anda Ditolak",
                 'user_role' => "MEMBER",
             ]);
             
@@ -249,6 +249,6 @@ class KoperasiController extends Controller
     public function exportExcel()
     {
 
-        return Excel::download(new PengajuanDanaKoperasiExport, 'Pengajuan Dana.xlsx');
+        return Excel::download(new PengajuanDanaKoperasiExport, 'Pembiayaan Usaha.xlsx');
     }
 }

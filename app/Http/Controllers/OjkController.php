@@ -105,7 +105,7 @@ class OjkController extends Controller
                             )
                         ->where("instansi","BANK")
                         // ->where("pengajuan_dana.status","Diterima")
-                        // ->where("pengajuan_dana.alasan","Selamat Pengajuan Dana Anda diterima")
+                        // ->where("pengajuan_dana.alasan","Selamat Pembiayaan Usaha Anda diterima")
                         ->orderBy('created_at', 'desc')->get();
     
                         $params = [
@@ -130,6 +130,6 @@ class OjkController extends Controller
 
     public function exportExcel()
     {
-        return Excel::download(new PengajuanDanaOJKExport, 'Pengajuan Dana.xlsx');
+        return Excel::download(new PengajuanDanaOJKExport, 'Pembiayaan Usaha.xlsx');
     }
 }

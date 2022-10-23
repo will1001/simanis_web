@@ -22,11 +22,11 @@ $baseUrl = env('APP_URL').'/';
     
     <div class="flex">
         
-        <div onclick="lihatDetails()" class="flex p-2 {{is_null($BadanUsaha[0]->nama_usaha)?'bg-blue-300':'bg-buttonColor-900'}} cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pengajuan Dana</span></div>
+        <div onclick="lihatDetails()" class="flex p-2 {{is_null($BadanUsaha[0]->nama_usaha)?'bg-blue-300':'bg-buttonColor-900'}} cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
     </div>
 </div>
 <div class="flex items-center actionContainer">
-   <h5>Histori Pengajuan Dana</h5>
+   <h5>Histori Pembiayaan Usaha</h5>
 </div>
 <table class="actionContainer rounded-2xl">
   <tr class="bg-tableColor-900 text-center text-white p-2">
@@ -67,7 +67,7 @@ $baseUrl = env('APP_URL').'/';
         <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
       @endif
     @endif
-    @if($item->alasan == "Pengajuan Dana Anda diterima Dinas Perindustrian")
+    @if($item->alasan == "Pembiayaan Usaha Anda diterima Dinas Perindustrian")
       @if(empty($DataPendukung))
       {{$item->alasan}} <br> 
         <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>

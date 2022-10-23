@@ -274,7 +274,7 @@ class MemberController extends Controller
         $notifikasi = new Notifikasi([
             'id' => (string) Str::uuid(),
             "nik" => "00000000",
-            'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
+            'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
             'user_role' => "ADMIN",
         ]);
 
@@ -288,7 +288,7 @@ class MemberController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => "33333333",
-                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
+                'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
                 'user_role' => "OJK",
             ]);
             

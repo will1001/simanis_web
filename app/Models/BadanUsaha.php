@@ -34,6 +34,7 @@ class BadanUsaha extends Model
         'nomor_test_report_tahun',
         'sni_tahun',
         'jenis_usaha',
+        'merek_usaha',
         'cabang_industri',
         'sub_cabang_industri',
         'id_kbli',

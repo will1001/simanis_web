@@ -394,7 +394,7 @@ class AdminController extends Controller
         if($status == "Ditolak"){
             $PengajuanDana->alasan = $r->input('alasan');
         }else{
-            $PengajuanDana->alasan = "Pengajuan Dana Anda diterima Dinas Perindustrian";
+            $PengajuanDana->alasan = "Pembiayaan Usaha Anda diterima Dinas Perindustrian";
         }
 
         $PengajuanDana->status = $status;
@@ -406,7 +406,7 @@ class AdminController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => $instansi->nik,
-                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha,
+                'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
                 'user_role' => $PengajuanDana->instansi,
             ]);
             
@@ -415,7 +415,7 @@ class AdminController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => $User->nik,
-                'deskripsi' => "Pengajuan Dana Anda Diterima",
+                'deskripsi' => "Pembiayaan Usaha Anda Diterima",
                 'user_role' => "MEMBER",
             ]);
             

@@ -47,11 +47,11 @@
       </div>
       <a href="{{ url('/perbankan/daftarPengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='daftarPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}}">
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
-        <span>Daftar Pengajuan Dana</span>
+        <span>Daftar Pembiayaan Usaha</span>
       </a>
       <a href="{{ url('/perbankan/historyPengajuanDana') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='historyPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}}">
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
-        <span>History Pengajuan Dana</span>
+        <span>History Pembiayaan Usaha</span>
       </a>
       <a href="{{ url('/perbankan/simulasiAngsuran') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='simulasiAngsuran'?'bg-blue-200 p-2 rounded-md':''}}">
         <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
@@ -112,7 +112,7 @@
                 <div class="flex bg-blue-50 p-3">
                   <img src="{{ asset('/Icon-svg/dana.svg') }}" >
                   <div class="ml-3 text-left">
-                      <p class="font-bold text-black">Pengajuan Dana</p>
+                      <p class="font-bold text-black">Pembiayaan Usaha</p>
                       <p class="text-gray-700 leading-5">{{$item->deskripsi}}</p>
                   </div>
                 </div>

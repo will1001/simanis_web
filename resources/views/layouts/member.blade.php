@@ -54,7 +54,7 @@
       </a>
       <a href="{{ url('/member/PengajuanDana') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='PengajuanDana'?'bg-blue-200 p-2 rounded-md':''}} w-full">
         <img class="mr-5" src="{{ asset('/Icon-svg/dana.svg') }}" alt="logo">
-        <span>Pengajuan Dana</span>
+        <span>Pembiayaan Usaha</span>
       </a>
       <a href="{{ url('/member/produk') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='produk'?'bg-blue-200 p-2 rounded-md':''}} w-full">
         <img class="mr-5" src="{{ asset('/Icon-svg/cart.svg') }}" alt="logo">
@@ -120,7 +120,7 @@
                 <div class="flex bg-blue-50 p-3">
                   <img src="{{ asset('/Icon-svg/dana.svg') }}" >
                   <div class="ml-3 text-left">
-                      <p class="font-bold text-black">Pengajuan Dana</p>
+                      <p class="font-bold text-black">Pembiayaan Usaha</p>
                       <p class="text-gray-700 leading-5">{{$item->deskripsi}}</p>
                   </div>
                 </div>

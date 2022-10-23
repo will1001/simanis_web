@@ -42,7 +42,7 @@
 
 </style>
 @section('content')
-<h2 class="ml-4">History Pengajuan Dana</h2>
+<h2 class="ml-4">History Pembiayaan Usaha</h2>
 
 <!-- <div class="flex flex-row badan_usaha_container ml-4 mt-4">
     <div class="flex gap-2 boxCari border rounded-md shadow-md bg-white">

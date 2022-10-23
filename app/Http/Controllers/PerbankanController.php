@@ -345,7 +345,7 @@ class PerbankanController extends Controller
         if($status == "Ditolak"){
             $PengajuanDana->alasan = $r->input('alasan');
         }else{
-            $PengajuanDana->alasan = "Selamat Pengajuan Dana Anda diterima";
+            $PengajuanDana->alasan = "Selamat Pembiayaan Usaha Anda diterima";
         }
 
         $PengajuanDana->status = $status;
@@ -357,7 +357,7 @@ class PerbankanController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => "33333333",
-                'deskripsi' => "Pengajuan Dana dari " . $BadanUsaha->nama_usaha. "Diterima",
+                'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha. "Diterima",
                 'user_role' => "OJK",
             ]);
             
@@ -366,7 +366,7 @@ class PerbankanController extends Controller
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => $User->nik,
-                'deskripsi' => "Pengajuan Dana Anda Diterima",
+                'deskripsi' => "Pembiayaan Usaha Anda Diterima",
                 'user_role' => "MEMBER",
             ]);
             
@@ -392,6 +392,6 @@ class PerbankanController extends Controller
     public function exportExcel()
     {
 
-        return Excel::download(new PengajuanDanaPerbankanExport, 'Pengajuan Dana.xlsx');
+        return Excel::download(new PengajuanDanaPerbankanExport, 'Pembiayaan Usaha.xlsx');
     }
 }

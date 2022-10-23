@@ -485,7 +485,7 @@ $baseUrl = env('APP_URL');
         <div class="client-text">
             <h2 style="color: white;font-weight:bolder;">SIMANIS</h2>
             <p>Simanis Adalah Sistem Informasi Manajemen Industri yang berguna untuk mendata para pelaku IKM yang ada
-                di Provinsi Nusa Tenggara Barat dan Membantu dalam memudahkan IKM untuk mengajukan pembiayaan yang di kelola oleh tim percepatan akses keuangan daerah (TPKAD) provinsi NTB dan Dinas Perindustrian NTB.</p>
+                di Provinsi Nusa Tenggara Barat dan Membantu dalam memudahkan IKM untuk mengajukan pembiayaan yang di kelola oleh Tim Percepatan Akses Keuangan Daerah (TPKAD) Provinsi NTB dan Dinas Perindustrian NTB.</p>
         </div>
         <div class="download-app-button">
             Download Aplikasi
