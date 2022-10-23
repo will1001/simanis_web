@@ -12,7 +12,7 @@ $baseUrl = env('APP_URL').'/';
   @if(is_null($BadanUsaha[0]->nama_usaha))
     <div class="flex items-center p-3 rounded-xl bg-ditolakBgColor text-ditolakTextColor">
         <img class="mr-2" src="{{ asset('/Icon-svg/warning.svg') }}" alt="">
-        <span>Data nama badan usaha belum diisi, <strong>Klik Disini </strong> untuk melengkapi</span>
+        <span>Data nama badan usaha belum diisi, <strong><a class="" href="/member/dashboard/ProfilBadanUsaha/{{$BadanUsaha[0]->id}}">Klik Disini</a> </strong> untuk melengkapi</span>
     </div>
   @else
   <div>

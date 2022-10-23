@@ -841,8 +841,8 @@ $baseUrl = env('APP_URL');
         let sertifikatHakiUpdate = badanUsaha.filter(e => e.sertifikat_merek_tahun !== null);
         let sertifikatSNIUpdate = badanUsaha.filter(e => e.sni_tahun !== null);
         let sertifikatTestReportUpdate = badanUsaha.filter(e => e.nomor_test_report_tahun !== null);
-        let formalUpdate = badanUsaha.filter(e => e.formal_informal === "FORMAL");
-        let informalUpdate = badanUsaha.filter(e => e.formal_informal === "INFORMAL");
+        let formalUpdate = badanUsaha.filter(e => e.nib_tahun !== null);
+        let informalUpdate = badanUsaha.filter(e => e.nib_tahun === null);
         console.log(formalUpdate);
         console.log(informalUpdate);
 

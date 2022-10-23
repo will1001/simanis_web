@@ -155,6 +155,7 @@ class PerbankanController extends Controller
                         ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         ->select(
                             'badan_usaha.*',
+                            'badan_usaha.nama_direktur',
                             'kabupaten.name as kabupaten',
                             'pengajuan_dana.id as dana_id',
                             'pengajuan_dana.jumlah_dana',
@@ -185,6 +186,7 @@ class PerbankanController extends Controller
                         ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         ->select(
                             'badan_usaha.*',
+                            'badan_usaha.nama_direktur',
                             'kabupaten.name as kabupaten',
                             'pengajuan_dana.id as dana_id',
                             'pengajuan_dana.jumlah_dana',

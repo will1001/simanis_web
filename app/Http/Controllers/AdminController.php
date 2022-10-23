@@ -214,7 +214,7 @@ class AdminController extends Controller
                         ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
                         ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         // ->where("pengajuan_dana.status","Menunggu")
-                        ->select('badan_usaha.nama_usaha','badan_usaha.nik','badan_usaha.id as id_badan_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
+                        ->select('badan_usaha.nama_usaha','badan_usaha.nik','badan_usaha.nama_direktur','badan_usaha.id as id_badan_usaha','kabupaten.name as kabupaten','pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
                         // dd($PengajuanDana);
     
                         $params = [
