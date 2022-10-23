@@ -191,9 +191,9 @@ class HomeController extends Controller
         } else if ($chartId == 9) {
             $data = $data->whereNotNull('nomor_test_report_tahun');
         } else if ($chartId == 10) {
-            $data = $data->where('formal_informal', '=', 1);
+            $data = $data->whereNotNull('nib_tahun');
         } else if ($chartId == 11) {
-            $data = $data->where('formal_informal', '=', 0);
+            $data = $data->whereNull('nib_tahun');
         }
 
         // if (str_contains($title, 'Industri Kecil')) {
