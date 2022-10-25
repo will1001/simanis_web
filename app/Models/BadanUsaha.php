@@ -27,7 +27,6 @@ class BadanUsaha extends Model
         'nama_usaha',
         'bentuk_usaha',
         'tahun_berdiri',
-        'formal_informal',
         'nib_tahun',
         'nomor_sertifikat_halal_tahun',
         'sertifikat_merek_tahun',

@@ -14,6 +14,7 @@ use App\Models\Instansi;
 use App\Models\Surat;
 use App\Models\Kabupaten;
 use App\Models\CabangIndustri;
+use App\Imports\UserImport;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,6 @@ class AdminController extends Controller
         'badan_usaha.nama_usaha',
         'badan_usaha.bentuk_usaha',
         'badan_usaha.tahun_berdiri',
-        'legalitas_usaha.name as formal_informal',
         'badan_usaha.nib_tahun',
         'badan_usaha.nomor_sertifikat_halal_tahun',
         'badan_usaha.sertifikat_merek_tahun',
@@ -69,7 +69,6 @@ class AdminController extends Controller
         'nama_usaha',
         'bentuk_usaha',
         'tahun_berdiri',
-        'formal_informal',
         'nib_tahun',
         'nomor_sertifikat_halal_tahun',
         'sertifikat_merek_tahun',
@@ -105,7 +104,6 @@ class AdminController extends Controller
         'badan_usaha.nama_usaha',
         'badan_usaha.bentuk_usaha',
         'badan_usaha.tahun_berdiri',
-        'badan_usaha.formal_informal',
         'badan_usaha.nib_tahun',
         'badan_usaha.nomor_sertifikat_halal_tahun',
         'badan_usaha.sertifikat_merek_tahun',
@@ -185,7 +183,6 @@ class AdminController extends Controller
                         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                         ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-                        ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
                         ->paginate(100, $this->fields);
                         $Kabupaten = Kabupaten::all();
                         $params = [
@@ -276,7 +273,6 @@ class AdminController extends Controller
         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-            ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
             ->where('badan_usaha.nik', 'LIKE', "%{$keyword}%");
 
 
@@ -343,8 +339,7 @@ class AdminController extends Controller
     public function importExcel(Request $request)
     {
 
-
-
+        Excel::import(new UserImport, request()->file('file'));
         Excel::import(new BadanUsahaImport, request()->file('file'));
         return back();
     }
@@ -506,11 +501,21 @@ class AdminController extends Controller
     {
         $surat=Surat::find(1);
         // dd($surat);
-        // $surat->alamat_kop =$r->alamat_kop;
+        $surat->judul_kop =$r->judul_kop;
+        $surat->alamat_kop =$r->alamat_kop;
         $surat->nama_kadis =$r->nama_kadis;
         $surat->nip =$r->nip;
         $surat->jabatan =$r->jabatan;
         $surat->alamat =$r->alamat;
+        $surat->nomor_surat =$r->nomor_surat;
+        if (!empty($r->file('ttd'))) {
+            $file =$r->file('ttd');
+            $extension = $file->getClientOriginalExtension(); 
+            $filename = "signKadis".'.' . $extension;
+            $file->move(public_path('images/'), $filename);
+            $surat->ttd ='images/'.$filename;
+
+        }
         $surat->save();
 
         return redirect('/admin/settingSurat');

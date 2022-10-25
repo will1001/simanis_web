@@ -59,11 +59,6 @@ $forms = array(
     ),
     (object)array(
         "type" => "text",
-        "placeholder" => "LEGALITAS USAHA",
-        "prop" => "formal_informal"
-    ),
-    (object)array(
-        "type" => "text",
         "placeholder" => "NIB/TAHUN",
         "prop" => "nib_tahun"
     ),

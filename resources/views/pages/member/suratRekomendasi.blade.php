@@ -2,8 +2,25 @@
 @section('content')
 @if($PengajuanDana)
 @php
+$kopTanggal=date("d",strtotime($PengajuanDana->updated_at));
 $kopBulan=date("m",strtotime($PengajuanDana->updated_at));
 $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
+
+$kopBulanRomawi;
+
+if($kopBulan == 1) $kopBulanRomawi = "I";
+if($kopBulan == 2) $kopBulanRomawi = "II";
+if($kopBulan == 3) $kopBulanRomawi = "III";
+if($kopBulan == 4) $kopBulanRomawi = "IV";
+if($kopBulan == 5) $kopBulanRomawi = "V";
+if($kopBulan == 6) $kopBulanRomawi = "VI";
+if($kopBulan == 7) $kopBulanRomawi = "VII";
+if($kopBulan == 8) $kopBulanRomawi = "VIII";
+if($kopBulan == 9) $kopBulanRomawi = "IX";
+if($kopBulan == 10) $kopBulanRomawi = "X";
+if($kopBulan == 11) $kopBulanRomawi = "XI";
+if($kopBulan == 12) $kopBulanRomawi = "XII";
+
 @endphp
 <div >
     <div>
@@ -15,21 +32,22 @@ $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
     <br>
     <div id="surat">
         <div class="flex justify-center mb-4">
-            <img class="mr-4 h-[84px]" src="{{ asset('/images/Logo NTB 1.png') }}" />
-            <div class="text-center flex flex-col">
-                <span class="font-bold text-black">Pemerintah Provinsi Nusa Tenggara Barat</span>
-                <span class="font-bold text-black">Dinas Pawriwisata Dan Kebudayaan</span>
-                <span>Jl. Langko No.70, Pejeruk, Kec. Ampenan, Kota Mataram,</span>
-                <span>Nusa Tenggara Bar. 83114</span>
+            <img class="mr-[70px] h-[84px]" src="{{ asset('/images/Logo NTB 1.png') }}" />
+            <div class="text-center flex flex-col justify-center">
+                <span class="font-bold text-black w-[320px]">{{$Surat->judul_kop}}</span>
+                <!-- <span class="font-bold text-black">Dinas Pawriwisata Dan Kebudayaan</span> -->
+                <!-- <span>Jl. Langko No.70, Pejeruk, Kec. Ampenan, Kota Mataram,</span>
+                <span>Nusa Tenggara Bar. 83114</span> -->
+                <span class="w-[320px]">{{$Surat->alamat_kop}}</span>
             </div>
-            <img class="ml-4 h-[84px]" src="{{ asset('/images/NTB Gemilang Logo 1.png') }}" />
+            <img class="ml-[70px] h-[84px]" src="{{ asset('/images/NTB Gemilang Logo 1.png') }}" />
         </div>
         <div class="h-[4px] bg-black w-full mb-1"></div>
         <div class="h-[2px] bg-black w-full mb-2"></div>
         <div class="flex justify-center">
             <div class="text-center flex flex-col">
                 <span class="font-bold text-black">SURAT REKOMENDASI</span>
-                <span>Nomor : 1726/DPK-NTB/{{$kopBulan}}/{{$kopTahun}}/</span>
+                <span>Nomor : {{$Surat->nomor_surat}}/{{$kopBulan.$kopTanggal}}/01.IND/{{$kopBulanRomawi}}/{{$kopTahun}} </span>
             </div>
         </div>
 
@@ -81,7 +99,7 @@ $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
             <div class="text-left flex flex-col">
                 <span>Mataram, {{date('d-m-Y', strtotime($PengajuanDana->updated_at))}} </span>
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
-                <img src="{{ asset('/images/signKadis.png') }}">
+                <img class="h-[60px]" src="{{ asset($Surat->ttd) }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
                 <span>{{$Surat->nip}}</span>
         </div>

@@ -103,8 +103,8 @@
 
   <table class="actionContainer justify-between rounded-2xl mt-4 shadow-lg"> 
   <tr class="bg-tableColor-900 text-white text-center h-16">
-    <th class="text-center p-3 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <th class="text-center p-2">No</th>
+    <!-- <th class="text-center p-3 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
+    <th class="text-center p-2 rounded-tl-xl">No</th>
     <th class="text-left pr-[250px]">NIK</th>
     <th class="text-left pr-[100px]">Nama Akun</th>
     <th class="text-left  ">Role</th>     
@@ -114,8 +114,8 @@
   @foreach($User as $key=>$item)
 
   <tr class="bg-white">
-  <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <td class="text-center text-slate-700 ">{{++$key}}</td>
+  <!-- <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
+    <td class="text-center text-slate-700 rounded-md">{{++$key}}</td>
     <td class="text-left text-slate-700 ">{{$item->nik}}</td>
     @if($item->role == 'KOPERASI' || $item->role == 'BANK')
       <td class="text-left text-slate-700 ">{{$item->nama}}</td>

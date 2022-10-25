@@ -43,7 +43,6 @@ class MemberController extends Controller
         'nama_usaha',
         'bentuk_usaha',
         'tahun_berdiri',
-        'formal_informal',
         'nib_tahun',
         'nomor_sertifikat_halal_tahun',
         'sertifikat_merek_tahun',
@@ -194,7 +193,7 @@ class MemberController extends Controller
                     $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
                     $surat = Surat::find(1);
                    
-                    // dd($BadanUsaha);
+                    // dd($surat);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,

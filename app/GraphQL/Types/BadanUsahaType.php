@@ -64,10 +64,7 @@ class BadanUsahaType extends GraphQLType
                 'type' => Type::int(),
                 'description' => 'The tahun_berdiri of BadanUsaha',
             ],
-            'formal_informal' => [
-                'type' => Type::string(),
-                'description' => 'The formal_informal of BadanUsaha',
-            ],
+           
             'nib_tahun' => [
                 'type' => Type::string(),
                 'description' => 'The nib_tahun of BadanUsaha',

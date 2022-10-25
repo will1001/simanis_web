@@ -74,10 +74,7 @@ class BadanUsahaQuery extends Query
                 'name' => 'tahun_berdiri',
                 'type' => Type::int(),
             ],
-            'formal_informal' => [
-                'name' => 'formal_informal',
-                'type' => Type::string(),
-            ],
+           
             'nib_tahun' => [
                 'name' => 'nib_tahun',
                 'type' => Type::string(),
@@ -233,9 +230,9 @@ class BadanUsahaQuery extends Query
             } else if ($args['jenis_industri'] == 'besar') {
                 $badanUsaha = $badanUsaha->where('investasi_modal', '>=', 15000000);
             } else if ($args['jenis_industri'] == 'formal') {
-                $badanUsaha = $badanUsaha->where('formal_informal', '=', 1);
+                $badanUsaha = $badanUsaha->whereNotNull('nib_tahun');
             } else {
-                $badanUsaha = $badanUsaha->where('formal_informal', '=', 0);
+                $badanUsaha = $badanUsaha->whereNull('nib_tahun');
             }
         }
 

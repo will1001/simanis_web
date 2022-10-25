@@ -92,13 +92,7 @@ $forms = array(
         "placeholder" => "TAHUN BERDIRI",
         "prop" => "tahun_berdiri"
     ),
-    // (object)array(
-    //     "type" => "select",
-    //     "placeholder" => "LEGALITAS USAHA",
-    //     "options" => $legalitasUsaha,
-    //     "prop" => "formal_informal",
-    //     "change" => ""
-    // ),
+ 
     (object)array(
         "type" => "text",
         "placeholder" => "NIB/TAHUN",

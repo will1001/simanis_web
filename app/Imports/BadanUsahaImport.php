@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\BadanUsaha;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class BadanUsahaImport implements ToModel
 {
@@ -31,7 +32,6 @@ class BadanUsahaImport implements ToModel
             'nama_usaha' => $row[7],
             'bentuk_usaha' => $row[8],
             'tahun_berdiri' => $row[9],
-            'formal_informal' => $row[10],
             'nib_tahun'     => $row[11],
             'nomor_sertifikat_halal_tahun'    => $row[12],
             'sertifikat_merek_tahun' => $row[13],

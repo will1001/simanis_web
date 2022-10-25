@@ -14,6 +14,7 @@ class Surat extends Model
 
     protected $fillable = [
         'id',
+        'judul_kop',
         'alamat_kop',
         'nama_kadis',
         'nip',

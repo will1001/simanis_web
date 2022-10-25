@@ -13,7 +13,7 @@ class BadanUsahaExport implements FromCollection,WithHeadings
         return BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-            ->leftJoin('legalitas_usaha', 'badan_usaha.formal_informal', '=', 'legalitas_usaha.id')
+            ->leftJoin('legalitas_usaha', '=', 'legalitas_usaha.id')
             ->get([
                 'badan_usaha.nik',
                 'badan_usaha.nama_direktur',
@@ -25,7 +25,6 @@ class BadanUsahaExport implements FromCollection,WithHeadings
                 'badan_usaha.nama_usaha',
                 'badan_usaha.bentuk_usaha',
                 'badan_usaha.tahun_berdiri',
-                'badan_usaha.formal_informal',
                 'badan_usaha.nib_tahun',
                 'badan_usaha.nomor_sertifikat_halal_tahun',
                 'badan_usaha.sertifikat_merek_tahun',
@@ -58,7 +57,6 @@ class BadanUsahaExport implements FromCollection,WithHeadings
             'nama_usaha',
             'bentuk_usaha',
             'tahun_berdiri',
-            'formal_informal',
             'nib_tahun',
             'nomor_sertifikat_halal_tahun',
             'sertifikat_merek_tahun',
