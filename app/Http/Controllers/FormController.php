@@ -21,12 +21,54 @@ use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
+    private $fieldBadanUsaha = [
+        'badan_usaha.id as id',
+        'badan_usaha_documents.id as badan_usaha_documents_id',
+        'badan_usaha.nik',
+        'badan_usaha.nama_direktur',
+        'kabupaten.name as kabupaten',
+        'badan_usaha.kecamatan',
+        'badan_usaha.kelurahan',
+        'badan_usaha.alamat_lengkap',
+        'badan_usaha.no_hp',
+        'badan_usaha.nama_usaha',
+        'badan_usaha.bentuk_usaha',
+        'badan_usaha.tahun_berdiri',
+        'badan_usaha.nib_tahun',
+        'badan_usaha.nomor_sertifikat_halal_tahun',
+        'badan_usaha.sertifikat_merek_tahun',
+        'badan_usaha.nomor_test_report_tahun',
+        'badan_usaha.sni_tahun',
+        'badan_usaha.jenis_usaha',
+        'cabang_industri.name as cabang_industri',
+        'sub_cabang_industri.name as sub_cabang_industri',
+        'badan_usaha.investasi_modal',
+        'badan_usaha.jumlah_tenaga_kerja_pria',
+        'badan_usaha.jumlah_tenaga_kerja_wanita',
+        'badan_usaha.rata_rata_pendidikan_tenaga_kerja',
+        'badan_usaha.kapasitas_produksi_perbulan',
+        'badan_usaha.satuan_produksi',
+        'badan_usaha.nilai_produksi_perbulan',
+        'badan_usaha.nilai_bahan_baku_perbulan',
+        'badan_usaha_documents.nib_file',
+        'badan_usaha_documents.bentuk_usaha_file',
+        'badan_usaha_documents.sertifikat_halal_file',
+        'badan_usaha_documents.sertifikat_sni_file',
+        'badan_usaha_documents.sertifikat_merek_file',
+
+    ];
     function badan_usaha(Request $r, $userType, $id = null)
     {
+        
         if ($r->isMethod('get')) {
             $badan_usaha = BadanUsaha::find(null);
             if ($id != null) {
-                $badan_usaha = BadanUsaha::where("id",$id)->get();
+                $badan_usaha = BadanUsaha::leftJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
+                ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->where("badan_usaha.id",$id)
+                ->get($this->fieldBadanUsaha);
             }
             // dd($badan_usaha);
 
@@ -87,6 +129,8 @@ class FormController extends Controller
                 $badan_usaha->foto_alat_produksi = '/storage/foto_alat_produksi/' . $name1;
                 $badan_usaha->foto_ruang_produksi = '/storage/foto_ruang_produksi/' . $name2;
             };
+
+            // $r->file
             
             // dd($input);
             $badan_usaha->fill($input)->save();

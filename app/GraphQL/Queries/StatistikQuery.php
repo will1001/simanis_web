@@ -90,9 +90,9 @@ class StatistikQuery extends Query
             ->select(DB::raw('
             count(*) as total_ikm,
             sum(jumlah_tenaga_kerja_pria)+sum(jumlah_tenaga_kerja_wanita) as total_tenaga_kerja,
-            count(case when investasi_modal <= 1000000 then 1 end) as total_industri_kecil,
-            count(case when investasi_modal between 1000000+1 and 15000000-1 then 1 end) as total_industri_menengah,
-            count(case when investasi_modal >= 15000000 then 1 end) as total_industri_besar,
+            count(case when investasi_modal <= 1000000000 then 1 end) as total_industri_kecil,
+            count(case when investasi_modal between 1000000000+1 and 15000000000-1 then 1 end) as total_industri_menengah,
+            count(case when investasi_modal >= 15000000000 then 1 end) as total_industri_besar,
             count(case when tahun_berdiri = YEAR(NOW()) then 1 end) as total_ikm_baru,
             count(case when nomor_sertifikat_halal_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_halal,
             count(case when sertifikat_merek_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_haki,

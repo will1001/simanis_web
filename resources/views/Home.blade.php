@@ -832,9 +832,9 @@ $baseUrl = env('APP_URL');
         ].filter(e => e.value !== "" && e.value !== "Semua");
 
         let totalIKMUpdate = badanUsaha;
-        let industriKecilUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) <= 1000000);
-        let industriMenengahUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) > 1000000 && e.investasi_modal < 15000000);
-        let industriBesarUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) >= 15000000);
+        let industriKecilUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) <= 1000000000);
+        let industriMenengahUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) > 1000000000 && e.investasi_modal < 15000000000);
+        let industriBesarUpdate = badanUsaha.filter(e => parseInt(e.investasi_modal) >= 15000000000);
         let totalTenagaKerjaUpdate = totalTenagaKerja;
         let totalIKMBaruUpdate = badanUsaha.filter(e => parseInt(e.tahun_berdiri) == new Date().getFullYear());
         let sertifikatHalalUpdate = badanUsaha.filter(e => e.nomor_sertifikat_halal_tahun !== null);

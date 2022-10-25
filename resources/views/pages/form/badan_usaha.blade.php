@@ -23,16 +23,7 @@ $bentukUsaha = [
         "name" => "Belum Ada"
     )
 ];
-// $legalitasUsaha = [
-//     (object)array(
-//         "id" => "1",
-//         "name" => "FORMAL"
-//     ),
-//     (object)array(
-//         "id" => "0",
-//         "name" => "INFORMAL"
-//     )
-// ];
+
 $forms = array(
     (object)array(
         "type" => "text",
@@ -88,15 +79,24 @@ $forms = array(
         "change" => ""
     ),
     (object)array(
+        "type" => "file",
+        "placeholder" => "FILE DOKUMEN BENTUK USAHA",
+        "prop" => "bentuk_usaha_file"
+    ),
+    (object)array(
         "type" => "number",
         "placeholder" => "TAHUN BERDIRI",
         "prop" => "tahun_berdiri"
     ),
- 
     (object)array(
         "type" => "text",
         "placeholder" => "NIB/TAHUN",
         "prop" => "nib_tahun"
+    ),
+    (object)array(
+        "type" => "file",
+        "placeholder" => "FILE DOKUMEN NIB",
+        "prop" => "nib_file"
     ),
     (object)array(
         "type" => "text",
@@ -104,9 +104,19 @@ $forms = array(
         "prop" => "nomor_sertifikat_halal_tahun"
     ),
     (object)array(
+        "type" => "file",
+        "placeholder" => "FILE SERTIFIKAT HALAL",
+        "prop" => "sertifikat_halal_file"
+    ),
+    (object)array(
         "type" => "text",
         "placeholder" => "SERTIFIKAT MEREK/TAHUN",
         "prop" => "sertifikat_merek_tahun"
+    ),
+    (object)array(
+        "type" => "file",
+        "placeholder" => "FILE SERTIFIKAT MEREK",
+        "prop" => "sertifikat_merek_file"
     ),
     (object)array(
         "type" => "text",
@@ -117,6 +127,11 @@ $forms = array(
         "type" => "text",
         "placeholder" => "SNI/TAHUN",
         "prop" => "sni_tahun"
+    ),
+    (object)array(
+        "type" => "file",
+        "placeholder" => "FILE SERTIFIKAT SNI",
+        "prop" => "sertifikat_sni_file"
     ),
     (object)array(
         "type" => "text",
@@ -151,7 +166,7 @@ $forms = array(
     ),
     (object)array(
         "type" => "number",
-        "placeholder" => "INVESTASI/ MODAL (RP. 000)",
+        "placeholder" => "INVESTASI/ MODAL",
         "prop" => "investasi_modal"
     ),
     (object)array(
@@ -166,7 +181,7 @@ $forms = array(
     ),
     (object)array(
         "type" => "number",
-        "placeholder" => "KAPASITAS PRODUKSI (RP. 000)",
+        "placeholder" => "KAPASITAS PRODUKSI / Tahun",
         "prop" => "kapasitas_produksi_perbulan"
     ),
     (object)array(
@@ -200,12 +215,12 @@ $forms = array(
         "prop" => "media_sosial"
     ),
     (object)array(
-        "type" => "file",
+        "type" => "image",
         "placeholder" => "Foto Alat Produksi",
         "prop" => "foto_alat_produksi"
     ),
     (object)array(
-        "type" => "file",
+        "type" => "image",
         "placeholder" => "Foto Ruang Produksi",
         "prop" => "foto_ruang_produksi"
     ),
@@ -254,7 +269,17 @@ $forms = array(
                 </select>
                 @elseif($form->type == 'file')
                 <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
-                <label for="dropzone-file" class="flex flex-col justify-center items-center w-[340px] h-32 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                <label for="dropzone-file" class="flex flex-col justify-center items-center w-[340px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                        <img src="{{ asset('/Icon-svg/file.svg') }}" />
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-bold">UPLOAD FILE PDF</p>
+                    </div>
+                    <input id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="{{$form->prop}}_file" type="file" class="hidden" id="{{$form->prop}}"/>
+                </label>
+                @elseif($form->type == 'image')
+                <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
+                <label for="dropzone-file" class="flex flex-col justify-center items-center w-[340px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                     <div class="flex flex-col justify-center items-center pt-5 pb-6">
                         <img src="{{ asset('/Icon-svg/file.svg') }}" />
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
@@ -263,7 +288,7 @@ $forms = array(
                     <input id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="{{$form->prop}}_file" type="file" class="hidden" id="{{$form->prop}}"/>
                 </label>
                 @else
-                <input class="border-1 border-gray-400 pl-2 pr-[150px] py-2 text-black mb-2" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                <input class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 @endif
             </div>
         </div>

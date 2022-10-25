@@ -15,11 +15,11 @@ class BadanUsahaDocuments extends Model
     protected $fillable = [
         'id',
         'id_badan_usaha',
-        'nib',
-        'bentuk_usaha',
-        'sertifikat_halal',
-        'sertifikat_sni',
-        'sertifikat_merek',
+        'nib_file',
+        'bentuk_usaha_file',
+        'sertifikat_halal_file',
+        'sertifikat_sni_file',
+        'sertifikat_merek_file',
     ];
   
 }
