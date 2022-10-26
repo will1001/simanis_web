@@ -70,18 +70,18 @@
 
 
 
-<div class="flex justify-end">
+<div class="flex justify-end mr-[70px]">
     <form action="/export/dana/perbankan" method="GET">
         <button class="flex items-center bg-menungguTextColor rounded-xl text-white px-3 py-2" type="submit" id="button-addon2"><img src="{{ asset('/Icon-svg/ekspor.svg') }}" class="mr-2"> <span>Export</span></button>
     </form>
 </div>
 
-<table class="badan_usaha_container ml-4 bg-white mt-3 h-20"> 
+<table class="badan_usaha_container  bg-white mt-3 h-20 w-[940px]"> 
   <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
-    <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <th class="text-center p-2">No</th>
+    <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
+    <th class="text-center p-2 rounded-tl-xl" >No</th>
     <th class="text-left p-2 ">Badan Usaha</th>
-    <th class="text-left p-2 ">Nama Pemilik</th>
+    <!-- <th class="text-left p-2 ">Nama Pemilik</th> -->
     <th class="text-left p-2 ">NIK</th>
     <th class="text-left ">
         <div class="flex text-left gap-1 my-auto ml-5  "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Kabupaten</div>
@@ -108,17 +108,17 @@
             }
         @endphp
   <tr class="bg-white h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
+  <!-- <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
     <td class="text-center text-slate-700 ">{{++$key}}</td>
     <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
-    <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td>
+    <!-- <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td> -->
     <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nik}}</td>
     <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
     <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->jumlah_dana}}</span></td>
     <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
     <td class="text-center p-2">{{date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
     <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
-    <td class="text-center p-2  cursor-pointer">
+    <td class="text-center p-2 w-[200px] cursor-pointer">
         <div class="flex ml-2 gap-1 justify-start items-center ">
             <form method="GET" action="/perbankan/dashboard/ProfilBadanUsaha/{{$item->id}}">
                 <button>

@@ -2,7 +2,7 @@
 <style>
     <style>
     .actionContainer{
-        width: 990px;
+        width: 1300px;
         height:80px;
     }
     .boxCari {
@@ -81,9 +81,9 @@
   </div>
 
   <div class="flex flex-col actionContainer ml-4  mt-3 h-14">
-    <table class="badan_usaha_container ml-4 bg-white mt-3 h-20 shadow-lg"> 
+    <table class="ml-4 bg-white mt-3 h-20 shadow-lg w-[1300px]"> 
     <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
-     <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
+     <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
      <th class="text-center p-2">No</th>
      <th class="text-left p-2 ">Badan Usaha</th>
      <th class="text-left p-2 ">Nama Pemilik</th>
@@ -114,7 +114,7 @@
         }
     @endphp
     <tr class="bg-white h-14 gap-2">
-        <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
+        <!-- <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
         <td class="text-center text-slate-700 ">{{++$key}}</td>
         <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
         <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td>

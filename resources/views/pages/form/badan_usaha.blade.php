@@ -191,12 +191,12 @@ $forms = array(
     ),
     (object)array(
         "type" => "number",
-        "placeholder" => "NILAI PRODUKSI (RP.000)",
+        "placeholder" => "NILAI PRODUKSI ",
         "prop" => "nilai_produksi_perbulan"
     ),
     (object)array(
         "type" => "number",
-        "placeholder" => "NILAI BAHAN BAKU (RP.000)",
+        "placeholder" => "NILAI BAHAN BAKU ",
         "prop" => "nilai_bahan_baku_perbulan"
     ),
     (object)array(

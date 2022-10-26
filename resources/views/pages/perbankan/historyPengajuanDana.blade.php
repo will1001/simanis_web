@@ -76,10 +76,10 @@
     </form>
 </div>
 
-<table class="badan_usaha_container ml-4 bg-white mt-3 h-20"> 
+<table class="badan_usaha_container ml-4 bg-white mt-3 h-20 w-[1050px]"> 
   <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
-    <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
-    <th class="text-center p-2">No</th>
+    <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
+    <th class="text-center p-2 ">No</th>
     <th class="text-left p-2 ">Badan Usaha</th>
     <th class="text-left p-2 ">Nama Permilik</th>
     <th class="text-left p-2 ">NIK</th>
@@ -92,7 +92,7 @@
     <th class="text-left p-2 "><span class="flex justify-center my-auto" >Waktu Pinjaman</span></th>   
     <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Tanggal</span></th>   
     <th class="text-left p-2 "><span class="">Status</span></th>   
-    <!-- <th class="rounded-tr-xl">Aksi</span></th>    -->
+    <th class="rounded-tr-xl">Aksi</span></th>   
   </tr>
   @foreach($PengajuanDana as $key=>$item)
   @php
@@ -108,7 +108,7 @@
             }
         @endphp
   <tr class="bg-white h-14 gap-2">
-  <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th>
+  <!-- <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
     <td class="text-center text-slate-700 ">{{++$key}}</td>
     <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
     <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td>
@@ -118,23 +118,23 @@
     <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
     <td class="text-center p-2">{{date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
     <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
-    <!-- <td class="text-center p-2  cursor-pointer">
+    <td class="text-center p-2  cursor-pointer">
         <div class="flex ml-2 gap-1 justify-start items-center ">
             <form method="GET" action="/perbankan/dashboard/ProfilBadanUsaha/{{$item->id}}">
                 <button>
                     <img class="w-[60px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                 </button>
             </form>
-            <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
+            <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
                     <button ><img class="w-[40px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
                     <form action="#">
                     <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[50px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
-                    </form>
+                    </form> -->
         </div>
-    </td> -->
+    </td>
 </tr>
 @endforeach
 

@@ -31,13 +31,13 @@ $fieldTitles = [
     'CABANG INDUSTRI',
     'SUB CABANG INDUSTRI',
     'KBLI',
-    'INVESTASI/ MODAL (RP. 000)',
+    'INVESTASI/ MODAL ',
     'JUMLAH TENAGA KERJA PRIA',
     'JUMLAH TENAGA KERJA WANITA',
-    'KAPASITAS PRODUKSI (RP. 000)',
+    'KAPASITAS PRODUKSI ',
     'SATUAN PRODUKSI',
-    'NILAI PRODUKSI (RP.000)',
-    'NILAI BAHAN BAKU (RP.000)',
+    'NILAI PRODUKSI ',
+    'NILAI BAHAN BAKU ',
     'LATITUDE',
     'LONGITUDE',
     'MEDIA SOSIAL',
@@ -103,7 +103,7 @@ $fieldTitles = [
 
   <div class="Container-Table">
     <div class="table-responsive m-2 " style="max-height:500px;">
-    <table class="actionContainer rounded-2xl whitespace-nowrap">
+    <table class="actionContainer rounded-2xl whitespace-nowrap w-[82px]">
     <tr class="bg-tableColor-900 text-center text-white p-2">
       <!-- <th class="text-center p-2 rounded-tl-xl">#</th> -->
       <th class="text-center p-2 rounded-tl-xl">No</th>

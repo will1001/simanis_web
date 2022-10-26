@@ -237,10 +237,11 @@ class MemberController extends Controller
                     if($pages == "suratRekomendasi"){
                         
                     $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
-                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Menunggu")
+                    ->where('alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('created_at', 'desc')->first();
                     $surat = Surat::find(1);
                    
-                    // dd($surat);
+                    // dd($PengajuanDana);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,

@@ -110,7 +110,7 @@ $forms = array(
     ),
     (object)array(
         "type" => "number",
-        "placeholder" => "INVESTASI/ MODAL (RP. 000)",
+        "placeholder" => "INVESTASI/ MODAL ",
         "prop" => "investasi_modal"
     ),
     (object)array(
@@ -135,7 +135,7 @@ $forms = array(
     ),
     (object)array(
         "type" => "number",
-        "placeholder" => "NILAI PRODUKSI (RP.000)",
+        "placeholder" => "NILAI PRODUKSI ",
         "prop" => "nilai_produksi_perbulan"
     ),
     (object)array(

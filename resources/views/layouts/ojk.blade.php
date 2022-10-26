@@ -44,7 +44,7 @@
         <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
         <span>SIMANIS.</span>
       </div>
-      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-2 rounded-md">
+      <div class="flex justify-center items-center cursor-pointer mt-3 mb-3 bg-blue-200 p-4 rounded-md">
         <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
         <span>Daftar Pembiayaan Usaha</span>
       </div>
@@ -210,7 +210,7 @@
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container">
+    <div class="w-full">
       @yield('content')
     </div>
     <!--   Core JS Files   -->

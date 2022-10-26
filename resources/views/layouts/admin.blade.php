@@ -216,7 +216,7 @@
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container">
+    <div class="w-full">
       @yield('content')
     </div>
     <!--   Core JS Files   -->
