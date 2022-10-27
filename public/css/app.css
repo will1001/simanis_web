@@ -778,6 +778,9 @@ video {
 .ml-\[850px\] {
   margin-left: 850px;
 }
+.mb-\[100px\] {
+  margin-bottom: 100px;
+}
 .block {
   display: block;
 }
@@ -900,6 +903,9 @@ video {
 }
 .h-\[48px\] {
   height: 48px;
+}
+.h-\[100px\] {
+  height: 100px;
 }
 .max-h-full {
   max-height: 100%;
