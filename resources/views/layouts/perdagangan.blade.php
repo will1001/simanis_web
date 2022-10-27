@@ -47,7 +47,7 @@
   <div class="flex h-full p-3">
     <aside class="flex flex-col bg-white p-3 rounded-xl items-start text-left">
       <div class="flex justify-center items-center">
-        <img src="{{ asset('/img/NTB Gemilang Logo 1.svg') }}" alt="logo">
+        <img src="{{ asset('/images/Logo_Simanis.png') }}" alt="logo">
         <span>SIMANIS.</span>
       </div>
       <a href="{{ url('/perdagangan/dashboard') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 {{$pages=='dashboard'?'bg-blue-200':''}} p-2 rounded-md">

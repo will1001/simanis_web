@@ -1,10 +1,11 @@
-@extends('layouts.admin')
+@extends('layouts.ojk')
 @section('content')
 <div>
    <h2>Surat Rekomendasi</h2>
-   <span class="mr-2"><a  href="/perbankan/dashboard/ProfilBadanUsaha/{{$BadanUsaha->id}}" >1. Profil Badan Usaha</a></span>
-   <span><a class="text-disetujuiTextColor" href="/perbankan/dashboard/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
-   <span><a href="/perbankan/dashboard/dataTambahan/{{$BadanUsaha->id}}">3. Data Tambahan</a></span>
+   
+   <span class="mr-2"><a  href="/ojk/dashboard/ProfilBadanUsaha/{{$BadanUsaha[0]->id}}" >1. Profil Badan Usaha</a></span>
+   <span><a class="text-disetujuiTextColor" href="/ojk/dashboard/suratRekomendasi/{{$BadanUsaha[0]->id}}">2. Surat Rekomendasi</a></span>
+   <span><a href="/ojk/dashboard/dataTambahan/{{$BadanUsaha[0]->id}}">3. Data Tambahan</a></span>
 </div>
 <div class="bg-black w-[100%] h-[1px] mt-2"></div>
 <br>
@@ -14,7 +15,7 @@ $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
 @endphp
 <div >
     <div>
-        <form action="/perbankan/dashboard/downloadSurat/{{$BadanUsaha->id}}" method="get">
+        <form action="/perbankan/dashboard/downloadSurat/{{$BadanUsaha[0]->id}}" method="get">
             <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
         </form>
     </div>
@@ -70,10 +71,10 @@ $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
                         <span>No. Telepon</span>
                     </div>
                     <div class="flex flex-col">
-                        <span>: {{$BadanUsaha->nama_usaha}}</span>
-                        <span>: {{$BadanUsaha->alamat_lengkap}}</span>
-                        <span>: {{$BadanUsaha->nama_direktur}}</span>
-                        <span>: {{$BadanUsaha->no_hp}}</span>
+                        <span>: {{$BadanUsaha[0]->nama_usaha}}</span>
+                        <span>: {{$BadanUsaha[0]->alamat_lengkap}}</span>
+                        <span>: {{$BadanUsaha[0]->nama_direktur}}</span>
+                        <span>: {{$BadanUsaha[0]->no_hp}}</span>
                     </div>
                 </div>
             </div>

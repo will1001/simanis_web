@@ -1,4 +1,4 @@
-@extends('layouts.perbankan')
+@extends('layouts.admin')
 <style>
     .badan_usaha_container,
     p,

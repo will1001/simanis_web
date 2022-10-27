@@ -14,6 +14,7 @@ use App\Models\Instansi;
 use App\Models\Surat;
 use App\Models\Kabupaten;
 use App\Models\CabangIndustri;
+use App\Models\DataPendukung;
 use App\Imports\UserImport;
 use App\Imports\BadanUsahaImport;
 use App\Exports\BadanUsahaExport;
@@ -156,6 +157,51 @@ class AdminController extends Controller
     
                             $subPagesParams['BadanUsaha'] = $BadanUsaha;
                         }
+
+                        if($subPages == "dataTambahan"){
+                            $dataPendukung = DataPendukung::where('id_badan_usaha',$id)->first();
+                            // dd($dataPendukung);
+                            $subPagesParams = [
+                                'BadanUsaha' => $BadanUsaha,
+                                'dataPendukung' => $dataPendukung,
+                                'pages' => $subPages,
+                                'Notifikasi' => $Notifikasi
+    
+                            ];
+                        }
+                        if($subPages == "suratRekomendasi"){
+                            
+                            $BadanUsaha = BadanUsaha::where('id',$id)->get();
+                            $user= User::where('nik',$BadanUsaha[0]->nik)->first();
+                            $surat = Surat::find(1);
+    
+                            // dd($surat);
+                            $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Menunggu")->orderBy('created_at', 'desc')->first();
+                            // dd($PengajuanDana);
+                                $subPagesParams = [
+                                    'BadanUsaha' => $BadanUsaha,
+                                    'PengajuanDana' => $PengajuanDana,
+                                    'pages' => $subPages,
+                                    'fields'=>$this->fields,
+                                    'Notifikasi' => $Notifikasi,
+                                    'Surat' => $surat,
+    
+                                ];
+                            }
+                            if($subPages == "downloadSurat"){
+                                $BadanUsaha = BadanUsaha::where('id',$id)->get();
+                                $user= User::where('nik',$BadanUsaha[0]->nik)->first();
+                                $surat = Surat::find(1);
+                                $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                                $subPagesParams = [
+                                    'BadanUsaha' => $BadanUsaha,
+                                    'PengajuanDana' => $PengajuanDana,
+                                    'pages' => $subPages,
+                                    'fields'=>$this->fields,
+                                    'Notifikasi' => $Notifikasi,
+                                    'Surat' => $surat,
+                                ];
+                            }
 
                     if($subPages == "ProfilBadanUsaha"){
 

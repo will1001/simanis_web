@@ -103,7 +103,7 @@ $fieldTitles = [
 
   <div class="Container-Table">
     <div class="table-responsive m-2 " style="max-height:500px;">
-    <table class="actionContainer rounded-2xl whitespace-nowrap w-[82px]">
+    <table class="actionContainer rounded-2xl whitespace-nowrap w-[820px]">
     <tr class="bg-tableColor-900 text-center text-white p-2">
       <!-- <th class="text-center p-2 rounded-tl-xl">#</th> -->
       <th class="text-center p-2 rounded-tl-xl">No</th>

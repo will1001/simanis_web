@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use App\Models\BadanUsaha;
 use App\Models\Notifikasi;
 use App\Models\PengajuanDana;
+use App\Models\dataPendukung;
+use App\Models\User;
+use App\Models\Surat;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PengajuanDanaOJKExport;
@@ -79,6 +82,57 @@ class OjkController extends Controller
                 if ($subPages != "") {
                     $params=['BadanUsaha' => $BadanUsaha,  'pages' => $subPages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi];
                     $params['User'] = Auth::user();
+
+                    if($subPages == "dataTambahan"){
+                        $BadanUsaha = BadanUsaha::where('id',$id)->first();
+
+                        $dataPendukung = DataPendukung::where('id_badan_usaha',$id)->first();
+                        // dd($BadanUsaha);
+                        $user= User::where('nik',$BadanUsaha->nik)->first();
+
+                        $params = [
+                            'BadanUsaha' => $BadanUsaha,
+                            'dataPendukung' => $dataPendukung,
+                            'pages' => $subPages,
+                            'Notifikasi' => $Notifikasi,
+                            'User' => $user,
+                        ];
+                    }
+
+                    if($subPages == "suratRekomendasi"){
+                            
+                        $BadanUsaha = BadanUsaha::where('id',$id)->get();
+                        $user= User::where('nik',$BadanUsaha[0]->nik)->first();
+                        $surat = Surat::find(1);
+
+                        // dd($BadanUsaha);
+                        $PengajuanDana = PengajuanDana::where('user_id',$user->id)->orderBy('created_at', 'desc')->first();
+                        // dd($PengajuanDana);
+                            $params = [
+                                'BadanUsaha' => $BadanUsaha,
+                                'PengajuanDana' => $PengajuanDana,
+                                'pages' => $subPages,
+                                'fields'=>$this->fields,
+                                'Notifikasi' => $Notifikasi,
+                                'Surat' => $surat,
+                                'User' => $user,
+
+                            ];
+                        }
+                        if($subPages == "downloadSurat"){
+                            $BadanUsaha = BadanUsaha::where('id',$id)->get();
+                            $user= User::where('nik',$BadanUsaha[0]->nik)->first();
+                            $surat = Surat::find(1);
+                            $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                            $params = [
+                                'BadanUsaha' => $BadanUsaha,
+                                'PengajuanDana' => $PengajuanDana,
+                                'pages' => $subPages,
+                                'fields'=>$this->fields,
+                                'Notifikasi' => $Notifikasi,
+                                'Surat' => $surat,
+                            ];
+                        }
                     return view("pages.ojk.{$subPages}", $params);
                 } else {
                     // dd($BadanUsaha);

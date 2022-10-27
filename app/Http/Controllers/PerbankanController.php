@@ -98,13 +98,13 @@ class PerbankanController extends Controller
                     }
                     if($subPages == "suratRekomendasi"){
                         
-                        $BadanUsaha = BadanUsaha::where('id',$id)->get();
-                        $user= User::where('nik',$BadanUsaha[0]->nik)->first();
+                        $BadanUsaha = BadanUsaha::where('id',$id)->first();
+                        $user= User::where('nik',$BadanUsaha->nik)->first();
                         $surat = Surat::find(1);
 
                         // dd($user);
-                        $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
-                        // dd($BadanUsaha);
+                        $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Menunggu")->orderBy('created_at', 'desc')->first();
+                        // dd($PengajuanDana);
                             $params = [
                                 'BadanUsaha' => $BadanUsaha,
                                 'PengajuanDana' => $PengajuanDana,
