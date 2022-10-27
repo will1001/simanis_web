@@ -34,7 +34,7 @@
       <input style="visibility: collapse;" id="nikInput" class="border-1 border-gray-500 p-2" type="string" placeholder="NIK" name="nik" minlength="8" >
       <input style="visibility: collapse;" id="namaInstansiInput" class="border-1 border-gray-500 p-2" type="string" placeholder="Nama Instansi" name="nama_instansi" >
     </div>
-    <div class="flex flex-row mx-auto gap-4">
+    <div class="flex flex-row mx-auto gap-4 w-full p-2">
       <div class="flex w-[140px] h-[52px] bg-slate-50 rounded-lg bg-cover mt-4  shadow-md">
           <input onclick="closeDetails()"  type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">    
       </div>

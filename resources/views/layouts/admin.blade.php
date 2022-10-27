@@ -80,13 +80,23 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
-      <div class="container-fluid py-1 px-3">
+      <div class=" flex justify-center w-full py-1 ">
         <!-- <nav aria-label="breadcrumb">
           <h6 class="font-weight-bolder mb-0">Dashboard</h6>
         </nav> -->
+        @if($pages == "ProfilBadanUsaha"
+         || $pages == "suratRekomendasi"
+         || $pages == "dataTambahan"
+        )
+        <a onclick="history.back()" href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-arrow-left cursor-pointer fa-2x"></i>
+          </a>
+        @endif
+        @if($pages == "tabel")
         <div>
           <a class="flex items-center bg-white rounded-xl px-3 py-2 border-1 border-gray-400 w-[170px]" href="{{ asset('/files/contah format import data.xlsx') }}">Contoh File Import</a>
         </div>
+        @endif
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">

@@ -17,9 +17,9 @@ $baseUrl = env('APP_URL');
 @section('content')
 <div>
    <h2>Data Tambahan</h2>
-   <span class="mr-2"><a  href="/perbankan/dashboard/ProfilBadanUsaha/{{$BadanUsaha->id}}" >1. Profil Badan Usaha</a></span>
-   <span><a href="/perbankan/dashboard/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
-   <span><a href="/perbankan/dashboard/dataTambahan/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">3. Data Tambahan</a></span>
+   <span class="mr-2"><a  href="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$BadanUsaha->id}}" >1. Profil Badan Usaha</a></span>
+   <span><a href="/admin/daftarPengajuanDana/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
+   <span><a href="/admin/daftarPengajuanDana/dataTambahan/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">3. Data Tambahan</a></span>
 </div>
 <div class="bg-black w-[100%] h-[1px] mt-2"></div>
 <br>

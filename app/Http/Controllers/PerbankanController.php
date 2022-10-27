@@ -104,7 +104,7 @@ class PerbankanController extends Controller
 
                         // dd($user);
                         $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Menunggu")->orderBy('created_at', 'desc')->first();
-                        // dd($PengajuanDana);
+                        // dd($BadanUsaha);
                             $params = [
                                 'BadanUsaha' => $BadanUsaha,
                                 'PengajuanDana' => $PengajuanDana,

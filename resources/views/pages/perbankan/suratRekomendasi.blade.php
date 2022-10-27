@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.perbankan')
 @section('content')
 <div>
    <h2>Surat Rekomendasi</h2>
@@ -26,7 +26,7 @@ if($kopBulan == 8) $kopBulanRomawi = "VIII";
 if($kopBulan == 9) $kopBulanRomawi = "IX";
 if($kopBulan == 10) $kopBulanRomawi = "X";
 if($kopBulan == 11) $kopBulanRomawi = "XI";
-if($kopBulan == 12) $kopBulanRomawi = "XII";p
+if($kopBulan == 12) $kopBulanRomawi = "XII";
 @endphp
 <div >
     <div>
@@ -87,10 +87,10 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";p
                         <span>No. Telepon</span>
                     </div>
                     <div class="flex flex-col">
-                        <span>: {{$BadanUsaha[0]->nama_usaha}}</span>
-                        <span>: {{$BadanUsaha[0]->alamat_lengkap}}</span>
-                        <span>: {{$BadanUsaha[0]->nama_direktur}}</span>
-                        <span>: {{$BadanUsaha[0]->no_hp}}</span>
+                        <span>: {{$BadanUsaha->nama_usaha}}</span>
+                        <span>: {{$BadanUsaha->alamat_lengkap}}</span>
+                        <span>: {{$BadanUsaha->nama_direktur}}</span>
+                        <span>: {{$BadanUsaha->no_hp}}</span>
                     </div>
                 </div>
             </div>
@@ -110,6 +110,6 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";p
                 <span>{{$Surat->nip}}</span>
         </div>
     </div>
-</div>p
+</div>
 
 @endsection
