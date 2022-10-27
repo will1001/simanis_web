@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\BadanUsaha;
 use App\Models\Notifikasi;
 use App\Models\PengajuanDana;
-use App\Models\dataPendukung;
+use App\Models\DataPendukung;
 use App\Models\User;
 use App\Models\Surat;
 use Illuminate\Support\Str;
