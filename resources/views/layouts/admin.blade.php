@@ -43,7 +43,7 @@
     <div class="flex h-full p-3">
         <aside class="flex flex-col bg-white p-3 rounded-xl items-start text-left w-[250px]">
         <div class="flex justify-center items-center">
-            <img src="{{ asset('/images/Logo_Simanis.png') }}" alt="logo">
+            <img class="h-[48px] mr-2" src="{{ asset('/images/Logo_Simanis.png') }}" alt="logo">
             <span>SIMANIS.</span>
         </div>
         <a href="{{ url('/admin/tabel') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='tabel' || $pages=='admin'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
