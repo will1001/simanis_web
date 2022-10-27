@@ -49,8 +49,7 @@ $fieldTitles = [
 ];
 ?>
 @section('content')
-<h1>Profil Badan Usaha</h1>
-div>
+<div>
    <h2>Profil Badan Usaha</h2>
    <span class="mr-2"><a  href="/ojk/dashboard/ProfilBadanUsaha/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">1. Profil Badan Usaha</a></span>
    <span><a href="/ojk/dashboard/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
