@@ -81,9 +81,12 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
+        <!-- <nav aria-label="breadcrumb">
           <h6 class="font-weight-bolder mb-0">Dashboard</h6>
-        </nav>
+        </nav> -->
+        <div>
+          <a class="flex items-center bg-white rounded-xl px-3 py-2 border-1 border-gray-400 w-[170px]" href="{{ asset('/files/contah format import data.xlsx') }}">Contoh File Import</a>
+        </div>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
