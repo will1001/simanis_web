@@ -1,3 +1,4 @@
+
 angular.module('myApp.controllers')
     .controller('BadanUsahaCtrl', ['$http', '$scope', '$window',
         function ($http, $scope, $window) {

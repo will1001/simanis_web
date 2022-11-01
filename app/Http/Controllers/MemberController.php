@@ -215,7 +215,7 @@ class MemberController extends Controller
                         $SimulasiAngsuran = SimulasiAngsuran::all();
                         $Instansi = Instansi::all();
                         $DataPendukung = DataPendukung::where('id_badan_usaha', $BadanUsaha[0]->id)->first();
-                        // dd($Instansi);
+                        // dd($JangkaWaktu);
 
 
                         $params = [
@@ -301,6 +301,7 @@ class MemberController extends Controller
     }
     function ajukan_dana(Request $r)
     {
+        // dd($r);
         $instansi = User::find($r->input("instansi"));
         $jumlah_dana;
         $waktu_pinjaman;
@@ -324,7 +325,7 @@ class MemberController extends Controller
             'user_id' => Auth::id(),
             'status' => "Menunggu",
             'jumlah_dana' => $jumlah_dana,
-            'waktu_pinjaman' => "12",
+            'waktu_pinjaman' => $waktu_pinjaman,
             'alasan' => $r->input("alasan"),
             'instansi' => $instansi->role,
             'jenis_pengajuan' => $r->input("jenis_pengajuan"),

@@ -170,7 +170,7 @@ class PerbankanController extends Controller
                             )
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.status", "Menunggu")
-                            ->orderBy('created_at', 'desc')->get();
+                            ->latest('dana_created_at')->get();
                         // dd($PengajuanDana);
                         $params = [
                             'PengajuanDana' => $PengajuanDana,

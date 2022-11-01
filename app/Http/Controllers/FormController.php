@@ -27,7 +27,7 @@ class FormController extends Controller
         'badan_usaha_documents.id as badan_usaha_documents_id',
         'badan_usaha.nik',
         'badan_usaha.nama_direktur',
-        'kabupaten.name as kabupaten',
+        'badan_usaha.id_kabupaten as kabupaten',
         'badan_usaha.kecamatan',
         'badan_usaha.kelurahan',
         'badan_usaha.alamat_lengkap',

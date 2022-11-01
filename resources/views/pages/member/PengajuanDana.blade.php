@@ -313,7 +313,6 @@ $baseUrl = env('APP_URL') . '/';
   }
   const jangkaWaktuChange = () => {
 
-
     const angsuranValue = document.getElementById('angsuranValue');
 
     const jmlDanaSelectChild = document.getElementById('jmlDanaSelectChild');

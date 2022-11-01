@@ -159,7 +159,7 @@ class OjkController extends Controller
                         ->where("instansi","BANK")
                         // ->where("pengajuan_dana.status","Diterima")
                         // ->where("pengajuan_dana.alasan","Selamat Pembiayaan Usaha Anda diterima")
-                        ->orderBy('created_at', 'desc')->get();
+                        ->latest('dana_created_at')->get();
     
                         $params = [
                             'PengajuanDana' => $PengajuanDana,

@@ -38,7 +38,8 @@ $forms = array(
     (object)array(
         "type" => "select",
         "placeholder" => "KABUPATEN",
-        "prop" => "id_kabupaten",
+        "prop" => "kabupaten",
+        "name" => "id_kabupaten",
         "options" => $Kabupaten,
         "change" => "return changeKabupaten()",
     ),
@@ -46,6 +47,7 @@ $forms = array(
         "type" => "select",
         "placeholder" => "KECAMATAN",
         "prop" => "kecamatan",
+        "name" => "kecamatan",
         "options" => [],
         "change" => "return changeKecamatan()",
     ),
@@ -53,6 +55,7 @@ $forms = array(
         "type" => "select",
         "placeholder" => "KELURAHAN/DESA",
         "prop" => "kelurahan",
+        "name" => "kelurahan",
         "options" => [],
         "change" => "",
     ),
@@ -76,6 +79,7 @@ $forms = array(
         "placeholder" => "BENTUK USAHA",
         "options" => $bentukUsaha,
         "prop" => "bentuk_usaha",
+        "name" => "bentuk_usaha",
         "change" => ""
     ),
     (object)array(
@@ -147,6 +151,7 @@ $forms = array(
         "type" => "select",
         "placeholder" => "CABANG INDUSTRI",
         "prop" => "cabang_industri",
+        "name" => "cabang_industri",
         "options" => $CabangIndustri,
         "change" => "return changeCabangIndustri()",
     ),
@@ -154,6 +159,7 @@ $forms = array(
         "type" => "select",
         "placeholder" => "SUB CABANG INDUSTRI",
         "prop" => "sub_cabang_industri",
+        "name" => "sub_cabang_industri",
         "options" => [],
         "change" => "",
     ),
@@ -161,6 +167,7 @@ $forms = array(
         "type" => "select",
         "placeholder" => "KBLI",
         "prop" => "id_kbli",
+        "name" => "id_kbli",
         "options" => $Kbli,
         "change" => "",
     ),
@@ -272,8 +279,10 @@ $forms = array(
             </div>
 
             <div class="w-[500px]">
+
                 @if($form->type == 'select')
-                <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
+
+                <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->name}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
                     <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
@@ -330,8 +339,8 @@ $forms = array(
 
     const renderSubCabangIndustriSelectFilter = (nameCabangIndsutri) => {
         var str = `<option value=''>Semua</option>`
-        const idCabangIndustri = cabangIndustri.filter(e => e.name == nameCabangIndsutri)[0].id;
-        const subCabangIndustriList = subCabangIndustri.filter(e => e.id_cabang_industri == idCabangIndustri);
+        const idCabangIndustri = cabangIndustri.filter(e => e.id == nameCabangIndsutri);
+        const subCabangIndustriList = subCabangIndustri.filter(e => e.id_cabang_industri == idCabangIndustri[0].id);
 
         for (let item of subCabangIndustriList) {
             str += `<option value='${item.id}'>` + item.name + "</option>"
