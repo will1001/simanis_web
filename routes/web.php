@@ -57,6 +57,7 @@ Route::get('/export/dana/koperasi', [KoperasiController::class, 'exportExcel']);
 Route::get('/export/dana/ojk', [OjkController::class, 'exportExcel']);
 Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);
 Route::post('/admin/survei/{id}', [AdminController::class, 'gantiLinksurvei']);
+Route::get('/admin/user/password/reset/{id}', [AdminController::class, 'resetPasswordUser']);
 
 Route::get('/member/{pages}/{subPages?}/{id?}', [MemberController::class, 'index'])->name('member');
 Route::post('/member/data/pendukung', [MemberController::class, 'uploadDataPendukung']);
@@ -66,7 +67,7 @@ Route::get('/perdagangan/{pages}/{subPages?}/{id?}', [PerdaganganController::cla
 Route::get('/ojk/{pages}/{subPages?}/{id?}', [OjkController::class, 'index'])->name('ojk');
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
-Route::get( '/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBadanUsahaById']);
+Route::get('/form/badan_usaha/delete/{id}', [FormController::class, 'deleteBadanUsahaById']);
 
 
 Route::post('/ajukan_dana', [MemberController::class, 'ajukan_dana'])->name('ajukan_dana');
@@ -82,5 +83,3 @@ Route::post('/simulasi/angsuran', [PerbankanController::class, 'tambahSimulasiAn
 Route::post('/simulasi/angsuran/delete/{jumlah_dana}', [PerbankanController::class, 'hapusSimulasiAngsuran']);
 Route::post('/simulasi/angsuran/edit/{id}', [PerbankanController::class, 'editSimulasiAngsuran']);
 Route::post('/ganti/foto', [MemberController::class, 'ganti_foto'])->name('ganti_foto');
-
-

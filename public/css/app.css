@@ -901,6 +901,9 @@ video {
 .h-\[200px\] {
   height: 200px;
 }
+.h-\[\] {
+  height: ;
+}
 .max-h-full {
   max-height: 100%;
 }
@@ -1403,6 +1406,10 @@ video {
 .px-\[15px\] {
   padding-left: 15px;
   padding-right: 15px;
+}
+.px-\[25px\] {
+  padding-left: 25px;
+  padding-right: 25px;
 }
 .pt-8 {
   padding-top: 2rem;
