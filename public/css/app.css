@@ -898,9 +898,6 @@ video {
 .h-64 {
   height: 16rem;
 }
-.h-\[100px\] {
-  height: 100px;
-}
 .h-\[200px\] {
   height: 200px;
 }

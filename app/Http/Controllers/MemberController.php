@@ -226,6 +226,7 @@ class MemberController extends Controller
                             'SimulasiAngsuran' => $SimulasiAngsuran,
                             'Instansi' => $Instansi,
                             'DataPendukung' => $DataPendukung,
+                            'userDataProgress' => $userDataProgress
                         ];
                     }
                     if ($pages == "produk") {

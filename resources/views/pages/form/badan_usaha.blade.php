@@ -180,7 +180,7 @@ $forms = array(
         "prop" => "jumlah_tenaga_kerja_wanita"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "text",
         "placeholder" => "RATA-RATA PENDIDIKAN TENAGA KERJA",
         "prop" => "rata_rata_pendidikan_tenaga_kerja"
     ),
@@ -270,7 +270,7 @@ $forms = array(
             <div class="w-[300px] text-gray-700">
                 <span>{{$form->placeholder}} </span>
             </div>
-            
+
             <div class="w-[500px]">
                 @if($form->type == 'select')
                 <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
@@ -287,7 +287,7 @@ $forms = array(
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400 font-bold">UPLOAD FILE PDF</p>
                     </div>
-                    <input id="{{$form->prop}}" accept="application/pdf" name="{{$form->prop}}" type="file" class="hidden" id="{{$form->prop}}"/>
+                    <input id="{{$form->prop}}" accept="application/pdf" name="{{$form->prop}}" type="file" class="hidden" id="{{$form->prop}}" />
                 </label>
                 @elseif($form->type == 'image')
                 <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
@@ -297,7 +297,7 @@ $forms = array(
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
                     </div>
-                    <input id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data"/>
+                    <input id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data" />
                 </label>
                 @elseif($form->type == 'label')
                 <a class="text-blue font-blue" target="_blank" href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik Disini</a>
@@ -309,7 +309,7 @@ $forms = array(
     </div>
     @endforeach
     <div class="flex justify-end">
-     <button class="bg-buttonColor-900 text-white p-3 mr-[150px] mt-3 rounded-xl" type="submit">Simpan Akun IKM</button>
+        <button class="bg-buttonColor-900 text-white p-3 mr-[150px] mt-3 rounded-xl" type="submit">Simpan Akun IKM</button>
     </div>
 </form>
 @endsection
