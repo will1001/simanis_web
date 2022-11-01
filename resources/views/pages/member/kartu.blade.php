@@ -1,5 +1,7 @@
 @extends('layouts.member')
 @section('content')
+@if($userDataProgress[0] === 100)
+<div>
 <div class="flex bg-white rounded-xl p-4">
     <div>
         <h2>No Kartu. {{substr($BadanUsaha[0]->nik,strlen($BadanUsaha[0]->nik)-4,strlen($BadanUsaha[0]->nik))}}{{$BadanUsaha[0]->id_cabang_industri}}{{$BadanUsaha[0]->id_kabupaten}}</h2>
@@ -35,5 +37,11 @@
             <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
         </form>
     </div>
+</div>
+@else
+<div>
+        <h3>Lengkapi Profil Badan Usaha Untuk Mengakses Fitur ini</h3>
+    </div>
+@endif
 
 @endsection

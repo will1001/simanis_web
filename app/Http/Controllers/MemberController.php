@@ -226,7 +226,7 @@ class MemberController extends Controller
                             'SimulasiAngsuran' => $SimulasiAngsuran,
                             'Instansi' => $Instansi,
                             'DataPendukung' => $DataPendukung,
-                            'userDataProgress' => $userDataProgress
+
                         ];
                     }
                     if ($pages == "produk") {
@@ -288,6 +288,7 @@ class MemberController extends Controller
                         ];
                     }
                     $params['Notifikasi'] = $Notifikasi;
+                    $params['userDataProgress'] = $userDataProgress;
                     $params['pages'] = $pages;
                     $params['User'] = Auth::user();
 
