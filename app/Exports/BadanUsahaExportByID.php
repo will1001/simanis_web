@@ -6,13 +6,22 @@ use App\Models\BadanUsaha;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class BadanUsahaExport implements FromCollection,WithHeadings
+class BadanUsahaExportByID implements FromCollection, WithHeadings
 {
+
+    protected $id;
+
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+    }
     public function collection()
     {
+        // dd($this->id);
         return BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->where('badan_usaha.id', $this->id)
             ->get([
                 'badan_usaha.nik',
                 'badan_usaha.nama_direktur',

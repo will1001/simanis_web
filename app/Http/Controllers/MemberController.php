@@ -50,8 +50,10 @@ class MemberController extends Controller
         'badan_usaha.nomor_test_report_tahun',
         'badan_usaha.sni_tahun',
         'badan_usaha.jenis_usaha',
+        'badan_usaha.merek_usaha',
         'cabang_industri.name as cabang_industri',
         'sub_cabang_industri.name as sub_cabang_industri',
+        'kbli.name as kbli',
         'badan_usaha.investasi_modal',
         'badan_usaha.jumlah_tenaga_kerja_pria',
         'badan_usaha.jumlah_tenaga_kerja_wanita',
@@ -65,10 +67,12 @@ class MemberController extends Controller
         'badan_usaha_documents.sertifikat_halal_file',
         'badan_usaha_documents.sertifikat_sni_file',
         'badan_usaha_documents.sertifikat_merek_file',
+        'badan_usaha.foto_alat_produksi',
+        'badan_usaha.foto_ruang_produksi',
 
     ];
     private $fields = [
-        'id',
+        // 'id',
         'nik',
         'nama_direktur',
         'kabupaten',
@@ -90,12 +94,14 @@ class MemberController extends Controller
         'sni_tahun',
         'sertifikat_sni_file',
         'jenis_usaha',
+        'merek_usaha',
         'cabang_industri',
         'sub_cabang_industri',
-        'id_kbli',
+        'kbli',
         'investasi_modal',
         'jumlah_tenaga_kerja_pria',
         'jumlah_tenaga_kerja_wanita',
+        'rata_rata_pendidikan_tenaga_kerja',
         'kapasitas_produksi_perbulan',
         'satuan_produksi',
         'nilai_produksi_perbulan',
@@ -111,18 +117,18 @@ class MemberController extends Controller
     //
     function index($pages = "dashboard", $subPages = "", $id = "")
     {
-        $Notifikasi = Notifikasi::where("user_role","MEMBER")->where("nik",Auth::user()->nik)->where("status","not read")->get();
+        $Notifikasi = Notifikasi::where("user_role", "MEMBER")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
 
         if (Auth::check()) {
             if (Auth::user()->role === "ADMIN") {
                 return redirect('/admin/tabel');
-            }else if (Auth::user()->role === "BANK") {
+            } else if (Auth::user()->role === "BANK") {
                 return redirect('/perbankan/daftarPengajuanDana');
-            }else if (Auth::user()->role === "KOPERASI") {
+            } else if (Auth::user()->role === "KOPERASI") {
                 return redirect('/koperasi/daftarPengajuanDana');
-            }else if (Auth::user()->role === "PERDAGANGAN") {
+            } else if (Auth::user()->role === "PERDAGANGAN") {
                 return redirect('/perdagangan/dashboard');
-            }else if (Auth::user()->role === "OJK") {
+            } else if (Auth::user()->role === "OJK") {
                 return redirect('/ojk/dashboard');
             } else {
                 // dd(Auth::user()->nik);
@@ -131,16 +137,24 @@ class MemberController extends Controller
                 // dd(count($this->fields));
                 // dd(!$BadanUsaha->first());
                 // dd(empty($BadanUsaha));
-                if(!$BadanUsaha->first()){
+                if (!$BadanUsaha->first()) {
                     $NewBadanUsaha = new BadanUsaha;
                     $NewBadanUsaha->id = (string) Str::uuid();
                     $NewBadanUsaha->nik = Auth::user()->nik;
 
-                     // BUAT BADAN USAHA
-                        $NewBadanUsaha->save();
-
+                    // BUAT BADAN USAHA
+                    $NewBadanUsaha->save();
                 }
-                $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+                // $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+                $badan_usaha = BadanUsaha::leftJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
+                    ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                    ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+                    ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+                    ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                    ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                    ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                    ->where("nik", Auth::user()->nik)
+                    ->get($this->fieldBadanUsaha);
                 // dd($BadanUsaha);
 
                 foreach ($BadanUsaha as $key => &$item) {
@@ -152,53 +166,56 @@ class MemberController extends Controller
                             $totalnull += 1;
                         }
                     }
-                    $userDataProgress[$key] = ((count($this->fields)-$totalnull) / count($this->fields)) * 100;
+                    $userDataProgress[$key] = ((count($this->fields) - ($totalnull - 10)) / (count($this->fields))) * 100;
                 }
 
                 if ($id != "") {
-                    
+
                     $badan_usaha = BadanUsaha::leftJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
                         ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
                         ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
                         ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                         ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-                        ->where("badan_usaha.id",$id)
+                        ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                        ->where("badan_usaha.id", $id)
                         ->get($this->fieldBadanUsaha);
                     // dd($badan_usaha);
                 }
                 if ($subPages != "") {
-                    // dd($BadanUsaha);
-                    return view("pages.member.{$subPages}", ['BadanUsaha' => $badan_usaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields,'Notifikasi' => $Notifikasi,'User' => Auth::user()]);
+                    // dd($userDataProgress);
+                    // dd($totalnull);
+                    // dd(count($this->fields));
+                    return view("pages.member.{$subPages}", ['BadanUsaha' => $badan_usaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()]);
                 } else {
-                    $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages,'fields'=>$this->fields];
-                    
-                    if($pages == "kartu"){
-                    $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
-                    $CabangIndustri = CabangIndustri::where('name',$BadanUsaha[0]->cabang_industri)->first();
-                    $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
-                    $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
+                    $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields];
+
+                    if ($pages == "kartu") {
+                        $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
+                        $CabangIndustri = CabangIndustri::where('name', $BadanUsaha[0]->cabang_industri)->first();
+                        $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
+                        $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
 
                         $params = ['BadanUsaha' => $BadanUsaha];
                     }
-                    if($pages == "downloadKartu"){
-                    $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
-                    $CabangIndustri = CabangIndustri::where('name',$BadanUsaha[0]->cabang_industri)->first();
-                    $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
-                    $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
+                    if ($pages == "downloadKartu") {
+                        $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
+                        $CabangIndustri = CabangIndustri::where('name', $BadanUsaha[0]->cabang_industri)->first();
+                        $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
+                        $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
 
                         $params = ['BadanUsaha' => $BadanUsaha];
                     }
 
-                    if($pages == "PengajuanDana"){
-                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
-                    $JumlahPinjaman = JumlahPinjaman::all();
-                    $JangkaWaktu = JangkaWaktu::all();
-                    $SimulasiAngsuran = SimulasiAngsuran::all();
-                    $Instansi = Instansi::all();
-                    $DataPendukung = DataPendukung::where('id_badan_usaha',$BadanUsaha[0]->id)->first();
-                    // dd($Instansi);
+                    if ($pages == "PengajuanDana") {
+                        $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+                        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+                        $JumlahPinjaman = JumlahPinjaman::all();
+                        $JangkaWaktu = JangkaWaktu::all();
+                        $SimulasiAngsuran = SimulasiAngsuran::all();
+                        $Instansi = Instansi::all();
+                        $DataPendukung = DataPendukung::where('id_badan_usaha', $BadanUsaha[0]->id)->first();
+                        // dd($Instansi);
 
 
                         $params = [
@@ -211,17 +228,17 @@ class MemberController extends Controller
                             'DataPendukung' => $DataPendukung,
                         ];
                     }
-                    if($pages == "produk"){
-                        
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
-                    $Produk = Produk::where('id_badan_usaha',$BadanUsaha[0]->id)->get();
-                    // dd($Produk);
+                    if ($pages == "produk") {
 
-                        $params = ['Produk' => $Produk,'BadanUsaha' => $BadanUsaha];
+                        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+                        $Produk = Produk::where('id_badan_usaha', $BadanUsaha[0]->id)->get();
+                        // dd($Produk);
+
+                        $params = ['Produk' => $Produk, 'BadanUsaha' => $BadanUsaha];
                     }
-                    if($pages == "settingBadanUsaha"){
-                        
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
+                    if ($pages == "settingBadanUsaha") {
+
+                        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
 
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
@@ -234,14 +251,14 @@ class MemberController extends Controller
                         ];
                     }
 
-                    if($pages == "suratRekomendasi"){
-                        
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
-                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Menunggu")
-                    ->where('alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('created_at', 'desc')->first();
-                    $surat = Surat::find(1);
-                   
-                    // dd($PengajuanDana);
+                    if ($pages == "suratRekomendasi") {
+
+                        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+                        $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->where('status', "Menunggu")
+                            ->where('alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('created_at', 'desc')->first();
+                        $surat = Surat::find(1);
+
+                        // dd($PengajuanDana);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,
@@ -249,11 +266,11 @@ class MemberController extends Controller
                         ];
                     }
 
-                    if($pages == "downloadSurat"){
-                        
-                    $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
-                    $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
-                    // dd($BadanUsaha);
+                    if ($pages == "downloadSurat") {
+
+                        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+                        $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->where('status', "Diterima")->orderBy('created_at', 'desc')->first();
+                        // dd($BadanUsaha);
                         $surat = Surat::find(1);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
@@ -262,8 +279,8 @@ class MemberController extends Controller
                         ];
                     }
 
-                    if($pages == "settingAkun"){
-                        $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->get();
+                    if ($pages == "settingAkun") {
+                        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
 
                         $params = [
                             'BadanUsaha' => $BadanUsaha
@@ -280,25 +297,22 @@ class MemberController extends Controller
             return redirect('/login');
         }
     }
-    function ajukan_dana(Request $r){
+    function ajukan_dana(Request $r)
+    {
         $instansi = User::find($r->input("instansi"));
         $jumlah_dana;
         $waktu_pinjaman;
-    // dd($r->input("jumlah_dana_bank") != null);
+        // dd($r->input("jumlah_dana_bank") != null);
 
-        if($r->input("jumlah_dana_bank") != null){
+        if ($r->input("jumlah_dana_bank") != null) {
 
             $JumlahPinjaman = JumlahPinjaman::find($r->input("jumlah_dana_bank"));
             $JangkaWaktu = JangkaWaktu::find($r->input("jangka_waktu_bank"));
-            $jumlah_dana=$JumlahPinjaman->jumlah;
-            $waktu_pinjaman=$JangkaWaktu->waktu;
-        
-
-
-        }else{
-            $jumlah_dana=$r->input("jumlah_dana");
-            $waktu_pinjaman=$r->input("waktu_pinjaman");
-        
+            $jumlah_dana = $JumlahPinjaman->jumlah;
+            $waktu_pinjaman = $JangkaWaktu->waktu;
+        } else {
+            $jumlah_dana = $r->input("jumlah_dana");
+            $waktu_pinjaman = $r->input("waktu_pinjaman");
         }
         // dd($waktu_pinjaman);
 
@@ -315,8 +329,8 @@ class MemberController extends Controller
         ]);
         // dd($pengajuanDana);
 
-        $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
-       
+        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->first();
+
 
         $notifikasi = new Notifikasi([
             'id' => (string) Str::uuid(),
@@ -331,69 +345,69 @@ class MemberController extends Controller
         // dd($BadanUsaha->nama_usaha);
 
         $notifikasi->save();
-        if($instansi == "BANK"){
+        if ($instansi == "BANK") {
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => "33333333",
                 'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
                 'user_role' => "OJK",
             ]);
-            
+
             $notifikasi->save();
         }
-        
+
         $pengajuanDana->save();
         return redirect('/member/PengajuanDana');
         // $PengajuanDana = PengajuanDana::where('user_id',Auth::id())->get();
 
         // return view('pages.member.PengajuanDana', ['PengajuanDana' => $PengajuanDana,'msg' => "Dana Telah di ajukan , menunggu verifiaksi admin"]);
     }
-    function ajukan_produk(Request $r){
-        $sertifikat_halal = 
-        (object)array(
-            "tahun" => $r->input("sertifikat_halal_thn"),
-            "nomor" => $r->input("sertifikat_halal_no"),
-        );
-        $sertifikat_haki = 
-        (object)array(
-            "tahun" => $r->input("sertifikat_haki_thn"),
-            "nomor" => $r->input("sertifikat_haki_no"),
-        );
-        $sertifikat_sni = 
-        (object)array(
-            "tahun" => $r->input("sertifikat_sni_thn"),
-            "nomor" => $r->input("sertifikat_sni_no"),
-        );
-        $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
-        $cek_sertifikat_halal = str_contains(json_encode($sertifikat_halal),"null");
-        $cek_sertifikat_haki = str_contains(json_encode($sertifikat_haki),"null");
-        $cek_sertifikat_sni = str_contains(json_encode($sertifikat_sni),"null");
-        
-       
+    function ajukan_produk(Request $r)
+    {
+        $sertifikat_halal =
+            (object)array(
+                "tahun" => $r->input("sertifikat_halal_thn"),
+                "nomor" => $r->input("sertifikat_halal_no"),
+            );
+        $sertifikat_haki =
+            (object)array(
+                "tahun" => $r->input("sertifikat_haki_thn"),
+                "nomor" => $r->input("sertifikat_haki_no"),
+            );
+        $sertifikat_sni =
+            (object)array(
+                "tahun" => $r->input("sertifikat_sni_thn"),
+                "nomor" => $r->input("sertifikat_sni_no"),
+            );
+        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->first();
+        $cek_sertifikat_halal = str_contains(json_encode($sertifikat_halal), "null");
+        $cek_sertifikat_haki = str_contains(json_encode($sertifikat_haki), "null");
+        $cek_sertifikat_sni = str_contains(json_encode($sertifikat_sni), "null");
 
-        $data= array(
+
+
+        $data = array(
             'id' => (string) Str::uuid(),
             'id_badan_usaha' => $BadanUsaha->id,
-            'sertifikat_halal' => $cek_sertifikat_halal? null : json_encode($sertifikat_halal),
-            'sertifikat_haki' => $cek_sertifikat_haki? null : json_encode($sertifikat_haki),
-            'sertifikat_sni' => $cek_sertifikat_sni? null : json_encode($sertifikat_sni),
+            'sertifikat_halal' => $cek_sertifikat_halal ? null : json_encode($sertifikat_halal),
+            'sertifikat_haki' => $cek_sertifikat_haki ? null : json_encode($sertifikat_haki),
+            'sertifikat_sni' => $cek_sertifikat_sni ? null : json_encode($sertifikat_sni),
             'nama' => $r->input("nama"),
             'deskripsi' => $r->input("deskripsi"),
         );
 
 
         if (!empty($r->file('foto'))) {
-            $file =$r->file('foto');
-            $extension = $file->getClientOriginalExtension(); 
-            $BadanUsaha = BadanUsaha::where('nik',Auth::user()->nik)->first();
-            $filename = $BadanUsaha->id.'-'.time().'.' . $extension;
+            $file = $r->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->first();
+            $filename = $BadanUsaha->id . '-' . time() . '.' . $extension;
 
             $file->move(public_path('images/'), $filename);
-            $data['foto']= 'images/'.$filename;
-
+            $data['foto'] = 'images/' . $filename;
         }
         // dd($data);
-       
+
 
 
 
@@ -409,44 +423,44 @@ class MemberController extends Controller
         // return view('pages.member.produk', ['Produk' => $Produk,'msg' => "produk Telah di atambahakan"]);
     }
 
-    function ganti_foto(Request $r){
+    function ganti_foto(Request $r)
+    {
 
         $filename;
         $User = User::find(Auth::id());
 
 
         if (!empty($r->file('foto'))) {
-            $file =$r->file('foto');
-            $extension = $file->getClientOriginalExtension(); 
-            $filename = Auth::id().'.' . $extension;
+            $file = $r->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $filename = Auth::id() . '.' . $extension;
 
             $file->move(public_path('images/'), $filename);
             // $data['foto']= 'images/'.$filename;
 
         }
         // dd($data);
-       
 
 
 
-        $User->foto = 'images/'.$filename;
+
+        $User->foto = 'images/' . $filename;
 
         // BUAT produk
         $User->save();
         return redirect('/member/kartu');
-
-      
     }
-    function uploadDataPendukung(Request $r){
+    function uploadDataPendukung(Request $r)
+    {
         // dd($r);
         $filenameKTP;
         $filenameKK;
         $User = User::find(Auth::id());
-        $BadanUsaha = BadanUsaha::where('nik',$User->nik)->first();
+        $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
         // $DataPendukung = DataPendukung::where('id_badan_usaha',$BadanUsaha->id)->first();
         // dd($r);
 
-        
+
         // if (!empty($DataPendukung)) {
         //     dd("data ada");
         // }else{
@@ -456,46 +470,44 @@ class MemberController extends Controller
 
 
         if (!empty($r->file('ktp'))) {
-            $file =$r->file('ktp');
-            $extension = $file->getClientOriginalExtension(); 
-            $filenameKTP = Auth::id().'_ktp.' . $extension;
+            $file = $r->file('ktp');
+            $extension = $file->getClientOriginalExtension();
+            $filenameKTP = Auth::id() . '_ktp.' . $extension;
 
             $file->move(public_path('data_tambahan/'), $filenameKTP);
             // $data['foto']= 'images/'.$filename;
 
         }
         // dd($data);
-       
+
 
 
         if (!empty($r->file('kk'))) {
-            $file =$r->file('kk');
-            $extension = $file->getClientOriginalExtension(); 
-            $filenameKK = Auth::id().'_kk.' . $extension;
+            $file = $r->file('kk');
+            $extension = $file->getClientOriginalExtension();
+            $filenameKK = Auth::id() . '_kk.' . $extension;
 
             $file->move(public_path('data_tambahan/'), $filenameKK);
             // $data['foto']= 'images/'.$filename;
 
         }
         // dd($data);
-       
+
 
         // dd($filenameKTP);
         // dd($filenameKK);
 
-        $data= array(
+        $data = array(
             'id' => (string) Str::uuid(),
             'id_badan_usaha' => $BadanUsaha->id,
-            'ktp' => 'data_tambahan/'.$filenameKTP,
-            'kk' => 'data_tambahan/'.$filenameKK,
+            'ktp' => 'data_tambahan/' . $filenameKTP,
+            'kk' => 'data_tambahan/' . $filenameKK,
         );
         // dd($data);
         $DataPendukung = new DataPendukung($data);
         $DataPendukung->save();
 
-        
-        return redirect('member/PengajuanDana');
 
-      
+        return redirect('member/PengajuanDana');
     }
 }

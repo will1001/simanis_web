@@ -50,12 +50,20 @@ $fieldTitles = [
 ?>
 @section('content')
 <div>
-   <h2>Profil Badan Usaha</h2>
-   <span class="mr-2"><a  href="/perbankan/dashboard/ProfilBadanUsaha/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">1. Profil Badan Usaha</a></span>
-   <span><a href="/perbankan/dashboard/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
-   <span><a href="/perbankan/dashboard/dataTambahan/{{$BadanUsaha->id}}">3. Data Tambahan</a></span>
+    <h2>Profil Badan Usaha</h2>
+    <span class="mr-2"><a href="/perbankan/dashboard/ProfilBadanUsaha/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">1. Profil Badan Usaha</a></span>
+    <span><a href="/perbankan/dashboard/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
+    <span><a href="/perbankan/dashboard/dataTambahan/{{$BadanUsaha->id}}">3. Data Tambahan</a></span>
 </div>
 <div class="bg-black w-[100%] h-[1px] mt-2"></div>
+<br>
+
+<div>
+    <form action="/export/badan_usaha/perbankan/{{$BadanUsaha->id}}" method="get">
+        <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
+    </form>
+</div>
+
 <br>
 
 @foreach($fields as $key => $field)
@@ -68,9 +76,9 @@ $fieldTitles = [
 </div>
 @else
 <div class="flex justify-start text-textColor2">
-<p class="w-[400px]">{{$fieldTitles[$key]}}</p>
-<p class="w-[10px]">:</p>
-<p class="w-[300px]"><strong>{{$BadanUsaha->$field}}</strong></p>
+    <p class="w-[400px]">{{$fieldTitles[$key]}}</p>
+    <p class="w-[10px]">:</p>
+    <p class="w-[300px]"><strong>{{$BadanUsaha->$field}}</strong></p>
 </div>
 @endif
 @endforeach

@@ -181,6 +181,11 @@ $forms = array(
     ),
     (object)array(
         "type" => "number",
+        "placeholder" => "RATA-RATA PENDIDIKAN TENAGA KERJA",
+        "prop" => "rata_rata_pendidikan_tenaga_kerja"
+    ),
+    (object)array(
+        "type" => "number",
         "placeholder" => "KAPASITAS PRODUKSI / Tahun",
         "prop" => "kapasitas_produksi_perbulan"
     ),
@@ -220,11 +225,13 @@ $forms = array(
         "prop" => "media_sosial"
     ),
     (object)array(
+        "id" => "foto_alat_produksi_file",
         "type" => "image",
         "placeholder" => "Foto Alat Produksi",
         "prop" => "foto_alat_produksi"
     ),
     (object)array(
+        "id" => "foto_ruang_produksi_file",
         "type" => "image",
         "placeholder" => "Foto Ruang Produksi",
         "prop" => "foto_ruang_produksi"
@@ -269,7 +276,7 @@ $forms = array(
                 <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
-                    <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
+                    <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
                     @endforeach
                 </select>
                 @elseif($form->type == 'file')
@@ -284,13 +291,13 @@ $forms = array(
                 </label>
                 @elseif($form->type == 'image')
                 <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
-                <label for="{{$form->prop}}" class="flex flex-col justify-center items-center w-[340px] h-[150px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                <label for="{{$form->id}}" class="flex flex-col justify-center items-center w-[340px] h-[150px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                     <div class="flex flex-col justify-center items-center pt-5 pb-6 h-[150px]">
                         <img src="{{ asset('/Icon-svg/file.svg') }}" />
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
                     </div>
-                    <input id="{{$form->prop}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->prop}}" type="file" class="hidden" id="{{$form->prop}}"/>
+                    <input id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data"/>
                 </label>
                 @elseif($form->type == 'label')
                 <a class="text-blue font-blue" target="_blank" href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik Disini</a>

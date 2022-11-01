@@ -13,7 +13,6 @@
 <?php
 $baseUrl = env('APP_URL');
 $fieldTitles = [
-    'id',
     'NOMOR INDUK KEPENDUDUKAN (NIK)',
     'NAMA',
     'KAB/KOTA',
@@ -35,12 +34,14 @@ $fieldTitles = [
     'SNI/TAHUN',
     'FILE DOKUMEN',
     'JENIS USAHA',
+    'MEREK USAHA',
     'CABANG INDUSTRI',
     'SUB CABANG INDUSTRI',
     'KBLI',
     'INVESTASI/ MODAL ',
     'JUMLAH TENAGA KERJA PRIA',
     'JUMLAH TENAGA KERJA WANITA',
+    'RATA RATA PENDIDIKAN TENAGA KERJA',
     'KAPASITAS PRODUKSI ',
     'SATUAN PRODUKSI',
     'NILAI PRODUKSI (RP.000)',
@@ -82,7 +83,7 @@ $fieldTitles = [
     )
 <div>
     <h5>{{$fieldTitles[$key]}}</h5>
-    <img src="{{$baseUrl.$BadanUsaha[0]->$field}}" alt="img">
+    <img class="h-[200px]" src="{{$baseUrl.$BadanUsaha[0]->$field}}" alt="img">
 </div>
 @elseif(
     $field == 'investasi_modal' || 

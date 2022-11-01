@@ -51,12 +51,20 @@ $fieldTitles = [
 @section('content')
 <h1>Profil Badan Usaha</h1>
 <div>
-   <h2>Profil Badan Usaha</h2>
-   <span class="mr-2"><a  href="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">1. Profil Badan Usaha</a></span>
-   <span><a href="/admin/daftarPengajuanDana/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
-   <span><a href="/admin/daftarPengajuanDana/dataTambahan/{{$BadanUsaha->id}}">3. Data Tambahan</a></span>
+    <h2>Profil Badan Usaha</h2>
+    <span class="mr-2"><a href="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">1. Profil Badan Usaha</a></span>
+    <span><a href="/admin/daftarPengajuanDana/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
+    <span><a href="/admin/daftarPengajuanDana/dataTambahan/{{$BadanUsaha->id}}">3. Data Tambahan</a></span>
 </div>
 <div class="bg-black w-[100%] h-[1px] mt-2"></div>
+<br>
+
+<div>
+    <form action="/export/badan_usaha/perbankan/{{$BadanUsaha->id}}" method="get">
+        <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
+    </form>
+</div>
+
 <br>
 @foreach($fields as $key => $field)
 @if($field == 'id')
@@ -68,9 +76,9 @@ $fieldTitles = [
 </div>
 @else
 <div class="flex justify-start text-textColor2">
-<p class="w-[400px]">{{$fieldTitles[$key]}}</p>
-<p class="w-[10px]">:</p>
-<p class="w-[300px]"><strong>{{$BadanUsaha->$field}}</strong></p>
+    <p class="w-[400px]">{{$fieldTitles[$key]}}</p>
+    <p class="w-[10px]">:</p>
+    <p class="w-[300px]"><strong>{{$BadanUsaha->$field}}</strong></p>
 </div>
 @endif
 @endforeach
@@ -80,31 +88,41 @@ $fieldTitles = [
 <div class="flex bg-white rounded-xl p-4">
     <div>
         <h2>No Kartu. {{substr($BadanUsaha->nik,strlen($BadanUsaha->nik)-4,strlen($BadanUsaha->nik))}}{{$BadanUsaha->id_cabang_industri}}{{$BadanUsaha->id_kabupaten}}</h2>
-     <div class="flex">
-        <div>
-            <div class="flex"><div class="mr-10">Nama</div></div>
-            <div class="flex"><div class="mr-10">Alamat</div></div>
-            <div class="flex"><div class="mr-10">Usaha</div></div>
-            <div class="flex"><div class="mr-10">Kabupaten</div></div>
-            <div class="flex"><div class="mr-10">NIK</div></div>
+        <div class="flex">
+            <div>
+                <div class="flex">
+                    <div class="mr-10">Nama</div>
+                </div>
+                <div class="flex">
+                    <div class="mr-10">Alamat</div>
+                </div>
+                <div class="flex">
+                    <div class="mr-10">Usaha</div>
+                </div>
+                <div class="flex">
+                    <div class="mr-10">Kabupaten</div>
+                </div>
+                <div class="flex">
+                    <div class="mr-10">NIK</div>
+                </div>
             </div>
-        <div>
-            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_direktur}}</div>
-            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->alamat_lengkap}}</div>
-            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_usaha}}</div>
-            <div class="text-left flex justify-start items-start">: {{$BadanUsaha->kabupaten}}</div>
-            <div class="text-left flex justify-start items-start">: {{$User->nik}}</div>
+            <div>
+                <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_direktur}}</div>
+                <div class="text-left flex justify-start items-start">: {{$BadanUsaha->alamat_lengkap}}</div>
+                <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_usaha}}</div>
+                <div class="text-left flex justify-start items-start">: {{$BadanUsaha->kabupaten}}</div>
+                <div class="text-left flex justify-start items-start">: {{$User->nik}}</div>
+            </div>
         </div>
-     </div>
-        
+
     </div>
     <img class="w-[200px] m-3" src="{{ asset($User->foto) }}" alt="">
 </div>
 <br>
 <div>
-        <form action="{{ url('/admin/downloadKartu') }}" method="get">
-            <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
-        </form>
-    </div>
+    <form action="{{ url('/admin/downloadKartu') }}" method="get">
+        <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
+    </form>
+</div>
 
 @endsection

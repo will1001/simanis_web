@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 <style>
-    <style>
     .actionContainer{
         width: 100px;
     }
@@ -123,7 +122,7 @@ $fieldTitles = [
       <td class="text-center p-4 flex items-center">
         <form method="GET" action="" class="mr-2">
           <button onclick="lihatDetails('{{$item->id}}',event)">
-              <img src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
+              <img class="h-[32px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
           </button>
         </form>
         <form method="GET" action="/form/admin/{{$item->id}}">
@@ -132,7 +131,7 @@ $fieldTitles = [
         </form>
         <form method="GET" action="/form/badan_usaha/delete/{{$item->id}}" class="p-2 bg-buttonDelete rounded-md">
           <button>
-              <img src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
+              <img class="h-[21px]" src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
           </button>
         </form>
       </td>
@@ -184,10 +183,10 @@ $fieldTitles = [
 
 <script>
 
-  const BadanUsaha = @json($BadanUsaha);
-  const fields = @json($fields);
-  const fieldTitles = @json($fieldTitles);
-  const baseUrl = @json($baseUrl);
+  const BadanUsaha = json($BadanUsaha);
+  const fields = json($fields);
+  const fieldTitles = json($fieldTitles);
+  const baseUrl = json($baseUrl);
 
 const lihatDetails = (id,e)=>{
   // alert(index);

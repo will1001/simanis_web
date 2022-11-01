@@ -52,6 +52,7 @@ Route::post('/kabupaten/delete/admin', [AdminController::class, 'deleteBadanUsah
 Route::post('/import/data/admin', [AdminController::class, 'importExcel'])->name('importExcel');
 Route::get('/export/data/admin', [AdminController::class, 'exportExcel'])->name('exportExcel');
 Route::get('/export/dana/perbankan', [PerbankanController::class, 'exportExcel']);
+Route::get('/export/badan_usaha/perbankan/{id}', [PerbankanController::class, 'exportBadanUsahaByID']);
 Route::get('/export/dana/koperasi', [KoperasiController::class, 'exportExcel']);
 Route::get('/export/dana/ojk', [OjkController::class, 'exportExcel']);
 Route::post('/admin/slideshow/{id}', [AdminController::class, 'gantiSlide']);

@@ -140,13 +140,22 @@ class FormController extends Controller
 
           
 
-            $input = $r->all();
+            // dd($r);
 
-            if ($r->file('foto_alat_produksi_file') != null || $r->file('foto_ruang_produksi_file') != null) {
+            if ($r->file('foto_alat_produksi_file') != null) {
                 $ext = $r->file('foto_alat_produksi_file')->getClientOriginalExtension();
                 $name1 = 'foto_alat_produksi' . $id . '.' . $ext;
 
                 $r->file('foto_alat_produksi_file')->storeAs('public/foto_alat_produksi', $name1);
+
+
+
+
+                $r->merge([
+                    'foto_alat_produksi' => '/storage/foto_alat_produksi/' . $name1,
+                ]);
+            };
+            if ($r->file('foto_ruang_produksi_file') != null) {
 
                 $ext2 = $r->file('foto_ruang_produksi_file')->getClientOriginalExtension();
                 $name2 = 'foto_ruang_produksi' . $id . '.' . $ext2;
@@ -154,10 +163,15 @@ class FormController extends Controller
 
                 $r->file('foto_ruang_produksi_file')->storeAs('public/foto_ruang_produksi', $name2);
 
-                
-                $badan_usaha->foto_alat_produksi = '/storage/foto_alat_produksi/' . $name1;
-                $badan_usaha->foto_ruang_produksi = '/storage/foto_ruang_produksi/' . $name2;
+                $r->merge([
+                    'foto_ruang_produksi' => '/storage/foto_ruang_produksi/' . $name2,
+                ]);
+                // $input->foto_alat_produksi = '/storage/foto_alat_produksi/' . $name1;
+                // $input->foto_ruang_produksi = '/storage/foto_ruang_produksi/' . $name2;
             };
+            $input = $r->all();
+            // dd($input);
+
             if ($r->file('bentuk_usaha_file') != null) {
                 $ext = $r->file('bentuk_usaha_file')->getClientOriginalExtension();
                 $name1 = 'bentuk_usaha_file' . $id . '.' . $ext;
