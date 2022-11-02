@@ -285,7 +285,7 @@ $forms = array(
                 <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->name}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
-                    <option value="{{$form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
+                    <option value="{{$form->prop == 'kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
                     @endforeach
                 </select>
                 @elseif($form->type == 'file')
@@ -349,8 +349,9 @@ $forms = array(
     }
 
     const changeKabupaten = () => {
-        const kabupatenFilter = document.getElementById('id_kabupaten');
+        const kabupatenFilter = document.getElementById('kabupaten');
         const idKabupaten = kabupatenFilter.options[kabupatenFilter.selectedIndex].value;
+        console.log(idKabupaten);
         renderKecamatan(idKabupaten)
     }
 
