@@ -89,6 +89,7 @@ class PerbankanController extends Controller
                     $params = ['BadanUsaha' => $BadanUsaha, 'pages' => $subPages, 'fields' => $this->fields, 'Notifikasi' => $Notifikasi];
                     if ($subPages == "dataTambahan") {
                         $dataPendukung = DataPendukung::where('id_badan_usaha', $id)->first();
+                        // dd($dataPendukung);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'dataPendukung' => $dataPendukung,
