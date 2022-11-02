@@ -80,12 +80,14 @@ class PerbankanController extends Controller
                 return redirect('/ojk/dashboard');
             } else {
                 $Instansi = Instansi::where("user_id", Auth::id())->first();
+                $BadanUsaha = [];
 
                 if ($id != "") {
 
                     $BadanUsaha = BadanUsaha::find($id);
                 }
                 if ($subPages != "") {
+                    // dd($BadanUsaha);
                     $params = ['BadanUsaha' => $BadanUsaha, 'pages' => $subPages, 'fields' => $this->fields, 'Notifikasi' => $Notifikasi];
                     if ($subPages == "dataTambahan") {
                         $dataPendukung = DataPendukung::where('id_badan_usaha', $id)->first();
@@ -118,10 +120,13 @@ class PerbankanController extends Controller
                         ];
                     }
                     if ($subPages == "downloadSurat") {
+                        // dd("adad");
                         $BadanUsaha = BadanUsaha::where('id', $id)->get();
+                        // dd($BadanUsaha);
                         $user = User::where('nik', $BadanUsaha[0]->nik)->first();
                         $surat = Surat::find(1);
-                        $PengajuanDana = PengajuanDana::where('user_id', $user->id)->where('status', "Diterima")->orderBy('created_at', 'desc')->first();
+                        $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
+                        // dd($PengajuanDana);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,

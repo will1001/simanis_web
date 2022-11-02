@@ -100,7 +100,7 @@ class KoperasiController extends Controller
                         $surat = Surat::find(1);
 
                         // dd($user);
-                        $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                        $PengajuanDana = PengajuanDana::where('user_id',$user->id)->orderBy('created_at', 'desc')->first();
                             $params = [
                                 'BadanUsaha' => $BadanUsaha,
                                 'PengajuanDana' => $PengajuanDana,
@@ -116,7 +116,8 @@ class KoperasiController extends Controller
                             $BadanUsaha = BadanUsaha::where('id',$id)->get();
                             $user= User::where('nik',$BadanUsaha[0]->nik)->first();
                             $surat = Surat::find(1);
-                            $PengajuanDana = PengajuanDana::where('user_id',$user->id)->where('status',"Diterima")->orderBy('created_at', 'desc')->first();
+                            $PengajuanDana = PengajuanDana::where('user_id',$user->id)->orderBy('created_at', 'desc')->first();
+                           
                             $params = [
                                 'BadanUsaha' => $BadanUsaha,
                                 'PengajuanDana' => $PengajuanDana,

@@ -31,7 +31,7 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
 @endphp
 <div >
     <div>
-        <form action="{{ url('/member/downloadSurat') }}" method="get">
+        <form action="/ojk/surat/downloadSurat/{{$BadanUsaha[0]->id}}" method="get">
             <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
         </form>
     </div>
