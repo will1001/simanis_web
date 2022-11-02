@@ -20,7 +20,7 @@ use App\Models\User;
 use App\Models\Surat;
 use Illuminate\Support\Str;
 use App\Exports\PengajuanDanaPerbankanExport;
-use App\Exports\BadanUsahaExportById;
+use App\Exports\BadanUsahaExportByID;
 
 
 
