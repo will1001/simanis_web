@@ -285,7 +285,7 @@ $forms = array(
                 <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->name}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
-                    <option value="{{$form->prop == 'kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'id_kabupaten'||$form->prop == 'id_kbli'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
+                    <option value="{{$form->prop == 'kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'kabupaten'||$form->prop == 'kecamatan'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
                     @endforeach
                 </select>
                 @elseif($form->type == 'file')
@@ -296,8 +296,10 @@ $forms = array(
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400 font-bold">UPLOAD FILE PDF</p>
                     </div>
-                    <input id="{{$form->prop}}" accept="application/pdf" name="{{$form->prop}}" type="file" class="hidden" id="{{$form->prop}}" />
+                    <input onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->prop}}" accept="application/pdf" name="{{$form->prop}}" type="file" class="hidden" id="{{$form->prop}}" />
                 </label>
+                <h5 id="{{$form->prop}}_info"></h5>
+
                 @elseif($form->type == 'image')
                 <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
                 <label for="{{$form->id}}" class="flex flex-col justify-center items-center w-[340px] h-[150px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -306,10 +308,13 @@ $forms = array(
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
                     </div>
-                    <input id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data" />
+                    <input onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data" />
                 </label>
+                <h5 id="{{$form->prop}}_info"></h5>
                 @elseif($form->type == 'label')
                 <a class="text-blue font-blue" target="_blank" href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik Disini</a>
+                @elseif($form->type == 'number')
+                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="updateTextView('{{$form->prop}}',event)" type="number" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 @else
                 <input class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 @endif
@@ -330,6 +335,11 @@ $forms = array(
     const subCabangIndustri = @json($SubCabangIndustri);
     const cabangIndustri = @json($CabangIndustri);
     const Kbli = @json($Kbli);
+    const BadanUsaha = @json($BadanUsaha);
+    const forms = @json($forms);
+
+
+
     const changeCabangIndustri = () => {
         const cabangIndustriFilter = document.getElementById('cabang_industri');
         const nameCabangIndsutri = cabangIndustriFilter.options[cabangIndustriFilter.selectedIndex].value;
@@ -351,17 +361,16 @@ $forms = array(
     const changeKabupaten = () => {
         const kabupatenFilter = document.getElementById('kabupaten');
         const idKabupaten = kabupatenFilter.options[kabupatenFilter.selectedIndex].value;
-        console.log(idKabupaten);
         renderKecamatan(idKabupaten)
     }
 
     const renderKecamatan = (idKabupaten) => {
         var str = `<option value=''>Semua</option>`
         const kecamatanList = Kecamatan.filter(e => e.id_kabupaten == idKabupaten);
-
         for (let item of kecamatanList) {
             str += `<option value='${item.id}'>` + item.name + "</option>"
         }
+
         document.getElementById("kecamatan").innerHTML = str;
     }
 
@@ -381,6 +390,39 @@ $forms = array(
         document.getElementById("kelurahan").innerHTML = str;
     }
 
+    const uploadFile = (label, e) => {
+        const FileLabel = document.getElementById(label);
+        FileLabel.innerHTML = e.target.value.split("\\").pop();
+    }
+
+
+    const updateTextView = (label, _obj) => {
+        const val = _obj.target.value;
+        const input = document.getElementById(label);
+        input.value = val.toLocaleString('en-US', {
+            maximumFractionDigits: 2
+        });
+        // console.log(val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        // var num = getNumber(val);
+        // if (num == 0) {
+        //     _obj.val('');
+        // } else {
+        //     _obj.val(num.toLocaleString());
+        // }
+        // return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function getNumber(_str) {
+        var arr = _str.split('');
+        var out = new Array();
+        for (var cnt = 0; cnt < arr.length; cnt++) {
+            if (isNaN(arr[cnt]) == false) {
+                out.push(arr[cnt]);
+            }
+        }
+        return Number(out.join(''));
+    }
+
     // const changeSubCabangIndustri = () => {
     //     const subCabangIndustriFilter = document.getElementById('sub_cabang_industri');
     //     const nameSubCabangIndsutri = subCabangIndustriFilter.options[subCabangIndustriFilter.selectedIndex].value;
@@ -397,4 +439,24 @@ $forms = array(
     //     }
     //     document.getElementById("sub_cabang_industri").innerHTML = str;
     // }
+
+    // console.log(BadanUsaha[0].cabang_industri);
+
+    setTimeout(function() {
+        if (BadanUsaha[0].kabupaten) {
+            renderKecamatan(BadanUsaha[0].kabupaten);
+            document.getElementById(forms[3].prop).value = BadanUsaha[0].kecamatan;
+
+        }
+        if (BadanUsaha[0].kecamatan) {
+            renderKelurahan(BadanUsaha[0].kecamatan);
+            document.getElementById(forms[4].prop).value = BadanUsaha[0].kelurahan;
+
+        }
+        if (BadanUsaha[0].cabang_industri) {
+            console.log(BadanUsaha[0].cabang_industri);
+            renderSubCabangIndustriSelectFilter(BadanUsaha[0].cabang_industri);
+            document.getElementById(forms[23].prop).value = BadanUsaha[0].sub_cabang_industri;
+        }
+    }, 3000);
 </script>

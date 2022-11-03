@@ -41,8 +41,9 @@ class FormController extends Controller
         'badan_usaha.nomor_test_report_tahun',
         'badan_usaha.sni_tahun',
         'badan_usaha.jenis_usaha',
-        'cabang_industri.name as cabang_industri',
-        'sub_cabang_industri.name as sub_cabang_industri',
+        'cabang_industri.id as cabang_industri',
+        'sub_cabang_industri.id as sub_cabang_industri',
+        'kbli.id as id_kbli',
         'badan_usaha.investasi_modal',
         'badan_usaha.jumlah_tenaga_kerja_pria',
         'badan_usaha.jumlah_tenaga_kerja_wanita',
@@ -68,6 +69,7 @@ class FormController extends Controller
                 ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                 ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                 ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
                 ->where("badan_usaha.id",$id)
                 ->get($this->fieldBadanUsaha);
             }

@@ -35,7 +35,7 @@ $baseUrl = env('APP_URL') . '/';
   <tr class="bg-tableColor-900 text-center text-white p-2">
     <th class="text-center p-2 rounded-tl-xl">No</th>
     <th class="text-center p-2 ">Jumlah Dana</th>
-    <th class="text-center p-2 ">Waktu Pinjaman</th>
+    <th class="text-center p-2 ">Jangka Waktu</th>
     <th class="text-center p-2 ">Tanggal</th>
     <th class="text-center p-2 ">Instansi</th>
     <th class="text-center p-2 ">Status</th>
@@ -108,7 +108,7 @@ $baseUrl = env('APP_URL') . '/';
             <input onchange="uploadKtp(event)" id="dropzone-filektp" accept="image/x-png,image/gif,image/jpeg" name="ktp" type="file" class="hidden" />
           </label>
         </div>
-        <h5 id="ktpLabel"></h5>
+        <h5 id="ktpLabel"></h5> 
         <div class="flex">
           <span class="mr-[110px]">KK : </span>
           <label for="dropzone-filekk" class="flex flex-col justify-center items-center h-32 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 p-3">
@@ -159,11 +159,11 @@ $baseUrl = env('APP_URL') . '/';
       </select>
     </div>
     <div class="flex justify-between items-center" id="waktuPinjaman" style="visibility: collapse;">
-      <span>Waktu Pinjaman (/ Bulan)</span>
+      <span>Jangka Waktu (/ Bulan)</span>
       <input class="border-1 border-gray-500 w-[70%] p-2" type="number" name="waktu_pinjaman">
     </div>
     <div class="flex justify-between items-center" style="visibility: collapse;" id="waktuPinjamanSelect">
-      <span>Waktu Pinjaman</span>
+      <span>Jangka Waktu</span>
       <select onchange="jangkaWaktuChange()" id="waktuPinjamanSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jangka_waktu_bank">
         <option value="" disabled selected>Pilih Jangka Waktu</option>
       </select>
@@ -191,7 +191,6 @@ $baseUrl = env('APP_URL') . '/';
       <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Ajukan Sekarang</button>
     </div>
   </form>
-
 </div>
 
 @endsection
