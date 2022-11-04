@@ -13,7 +13,6 @@
 <?php
 $baseUrl = env('APP_URL');
 $fieldTitles = [
-    'id',
     'NOMOR INDUK KEPENDUDUKAN (NIK)',
     'NAMA',
     'KAB/KOTA',
@@ -23,29 +22,40 @@ $fieldTitles = [
     'NO. HP',
     'NAMA USAHA',
     'BENTUK USAHA',
-    'TAHUN BERDIRI',
-    'LEGALITAS USAHA',
+    'FILE DOKUMEN',
+    'TAHUN BERDIRI',    
     'NIB/TAHUN',
+    'FILE DOKUMEN',
     'NOMOR SERTIFIKAT HALAL/ TAHUN',
+    'FILE DOKUMEN',
     'SERTIFIKAT MEREK/TAHUN',
+    'FILE DOKUMEN',
     'NOMOR TEST REPORT/TAHUN',
     'SNI/TAHUN',
+    'FILE DOKUMEN',
     'JENIS USAHA',
+    'MEREK USAHA',
     'CABANG INDUSTRI',
     'SUB CABANG INDUSTRI',
     'KBLI',
     'INVESTASI/ MODAL ',
     'JUMLAH TENAGA KERJA PRIA',
     'JUMLAH TENAGA KERJA WANITA',
+    'RATA RATA PENDIDIKAN TENAGA KERJA',
     'KAPASITAS PRODUKSI ',
     'SATUAN PRODUKSI',
-    'NILAI PRODUKSI ',
-    'NILAI BAHAN BAKU ',
+    'NILAI PRODUKSI (RP.000)',
+    'NILAI BAHAN BAKU (RP.000)',
     'LATITUDE',
     'LONGITUDE',
     'MEDIA SOSIAL',
     'FOTO ALAT PRODUKSI',
     'FOTO RUANG PRODUKSI',
+    'FILE DOKUMEN BENTUK USAHA',
+    'FILE DOKUMEN NIB',
+    'FILE SERTIFIKAT HALAL',
+    'FILE SERTIFIKAT MEREK',
+    'FILE SERTIFIKAT SNI',
 ];
 ?>
 @section('content')
@@ -70,8 +80,40 @@ $fieldTitles = [
 @elseif($field == 'foto_alat_produksi' || $field == 'foto_ruang_produksi')
 <div>
     <h5>{{$fieldTitles[$key]}}</h5>
-    <img src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
+    <img class="h-[300px]" src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
 </div>
+@elseif(
+    $field == 'nib_file' ||
+    $field == 'bentuk_usaha_file' ||
+    $field == 'sertifikat_halal_file' ||
+    $field == 'sertifikat_sni_file' ||
+    $field == 'sertifikat_merek_file' 
+    )
+<div class="flex">
+    <p  class="w-[400px]">{{$fieldTitles[$key]}}</p>
+    <a target="_blank" href="{{$baseUrl.$BadanUsaha->$field}}">Lihat Dokumen</a>
+</div>
+@elseif(
+    $field == 'foto_alat_produksi' || 
+    $field == 'foto_ruang_produksi'
+    )
+<div>
+    <h5>{{$fieldTitles[$key]}}</h5>
+    <img class="h-[200px]" src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
+</div>
+@elseif(
+    $field == 'investasi_modal' || 
+    $field == 'jumlah_tenaga_kerja_pria' || 
+    $field == 'jumlah_tenaga_kerja_wanita' || 
+    $field == 'kapasitas_produksi_perbulan' || 
+    $field == 'nilai_produksi_perbulan' || 
+    $field == 'nilai_bahan_baku_perbulan'
+    )
+    <div class="flex justify-start text-textColor2">
+        <p class="w-[400px]">{{$fieldTitles[$key]}}</p>
+        <p class="w-[10px]">:</p>
+        <p class="w-[300px]"><strong>{{number_format($BadanUsaha->$field,0)}}</strong></p>
+    </div>
 @else
 <div class="flex justify-start text-textColor2">
     <p class="w-[400px]">{{$fieldTitles[$key]}}</p>

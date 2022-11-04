@@ -28,7 +28,7 @@
       <form action="/simulasi/angsuran" method="post">
         @csrf
         <div class="flex justify-between items-center mr-[20px]"  >
-          <span>Jumlah Pinjaman</span>
+          <span>Jumlah Pembiayaan</span>
           <input class="border-1 border-gray-500  p-2" type="number" name="jumlah_dana" required>
         </div>
         <br>

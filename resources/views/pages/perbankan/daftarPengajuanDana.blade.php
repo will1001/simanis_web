@@ -122,7 +122,7 @@
         <!-- <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td> -->
         <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nik}}</td>
         <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
-        <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->jumlah_dana}}</span></td>
+        <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
         <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
         <td class="text-center p-2">{{date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
         <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>

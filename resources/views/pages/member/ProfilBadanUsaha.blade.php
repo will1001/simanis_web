@@ -10,7 +10,7 @@
         height: 400px;
     }
 </style>
-<?php
+<?php 
 $baseUrl = env('APP_URL');
 $fieldTitles = [
     'NOMOR INDUK KEPENDUDUKAN (NIK)',

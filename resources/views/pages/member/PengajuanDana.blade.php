@@ -57,7 +57,7 @@ $baseUrl = env('APP_URL') . '/';
   @endphp
   <tr>
     <td class="text-center p-4 ">{{++$key}}</td>
-    <td class="text-center p-4 ">{{$item->jumlah_dana}}</td>
+    <td class="text-center p-4 ">{{number_format($item->jumlah_dana)}}</td>
     <td class="text-center p-4 ">{{$item->waktu_pinjaman}}</td>
     <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
     <td class="text-center p-4 ">{{$item->instansi}}</td>
@@ -74,7 +74,7 @@ $baseUrl = env('APP_URL') . '/';
       {{$item->alasan}} <br>
       <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>
       @else
-      <span>Menunggu Persutujuan dari Instansi Terkait</span>
+      <span>Menunggu Persetujuan dari Instansi Terkait</span>
       @endif
       @endif
     </td>
@@ -108,7 +108,7 @@ $baseUrl = env('APP_URL') . '/';
             <input onchange="uploadKtp(event)" id="dropzone-filektp" accept="image/x-png,image/gif,image/jpeg" name="ktp" type="file" class="hidden" />
           </label>
         </div>
-        <h5 id="ktpLabel"></h5> 
+        <h5 id="ktpLabel"></h5>
         <div class="flex">
           <span class="mr-[110px]">KK : </span>
           <label for="dropzone-filekk" class="flex flex-col justify-center items-center h-32 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 p-3">
@@ -149,11 +149,11 @@ $baseUrl = env('APP_URL') . '/';
     </div>
     <br>
     <div class="flex justify-between items-center" id="jmlPinjaman" style="visibility: collapse;">
-      <span>Jumlah Pinjaman</span>
+      <span>Jumlah Pembiayaan</span>
       <input class="border-1 border-gray-500 w-[70%] p-2" type="number" name="jumlah_dana">
     </div>
     <div class="flex justify-between items-center" id="jmlDanaSelect" style="visibility: collapse;">
-      <span>Jumlah Pinjaman</span>
+      <span>Jumlah Pembiayaan</span>
       <select onchange="pinjamanChange()" id="jmlDanaSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jumlah_dana_bank">
         <option value="" disabled selected>Pilih Jumlah Pinjaman</option>
       </select>
@@ -283,10 +283,11 @@ $baseUrl = env('APP_URL') . '/';
       jmlDanaSelect.style.visibility = "visible";
       waktuPinjamanSelect.style.visibility = "visible";
       angsuranDiv.style.visibility = "visible";
+      const numberFormatter = Intl.NumberFormat('en-US');
       for (const item of JumlahPinjaman.filter(e => e.id_instansi === instansi_user_id[0].id).sort((a, b) => a.jumlah - b.jumlah)) {
         let opt = document.createElement('option');
         opt.value = item.id;
-        opt.innerHTML = item.jumlah;
+        opt.innerHTML = numberFormatter.format(item.jumlah);
         jmlDanaSelectChild.appendChild(opt);
       }
       for (const item of JangkaWaktu.filter(e => e.id_instansi === instansi_user_id[0].id).sort((a, b) => a.waktu - b.waktu)) {
@@ -320,8 +321,11 @@ $baseUrl = env('APP_URL') . '/';
     const instansi_user_id = Instansi.filter(e => e.user_id === instansiSelect.value);
 
     const simulasi = SimulasiAngsuran.filter(e => e.id_instansi === instansi_user_id[0].id && e.id_jml_pinjaman === jmlDanaSelectChild.value && e.id_jangka_waktu === waktuPinjamanSelectChild.value)
+    console.log(simulasi);
     angsuranValue.className = "border-1 border-gray-500 w-[70%] p-2";
-    angsuranValue.innerHTML = Number(simulasi[0].angsuran).toString();
+    const numberFormatter = Intl.NumberFormat('en-US');
+
+    angsuranValue.innerHTML = numberFormatter.format(Number(simulasi[0].angsuran)).toString();
   }
 
   const uploadKtp = (e) => {

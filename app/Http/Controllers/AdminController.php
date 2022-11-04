@@ -26,6 +26,46 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    private $fieldBadanUsaha = [
+        'badan_usaha.id as id',
+        'badan_usaha_documents.id as badan_usaha_documents_id',
+        'badan_usaha.nik',
+        'badan_usaha.nama_direktur',
+        'kabupaten.name as kabupaten',
+        'kecamatan.name as kecamatan',
+        'kelurahan.name as kelurahan',
+        'badan_usaha.alamat_lengkap',
+        'badan_usaha.no_hp',
+        'badan_usaha.nama_usaha',
+        'badan_usaha.bentuk_usaha',
+        'badan_usaha.tahun_berdiri',
+        'badan_usaha.nib_tahun',
+        'badan_usaha.nomor_sertifikat_halal_tahun',
+        'badan_usaha.sertifikat_merek_tahun',
+        'badan_usaha.nomor_test_report_tahun',
+        'badan_usaha.sni_tahun',
+        'badan_usaha.jenis_usaha',
+        'badan_usaha.merek_usaha',
+        'cabang_industri.name as cabang_industri',
+        'sub_cabang_industri.name as sub_cabang_industri',
+        'kbli.name as kbli',
+        'badan_usaha.investasi_modal',
+        'badan_usaha.jumlah_tenaga_kerja_pria',
+        'badan_usaha.jumlah_tenaga_kerja_wanita',
+        'badan_usaha.rata_rata_pendidikan_tenaga_kerja',
+        'badan_usaha.kapasitas_produksi_perbulan',
+        'badan_usaha.satuan_produksi',
+        'badan_usaha.nilai_produksi_perbulan',
+        'badan_usaha.nilai_bahan_baku_perbulan',
+        'badan_usaha_documents.nib_file',
+        'badan_usaha_documents.bentuk_usaha_file',
+        'badan_usaha_documents.sertifikat_halal_file',
+        'badan_usaha_documents.sertifikat_sni_file',
+        'badan_usaha_documents.sertifikat_merek_file',
+        'badan_usaha.foto_alat_produksi',
+        'badan_usaha.foto_ruang_produksi',
+
+    ];
     private $fields = [
         'badan_usaha.id',
         'badan_usaha.nik',
@@ -59,30 +99,36 @@ class AdminController extends Controller
     ];
 
     private $fields2 = [
-        'id',
+        // 'id',
         'nik',
         'nama_direktur',
-        'id_kabupaten',
+        'kabupaten',
         'kecamatan',
         'kelurahan',
         'alamat_lengkap',
         'no_hp',
         'nama_usaha',
         'bentuk_usaha',
+        'bentuk_usaha_file',
         'tahun_berdiri',
         'nib_tahun',
+        'nib_file',
         'nomor_sertifikat_halal_tahun',
+        'sertifikat_halal_file',
         'sertifikat_merek_tahun',
+        'sertifikat_merek_file',
         'nomor_test_report_tahun',
         'sni_tahun',
+        'sertifikat_sni_file',
         'jenis_usaha',
+        'merek_usaha',
         'cabang_industri',
         'sub_cabang_industri',
-        'id_kbli',
+        'kbli',
         'investasi_modal',
         'jumlah_tenaga_kerja_pria',
         'jumlah_tenaga_kerja_wanita',
-        // 'rata_rata_pendidikan_tenaga_kerja',
+        'rata_rata_pendidikan_tenaga_kerja',
         'kapasitas_produksi_perbulan',
         'satuan_produksi',
         'nilai_produksi_perbulan',
@@ -204,16 +250,25 @@ class AdminController extends Controller
                     }
 
                     if ($subPages == "ProfilBadanUsaha") {
+                        $BadanUsaha = BadanUsaha::leftJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
+                            ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+                            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+                            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                            ->where("badan_usaha.id", $id)
+                            ->get($this->fieldBadanUsaha);
+                        // dd($BadanUsaha[0]);
+                        // $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
 
-                        $kabupaten = Kabupaten::find($BadanUsaha->id_kabupaten);
+                        // $CabangIndustri = CabangIndustri::where('name', $BadanUsaha[0]->cabang_industri)->first();
 
-                        $CabangIndustri = CabangIndustri::where('name', $BadanUsaha->cabang_industri)->first();
+                        // $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
 
-                        $BadanUsaha->kabupaten = $kabupaten ? $kabupaten->name : null;
+                        // $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
 
-                        $BadanUsaha->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
-
-                        $subPagesParams['BadanUsaha'] = $BadanUsaha;
+                        $subPagesParams['BadanUsaha'] = $BadanUsaha[0];
                     }
                     // dd($subPagesParams);
                     return view("pages.admin.{$subPages}", $subPagesParams);
