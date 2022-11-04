@@ -57,25 +57,26 @@ class FormController extends Controller
         'badan_usaha_documents.sertifikat_halal_file',
         'badan_usaha_documents.sertifikat_sni_file',
         'badan_usaha_documents.sertifikat_merek_file',
+        'badan_usaha.merek_usaha',
 
     ];
     function badan_usaha(Request $r, $userType, $id = null)
     {
-        
+
         if ($r->isMethod('get')) {
             $badan_usaha = BadanUsaha::find(null);
             if ($id != null) {
                 $badan_usaha = BadanUsaha::leftJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
-                ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-                ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-                ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-                ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
-                ->where("badan_usaha.id",$id)
-                ->get($this->fieldBadanUsaha);
+                    ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                    ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                    ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                    ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                    ->where("badan_usaha.id", $id)
+                    ->get($this->fieldBadanUsaha);
             }
             // dd($badan_usaha);
 
-        $Notifikasi = Notifikasi::where("user_role","MEMBER")->where("nik",Auth::user()->nik)->where("status","not read")->get();
+            $Notifikasi = Notifikasi::where("user_role", "MEMBER")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
 
 
             return view('pages.form.badan_usaha', [
@@ -98,9 +99,9 @@ class FormController extends Controller
 
             if ($id != null) {
                 $badan_usaha = BadanUsaha::find($id);
-                $badan_usaha_documents = BadanUsahaDocuments::where("id_badan_usaha",$badan_usaha->id);
-               
-                if(!empty($badan_usaha_documents)){
+                $badan_usaha_documents = BadanUsahaDocuments::where("id_badan_usaha", $badan_usaha->id);
+
+                if (!empty($badan_usaha_documents)) {
                     $badan_usaha_documents = new BadanUsahaDocuments([
                         'id' =>  Str::uuid(36),
                         'id_badan_usaha' => $badan_usaha->id,
@@ -113,7 +114,7 @@ class FormController extends Controller
                 }
             } else {
                 $badan_usaha = new BadanUsaha;
-              
+
                 $r->merge([
                     'id' => Str::uuid(36),
                 ]);
@@ -128,19 +129,18 @@ class FormController extends Controller
                     'sertifikat_merek_file' => ''
                 ]);
 
-                $User=User::where('nik',$r->input('nik'))->first();
-                if(empty($User)){
+                $User = User::where('nik', $r->input('nik'))->first();
+                if (empty($User)) {
                     $users = new User([
                         'id' => (string) Str::uuid()->getHex(),
                         'nik' => $r->input('nik'),
                         'password' => Hash::make('12345678'),
                     ]);
                     $users->save();
-
                 }
             }
 
-          
+
 
             // dd($r);
 
@@ -179,50 +179,45 @@ class FormController extends Controller
                 $name1 = 'bentuk_usaha_file' . $id . '.' . $ext;
 
                 $r->file('bentuk_usaha_file')->storeAs('public/dokumen', $name1);
-                
+
                 $badan_usaha_documents->bentuk_usaha_file = '/storage/dokumen/' . $name1;
-               
             };
             if ($r->file('nib_file') != null) {
                 $ext = $r->file('nib_file')->getClientOriginalExtension();
                 $name1 = 'nib_file' . $id . '.' . $ext;
 
                 $r->file('nib_file')->storeAs('public/dokumen', $name1);
-                
+
                 $badan_usaha_documents->nib_file = '/storage/dokumen/' . $name1;
-               
             };
             if ($r->file('sertifikat_halal_file') != null) {
                 $ext = $r->file('sertifikat_halal_file')->getClientOriginalExtension();
                 $name1 = 'sertifikat_halal_file' . $id . '.' . $ext;
 
                 $r->file('sertifikat_halal_file')->storeAs('public/dokumen', $name1);
-                
+
                 $badan_usaha_documents->sertifikat_halal_file = '/storage/dokumen/' . $name1;
-               
             };
             if ($r->file('sertifikat_merek_file') != null) {
                 $ext = $r->file('sertifikat_merek_file')->getClientOriginalExtension();
                 $name1 = 'sertifikat_merek_file' . $id . '.' . $ext;
 
                 $r->file('sertifikat_merek_file')->storeAs('public/dokumen', $name1);
-                
+
                 $badan_usaha_documents->sertifikat_merek_file = '/storage/dokumen/' . $name1;
-               
             };
             if ($r->file('sertifikat_sni_file') != null) {
                 $ext = $r->file('sertifikat_sni_file')->getClientOriginalExtension();
                 $name1 = 'sertifikat_sni_file' . $id . '.' . $ext;
 
                 $r->file('sertifikat_sni_file')->storeAs('public/dokumen', $name1);
-                
+
                 $badan_usaha_documents->sertifikat_sni_file = '/storage/dokumen/' . $name1;
-               
             };
-            
+
 
             // $r->file
-            
+
             // dd($r->file('sertifikat_halal_file'));
             // dd($r->file('sertifikat_merek_file'));
             // dd($badan_usaha_documents);
@@ -230,9 +225,9 @@ class FormController extends Controller
             $badan_usaha_documents->save();
 
 
-            if($userType == 'admin'){
+            if ($userType == 'admin') {
                 return redirect('/admin/tabel');
-            }else{
+            } else {
                 return redirect('/member/dashboard');
             }
         }

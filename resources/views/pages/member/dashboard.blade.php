@@ -11,7 +11,7 @@
 @foreach($BadanUsaha as $key => $item)
 <div class="badan_usaha_container">
     <h5>{{$key+1}} . Nama Usaha : {{$item->nama_usaha}}</h5>
-    <span>kelengkapan Profil : </span>
+    <span>Kelengkapan Profil : </span>
     <div class="progress" style="width: 200px;">
         <div class="progress-bar" role="progressbar" style="width: {{round($userDataProgress[$key],0)}}%;height: 20px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{round($userDataProgress[$key],0)}}%</div>
     </div>
