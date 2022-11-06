@@ -51,6 +51,7 @@ $fieldTitles = [
     'MEDIA SOSIAL',
     'FOTO ALAT PRODUKSI',
     'FOTO RUANG PRODUKSI',
+    'PRODUK',
     'FILE DOKUMEN BENTUK USAHA',
     'FILE DOKUMEN NIB',
     'FILE SERTIFIKAT HALAL',
@@ -79,7 +80,7 @@ $fieldTitles = [
 @foreach($fields as $key => $field)
 @if($field == 'id')
 <span></span>
-@elseif($field == 'foto_alat_produksi' || $field == 'foto_ruang_produksi')
+@elseif($field == 'foto_alat_produksi' || $field == 'foto_ruang_produksi' || $field == 'produk')
 <div>
     <h5>{{$fieldTitles[$key]}}</h5>
     <img class="h-[300px]" src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
@@ -94,14 +95,6 @@ $fieldTitles = [
 <div class="flex">
     <p  class="w-[400px]">{{$fieldTitles[$key]}}</p>
     <a target="_blank" href="{{$baseUrl.$BadanUsaha->$field}}">Lihat Dokumen</a>
-</div>
-@elseif(
-    $field == 'foto_alat_produksi' || 
-    $field == 'foto_ruang_produksi'
-    )
-<div>
-    <h5>{{$fieldTitles[$key]}}</h5>
-    <img class="h-[200px]" src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
 </div>
 @elseif(
     $field == 'investasi_modal' || 

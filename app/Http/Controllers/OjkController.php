@@ -59,6 +59,7 @@ class OjkController extends Controller
         'badan_usaha_documents.sertifikat_merek_file',
         'badan_usaha.foto_alat_produksi',
         'badan_usaha.foto_ruang_produksi',
+        'produk.foto as produk',
 
     ];
     private $fields = [
@@ -101,6 +102,7 @@ class OjkController extends Controller
         'media_sosial',
         'foto_alat_produksi',
         'foto_ruang_produksi',
+        'produk',
         // 'created_at',
         // 'updated_at'
     ];
@@ -131,6 +133,7 @@ class OjkController extends Controller
                         ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                         ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                         ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                        ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
                         ->where("badan_usaha.id", $id)
                         ->get($this->fieldBadanUsaha);
                 }

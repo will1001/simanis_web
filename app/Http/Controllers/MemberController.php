@@ -212,13 +212,15 @@ class MemberController extends Controller
                             ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             ->select("pengajuan_dana.id as id", "pengajuan_dana.*", "pengajuan_dana.status as status", "instansi.nama")
                             ->where('pengajuan_dana.user_id', Auth::id())->orderBy('pengajuan_dana.created_at', 'desc')->get();
-                        $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
+                        $BadanUsaha = BadanUsaha::leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+                        ->select("badan_usaha.id as id","badan_usaha.*","produk.*")
+                        ->where('nik', Auth::user()->nik)->get();
                         $JumlahPinjaman = JumlahPinjaman::all();
                         $JangkaWaktu = JangkaWaktu::all();
                         $SimulasiAngsuran = SimulasiAngsuran::all();
                         $Instansi = Instansi::all();
                         $DataPendukung = DataPendukung::where('id_badan_usaha', $BadanUsaha[0]->id)->first();
-                        // dd($PengajuanDana);
+                        // dd($BadanUsaha);
 
 
                         $params = [
@@ -413,7 +415,7 @@ class MemberController extends Controller
             $filename = $BadanUsaha->id . '-' . time() . '.' . $extension;
 
             $file->move(public_path('images/'), $filename);
-            $data['foto'] = 'images/' . $filename;
+            $data['foto'] = '/images/' . $filename;
         }
         // dd($data);
 

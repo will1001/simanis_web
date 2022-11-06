@@ -51,6 +51,7 @@ $fieldTitles = [
     'MEDIA SOSIAL',
     'FOTO ALAT PRODUKSI',
     'FOTO RUANG PRODUKSI',
+    'PRODUK',
     'FILE DOKUMEN BENTUK USAHA',
     'FILE DOKUMEN NIB',
     'FILE SERTIFIKAT HALAL',
@@ -77,11 +78,7 @@ $fieldTitles = [
 @foreach($fields as $key => $field)
 @if($field == 'id')
 <span></span>
-@elseif($field == 'foto_alat_produksi' || $field == 'foto_ruang_produksi')
-<div>
-    <h5>{{$fieldTitles[$key]}}</h5>
-    <img class="h-[300px]" src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
-</div>
+
 @elseif(
     $field == 'nib_file' ||
     $field == 'bentuk_usaha_file' ||
@@ -95,7 +92,8 @@ $fieldTitles = [
 </div>
 @elseif(
     $field == 'foto_alat_produksi' || 
-    $field == 'foto_ruang_produksi'
+    $field == 'foto_ruang_produksi' ||
+    $field == 'produk'
     )
 <div>
     <h5>{{$fieldTitles[$key]}}</h5>

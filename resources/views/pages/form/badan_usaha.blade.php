@@ -23,6 +23,32 @@ $bentukUsaha = [
         "name" => "Belum Ada"
     )
 ];
+$pendidikan_tenaga_kerja = [
+    (object)array(
+        "id" => "SD",
+        "name" => "SD"
+    ),
+    (object)array(
+        "id" => "SMP",
+        "name" => "SMP"
+    ),
+    (object)array(
+        "id" => "SMA",
+        "name" => "SMA"
+    ),
+    (object)array(
+        "id" => "S1",
+        "name" => "S1"
+    ),
+    (object)array(
+        "id" => "S2",
+        "name" => "S2"
+    ),
+    (object)array(
+        "id" => "S3",
+        "name" => "S3"
+    )
+];
 
 $forms = array(
     (object)array(
@@ -187,9 +213,12 @@ $forms = array(
         "prop" => "jumlah_tenaga_kerja_wanita"
     ),
     (object)array(
-        "type" => "text",
+        "type" => "select",
         "placeholder" => "RATA-RATA PENDIDIKAN TENAGA KERJA",
-        "prop" => "rata_rata_pendidikan_tenaga_kerja"
+        "prop" => "rata_rata_pendidikan_tenaga_kerja",
+        "name" => "rata_rata_pendidikan_tenaga_kerja",
+        "options" => $pendidikan_tenaga_kerja,
+        "change" => "",
     ),
     (object)array(
         "type" => "number",
