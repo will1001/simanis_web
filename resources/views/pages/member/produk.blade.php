@@ -179,12 +179,16 @@
               <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
               <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
             </div>
-            <input id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="foto" type="file" class="hidden" />
+            <input onchange="uploadFile('foto_produk',event)" id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="foto" type="file" class="hidden" />
+           
           </label>
+         
+
         </div>
 
         <input />
       </div>
+       <h5 class="ml-[230px]" id="foto_produk"></h5>
       <br>
       <div class="flex items-center justify-start">
         <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Cancel</div>
@@ -242,4 +246,9 @@
     formPopUp.style.visibility = "visible";
 
   }
+
+  const uploadFile = (label, e) => {
+        const FileLabel = document.getElementById(label);
+        FileLabel.innerHTML = e.target.value.split("\\").pop();
+    }
 </script>

@@ -93,19 +93,20 @@
         <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
             <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
             <th class="text-center p-2">No</th>
-            <th class="text-left p-2 ">Badan Usaha</th>
-            <th class="text-left p-2 ">Nama Pemilik</th>
-            <th class="text-left p-2 ">NIK</th>
-            <th class="text-left ">
-                <div class="flex text-left gap-1 my-auto ml-5  "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Kabupaten</div>
+            <th class="text-center p-2 ">Badan Usaha</th>
+            <th class="text-center p-2 ">Nama Pemilik</th>
+            <th class="text-center p-2 ">NIK</th>
+            <th class="text-center ">
+                <div class="flex text-center gap-1 my-auto ml-5  "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Kabupaten</div>
             </th>
-            <th class="text-left">
+            <th class="text-center">
                 <div class="flex justify-center gap-1 my-auto "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Jumlah Dana</div>
             </th>
-            <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Jangka Waktu</span></th>
-            <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Tanggal</span></th>
-            <th class="text-left p-2 "><span class="">Instansi</span></th>
-            <th class="text-left p-2 "><span class="">Status</span></th>
+            <th class="text-center p-2 "><span class="flex justify-center my-auto mx-1">Jangka Waktu</span></th>
+            <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal</span></th>
+            <th class="text-center p-2 "><span class="">Instansi</span></th>
+            <th class="text-center p-2 "><span class="">Status</span></th>
+            <th class="text-center p-2 "><span class="">Keterangan</span></th>
             <th class="rounded-tr-xl">Aksi</span></th>
         </tr>
         @foreach($PengajuanDana as $key=>$item)
@@ -124,15 +125,16 @@
         <tr class="bg-white h-14 gap-2">
             <!-- <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
             <td class="text-center text-slate-700 ">{{++$key}}</td>
-            <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
-            <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td>
-            <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nik}}</td>
-            <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
-            <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
-            <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
-            <td class="text-center p-2">{{$item->created_at}}</td>
+            <td class="text-center text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
+            <td class="text-center text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td>
+            <td class="text-center text-slate-700 font-bold p-2 ">{{$item->nik}}</td>
+            <td class="text-center "><span class="flex text-center my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
+            <td class="text-center text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
+            <td class="text-center text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
+            <td class="text-center p-2">{{date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
             <td class="text-center p-2">{{$item->instansi}}</td>
-            <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
+            <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
+            <td class="text-center p-2">{{$item->alasan}}</td>
             <td class="text-center p-2  cursor-pointer">
                 <div class="flex ml-2 gap-1 justify-start items-center">
                     <form method="GET" action="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$item->id_badan_usaha}}">
