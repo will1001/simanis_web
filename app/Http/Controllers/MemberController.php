@@ -209,8 +209,9 @@ class MemberController extends Controller
 
                     if ($pages == "PengajuanDana") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
-                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
-                        ->where('pengajuan_dana.user_id', Auth::id())->orderBy('pengajuan_dana.created_at', 'desc')->get();
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                            ->select("pengajuan_dana.id as id", "pengajuan_dana.*", "pengajuan_dana.status as status", "instansi.nama")
+                            ->where('pengajuan_dana.user_id', Auth::id())->orderBy('pengajuan_dana.created_at', 'desc')->get();
                         $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
                         $JumlahPinjaman = JumlahPinjaman::all();
                         $JangkaWaktu = JangkaWaktu::all();
@@ -258,10 +259,10 @@ class MemberController extends Controller
 
                         $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
-                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
-                        ->select("pengajuan_dana.id as id","instansi.*","pengajuan_dana.*")
-                        ->where('pengajuan_dana.user_id', Auth::id())->where('pengajuan_dana.status', "Menunggu")
-                        ->where('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                            ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
+                            ->where('pengajuan_dana.user_id', Auth::id())->where('pengajuan_dana.status', "Menunggu")
+                            ->where('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         $surat = Surat::find(1);
 
                         // dd($PengajuanDana);
