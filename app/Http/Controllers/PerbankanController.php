@@ -27,7 +27,7 @@ use App\Exports\BadanUsahaExportByID;
 
 class PerbankanController extends Controller
 {
-     private $fieldBadanUsaha = [
+    private $fieldBadanUsaha = [
         'badan_usaha.id as id',
         'badan_usaha_documents.id as badan_usaha_documents_id',
         'badan_usaha.nik',
@@ -184,16 +184,16 @@ class PerbankanController extends Controller
                         ];
                     }
 
-                    if ($subPages == "ProfilBadanUsaha") { 
+                    if ($subPages == "ProfilBadanUsaha") {
                         $BadanUsaha = BadanUsaha::leftJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
-                        ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-                        ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
-                        ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
-                        ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-                        ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-                        ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
-                        ->where("badan_usaha.id", $id)
-                        ->get($this->fieldBadanUsaha);
+                            ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+                            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+                            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                            ->where("badan_usaha.id", $id)
+                            ->get($this->fieldBadanUsaha);
                         $params = [
                             'BadanUsaha' => $BadanUsaha[0],
                             'pages' => $subPages,
@@ -214,6 +214,7 @@ class PerbankanController extends Controller
                     if ($pages == "daftarPengajuanDana") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->select(
                                 'badan_usaha.*',
@@ -229,12 +230,15 @@ class PerbankanController extends Controller
                                 'pengajuan_dana.user_id',
                                 'pengajuan_dana.created_at as dana_created_at',
                                 'pengajuan_dana.updated_at as dana_updated_at',
+                                'data_tambahan.ktp',
+                                'data_tambahan.kk',
                             )
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.status", "Menunggu")
-                            ->where("pengajuan_dana.alasan", 'LIKE', "%Pembiayaan Usaha Anda diterima Dinas Perindustrian%")
+                            ->whereNotNull("data_tambahan.ktp")
+                            ->whereNotNull("data_tambahan.kk")
                             ->latest('dana_created_at')->get();
-                        // dd($PengajuanDana);
+                        // dd($PengajuanDana[0]);
                         $params = [
                             'PengajuanDana' => $PengajuanDana,
                             'pages' => $pages,
@@ -402,17 +406,17 @@ class PerbankanController extends Controller
         $User = User::find($PengajuanDana->user_id);
 
         $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
+        // dd($status);
+        // dd($r->input('alasan'));
 
-        // dd($BadanUsaha);
-
-        if ($status == "Ditolak") {
+        if ($status == "Ditolak" || $status == "Menunggu") {
             $PengajuanDana->alasan = $r->input('alasan');
         } else {
             $PengajuanDana->alasan = "Selamat Pembiayaan Usaha Anda diterima";
         }
 
         $PengajuanDana->status = $status;
-
+        // dd($PengajuanDana);
         $PengajuanDana->save();
         $instansi = User::find($PengajuanDana->id_instansi);
         // dd($instansi);
@@ -435,7 +439,7 @@ class PerbankanController extends Controller
 
             $notifikasi->save();
         }
-        if ($status == "Ditolak") {
+        if ($status == "Ditolak" || $status == "Menunggu") {
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
                 'nik' => $User->nik,

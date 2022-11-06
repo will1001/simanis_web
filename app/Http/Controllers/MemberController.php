@@ -208,14 +208,16 @@ class MemberController extends Controller
                     }
 
                     if ($pages == "PengajuanDana") {
-                        $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+                        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
+                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                        ->where('pengajuan_dana.user_id', Auth::id())->orderBy('pengajuan_dana.created_at', 'desc')->get();
                         $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
                         $JumlahPinjaman = JumlahPinjaman::all();
                         $JangkaWaktu = JangkaWaktu::all();
                         $SimulasiAngsuran = SimulasiAngsuran::all();
                         $Instansi = Instansi::all();
                         $DataPendukung = DataPendukung::where('id_badan_usaha', $BadanUsaha[0]->id)->first();
-                        // dd($JangkaWaktu);
+                        // dd($PengajuanDana);
 
 
                         $params = [
@@ -255,8 +257,11 @@ class MemberController extends Controller
                     if ($pages == "suratRekomendasi") {
 
                         $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
-                        $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->where('status', "Menunggu")
-                            ->where('alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('created_at', 'desc')->first();
+                        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
+                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                        ->select("pengajuan_dana.id as id","instansi.*","pengajuan_dana.*")
+                        ->where('pengajuan_dana.user_id', Auth::id())->where('pengajuan_dana.status', "Menunggu")
+                        ->where('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         $surat = Surat::find(1);
 
                         // dd($PengajuanDana);

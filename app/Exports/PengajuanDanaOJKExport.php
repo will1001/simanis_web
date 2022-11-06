@@ -20,6 +20,7 @@ class PengajuanDanaOJKExport implements FromCollection,WithHeadings
                             'pengajuan_dana.waktu_pinjaman',
                             'pengajuan_dana.status',
                             'pengajuan_dana.alasan',
+                            'pengajuan_dana.created_at',
                             )
                         ->where("instansi","BANK")
                         ->orderBy('pengajuan_dana.created_at', 'desc')->get();
@@ -34,6 +35,7 @@ class PengajuanDanaOJKExport implements FromCollection,WithHeadings
             'waktu_pinjaman',
             'status',
             'alasan',
+            'Tanggal',
         ];
     }
 }

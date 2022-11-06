@@ -65,17 +65,19 @@ $baseUrl = env('APP_URL') . '/';
     <td class="text-center p-4 ">
       @if($item->instansi == "KOPERASI")
       {{$item->alasan}} <br>
-      @if($item->status == "Diterima")
-      <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
-      @endif
+        @if($item->status == "Diterima")
+        <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
+        @endif
       @endif
       @if($item->alasan == "Pembiayaan Usaha Anda diterima Dinas Perindustrian")
-      @if(empty($DataPendukung))
-      {{$item->alasan}} <br>
-      <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>
+        @if(empty($DataPendukung))
+        {{$item->alasan}} <br>
+        <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>
+        @else
+        <span>Menunggu Persetujuan dari {{$item->nama}}</span>
+        @endif
       @else
-      <span>Menunggu Persetujuan dari Instansi Terkait</span>
-      @endif
+        {{$item->alasan}} <br>
       @endif
     </td>
   </tr>

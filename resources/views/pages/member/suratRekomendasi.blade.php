@@ -22,7 +22,7 @@ if($kopBulan == 11) $kopBulanRomawi = "XI";
 if($kopBulan == 12) $kopBulanRomawi = "XII";
 
 @endphp
-<div >
+<div>
     <div>
         <form action="{{ url('/member/downloadSurat') }}" method="get">
             <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
@@ -91,8 +91,8 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
         </div>
         <div class="flex justify-start mt-[50px]">
             <div class="text-left flex flex-col">
-                <span class="w-[700px]">Adalah IKM Binaan DInas Perindustrian PRovinsi NTB dan telah memenuhi persyaratan untuk mengajukan pinjaman kepada PT Bank</span>
-                <span class="mt-[20px]">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya</span>       
+                <span class="w-[700px]">Adalah IKM Binaan DInas Perindustrian Provinsi NTB dan telah memenuhi persyaratan untuk mengajukan pinjaman kepada PT {{$PengajuanDana->nama}}</span>
+                <span class="mt-[20px]">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya</span>
             </div>
         </div>
         <div class="flex justify-end mt-[150px]">
@@ -102,18 +102,18 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
                 <img class="h-[60px]" src="{{ asset($Surat->ttd) }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
                 <span>{{$Surat->nip}}</span>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- <div class="p-[100px]">
+    <!-- <div class="p-[100px]">
     <button onclick="printSurat()" class="rounded-xl px-4 py-2 bg-blue-500 text-white">Print</button>
     <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download PDF</button>
 </div> -->
-@else
+    @else
     <div>
         <h1>Belum Ada Surat Rekomendasi</h1>
     </div>
-@endif
+    @endif
 
-@endsection
+    @endsection
