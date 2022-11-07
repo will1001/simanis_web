@@ -20,19 +20,19 @@ class AuthController extends Controller
             if (Auth::check()) {
                 if (Auth::user()->role === "ADMIN") {
                     return redirect('/admin/tabel');
-                }else if (Auth::user()->role === "BANK") {
+                } else if (Auth::user()->role === "BANK") {
                     return redirect('/perbankan/daftarPengajuanDana');
-                }else if (Auth::user()->role === "KOPERASI") {
+                } else if (Auth::user()->role === "KOPERASI") {
                     return redirect('/koperasi/daftarPengajuanDana');
-                }else if (Auth::user()->role === "PERDAGANGAN") {
+                } else if (Auth::user()->role === "PERDAGANGAN") {
                     return redirect('/perdagangan/dashboard');
-                }else if (Auth::user()->role === "OJK") {
+                } else if (Auth::user()->role === "OJK") {
                     return redirect('/ojk/dashboard');
-                }  else {
+                } else {
                     return redirect('/member/dashboard');
                 }
             } else {
-              
+
                 return view('pages.login');
             }
         } else {
@@ -45,17 +45,16 @@ class AuthController extends Controller
 
                     if ($user[0]->role === "ADMIN") {
                         return redirect()->intended('/admin/tabel');
-                    }else if ($user[0]->role === "BANK") {
+                    } else if ($user[0]->role === "BANK") {
                         return redirect('/perbankan/daftarPengajuanDana');
-                    }else if ($user[0]->role === "KOPERASI") {
+                    } else if ($user[0]->role === "KOPERASI") {
                         return redirect('/koperasi/daftarPengajuanDana');
-                    }else if ($user[0]->role === "PERDAGANGAN") {
+                    } else if ($user[0]->role === "PERDAGANGAN") {
                         return redirect('/perdagangan/dashboard');
-                    }else if ($user[0]->role === "OJK") {
+                    } else if ($user[0]->role === "OJK") {
                         return redirect('/ojk/dashboard');
                     } else {
-                        // dd(Auth::user());
-                        if(Auth::user()->status == "Tidak Aktif"){
+                        if (Auth::user()->status == "Tidak Aktif") {
                             return view('pages.login', ['msg' => "Akun Anda Di Non Aktifkan"]);
                         }
                         return redirect()->intended('/member/dashboard');
@@ -77,15 +76,15 @@ class AuthController extends Controller
             if (Auth::check()) {
                 if (Auth::user()->role === "ADMIN") {
                     return redirect('/admin/tabel');
-                }else if (Auth::user()->role === "BANK") {
+                } else if (Auth::user()->role === "BANK") {
                     return redirect('/perbankan/daftarPengajuanDana');
-                }else if (Auth::user()->role === "KOPERASI") {
+                } else if (Auth::user()->role === "KOPERASI") {
                     return redirect('/koperasi/daftarPengajuanDana');
-                }else if (Auth::user()->role === "PERDAGANGAN") {
+                } else if (Auth::user()->role === "PERDAGANGAN") {
                     return redirect('/perdagangan/dashboard');
-                }else if (Auth::user()->role === "OJK") {
+                } else if (Auth::user()->role === "OJK") {
                     return redirect('/ojk/dashboard');
-                }  else {
+                } else {
                     return redirect('/member/dashboard');
                 }
             } else {
@@ -95,13 +94,13 @@ class AuthController extends Controller
             $nik = $r->input('nik');
             $password = $r->input('password');
 
-            if(!$nik || !$password){
+            if (!$nik || !$password) {
                 return view('pages.register', ['msg' => "Input NIK dan Password Terlebih dahulu"]);
             }
 
             $checkNIK = User::where('nik', $nik)->first();
 
-            if($checkNIK){
+            if ($checkNIK) {
                 return view('pages.register', ['msg' => "NIK sudah terdaftar di Sistem"]);
             }
 
@@ -118,7 +117,7 @@ class AuthController extends Controller
             $NewBadanUsaha->nama_direktur = $r->input('nama_direktur');
             $NewBadanUsaha->no_hp = $r->input('no_hp');
 
-             // BUAT BADAN USAHA
+            // BUAT BADAN USAHA
             $NewBadanUsaha->save();
 
             // BUAT USER
@@ -140,29 +139,25 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-    function changePassword(Request $r,$pages){
+    function changePassword(Request $r, $pages)
+    {
         $users = User::find($r->input("id"));
         // dd('/member'.$pages.'/settingAkun');
 
         if (Hash::check($r->input("password_lama"), $users->password)) {
             // dd("true");
-            if($pages === "member"){
-                $BadanUsaha = BadanUsaha::where("nik",$users->nik)->first();
+            if ($pages === "member") {
+                $BadanUsaha = BadanUsaha::where("nik", $users->nik)->first();
                 $BadanUsaha->email =  $r->input("email");
                 $BadanUsaha->save();
             }
             $users->password =  Hash::make($r->input("password"));
-            
+
             $users->save();
-            return redirect('/'.$pages.'/settingAkun')->with('success', 'Password Berhasil Dirubah');
-
-        }else{
+            return redirect('/' . $pages . '/settingAkun')->with('success', 'Password Berhasil Dirubah');
+        } else {
             // dd("pass salah");
-            return redirect('/'.$pages.'/settingAkun')->with('failed', 'Password Lama Salah');
+            return redirect('/' . $pages . '/settingAkun')->with('failed', 'Password Lama Salah');
         }
-
-     
-
-
     }
 }

@@ -90,6 +90,10 @@ return [
             ],
             'mutation' => [
                 // ExampleMutation::class,
+                // App\GraphQL\Queries\ProdukQuery::class,
+                App\GraphQL\Mutations\RegisterMutation::class,
+                App\GraphQL\Mutations\LoginMutation::class,
+
             ],
             // The types only available in this schema
             'types' => [
@@ -106,6 +110,8 @@ return [
                 App\GraphQL\Types\SlideShowType::class,
                 App\GraphQL\Types\SurveiType::class,
                 App\GraphQL\Types\ProdukType::class,
+                App\GraphQL\Types\RegisterType::class,
+                App\GraphQL\Types\LoginType::class,
             ],
 
             // Laravel HTTP middleware
