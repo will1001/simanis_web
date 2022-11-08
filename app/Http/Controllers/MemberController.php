@@ -213,8 +213,8 @@ class MemberController extends Controller
                             ->select("pengajuan_dana.id as id", "pengajuan_dana.*", "pengajuan_dana.status as status", "instansi.nama")
                             ->where('pengajuan_dana.user_id', Auth::id())->orderBy('pengajuan_dana.created_at', 'desc')->get();
                         $BadanUsaha = BadanUsaha::leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
-                        ->select("badan_usaha.id as id","badan_usaha.*","produk.*")
-                        ->where('nik', Auth::user()->nik)->get();
+                            ->select("badan_usaha.id as id", "badan_usaha.*", "produk.*")
+                            ->where('nik', Auth::user()->nik)->get();
                         $JumlahPinjaman = JumlahPinjaman::all();
                         $JangkaWaktu = JangkaWaktu::all();
                         $SimulasiAngsuran = SimulasiAngsuran::all();
@@ -311,12 +311,11 @@ class MemberController extends Controller
     {
         // dd($r);
         $instansi = User::find($r->input("instansi"));
-        $jumlah_dana;
-        $waktu_pinjaman;
+        $jumlah_dana = null;
+        $waktu_pinjaman = null;
         // dd($r->input("jumlah_dana_bank") != null);
 
         if ($r->input("jumlah_dana_bank") != null) {
-
             $JumlahPinjaman = JumlahPinjaman::find($r->input("jumlah_dana_bank"));
             $JangkaWaktu = JangkaWaktu::find($r->input("jangka_waktu_bank"));
             $jumlah_dana = $JumlahPinjaman->jumlah;
@@ -437,7 +436,7 @@ class MemberController extends Controller
     function ganti_foto(Request $r)
     {
 
-        $filename;
+        $filename = null;
         $User = User::find(Auth::id());
 
 
@@ -464,8 +463,8 @@ class MemberController extends Controller
     function uploadDataPendukung(Request $r)
     {
         // dd($r);
-        $filenameKTP;
-        $filenameKK;
+        $filenameKTP = null;
+        $filenameKK = null;
         $User = User::find(Auth::id());
         $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
         // $DataPendukung = DataPendukung::where('id_badan_usaha',$BadanUsaha->id)->first();

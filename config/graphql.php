@@ -93,6 +93,7 @@ return [
                 // App\GraphQL\Queries\ProdukQuery::class,
                 App\GraphQL\Mutations\RegisterMutation::class,
                 App\GraphQL\Mutations\LoginMutation::class,
+                App\GraphQL\Mutations\PengajuanDanaMutation::class,
 
             ],
             // The types only available in this schema
@@ -112,6 +113,7 @@ return [
                 App\GraphQL\Types\ProdukType::class,
                 App\GraphQL\Types\RegisterType::class,
                 App\GraphQL\Types\LoginType::class,
+                App\GraphQL\Types\PengajuanDanaType::class,
             ],
 
             // Laravel HTTP middleware

@@ -180,15 +180,15 @@
               <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
             </div>
             <input onchange="uploadFile('foto_produk',event)" id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="foto" type="file" class="hidden" />
-           
+
           </label>
-         
+
 
         </div>
 
         <input />
       </div>
-       <h5 class="ml-[230px]" id="foto_produk"></h5>
+      <h5 class="ml-[230px]" id="foto_produk"></h5>
       <br>
       <div class="flex items-center justify-start">
         <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Cancel</div>
@@ -205,7 +205,7 @@
 @endsection
 <script>
   const produk = @json($Produk);
-  const baseUrl = "http://127.0.0.1:8000/";
+  const baseUrl = "http://127.0.0.1:8000";
 
   const lihatDetails = (index) => {
     const blackBg = document.getElementById('PopUpBlackbg');
@@ -248,7 +248,7 @@
   }
 
   const uploadFile = (label, e) => {
-        const FileLabel = document.getElementById(label);
-        FileLabel.innerHTML = e.target.value.split("\\").pop();
-    }
+    const FileLabel = document.getElementById(label);
+    FileLabel.innerHTML = e.target.value.split("\\").pop();
+  }
 </script>

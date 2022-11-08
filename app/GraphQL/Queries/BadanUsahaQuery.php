@@ -74,7 +74,7 @@ class BadanUsahaQuery extends Query
                 'name' => 'tahun_berdiri',
                 'type' => Type::int(),
             ],
-           
+
             'nib_tahun' => [
                 'name' => 'nib_tahun',
                 'type' => Type::string(),
@@ -181,7 +181,7 @@ class BadanUsahaQuery extends Query
             ],
             'page' => [
                 'name' => 'page',
-                'type' => Type::int(),
+                'type' => Type::nonNull(Type::int()),
             ],
         ];
     }
@@ -203,7 +203,7 @@ class BadanUsahaQuery extends Query
         if (isset($args['cabang_industri']) && $args['cabang_industri'] != '') {
             $badanUsaha = $badanUsaha->where('cabang_industri', $args['cabang_industri']);
         }
-      
+
         if (isset($args['sub_cabang_industri']) && $args['cabang_industri'] != '') {
             $badanUsaha = $badanUsaha->where('sub_cabang_industri', $args['sub_cabang_industri']);
         }
