@@ -87,6 +87,8 @@ return [
                 App\GraphQL\Queries\SlideShowQuery::class,
                 App\GraphQL\Queries\SurveiQuery::class,
                 App\GraphQL\Queries\ProdukQuery::class,
+                App\GraphQL\Queries\NotifikasiQuery::class,
+                App\GraphQL\Queries\SuratQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -94,6 +96,7 @@ return [
                 App\GraphQL\Mutations\RegisterMutation::class,
                 App\GraphQL\Mutations\LoginMutation::class,
                 App\GraphQL\Mutations\PengajuanDanaMutation::class,
+                App\GraphQL\Mutations\PengajuanProdukMutation::class,
 
             ],
             // The types only available in this schema
@@ -114,6 +117,9 @@ return [
                 App\GraphQL\Types\RegisterType::class,
                 App\GraphQL\Types\LoginType::class,
                 App\GraphQL\Types\PengajuanDanaType::class,
+                App\GraphQL\Types\PengajuanProdukType::class,
+                App\GraphQL\Types\NotifikasiType::class,
+                App\GraphQL\Types\SuratType::class,
             ],
 
             // Laravel HTTP middleware
@@ -139,7 +145,7 @@ return [
     'types' => [
         // ExampleType::class,
         // ExampleRelationType::class,
-        // \Rebing\GraphQL\Support\UploadType::class,
+        \Rebing\GraphQL\Support\UploadType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request
