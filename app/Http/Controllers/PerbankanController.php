@@ -156,8 +156,8 @@ class PerbankanController extends Controller
                         $surat = Surat::find(1);
 
                         // dd($user);
-                        $PengajuanDana = PengajuanDana::where('user_id', $user->id)->where('status', "Menunggu")->orderBy('created_at', 'desc')->first();
-                        // dd($BadanUsaha);
+                        $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
+                        // dd($PengajuanDana);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,
@@ -252,6 +252,7 @@ class PerbankanController extends Controller
                     if ($pages == "historyPengajuanDana") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->select(
                                 'badan_usaha.*',
@@ -267,6 +268,8 @@ class PerbankanController extends Controller
                                 'pengajuan_dana.user_id',
                                 'pengajuan_dana.created_at as dana_created_at',
                                 'pengajuan_dana.updated_at as dana_updated_at',
+                                'data_tambahan.ktp',
+                                'data_tambahan.kk',
                             )
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.status", "Diterima")
