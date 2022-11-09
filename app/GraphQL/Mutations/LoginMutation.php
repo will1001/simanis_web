@@ -47,6 +47,7 @@ class LoginMutation extends Mutation
         $nik = $args['nik'];
         $password = $args['password'];
         $user = User::where('nik', $nik)->get();
+        $BadanUsaha = BadanUsaha::where('nik', $nik)->first();
         if (!$user->isEmpty()) {
             $checkPassword = Hash::check($password, $user[0]->password);
             if (!$checkPassword) {
@@ -68,6 +69,8 @@ class LoginMutation extends Mutation
 
         return  (object)array(
             "id" => $user[0]->id,
+            "nama" => $BadanUsaha->nama_direktur,
+            "foto" => $user[0]->foto,
             "messagges" => "success",
         );
     }

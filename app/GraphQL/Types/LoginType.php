@@ -25,6 +25,14 @@ class LoginType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'id',
             ],
+            'nama' => [
+                'type' => Type::string(),
+                'description' => 'nama',
+            ],
+            'foto' => [
+                'type' => Type::string(),
+                'description' => 'foto',
+            ],
             'messagges' => [
                 'type' => Type::string(),
                 'description' => 'messagges',
