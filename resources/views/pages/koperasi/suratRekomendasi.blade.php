@@ -56,7 +56,7 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
             </div>
         </div>
 
-        <div class="flex justify-start mt-[50px]">
+        <div class="flex justify-start mt-[20px]">
             <div class="text-left flex flex-col">
                 <span>Yang bertanda tangan dibawah ini :</span>
                 <div class="flex ml-10 ">
@@ -75,7 +75,7 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
                 </div>
             </div>
         </div>
-        <div class="flex justify-start mt-[100px]">
+        <div class="flex justify-start mt-[20px]">
             <div class="text-left flex flex-col">
                 <span>Dengan ini menerangkan bahwa IKM :</span>
                 <div class="flex ml-10 ">

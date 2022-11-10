@@ -224,7 +224,7 @@ class AdminController extends Controller
                         $surat = Surat::find(1);
 
                         // dd($surat);
-                        $PengajuanDana = PengajuanDana::where('user_id', $user->id)->where('status', "Menunggu")->orderBy('created_at', 'desc')->first();
+                        $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                         // dd($PengajuanDana);
                         $subPagesParams = [
                             'BadanUsaha' => $BadanUsaha,
@@ -276,7 +276,7 @@ class AdminController extends Controller
                     // dd($subPagesParams);
                     return view("pages.admin.{$subPages}", $subPagesParams);
                 } else {
-                    $params;
+                    $params=null;
                     // dd(Auth::user()->nik);
                     $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
                         ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
