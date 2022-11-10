@@ -97,6 +97,7 @@ return [
                 App\GraphQL\Mutations\LoginMutation::class,
                 App\GraphQL\Mutations\PengajuanDanaMutation::class,
                 App\GraphQL\Mutations\PengajuanProdukMutation::class,
+                App\GraphQL\Mutations\UpdatePasswordMutation::class,
 
             ],
             // The types only available in this schema
@@ -120,6 +121,7 @@ return [
                 App\GraphQL\Types\PengajuanProdukType::class,
                 App\GraphQL\Types\NotifikasiType::class,
                 App\GraphQL\Types\SuratType::class,
+                App\GraphQL\Types\UpdatePasswordType::class,
             ],
 
             // Laravel HTTP middleware
