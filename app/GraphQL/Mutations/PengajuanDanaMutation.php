@@ -24,7 +24,7 @@ class PengajuanDanaMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'PengajuanDana',
-        'model' => User::class
+        'model' => PengajuanDana::class
     ];
 
     public function type(): Type

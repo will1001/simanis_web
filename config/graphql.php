@@ -89,6 +89,7 @@ return [
                 App\GraphQL\Queries\ProdukQuery::class,
                 App\GraphQL\Queries\NotifikasiQuery::class,
                 App\GraphQL\Queries\SuratQuery::class,
+                App\GraphQL\Queries\PengajuanDanaQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,

@@ -21,6 +21,22 @@ class PengajuanDanaType extends GraphQLType
     public function fields(): array
     {
         return [
+            'id' => [
+                'type' => Type::string(),
+                'description' => 'id',
+            ],
+            'created_at' => [
+                'type' => Type::string(),
+                'description' => 'created_at',
+            ],
+            'jumlah_dana' => [
+                'type' => Type::string(),
+                'description' => 'jumlah_dana',
+            ],
+            'waktu_pinjaman' => [
+                'type' => Type::string(),
+                'description' => 'waktu_pinjaman',
+            ],
             'messagges' => [
                 'type' => Type::string(),
                 'description' => 'messagges',
