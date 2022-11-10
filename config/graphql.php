@@ -93,6 +93,7 @@ return [
                 App\GraphQL\Queries\InstansiQuery::class,
                 App\GraphQL\Queries\ListJumlahPinjamanQuery::class,
                 App\GraphQL\Queries\ListJangkaWaktuQuery::class,
+                App\GraphQL\Queries\SimulasiAngsuranQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -129,6 +130,7 @@ return [
                 App\GraphQL\Types\InstansiType::class,
                 App\GraphQL\Types\ListJumlahPinjamanType::class,
                 App\GraphQL\Types\ListJangkaWaktuType::class,
+                App\GraphQL\Types\SimulasiAngsuranType::class,
             ],
 
             // Laravel HTTP middleware

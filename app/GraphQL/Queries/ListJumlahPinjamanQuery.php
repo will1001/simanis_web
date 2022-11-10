@@ -39,6 +39,6 @@ class ListJumlahPinjamanQuery extends Query
     {
         
 
-        return JumlahPinjaman::where('id_instansi', $args['id_instansi'])->get();
+        return JumlahPinjaman::where('id_instansi', $args['id_instansi'])->orderByRaw('CONVERT(jumlah, SIGNED) asc')->get();
     }
 }
