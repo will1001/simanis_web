@@ -37,6 +37,14 @@ class PengajuanDanaType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'waktu_pinjaman',
             ],
+            'status' => [
+                'type' => Type::string(),
+                'description' => 'status',
+            ],
+            'alasan' => [
+                'type' => Type::string(),
+                'description' => 'alasan',
+            ],
             'messagges' => [
                 'type' => Type::string(),
                 'description' => 'messagges',
