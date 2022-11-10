@@ -90,6 +90,9 @@ return [
                 App\GraphQL\Queries\NotifikasiQuery::class,
                 App\GraphQL\Queries\SuratQuery::class,
                 App\GraphQL\Queries\PengajuanDanaQuery::class,
+                App\GraphQL\Queries\InstansiQuery::class,
+                App\GraphQL\Queries\ListJumlahPinjamanQuery::class,
+                App\GraphQL\Queries\ListJangkaWaktuQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -123,6 +126,9 @@ return [
                 App\GraphQL\Types\NotifikasiType::class,
                 App\GraphQL\Types\SuratType::class,
                 App\GraphQL\Types\UpdatePasswordType::class,
+                App\GraphQL\Types\InstansiType::class,
+                App\GraphQL\Types\ListJumlahPinjamanType::class,
+                App\GraphQL\Types\ListJangkaWaktuType::class,
             ],
 
             // Laravel HTTP middleware
