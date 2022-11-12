@@ -77,7 +77,7 @@ class PengajuanDanaMutation extends Mutation
         $jumlah_dana = null;
         $waktu_pinjaman = null;
 
-        if ($args["jumlah_dana_bank"] != null) {
+        if ($args["jumlah_dana_bank"] != "null") {
             $JumlahPinjaman = JumlahPinjaman::find($args["jumlah_dana_bank"]);
             $JangkaWaktu = JangkaWaktu::find($args["jangka_waktu_bank"]);
             $jumlah_dana = $JumlahPinjaman->jumlah;

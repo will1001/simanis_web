@@ -95,7 +95,7 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
                 <span class="mt-[20px]">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya</span>
             </div>
         </div>
-        <div class="flex justify-end mt-[150px]">
+        <div class="flex justify-end mt-[50px]">
             <div class="text-left flex flex-col">
                 <span>Mataram, {{date('d-m-Y', strtotime($PengajuanDana->updated_at))}} </span>
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>

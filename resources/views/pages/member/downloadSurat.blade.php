@@ -81,11 +81,11 @@
                 <span class="mt-[20px]">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya</span>
             </div>
         </div>
-        <div class="flex justify-end mt-[80px]">
+        <div class="flex justify-end mt-[50px]">
             <div class="text-left flex flex-col">
                 <span>Mataram, {{date('d-m-Y', strtotime($PengajuanDana->updated_at))}} </span>
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
-                <img src="{{ asset('/images/signKadis.png') }}">
+                <img class="h-[60px]" src="{{ asset('/images/signKadis.png') }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
                 <span>{{$Surat->nip}}</span>
             </div>
