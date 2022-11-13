@@ -45,7 +45,7 @@ class DataPendukungMutation extends Mutation
                 'rules' => ['required', 'image', 'max:1500'],
             ],
             'kk' => [
-                'name' => 'waktu_pinjaman',
+                'name' => 'kk',
                 'type' => Type::nonNull(GraphQL::type('Upload')),
                 'rules' => ['required', 'image', 'max:1500'],
             ],
