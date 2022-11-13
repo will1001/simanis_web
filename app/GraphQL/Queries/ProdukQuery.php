@@ -11,6 +11,8 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Query;
 use Rebing\GraphQL\Support\SelectFields;
 use App\Models\Produk;
+use App\Models\User;
+use App\Models\BadanUsaha;
 
 class ProdukQuery extends Query
 {
@@ -28,6 +30,10 @@ class ProdukQuery extends Query
     public function args(): array
     {
         return [
+            'user_id' => [
+                'name' => 'user_id',
+                'type' => Type::string(),
+            ],
             'id' => [
                 'name' => 'id',
                 'type' => Type::string(),
@@ -59,6 +65,11 @@ class ProdukQuery extends Query
 
         if (isset($args['id_badan_usaha'])) {
             return Produk::where('id_badan_usaha', $args['id_badan_usaha'])->get();
+        }
+        if (isset($args['user_id'])) {
+            $users = User::find($args["user_id"]);
+            $BadanUsaha = BadanUsaha::where('nik', $users->nik)->first();
+            return Produk::where('id_badan_usaha', $BadanUsaha->id)->get();
         }
         return Produk::all();
     }
