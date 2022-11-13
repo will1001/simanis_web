@@ -54,7 +54,7 @@ class KartuMutation extends Mutation
             $extension = $file->getClientOriginalExtension();
             $filename = $args['user_id'] . '.' . $extension;
 
-            $file->move(public_path('images/'), $filename);
+            $file->move(public_path('/images/'), $filename);
             // $data['foto']= 'images/'.$filename;
 
         }
