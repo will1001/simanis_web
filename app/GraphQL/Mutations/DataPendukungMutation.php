@@ -54,15 +54,41 @@ class DataPendukungMutation extends Mutation
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        // if (!empty($args['foto'])) {
-        //     $file = $args['foto'];
-        //     $extension = $file->getClientOriginalExtension();
-        //     $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
-        //     $filename = $BadanUsaha->id . '-' . time() . '.' . $extension;
 
-        //     $file->move(public_path('images/'), $filename);
-        //     $data['foto'] = '/images/' . $filename;
-        // }
+        $filenameKTP = null;
+        $filenameKK = null;
+        $User = User::find($args['user_id']);
+        $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
+        if (!empty($args['ktp'])) {
+            $file = $args['ktp'];
+            $extension = $file->getClientOriginalExtension();
+            $filenameKTP = $args['user_id'] . '_ktp.' . $extension;
+
+            $file->move(public_path('data_tambahan/'), $filenameKTP);
+
+        }
+
+
+
+        if (!empty($args['kk'])) {
+            $file = $args['kk'];
+            $extension = $file->getClientOriginalExtension();
+            $filenameKK = $args['user_id'] . '_kk.' . $extension;
+
+            $file->move(public_path('data_tambahan/'), $filenameKK);
+
+        }
+
+
+
+        $data = array(
+            'id' => (string) Str::uuid(),
+            'id_badan_usaha' => $BadanUsaha->id,
+            'ktp' => 'data_tambahan/' . $filenameKTP,
+            'kk' => 'data_tambahan/' . $filenameKK,
+        );
+        $DataPendukung = new DataPendukung($data);
+        $DataPendukung->save();
 
         return  (object)array(
             "messagges" => "success",
