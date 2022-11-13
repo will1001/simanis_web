@@ -51,6 +51,10 @@ class KartuType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The foto of Kartu',
             ],
+            'messagges' => [
+                'type' => Type::string(),
+                'description' => 'The messagges of Kartu',
+            ],
         ];
     }
 }
