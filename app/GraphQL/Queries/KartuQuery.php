@@ -45,7 +45,7 @@ class KartuQuery extends Query
         $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
         $CabangIndustri = CabangIndustri::where('name', $BadanUsaha[0]->cabang_industri)->first();
         $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
-        $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
+        $BadanUsaha[0]->id_cabang_industri = $BadanUsaha[0]->cabang_industri;
         $BadanUsaha[0]->foto = $users->foto;
         return $BadanUsaha;
     }
