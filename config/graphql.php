@@ -95,6 +95,7 @@ return [
                 App\GraphQL\Queries\ListJangkaWaktuQuery::class,
                 App\GraphQL\Queries\SimulasiAngsuranQuery::class,
                 App\GraphQL\Queries\DataPendukungQuery::class,
+                App\GraphQL\Queries\KartuQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -134,6 +135,7 @@ return [
                 App\GraphQL\Types\ListJangkaWaktuType::class,
                 App\GraphQL\Types\SimulasiAngsuranType::class,
                 App\GraphQL\Types\DataPendukungType::class,
+                App\GraphQL\Types\KartuType::class,
             ],
 
             // Laravel HTTP middleware

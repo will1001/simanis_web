@@ -195,7 +195,7 @@ class MemberController extends Controller
                         $CabangIndustri = CabangIndustri::where('name', $BadanUsaha[0]->cabang_industri)->first();
                         $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
                         $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
-
+                        // dd($BadanUsaha);
                         $params = ['BadanUsaha' => $BadanUsaha];
                     }
                     if ($pages == "downloadKartu") {
