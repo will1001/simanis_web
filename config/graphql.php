@@ -106,6 +106,7 @@ return [
                 App\GraphQL\Mutations\PengajuanProdukMutation::class,
                 App\GraphQL\Mutations\UpdatePasswordMutation::class,
                 App\GraphQL\Mutations\DataPendukungMutation::class,
+                App\GraphQL\Mutations\KartuMutation::class,
 
             ],
             // The types only available in this schema
