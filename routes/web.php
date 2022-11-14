@@ -34,6 +34,7 @@ Route::get('/storageLink', function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/downloadSurat/{user_id}', [HomeController::class, 'download_surat']);
 Route::post('/chartDetail/{chartId}/{title}', [HomeController::class, 'chartDetail'])->name('chartDetail');
 Route::post('/chartDetail/search', [HomeController::class, 'chartDetailSearch'])->name('chartDetail_search');
 Route::post('/surveyChart/{id}', [HomeController::class, 'surveyChart'])->name('surveyChart');

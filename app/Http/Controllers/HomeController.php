@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Models\SlideShow;
+use App\Models\User;
+use App\Models\PengajuanDana;
+use App\Models\Surat;
 
 
 class HomeController extends Controller
@@ -155,7 +158,7 @@ class HomeController extends Controller
             'Kelurahan' => Kelurahan::all(),
             'cabangIndustri' => CabangIndustri::all(),
             'subCabangIndustri' => SubCabangIndustri::all(),
-            'SlideShow' => SlideShow::where("type","website")->get(),
+            'SlideShow' => SlideShow::where("type", "website")->get(),
         ]);
     }
 
@@ -170,8 +173,7 @@ class HomeController extends Controller
 
         $data = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-            ;
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id');
 
         if ($chartId == 2) {
             $data = $data->where('tahun_berdiri', $yearNow);
@@ -251,8 +253,7 @@ class HomeController extends Controller
 
         $data = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-            ;
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id');
         if (str_contains($title, 'Industri Kecil')) {
             $data = $data->where('investasi_modal', '<', 1000000);
         } else if (str_contains($title, 'Industri Menengah')) {
@@ -295,5 +296,21 @@ class HomeController extends Controller
 
 
         return back();
+    }
+    public function download_surat($user_id = null)
+    {
+
+        $User = User::find($user_id);
+        $BadanUsaha = BadanUsaha::where('nik', $User->nik)->get();
+        $PengajuanDana = PengajuanDana::where('user_id', $User->id)->orderBy('created_at', 'desc')->first();
+        // dd($PengajuanDana);
+        $surat = Surat::find(1);
+        $params = [
+            'BadanUsaha' => $BadanUsaha,
+            'PengajuanDana' => $PengajuanDana,
+            'Surat' => $surat,
+        ];
+
+        return view("pages.member.downloadSurat", $params);
     }
 }
