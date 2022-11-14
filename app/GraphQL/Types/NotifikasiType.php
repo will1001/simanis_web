@@ -49,6 +49,10 @@ class NotifikasiType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The updated_at of Notifikasi',
             ],
+            'messagges' => [
+                'type' => Type::string(),
+                'description' => 'The messagges of Notifikasi',
+            ],
         ];
     }
 }
