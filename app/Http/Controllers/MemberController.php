@@ -278,8 +278,8 @@ class MemberController extends Controller
                     if ($pages == "downloadSurat") {
 
                         $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
-                        $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->where('status', "Diterima")->orderBy('created_at', 'desc')->first();
-                        // dd($BadanUsaha);
+                        $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->orderBy('created_at', 'desc')->first();
+                        // dd($PengajuanDana);
                         $surat = Surat::find(1);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
