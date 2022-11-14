@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 <style>
-    <style>.actionContainer {
+    .actionContainer {
         width: 1300px;
         height: 80px;
     }
