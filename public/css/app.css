@@ -1079,6 +1079,9 @@ video {
 .w-\[55px\] {
   width: 55px;
 }
+.w-\[45px\] {
+  width: 45px;
+}
 .max-w-6xl {
   max-width: 72rem;
 }
