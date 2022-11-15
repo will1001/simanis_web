@@ -160,7 +160,7 @@ class PerbankanController extends Controller
                         ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                         ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
                         ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
-                        ->where('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                        ->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         // $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                         // dd($PengajuanDana);
                         $params = [
