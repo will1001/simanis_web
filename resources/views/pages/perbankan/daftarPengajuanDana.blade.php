@@ -84,7 +84,7 @@
     </form>
 </div>
 
-<table class="badan_usaha_container  bg-white mt-3 h-20 w-[1240px]">
+<table class="badan_usaha_container  bg-white mt-3 h-20 w-[1340px]">
     <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
         <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
         <th class="text-center p-2 rounded-tl-xl">No</th>
