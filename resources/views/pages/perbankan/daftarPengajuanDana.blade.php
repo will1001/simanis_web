@@ -48,6 +48,10 @@
         width: 11.67px;
         height: 5.83px;
     }
+
+    .icon-size {
+        width: 40px;
+    }
 </style>
 @section('content')
 <h2 class="ml-4">Daftar Pembiayaan Usaha</h2>
@@ -139,7 +143,7 @@
                 <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button><img class="w-[42px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                    <button><img class="icon-size" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
                 <form action="#">
                     <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
