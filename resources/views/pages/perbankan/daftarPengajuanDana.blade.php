@@ -1,7 +1,7 @@
 @extends('layouts.perbankan')
 <style>
     .badan_usaha_container {
-        width: 990px;
+        width: 1025px;
         height: 80px;
     }
 
@@ -84,7 +84,7 @@
     </form>
 </div>
 
-<table class="badan_usaha_container  bg-white mt-3 h-20 w-[1440px]">
+<table class="badan_usaha_container  bg-white mt-3 h-20">
     <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
         <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
         <th class="text-center p-2 rounded-tl-xl">No</th>
@@ -139,7 +139,7 @@
                 <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button><img class="w-[40px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                    <button><img class="w-[55px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
                 <form action="#">
                     <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
