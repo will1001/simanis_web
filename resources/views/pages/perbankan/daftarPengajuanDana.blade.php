@@ -84,7 +84,7 @@
     </form>
 </div>
 
-<table class="badan_usaha_container  bg-white mt-3 h-20 w-[940px]">
+<table class="badan_usaha_container  bg-white mt-3 h-20 w-[1240px]">
     <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
         <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
         <th class="text-center p-2 rounded-tl-xl">No</th>
@@ -134,7 +134,7 @@
                     </button>
                 </form>
                 <form action="#">
-                    <button onclick="openPopUpProses('{{$item->dana_id}}')" class="bg-orange-400 text-white p-[5px] rounded-lg"><img class="w-[90px] h-[25px]" src="{{ asset('/Icon-svg/sand-clock.svg') }}" alt="icon"></button>
+                    <button onclick="openPopUpProses('{{$item->dana_id}}')" class="bg-orange-400 text-white p-1 rounded-lg"><img class="w-[60px]" src="{{ asset('/Icon-svg/sand-clock.svg') }}" alt="icon"></button>
                 </form>
                 <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
