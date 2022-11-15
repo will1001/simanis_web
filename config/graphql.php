@@ -108,6 +108,7 @@ return [
                 App\GraphQL\Mutations\DataPendukungMutation::class,
                 App\GraphQL\Mutations\KartuMutation::class,
                 App\GraphQL\Mutations\NotifikasiMutation::class,
+                App\GraphQL\Mutations\BadanUsahaMutation::class,
 
             ],
             // The types only available in this schema

@@ -141,6 +141,10 @@ class BadanUsahaType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The media_sosial of BadanUsaha',
             ],
+            'messagges' => [
+                'type' => Type::string(),
+                'description' => 'The messagges of BadanUsaha',
+            ],
         ];
     }
 }
