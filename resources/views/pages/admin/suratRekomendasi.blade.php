@@ -98,11 +98,11 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
         </div>
         <div class="flex justify-start mt-[50px]">
             <div class="text-left flex flex-col">
-                <span class="w-[700px]">Adalah IKM Binaan DInas Perindustrian Provinsi NTB dan telah memenuhi persyaratan untuk mengajukan pinjaman kepada PT Bank</span>
+                <span class="w-[700px]">Adalah IKM Binaan Dinas Perindustrian Provinsi NTB dan telah memenuhi persyaratan untuk mengajukan pinjaman kepada PT {{$PengajuanDana->nama}}</span>
                 <span class="mt-[20px]">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya</span>
             </div>
         </div>
-        <div class="flex justify-end mt-[150px]">
+        <div class="flex justify-end mt-[50px]">
             <div class="text-left flex flex-col">
                 <span>Mataram, {{date('d-m-Y', strtotime($PengajuanDana->updated_at))}} </span>
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
