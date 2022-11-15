@@ -139,7 +139,7 @@
                 <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button><img class="w-[45px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                    <button><img class="w-[40px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
                 <form action="#">
                     <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
