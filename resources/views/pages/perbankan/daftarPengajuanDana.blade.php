@@ -50,7 +50,7 @@
     }
 
     .icon-size {
-        width: 40px;
+        width: 50px;
     }
 </style>
 @section('content')
