@@ -221,6 +221,15 @@ class FormController extends Controller
             // dd($r->file('sertifikat_halal_file'));
             // dd($r->file('sertifikat_merek_file'));
             // dd($badan_usaha_documents);
+            // dd($input);
+            $input['investasi_modal'] = str_replace(',', '', $input['investasi_modal']);
+            $input['jumlah_tenaga_kerja_pria'] = str_replace(',', '', $input['jumlah_tenaga_kerja_pria']);
+            $input['jumlah_tenaga_kerja_wanita'] = str_replace(',', '', $input['jumlah_tenaga_kerja_wanita']);
+            $input['kapasitas_produksi_perbulan'] = str_replace(',', '', $input['kapasitas_produksi_perbulan']);
+            $input['nilai_produksi_perbulan'] = str_replace(',', '', $input['nilai_produksi_perbulan']);
+            $input['nilai_bahan_baku_perbulan'] = str_replace(',', '', $input['nilai_bahan_baku_perbulan']);
+            // dd($r->all());
+            // dd($input);
             $badan_usaha->fill($input)->save();
             $badan_usaha_documents->save();
 

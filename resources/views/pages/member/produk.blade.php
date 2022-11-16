@@ -91,10 +91,11 @@
       <th class="text-center p-2 rounded-tl-xl">No</th>
       <th class="text-center p-2 ">Foto Poduk</th>
       <th class="text-center p-2 ">Nama</th>
+      <th class="text-center p-2 ">Harga</th>
       <th class="text-center p-2 ">Halal</th>
       <th class="text-center p-2 ">SNI</th>
       <th class="text-center p-2 ">Haki</th>
-      <th class="text-center p-2 rounded-tr-xl">Deskripsi</th>
+      <th class="text-center p-2 rounded-tr-xl">Aksi</th>
     </tr>
     @php
     $index = 0;
@@ -106,10 +107,34 @@
       <td class="text-center p-4 ">{{++$key}}</td>
       <td class="text-center p-1 imgSize"><img src="{{ asset($item->foto) }}" alt=""></td>
       <td class="text-center p-4 ">{{$item->nama}}</td>
+      <td class="text-center p-4 ">{{$item->harga}}</td>
       <td class="text-center p-4 "><span class="bg-halalBgColor text-halalTextColor p-2 rounded-xl">{{is_null($item->sertifikat_halal)?"Tidak Ada":"Ada"}}</span></td>
       <td class="text-center p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">{{is_null($item->sertifikat_haki)?"Tidak Ada":"Ada"}}</span></td>
       <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">{{is_null($item->sertifikat_sni)?"Tidak Ada":"Ada"}}</span></td>
-      <td onclick="lihatDetails({{$index++}})" class="text-center p-4 text-disetujuiTextColor cursor-pointer">Lihat Detail</td>
+      <td  class=" flex items-center justify-center text-center p-4 text-disetujuiTextColor cursor-pointer">
+        <form onclick="lihatDetails({{$index++}})" action="#" class="mr-3">Lihat Detail</form>
+        <form method="GET" action="/user/hapus_produk/{{$item->id}}" class="p-2 bg-buttonDelete rounded-md">
+          <button>
+            <img class="h-[21px]" src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
+          </button>
+        </form>
+      </td>
+      <!-- <td class="text-center p-4 flex items-end justify-center">
+        <form onclick="lihatDetails({{$index++}})" action="#" class="mr-2">
+          <button  type="button">
+            <img class="h-[32px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
+          </button>
+        </form>
+        <form method="GET" action="/form/admin/{{$item->id}}">
+            <button class="bg-buttonColor-900 px-[30px] py-[10px] rounded-xl text-white mr-2" type="submit" id="button-addon2">Edit</button>
+
+          </form>
+        <form method="GET" action="/form/badan_usaha/delete/{{$item->id}}" class="p-2 bg-buttonDelete rounded-md">
+          <button>
+            <img class="h-[21px]" src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
+          </button>
+        </form>
+      </td> -->
     </tr>
     @endforeach
 
@@ -142,6 +167,12 @@
       <div class="flex justify-between items-center">
         <span>Nama Produk</span>
         <input class="border-2 border-gray-300 w-[73%] p-1 rounded-md" type="text" name="nama">
+      </div>
+      <br>
+
+      <div class="flex justify-between items-center">
+        <span>Harga Produk</span>
+        <input class="border-2 border-gray-300 w-[73%] p-1 rounded-md" type="number" name="harga">
       </div>
       <br>
       <div class="flex justify-between items-center">

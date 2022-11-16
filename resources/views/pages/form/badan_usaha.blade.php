@@ -54,12 +54,15 @@ $forms = array(
     (object)array(
         "type" => "text",
         "placeholder" => "NOMOR INDUK KEPENDUDUKAN (NIK)",
-        "prop" => "nik"
+        "prop" => "nik",
+        "required" => "true"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "NAMA",
-        "prop" => "nama_direktur"
+        "prop" => "nama_direktur",
+        "required" => "true"
+
     ),
     (object)array(
         "type" => "select",
@@ -68,6 +71,7 @@ $forms = array(
         "name" => "id_kabupaten",
         "options" => $Kabupaten,
         "change" => "return changeKabupaten()",
+        "required" => "true"
     ),
     (object)array(
         "type" => "select",
@@ -76,6 +80,8 @@ $forms = array(
         "name" => "kecamatan",
         "options" => [],
         "change" => "return changeKecamatan()",
+        "required" => "true"
+
     ),
     (object)array(
         "type" => "select",
@@ -84,21 +90,27 @@ $forms = array(
         "name" => "kelurahan",
         "options" => [],
         "change" => "",
+        "required" => "true"
+
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "ALAMAT LENGKAP",
-        "prop" => "alamat_lengkap"
+        "prop" => "alamat_lengkap",
+        "required" => "true"
+
     ),
     (object)array(
         "type" => "number",
         "placeholder" => "NO. HP",
-        "prop" => "no_hp"
+        "prop" => "no_hp",
+        "required" => "true"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "NAMA USAHA",
-        "prop" => "nama_usaha"
+        "prop" => "nama_usaha",
+        "required" => "true"
     ),
     (object)array(
         "type" => "select",
@@ -106,72 +118,86 @@ $forms = array(
         "options" => $bentukUsaha,
         "prop" => "bentuk_usaha",
         "name" => "bentuk_usaha",
-        "change" => ""
+        "change" => "",
+        "required" => "true"
     ),
     (object)array(
         "type" => "file",
         "placeholder" => "FILE DOKUMEN BENTUK USAHA",
-        "prop" => "bentuk_usaha_file"
+        "prop" => "bentuk_usaha_file",
+        "required" => "false"
     ),
     (object)array(
         "type" => "number",
         "placeholder" => "TAHUN BERDIRI",
-        "prop" => "tahun_berdiri"
+        "prop" => "tahun_berdiri",
+        "required" => "true"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "NIB/TAHUN",
-        "prop" => "nib_tahun"
+        "prop" => "nib_tahun",
+        "required" => "false"
     ),
     (object)array(
         "type" => "file",
         "placeholder" => "FILE DOKUMEN NIB",
-        "prop" => "nib_file"
+        "prop" => "nib_file",
+        "required" => "false"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "NOMOR SERTIFIKAT HALAL/ TAHUN",
-        "prop" => "nomor_sertifikat_halal_tahun"
+        "prop" => "nomor_sertifikat_halal_tahun",
+        "required" => "true"
     ),
     (object)array(
         "type" => "file",
         "placeholder" => "FILE SERTIFIKAT HALAL",
-        "prop" => "sertifikat_halal_file"
+        "prop" => "sertifikat_halal_file",
+        "required" => "false"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "SERTIFIKAT MEREK/TAHUN",
-        "prop" => "sertifikat_merek_tahun"
+        "prop" => "sertifikat_merek_tahun",
+        "required" => "true"
     ),
     (object)array(
         "type" => "file",
         "placeholder" => "FILE SERTIFIKAT MEREK",
-        "prop" => "sertifikat_merek_file"
+        "prop" => "sertifikat_merek_file",
+        "required" => "false"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "NOMOR TEST REPORT/TAHUN",
-        "prop" => "nomor_test_report_tahun"
+        "prop" => "nomor_test_report_tahun",
+        "required" => "true"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "SNI/TAHUN",
-        "prop" => "sni_tahun"
+        "prop" => "sni_tahun",
+        "required" => "true"
     ),
     (object)array(
         "type" => "file",
         "placeholder" => "FILE SERTIFIKAT SNI",
-        "prop" => "sertifikat_sni_file"
+        "prop" => "sertifikat_sni_file",
+        "required" => "false"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "JENIS USAHA",
-        "prop" => "jenis_usaha"
+        "prop" => "jenis_usaha",
+        "required" => "true"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "MEREK USAHA",
-        "prop" => "merek_usaha"
+        "prop" => "merek_usaha",
+        "required" => "true"
     ),
     (object)array(
         "type" => "select",
@@ -180,6 +206,7 @@ $forms = array(
         "name" => "cabang_industri",
         "options" => $CabangIndustri,
         "change" => "return changeCabangIndustri()",
+        "required" => "true"
     ),
     (object)array(
         "type" => "select",
@@ -188,6 +215,7 @@ $forms = array(
         "name" => "sub_cabang_industri",
         "options" => [],
         "change" => "",
+        "required" => "true"
     ),
     (object)array(
         "type" => "select",
@@ -196,21 +224,25 @@ $forms = array(
         "name" => "id_kbli",
         "options" => $Kbli,
         "change" => "",
+        "required" => "true"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "numberText",
         "placeholder" => "INVESTASI/ MODAL",
-        "prop" => "investasi_modal"
+        "prop" => "investasi_modal",
+        "required" => "true"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "numberText",
         "placeholder" => "JUMLAH TENAGA KERJA PRIA",
-        "prop" => "jumlah_tenaga_kerja_pria"
+        "prop" => "jumlah_tenaga_kerja_pria",
+        "required" => "true"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "numberText",
         "placeholder" => "JUMLAH TENAGA KERJA WANITA",
-        "prop" => "jumlah_tenaga_kerja_wanita"
+        "prop" => "jumlah_tenaga_kerja_wanita",
+        "required" => "true"
     ),
     (object)array(
         "type" => "select",
@@ -219,58 +251,69 @@ $forms = array(
         "name" => "rata_rata_pendidikan_tenaga_kerja",
         "options" => $pendidikan_tenaga_kerja,
         "change" => "",
+        "required" => "true"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "numberText",
         "placeholder" => "KAPASITAS PRODUKSI / Tahun",
-        "prop" => "kapasitas_produksi_perbulan"
+        "prop" => "kapasitas_produksi_perbulan",
+        "required" => "true"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "SATUAN PRODUKSI",
-        "prop" => "satuan_produksi"
+        "prop" => "satuan_produksi",
+        "required" => "true"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "numberText",
         "placeholder" => "NILAI PRODUKSI ",
-        "prop" => "nilai_produksi_perbulan"
+        "prop" => "nilai_produksi_perbulan",
+        "required" => "true"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "numberText",
         "placeholder" => "NILAI BAHAN BAKU ",
-        "prop" => "nilai_bahan_baku_perbulan"
+        "prop" => "nilai_bahan_baku_perbulan",
+        "required" => "true"
     ),
     (object)array(
         "type" => "number",
         "placeholder" => "Latitude",
-        "prop" => "lat"
+        "prop" => "lat",
+        "required" => "false"
     ),
     (object)array(
         "type" => "number",
         "placeholder" => "Longitude",
-        "prop" => "lng"
+        "prop" => "lng",
+        "required" => "false"
     ),
     (object)array(
         "type" => "label",
         "placeholder" => "Contoh Data Latitude dan Longitude",
         "prop" => ""
+
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "Media sosial",
-        "prop" => "media_sosial"
+        "prop" => "media_sosial",
+        "required" => "false"
     ),
     (object)array(
         "id" => "foto_alat_produksi_file",
         "type" => "image",
         "placeholder" => "Foto Alat Produksi",
-        "prop" => "foto_alat_produksi"
+        "prop" => "foto_alat_produksi",
+        "required" => "true"
     ),
     (object)array(
         "id" => "foto_ruang_produksi_file",
         "type" => "image",
         "placeholder" => "Foto Ruang Produksi",
-        "prop" => "foto_ruang_produksi"
+        "prop" => "foto_ruang_produksi",
+        "required" => "true"
     ),
 
 )
@@ -343,9 +386,12 @@ $forms = array(
                 @elseif($form->type == 'label')
                 <a class="text-blue font-blue" target="_blank" href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik Disini</a>
                 @elseif($form->type == 'number')
-                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="updateTextView('{{$form->prop}}',event)" type="number" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="number" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                @elseif($form->type == 'numberText')
+                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}" placeholder="{{$form->placeholder}}">
                 @else
-                <input class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                <input id="{{$form->prop}}" {{$form->required == 'true'?'required':''}} oninvalid="invalid('{{$form->prop}}','Wajib di Isi')" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
                 @endif
             </div>
         </div>
@@ -423,6 +469,14 @@ $forms = array(
         const FileLabel = document.getElementById(label);
         FileLabel.innerHTML = e.target.value.split("\\").pop();
     }
+    const invalid = (id, msg) => {
+        console.log(id);
+        const inputEl = document.getElementById(id);
+        const labelEl = document.getElementById(id + "_label");
+        inputEl.style.borderColor = "red";
+        labelEl.style.display = "block";
+
+    }
 
 
     const updateTextView = (label, _obj) => {
@@ -440,6 +494,18 @@ $forms = array(
         // }
         // return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+    const keyup = (id, e) => {
+        let val = e.target.value;
+        if (val === null || val === "") {
+            val = 0;
+        }
+        const a = new Intl.NumberFormat('en-US').format(parseFloat(val.replace(/,/g, '')));
+        const input = document.getElementById(id);
+
+        console.log(a);
+        input.value = a;
+
+    }
 
     function getNumber(_str) {
         var arr = _str.split('');
@@ -451,6 +517,8 @@ $forms = array(
         }
         return Number(out.join(''));
     }
+
+
 
     // const changeSubCabangIndustri = () => {
     //     const subCabangIndustriFilter = document.getElementById('sub_cabang_industri');

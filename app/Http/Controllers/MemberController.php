@@ -166,7 +166,7 @@ class MemberController extends Controller
                             $totalnull += 1;
                         }
                     }
-                    $userDataProgress[$key] = ((count($this->fields) - ($totalnull - 10)) / (count($this->fields))) * 100;
+                    $userDataProgress[$key] = ((count($this->fields) - ($totalnull - 11)) / (count($this->fields))) * 100;
                 }
 
                 if ($id != "") {
@@ -408,6 +408,7 @@ class MemberController extends Controller
             'sertifikat_haki' => $cek_sertifikat_haki ? null : json_encode($sertifikat_haki),
             'sertifikat_sni' => $cek_sertifikat_sni ? null : json_encode($sertifikat_sni),
             'nama' => $r->input("nama"),
+            'harga' => $r->input("harga"),
             'deskripsi' => $r->input("deskripsi"),
         );
 
@@ -436,6 +437,13 @@ class MemberController extends Controller
         // $Produk = Produk::where('id_badan_usaha',$BadanUsaha->id)->get();
 
         // return view('pages.member.produk', ['Produk' => $Produk,'msg' => "produk Telah di atambahakan"]);
+    }
+    function hapus_produk($id)
+    {
+        $res = Produk::where('id', $id)->delete();
+
+        return redirect('/member/produk');
+
     }
 
     function ganti_foto(Request $r)
