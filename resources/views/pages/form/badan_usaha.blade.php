@@ -366,7 +366,7 @@ $forms = array(
                     <div class="flex flex-col justify-center items-center pt-5 pb-6 h-[150px]">
                         <img src="{{ asset('/Icon-svg/file.svg') }}" />
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-bold">UPLOAD FILE PDF</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-bold">UPLOAD FILE (MAX : 5MB)</p>
                     </div>
                     <input onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->prop}}" accept="application/pdf" name="{{$form->prop}}" type="file" class="hidden" id="{{$form->prop}}" />
                 </label>
@@ -378,7 +378,7 @@ $forms = array(
                     <div class="flex flex-col justify-center items-center pt-5 pb-6 h-[150px]">
                         <img src="{{ asset('/Icon-svg/file.svg') }}" />
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px) (Max : 5MB)</p>
                     </div>
                     <input onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data" />
                 </label>
