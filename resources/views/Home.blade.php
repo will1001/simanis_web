@@ -406,9 +406,9 @@ $baseUrl = env('APP_URL');
     </div>
     <div class="container">
 
-        <form action="" method="POST" style="display:none;" id="formChartDetail">
-            @csrf
-            <input type="text" name="filter" id="filterChartDetail" >
+        <form action="" method="GET" style="display:none;" id="formChartDetail">
+            <!-- @csrf -->
+            <input type="text" name="filter" id="filterChartDetail">
             <!-- <input type="text" name="chartDetailData" id="chartDetailData">
             <input type="text" name="title" id="chartDetailTitle">
             <input type="text" name="chartId" id="chartId"> -->
@@ -588,7 +588,6 @@ $baseUrl = env('APP_URL');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script>
-  
     const badanUsaha = @json($BadanUsaha);
     const kabupaten = @json($kabupaten);
     const kecamatan = @json($Kecamatan);
@@ -700,9 +699,9 @@ $baseUrl = env('APP_URL');
         const formChartDetail = document.getElementById('formChartDetail');
         const filterChartDetail = document.getElementById('filterChartDetail');
         const submitButtonchartDetail = document.getElementById('submitButtonchartDetail');
-        // formChartDetail.action = `/chartDetail/${filter}/${idChart}/${title}`;
-        filterChartDetail.value=filter;
-        formChartDetail.action = `/chartDetail/${idChart}/${title}`;
+        filterChartDetail.value = filter;
+        formChartDetail.action = `/chartDetail/${idChart}/${title}/sjfi834t3htg84ht3ht98034ht3ht3h4t8h24th82h4t2sbf3287r9823gr934gr3sjfi834t3htg84ht3ht98034ht3ht3h4t8h24th82h4t2sbf3287r9823gr934gr3/${filter}`;
+        // formChartDetail.action = `/chartDetail/${idChart}/${title}`;
         submitButtonchartDetail.click();
     }
 
@@ -716,7 +715,7 @@ $baseUrl = env('APP_URL');
         kelurahanFilterApply = "";
         console.log(idKabupatenFilterApply);
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply, tahunFilterApply
         )
     }
 
@@ -728,7 +727,7 @@ $baseUrl = env('APP_URL');
         kecamatanFilterApply = textKecamatan;
         kelurahanFilterApply = "";
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply, tahunFilterApply
         )
     }
 
@@ -738,7 +737,7 @@ $baseUrl = env('APP_URL');
         const textKelurahan = kelurahanFilter.options[kelurahanFilter.selectedIndex].text;
         kelurahanFilterApply = textKelurahan;
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply, tahunFilterApply
         )
     }
 
@@ -751,7 +750,7 @@ $baseUrl = env('APP_URL');
         cabangIndustriFilterApply = textCabangIndsutri;
         subCabangIndustriFilterApply = "";
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply, tahunFilterApply
         )
     }
 
@@ -761,14 +760,14 @@ $baseUrl = env('APP_URL');
         const textSubCabangIndsutri = subCabangIndustriFilter.options[subCabangIndustriFilter.selectedIndex].text;
         subCabangIndustriFilterApply = textSubCabangIndsutri;
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply, tahunFilterApply
         )
     }
     const changeFilterTahun = () => {
         const tahunFilter = document.getElementById('tahunFilter');
         tahunFilterApply = tahunFilter.value;
         applyFilter(
-            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply,tahunFilterApply
+            idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply, tahunFilterApply
         )
     }
 
@@ -803,7 +802,7 @@ $baseUrl = env('APP_URL');
 
 
 
-    const applyFilter = (idKabupaten, kecamatan, kelurahan, cabang_industri, subCabangIndustri,tahun) => {
+    const applyFilter = (idKabupaten, kecamatan, kelurahan, cabang_industri, subCabangIndustri, tahun) => {
         const filters = [{
                 prop: 'id_kabupaten',
                 value: idKabupaten
