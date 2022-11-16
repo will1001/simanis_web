@@ -76,7 +76,7 @@
 
 @section('content')
 
-@if($userDataProgress[0] === 100)
+@if($userDataProgress[0] >= 100)
 
 <div>
   <div class="flex justify-end items-center actionContainer">
@@ -111,7 +111,7 @@
       <td class="text-center p-4 "><span class="bg-halalBgColor text-halalTextColor p-2 rounded-xl">{{is_null($item->sertifikat_halal)?"Tidak Ada":"Ada"}}</span></td>
       <td class="text-center p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">{{is_null($item->sertifikat_haki)?"Tidak Ada":"Ada"}}</span></td>
       <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">{{is_null($item->sertifikat_sni)?"Tidak Ada":"Ada"}}</span></td>
-      <td  class=" flex items-center justify-center text-center p-4 text-disetujuiTextColor cursor-pointer">
+      <td class=" flex items-center justify-center text-center p-4 text-disetujuiTextColor cursor-pointer">
         <form onclick="lihatDetails({{$index++}})" action="#" class="mr-3">Lihat Detail</form>
         <form method="GET" action="/user/hapus_produk/{{$item->id}}" class="p-2 bg-buttonDelete rounded-md">
           <button>

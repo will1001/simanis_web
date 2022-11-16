@@ -386,7 +386,7 @@ $forms = array(
                 @elseif($form->type == 'label')
                 <a class="text-blue font-blue" target="_blank" href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik Disini</a>
                 @elseif($form->type == 'number')
-                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="number" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
+                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="number" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 @elseif($form->type == 'numberText')
                 <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}" placeholder="{{$form->placeholder}}">
                 @else

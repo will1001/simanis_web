@@ -225,10 +225,10 @@ class AdminController extends Controller
 
                         // dd($surat);
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
-                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
-                        ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
-                        ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
-                        ->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                            ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
+                            ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
+                            ->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         // $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                         // dd($PengajuanDana);
                         $subPagesParams = [
@@ -246,10 +246,10 @@ class AdminController extends Controller
                         $user = User::where('nik', $BadanUsaha[0]->nik)->first();
                         $surat = Surat::find(1);
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
-                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
-                        ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
-                        ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
-                       ->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                            ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
+                            ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
+                            ->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         // $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                         $subPagesParams = [
                             'BadanUsaha' => $BadanUsaha,
@@ -286,7 +286,7 @@ class AdminController extends Controller
                     // dd($subPagesParams);
                     return view("pages.admin.{$subPages}", $subPagesParams);
                 } else {
-                    $params=null;
+                    $params = null;
                     // dd(Auth::user()->nik);
                     $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
                         ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
@@ -434,8 +434,8 @@ class AdminController extends Controller
         // dd(count($r->request));
         $filter = $r->except(['_token']);
         // unset($filter['KABUPATEN_LOMBOK_BARAT']);
-        $BadanUsaha = BadanUsaha::whereIn('id_kabupaten', $filter)->delete();
-        // dd($BadanUsaha);
+        $BadanUsaha = BadanUsaha::whereIn('id_kabupaten', $filter)->get();
+        dd($BadanUsaha);
 
         // $BadanUsaha->delete();
 
