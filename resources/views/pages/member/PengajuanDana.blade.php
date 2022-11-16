@@ -12,7 +12,7 @@ $baseUrl = env('APP_URL') . '/';
   @if($userDataProgress[0] < 100 || is_null($BadanUsaha[0]->nama))
   <div class="flex items-center p-3 rounded-xl bg-ditolakBgColor text-ditolakTextColor">
     <img class="mr-2" src="{{ asset('/Icon-svg/warning.svg') }}" alt="">
-    <span>{{$userDataProgress[0] !== 100?'Profil Badan Usaha Anda Belum Lengkap (100%)':'Data Produk Anda Masih Kosong'}}, <strong>
+    <span>{{$userDataProgress[0] < 100?'Profil Badan Usaha Anda Belum Lengkap (100%)':'Data Produk Anda Masih Kosong'}}, <strong>
   @if($userDataProgress[0] < 100)
   <a class="" href="/member/dashboard/ProfilBadanUsaha/{{$BadanUsaha[0]->id}}">Klik Disini</a>
   @else
