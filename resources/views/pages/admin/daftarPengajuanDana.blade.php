@@ -89,7 +89,7 @@
 </div>
 
 <div class="flex flex-col actionContainer ml-4  mt-3 h-14">
-    <table class="ml-4 bg-white mt-3 h-20 shadow-lg w-[1300px]">
+    <table class="ml-4 bg-white mt-3 h-20 shadow-lg w-[1400px]">
         <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
             <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
             <th class="text-center p-2">No</th>
@@ -103,7 +103,8 @@
                 <div class="flex justify-center gap-1 my-auto "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Jumlah Dana</div>
             </th>
             <th class="text-center p-2 "><span class="flex justify-center my-auto mx-1">Jangka Waktu</span></th>
-            <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal</span></th>
+            <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal Pengajuan</span></th>
+            <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal Diterima/Ditolak</span></th>
             <th class="text-center p-2 "><span class="">Instansi</span></th>
             <th class="text-center p-2 "><span class="">Status</span></th>
             <th class="text-center p-2 "><span class="">Keterangan</span></th>
@@ -131,7 +132,8 @@
             <td class="text-center "><span class="flex text-center my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
             <td class="text-center text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
             <td class="text-center text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
-            <td class="text-center p-2">{{date('d-m-Y', strtotime($item->updated_at))}}</td>
+            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
+            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status != 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
             <td class="text-center p-2">{{$item->instansi}}</td>
             <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
             <td class="text-center p-2">{{$item->alasan}}</td>

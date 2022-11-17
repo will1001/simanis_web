@@ -51,11 +51,14 @@ $fieldTitles = [
     'MEDIA SOSIAL',
     'FOTO ALAT PRODUKSI',
     'FOTO RUANG PRODUKSI',
+    'KTP',
+    'KK',
     'FILE DOKUMEN BENTUK USAHA',
     'FILE DOKUMEN NIB',
     'FILE SERTIFIKAT HALAL',
     'FILE SERTIFIKAT MEREK',
     'FILE SERTIFIKAT SNI',
+    
 ];
 ?>
 @section('content')
@@ -78,6 +81,8 @@ $fieldTitles = [
     <a target="_blank" href="{{$baseUrl.$BadanUsaha[0]->$field}}">Lihat Dokumen</a>
 </div>
 @elseif(
+    $field == 'ktp' || 
+    $field == 'kk' || 
     $field == 'foto_alat_produksi' || 
     $field == 'foto_ruang_produksi'
     )

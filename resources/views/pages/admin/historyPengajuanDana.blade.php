@@ -1,7 +1,7 @@
-@extends('layouts.perbankan')
+@extends('layouts.admin')
 <style>
     .badan_usaha_container {
-        width: 1025px;
+        width: 990px;
         height: 80px;
     }
 
@@ -48,13 +48,9 @@
         width: 11.67px;
         height: 5.83px;
     }
-
-    .icon-size {
-        width: 50px;
-    }
 </style>
 @section('content')
-<h2 class="ml-4">Daftar Pembiayaan Usaha</h2>
+<h2 class="ml-4">History Pembiayaan Usaha</h2>
 
 <!-- <div class="flex flex-row badan_usaha_container ml-4 mt-4">
     <div class="flex gap-2 boxCari border rounded-md shadow-md bg-white">
@@ -82,18 +78,18 @@
 
 
 
-<div class="flex justify-end mr-[70px]">
+<div class="flex justify-end">
     <form action="/export/dana/perbankan" method="GET">
         <button class="flex items-center bg-menungguTextColor rounded-xl text-white px-3 py-2" type="submit" id="button-addon2"><img src="{{ asset('/Icon-svg/ekspor.svg') }}" class="mr-2"> <span>Export</span></button>
     </form>
 </div>
 
-<table class="badan_usaha_container  bg-white mt-3 h-20">
+<table class="badan_usaha_container ml-4 bg-white mt-3 h-20 w-[1050px]">
     <tr class="bg-tableColor-900 text-white text-center h-16 gap-3">
         <!-- <th class="cursor-pointer text-center pl-2 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
-        <th class="text-center p-2 rounded-tl-xl">No</th>
+        <th class="text-center p-2 ">No</th>
         <th class="text-left p-2 ">Badan Usaha</th>
-        <!-- <th class="text-left p-2 ">Nama Pemilik</th> -->
+        <th class="text-left p-2 ">Nama Permilik</th>
         <th class="text-left p-2 ">NIK</th>
         <th class="text-left ">
             <div class="flex text-left gap-1 my-auto ml-5  "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Kabupaten</div>
@@ -102,8 +98,7 @@
             <div class="flex justify-center gap-1 my-auto "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Jumlah Dana</div>
         </th>
         <th class="text-left p-2 "><span class="flex justify-center my-auto">Jangka Waktu</span></th>
-        <th class="text-left p-2 "><span class="flex justify-center my-auto">Tanggal Pengajuan</span></th>
-        <th class="text-left p-2 "><span class="flex justify-center my-auto">Tanggal Diterima/Ditolak</span></th>
+        <th class="text-left p-2 "><span class="flex justify-center my-auto mx-6">Tanggal</span></th>
         <th class="text-left p-2 "><span class="">Status</span></th>
         <th class="rounded-tr-xl">Aksi</span></th>
     </tr>
@@ -124,34 +119,28 @@
         <!-- <td class="cursor-pointer text-center pl-2"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
         <td class="text-center text-slate-700 ">{{++$key}}</td>
         <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_usaha}}</td>
-        <!-- <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td> -->
+        <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nama_direktur}}</td>
         <td class="text-left text-slate-700 font-bold p-2 ">{{$item->nik}}</td>
         <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
-        <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
+        <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->jumlah_dana}}</span></td>
         <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
-        <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
-        <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status != 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
+        <td class="text-center p-2">{{date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
         <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
-        <td class="text-center p-2 w-[200px] cursor-pointer">
+        <td class="text-center p-2  cursor-pointer">
             <div class="flex ml-2 gap-1 justify-start items-center ">
                 <form method="GET" action="/perbankan/dashboard/ProfilBadanUsaha/{{$item->id}}">
                     <button>
                         <img class="w-[60px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                     </button>
                 </form>
-                <form action="#">
-                    <button onclick="openPopUpProses('{{$item->dana_id}}')" class="bg-orange-400 text-white p-1 rounded-lg"><img class="w-[60px]" src="{{ asset('/Icon-svg/sand-clock.svg') }}" alt="icon"></button>
-                </form>
-                <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
-                <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
+                <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <!-- <button onclick="openPopUpTerima('{{$item->dana_id}}')"><img class="icon-size" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button> -->
-                    <button><img class="icon-size" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                    <button ><img class="w-[40px]" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
-                <form action="#">
-                    <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
-                </form>
+                    <form action="#">
+                    <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[50px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+                    </form> -->
             </div>
         </td>
     </tr>
@@ -192,31 +181,13 @@
 <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
 <div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
-    <h4>Penolakan Pembiayaan</h4>
+    <h4>Penolakan Ajuan Dana</h4>
     <br />
     <form action="" method="post" id="formPenolakan">
         @csrf
 
         <div class="flex items-center justify-between">
             <span>Alasan Penolakan</span>
-            <textarea class="border-2 border-gray-300 w-[70%]" name="alasan" rows="7" required></textarea>
-        </div>
-
-        <div class="flex items-center justify-end mt-[100px]">
-            <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
-            <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
-        </div>
-    </form>
-
-</div>
-<div style="visibility: collapse;" id="detailPopUpProses" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
-    <h4>Proses Pembiayaan</h4>
-    <br />
-    <form action="" method="post" id="formProses">
-        @csrf
-
-        <div class="flex items-center justify-between">
-            <span>Keterangan Proses</span>
             <textarea class="border-2 border-gray-300 w-[70%]" name="alasan" rows="7" required></textarea>
         </div>
 
@@ -240,24 +211,12 @@
         formPenolakan.action = `/bank/dana/${id_pengajuan_dana}/status/Ditolak`;
 
     }
-    const openPopUpProses = (id_pengajuan_dana) => {
-
-        const blackBg = document.getElementById('detailPopUpBlackbg');
-        const detailPopUpProses = document.getElementById('detailPopUpProses');
-        const formProses = document.getElementById('formProses');
-        blackBg.style.visibility = "visible";
-        detailPopUpProses.style.visibility = "visible";
-        formProses.action = `/bank/dana/${id_pengajuan_dana}/status/Menunggu`;
-
-    }
     const closeDetails = () => {
         const blackBg = document.getElementById('detailPopUpBlackbg');
         const detailPopUp = document.getElementById('detailPopUp');
-        const detailPopUpProses = document.getElementById('detailPopUpProses');
 
         blackBg.style.visibility = "collapse";
         detailPopUp.style.visibility = "collapse";
-        detailPopUpProses.style.visibility = "collapse";
 
     }
 </script>

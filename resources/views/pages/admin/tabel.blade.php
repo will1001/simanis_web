@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 <style>
   .actionContainer {
-    width: 100px;
+    width: 1000px;
   }
 </style>
 @section('content')
@@ -102,10 +102,11 @@ $index = 0;
 
 <div class="Container-Table">
   <div class="table-responsive m-2 " style="max-height:500px;">
-    <table class="actionContainer rounded-2xl whitespace-nowrap w-[925px]">
+    <table class="actionContainer rounded-2xl whitespace-nowrap">
       <tr class="bg-tableColor-900 text-center text-white p-2">
         <!-- <th class="text-center p-2 rounded-tl-xl">#</th> -->
         <th class="text-center p-2 rounded-tl-xl">No</th>
+        <th class="text-center p-2 ">Nama Pemilik</th>
         <th class="text-center p-2 ">Nama Usaha</th>
         <th class="text-center p-2 ">NIK</th>
         <th class="text-center p-2 ">Kab/Kota</th>
@@ -116,6 +117,7 @@ $index = 0;
       <tr>
 
         <td class="text-center p-4 ">{{ (++$key + (100* ((int)$BadanUsaha->currentPage() -1) ) ) }}</td>
+        <td class="text-center p-4 ">{{$item->nama_direktur}}</td>
         <td class="text-center p-4 ">{{$item->nama_usaha}}</td>
         <td class="text-center p-4 ">{{$item->nik}}</td>
         <td class="text-center p-4 ">{{$item->kabupaten}}</td>

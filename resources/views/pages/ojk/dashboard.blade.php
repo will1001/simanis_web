@@ -53,7 +53,8 @@
             <div class="flex justify-center gap-1 my-auto "><img src="{{ asset('/Icon-svg/iconBawahAtas.svg') }}" alt="" class="flex"> Jumlah Dana</div>
         </th>
         <th class="text-center p-2 "><span class="flex justify-center my-auto mx-1">Jangka Waktu</span></th>
-        <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal</span></th>
+        <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal Pengajuan</span></th>
+        <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal Diterima/Ditolak</span></th>
         <th class="text-center p-2 "><span class="">Status</span></th>
         <th class="text-center p-2 "><span class="">Keterangan</span></th>
         <th class="rounded-tr-xl">Aksi</span></th>
@@ -80,7 +81,8 @@
         <td class="text-center "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
         <td class="text-center text-slate-700 font-bold"><span class="flex justify-center my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
         <td class="text-center p-2  w-[10px]">{{$item->waktu_pinjaman}}</td>
-        <td class="text-center p-2">{{date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
+        <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
+    <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status != 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
         <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
         <td class="text-center p-2">{{$item->alasan}}</td>
 

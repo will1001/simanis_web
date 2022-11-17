@@ -10,28 +10,27 @@ $baseUrl = env('APP_URL') . '/';
 @section('content')
 <div class="flex justify-between items-center actionContainer">
   @if($userDataProgress[0] < 100 || is_null($BadanUsaha[0]->nama))
-  <div class="flex items-center p-3 rounded-xl bg-ditolakBgColor text-ditolakTextColor">
-    <img class="mr-2" src="{{ asset('/Icon-svg/warning.svg') }}" alt="">
-    <span>{{$userDataProgress[0] < 100?'Profil Badan Usaha Anda Belum Lengkap (100%)':'Data Produk Anda Masih Kosong'}}, <strong>
-  @if($userDataProgress[0] < 100)
-  <a class="" href="/member/dashboard/ProfilBadanUsaha/{{$BadanUsaha[0]->id}}">Klik Disini</a>
-  @else
-  <a class="" href="/member/produk">Klik Disini</a>
-  @endif
-  
-  </strong> untuk melengkapi</span>
-  </div>
-  <div class="flex">
-    <div onclick="" class="flex p-2 bg-blue-300 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
-  </div>
-  @else
-  <div>
+    <div class="flex items-center p-3 rounded-xl bg-ditolakBgColor text-ditolakTextColor">
+      <img class="mr-2" src="{{ asset('/Icon-svg/warning.svg') }}" alt="">
+      <span>{{$userDataProgress[0] < 100?'Profil Badan Usaha Anda Belum Lengkap (100%)':'Data Produk Anda Masih Kosong'}}, <strong>
+          @if($userDataProgress[0] < 100) <a class="" href="/member/dashboard/ProfilBadanUsaha/{{$BadanUsaha[0]->id}}">Klik Disini</a>
+            @else
+            <a class="" href="/member/produk">Klik Disini</a>
+            @endif
 
-  </div>
-  <div class="flex">
-    <div onclick="lihatDetails()" class="flex p-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
-  </div>
-  @endif
+        </strong> untuk melengkapi</span>
+    </div>
+    <div class="flex">
+      <div onclick="" class="flex p-2 bg-blue-300 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
+    </div>
+    @else
+    <div>
+
+    </div>
+    <div class="flex">
+      <div onclick="lihatDetails()" class="flex p-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
+    </div>
+    @endif
 
 
 </div>
@@ -43,7 +42,8 @@ $baseUrl = env('APP_URL') . '/';
     <th class="text-center p-2 rounded-tl-xl">No</th>
     <th class="text-center p-2 ">Jumlah Dana</th>
     <th class="text-center p-2 ">Jangka Waktu</th>
-    <th class="text-center p-2 ">Tanggal</th>
+    <th class="text-center p-2 ">Tanggal Pengajuan</th>
+    <th class="text-center p-2 ">Tanggal Diterima/Ditolak</th>
     <th class="text-center p-2 ">Instansi</th>
     <th class="text-center p-2 ">Status</th>
     <th class="text-center p-2 rounded-tr-xl">Keterangan</th>
@@ -67,25 +67,28 @@ $baseUrl = env('APP_URL') . '/';
     <td class="text-center p-4 ">{{number_format($item->jumlah_dana)}}</td>
     <td class="text-center p-4 ">{{$item->waktu_pinjaman}}</td>
     <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
+    <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status != 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
     <td class="text-center p-4 ">{{$item->nama}}</td>
     <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-4 ">
       @if($item->instansi == "KOPERASI")
-      {{$item->alasan}} <br>
+        {{$item->alasan}} <br>
         @if($item->status == "Diterima")
         <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
-        @endif
-      @endif
-      @if($item->alasan == "Pembiayaan Usaha Anda diterima Dinas Perindustrian")
-        @if(empty($DataPendukung))
-        {{$item->alasan}} <br>
-        <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>
-        @else
-        <span>Menunggu Persetujuan dari {{$item->nama}}</span>
         @endif
       @else
         {{$item->alasan}} <br>
       @endif
+      <!-- @if($item->alasan == "Pembiayaan Usaha Anda diterima Dinas Perindustrian")
+      @if(empty($DataPendukung))
+      {{$item->alasan}} <br>
+      <span onclick="lihatDetailsDataTambahan()" class="text-disetujuiTextColor cursor-pointer">klik Disni</span><br><span> untuk melengkapi data tambahan</span>
+      @else
+      <span>Menunggu Persetujuan dari {{$item->nama}}</span>
+      @endif
+      @else
+      {{$item->alasan}} <br>
+      @endif -->
     </td>
   </tr>
   @endforeach

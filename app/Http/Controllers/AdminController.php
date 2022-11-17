@@ -323,8 +323,41 @@ class AdminController extends Controller
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-                            // ->where("pengajuan_dana.status","Menunggu")
+                            ->where("pengajuan_dana.status", "Menunggu")
                             ->select('badan_usaha.nama_usaha', 'badan_usaha.nik', 'badan_usaha.nama_direktur', 'badan_usaha.id as id_badan_usaha', 'kabupaten.name as kabupaten', 'pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
+                        // dd($PengajuanDana);
+
+                        $params = [
+                            'PengajuanDana' => $PengajuanDana,
+                            'pages' => $pages,
+                            'Notifikasi' => $Notifikasi
+                        ];
+                    }
+                    if ($pages == "historyPengajuanDana") {
+                        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+                            ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
+                            ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                            ->select(
+                                'badan_usaha.*',
+                                'badan_usaha.nama_direktur',
+                                'kabupaten.name as kabupaten',
+                                'pengajuan_dana.id as dana_id',
+                                'pengajuan_dana.jumlah_dana',
+                                'pengajuan_dana.waktu_pinjaman',
+                                'pengajuan_dana.status',
+                                'pengajuan_dana.instansi',
+                                'pengajuan_dana.jenis_pengajuan',
+                                'pengajuan_dana.alasan',
+                                'pengajuan_dana.user_id',
+                                'pengajuan_dana.created_at as dana_created_at',
+                                'pengajuan_dana.updated_at as dana_updated_at',
+                                'data_tambahan.ktp',
+                                'data_tambahan.kk',
+                            )
+                            ->where("pengajuan_dana.status", "Diterima")
+                            ->orWhere("pengajuan_dana.status", "Ditolak")
+                            ->orderBy('created_at', 'desc')->get();
                         // dd($PengajuanDana);
 
                         $params = [

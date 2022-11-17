@@ -785,6 +785,9 @@ video {
 .ml-\[850px\] {
   margin-left: 850px;
 }
+.mb-\[100px\] {
+  margin-bottom: 100px;
+}
 .block {
   display: block;
 }
@@ -1084,6 +1087,9 @@ video {
 }
 .w-\[42px\] {
   width: 42px;
+}
+.w-\[1400px\] {
+  width: 1400px;
 }
 .max-w-6xl {
   max-width: 72rem;
@@ -1463,6 +1469,10 @@ video {
 .px-\[15px\] {
   padding-left: 15px;
   padding-right: 15px;
+}
+.py-7 {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
 }
 .pt-8 {
   padding-top: 2rem;

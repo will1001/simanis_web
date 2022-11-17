@@ -315,6 +315,20 @@ $forms = array(
         "prop" => "foto_ruang_produksi",
         "required" => "true"
     ),
+    (object)array(
+        "id" => "ktp",
+        "type" => "image",
+        "placeholder" => "KTP",
+        "prop" => "ktp",
+        "required" => "true"
+    ),
+    (object)array(
+        "id" => "kk",
+        "type" => "image",
+        "placeholder" => "KK",
+        "prop" => "kk",
+        "required" => "true"
+    ),
 
 )
 

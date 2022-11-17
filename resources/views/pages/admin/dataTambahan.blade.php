@@ -25,11 +25,11 @@ $baseUrl = env('APP_URL');
 <br>
 
 <h1>KTP</h1>
-<img class="imgSlide h-[300]" src="{{$baseUrl.'/'.$dataPendukung->ktp}}" alt="img">
-<a href="{{$baseUrl.'/'.$dataPendukung->ktp}}" class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download KTP</a>
+<img class="imgSlide h-[300]" src="{{$baseUrl.''.$dataPendukung->ktp}}" alt="img">
+<a href="{{$baseUrl.''.$dataPendukung->ktp}}" class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download KTP</a>
 <h1>KK</h1>
-<img class="imgSlide h-[300]" src="{{$baseUrl.'/'.$dataPendukung->kk}}" alt="img">
-<a href="{{$baseUrl.'/'.$dataPendukung->ktp}}" class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download KK</a>
+<img class="imgSlide h-[300]" src="{{$baseUrl.''.$dataPendukung->kk}}" alt="img">
+<a href="{{$baseUrl.''.$dataPendukung->kk}}" class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download KK</a>
 
 
 @endsection

@@ -69,6 +69,8 @@ class MemberController extends Controller
         'badan_usaha_documents.sertifikat_merek_file',
         'badan_usaha.foto_alat_produksi',
         'badan_usaha.foto_ruang_produksi',
+        'data_tambahan.ktp',
+        'data_tambahan.kk',
 
     ];
     private $fields = [
@@ -111,6 +113,8 @@ class MemberController extends Controller
         'media_sosial',
         'foto_alat_produksi',
         'foto_ruang_produksi',
+        'ktp',
+        'kk',
         // 'created_at',
         // 'updated_at'
     ];
@@ -153,6 +157,7 @@ class MemberController extends Controller
                     ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                     ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                     ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                    ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                     ->where("nik", Auth::user()->nik)
                     ->get($this->fieldBadanUsaha);
                 // dd($BadanUsaha);
@@ -178,6 +183,7 @@ class MemberController extends Controller
                         ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                         ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                         ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                        ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                         ->where("badan_usaha.id", $id)
                         ->get($this->fieldBadanUsaha);
                     // dd($badan_usaha);
@@ -215,6 +221,8 @@ class MemberController extends Controller
                         $BadanUsaha = BadanUsaha::leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
                             ->select("badan_usaha.id as id", "badan_usaha.*", "produk.*")
                             ->where('nik', Auth::user()->nik)->get();
+
+
                         $JumlahPinjaman = JumlahPinjaman::all();
                         $JangkaWaktu = JangkaWaktu::all();
                         $SimulasiAngsuran = SimulasiAngsuran::all();
@@ -279,10 +287,10 @@ class MemberController extends Controller
 
                         $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
-                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
-                        ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
-                        ->where('pengajuan_dana.user_id', Auth::id())->where('pengajuan_dana.status', "Menunggu")
-                        ->where('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                            ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
+                            ->where('pengajuan_dana.user_id', Auth::id())->where('pengajuan_dana.status', "Menunggu")
+                            ->where('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         // $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->orderBy('created_at', 'desc')->first();
                         // dd($PengajuanDana);
                         $surat = Surat::find(1);
@@ -443,7 +451,6 @@ class MemberController extends Controller
         $res = Produk::where('id', $id)->delete();
 
         return redirect('/member/produk');
-
     }
 
     function ganti_foto(Request $r)

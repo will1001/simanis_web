@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BadanUsaha;
 use App\Models\BadanUsahaDocuments;
+use App\Models\DataPendukung;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
@@ -58,6 +59,8 @@ class FormController extends Controller
         'badan_usaha_documents.sertifikat_sni_file',
         'badan_usaha_documents.sertifikat_merek_file',
         'badan_usaha.merek_usaha',
+        'data_tambahan.ktp',
+        'data_tambahan.kk',
 
     ];
     function badan_usaha(Request $r, $userType, $id = null)
@@ -71,6 +74,7 @@ class FormController extends Controller
                     ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                     ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                     ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                    ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                     ->where("badan_usaha.id", $id)
                     ->get($this->fieldBadanUsaha);
             }
@@ -96,10 +100,12 @@ class FormController extends Controller
 
             $badan_usaha = null;
             $badan_usaha_documents = null;
+            $data_tambahan = null;
 
             if ($id != null) {
                 $badan_usaha = BadanUsaha::find($id);
                 $badan_usaha_documents = BadanUsahaDocuments::where("id_badan_usaha", $badan_usaha->id);
+                $data_tambahan = DataPendukung::where("id_badan_usaha", $badan_usaha->id);
 
                 if (!empty($badan_usaha_documents)) {
                     $badan_usaha_documents = new BadanUsahaDocuments([
@@ -110,6 +116,12 @@ class FormController extends Controller
                         'sertifikat_halal_file' => '',
                         'sertifikat_sni_file' => '',
                         'sertifikat_merek_file' => ''
+                    ]);
+                    $data_tambahan = new DataPendukung([
+                        'id' =>  Str::uuid(36),
+                        'id_badan_usaha' => $badan_usaha->id,
+                        'ktp' => '',
+                        'kk' => ''
                     ]);
                 }
             } else {
@@ -127,6 +139,12 @@ class FormController extends Controller
                     'sertifikat_halal_file' => '',
                     'sertifikat_sni_file' => '',
                     'sertifikat_merek_file' => ''
+                ]);
+                $data_tambahan = new DataPendukung([
+                    'id' =>  Str::uuid(36),
+                    'id_badan_usaha' => $r->input('id'),
+                    'ktp' => '',
+                    'kk' => ''
                 ]);
 
                 $User = User::where('nik', $r->input('nik'))->first();
@@ -214,6 +232,22 @@ class FormController extends Controller
 
                 $badan_usaha_documents->sertifikat_sni_file = '/storage/dokumen/' . $name1;
             };
+            if ($r->file('ktp') != null) {
+                $ext = $r->file('ktp')->getClientOriginalExtension();
+                $name1 = 'ktp' . $id . '.' . $ext;
+
+                $r->file('ktp')->storeAs('public/dokumen', $name1);
+
+                $data_tambahan->ktp = '/storage/dokumen/' . $name1;
+            };
+            if ($r->file('kk') != null) {
+                $ext = $r->file('kk')->getClientOriginalExtension();
+                $name1 = 'kk' . $id . '.' . $ext;
+
+                $r->file('kk')->storeAs('public/dokumen', $name1);
+
+                $data_tambahan->kk = '/storage/dokumen/' . $name1;
+            };
 
 
             // $r->file
@@ -232,6 +266,7 @@ class FormController extends Controller
             // dd($input);
             $badan_usaha->fill($input)->save();
             $badan_usaha_documents->save();
+            $data_tambahan->save();
 
 
             if ($userType == 'admin') {
