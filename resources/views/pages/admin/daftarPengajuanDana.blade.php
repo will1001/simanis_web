@@ -132,8 +132,8 @@
             <td class="text-center "><span class="flex text-center my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
             <td class="text-center text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
             <td class="text-center text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
-            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
-            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status != 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
+            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at))}}</td>
+            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at)) == date('d-m-Y', strtotime($item->dana_updated_at)) && $item->status == 'Menunggu' ?'':date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
             <td class="text-center p-2">{{$item->instansi}}</td>
             <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
             <td class="text-center p-2">{{$item->alasan}}</td>
@@ -149,7 +149,10 @@
                         <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
                         <button><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon" class="w-[150px]"></button>
                     </form>
-                    <form class="bg-ditolakTextColor text-white p-1 rounded-lg" onclick="openPopUp('{{$item->id}}')" action="#" method="get">
+                    <form class="bg-ditolakTextColor text-white p-1 rounded-lg" action="/dana/{{$item->id}}/status/Ditolak" method="post">
+                        @csrf
+                        <input type="text" value="Ditolak Admin" name="alasan" style="display:none;">
+
                         <button type="submit"><img src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon" class="w-[150px]"></button>
                     </form>
 

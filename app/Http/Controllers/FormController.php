@@ -121,7 +121,8 @@ class FormController extends Controller
                         'id' =>  Str::uuid(36),
                         'id_badan_usaha' => $badan_usaha->id,
                         'ktp' => '',
-                        'kk' => ''
+                        'kk' => '',
+                        'ktp_pasangan' => ''
                     ]);
                 }
             } else {
@@ -144,7 +145,8 @@ class FormController extends Controller
                     'id' =>  Str::uuid(36),
                     'id_badan_usaha' => $r->input('id'),
                     'ktp' => '',
-                    'kk' => ''
+                    'kk' => '',
+                    'ktp_pasangan' => ''
                 ]);
 
                 $User = User::where('nik', $r->input('nik'))->first();
@@ -248,6 +250,14 @@ class FormController extends Controller
 
                 $data_tambahan->kk = '/storage/dokumen/' . $name1;
             };
+            if ($r->file('ktp_pasangan') != null) {
+                $ext = $r->file('ktp_pasangan')->getClientOriginalExtension();
+                $name1 = 'ktp_pasangan' . $id . '.' . $ext;
+
+                $r->file('ktp_pasangan')->storeAs('public/dokumen', $name1);
+
+                $data_tambahan->ktp_pasangan = '/storage/dokumen/' . $name1;
+            };
 
 
             // $r->file
@@ -255,7 +265,7 @@ class FormController extends Controller
             // dd($r->file('sertifikat_halal_file'));
             // dd($r->file('sertifikat_merek_file'));
             // dd($badan_usaha_documents);
-            // dd($input);
+            // dd($data_tambahan);
             $input['investasi_modal'] = str_replace(',', '', $input['investasi_modal']);
             $input['jumlah_tenaga_kerja_pria'] = str_replace(',', '', $input['jumlah_tenaga_kerja_pria']);
             $input['jumlah_tenaga_kerja_wanita'] = str_replace(',', '', $input['jumlah_tenaga_kerja_wanita']);

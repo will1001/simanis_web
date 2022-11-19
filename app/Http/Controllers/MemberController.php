@@ -71,6 +71,7 @@ class MemberController extends Controller
         'badan_usaha.foto_ruang_produksi',
         'data_tambahan.ktp',
         'data_tambahan.kk',
+        'data_tambahan.ktp_pasangan',
 
     ];
     private $fields = [
@@ -115,6 +116,7 @@ class MemberController extends Controller
         'foto_ruang_produksi',
         'ktp',
         'kk',
+        'ktp_pasangan',
         // 'created_at',
         // 'updated_at'
     ];
@@ -162,7 +164,7 @@ class MemberController extends Controller
                     ->get($this->fieldBadanUsaha);
                 // dd($BadanUsaha);
 
-                foreach ($BadanUsaha as $key => &$item) {
+                foreach ($badan_usaha as $key => &$item) {
                     $userDataProgress[$key] = 0;
                     $totalnull = 0;
                     foreach ($this->fields as &$field) {
@@ -171,7 +173,7 @@ class MemberController extends Controller
                             $totalnull += 1;
                         }
                     }
-                    $userDataProgress[$key] = ((count($this->fields) - ($totalnull - 11)) / (count($this->fields))) * 100;
+                    $userDataProgress[$key] = ((count($this->fields) - ($totalnull - 9)) / (count($this->fields))) * 100;
                 }
 
                 if ($id != "") {
@@ -186,7 +188,7 @@ class MemberController extends Controller
                         ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                         ->where("badan_usaha.id", $id)
                         ->get($this->fieldBadanUsaha);
-                    // dd($badan_usaha);
+                    // dd($badan_usaha[0]);
                 }
                 if ($subPages != "") {
                     // dd($userDataProgress);

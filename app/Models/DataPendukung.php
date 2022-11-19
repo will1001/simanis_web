@@ -17,6 +17,7 @@ class DataPendukung extends Model
         'id_badan_usaha',
         'ktp',
         'kk',
+        'ktp_pasangan',
     ];
   
 }

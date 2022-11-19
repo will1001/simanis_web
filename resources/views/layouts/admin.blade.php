@@ -68,7 +68,7 @@
           <img class="mr-5" src="{{ asset('/Icon-svg/dana.svg') }}" alt="logo">
           <span>Daftar Pembiayaan Usaha</span>
         </a>
-        <a href="{{ url('/admin/historyPengajuanDana') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='daftarPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}} w-full">
+        <a href="{{ url('/admin/historyPengajuanDana') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='historyPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}} w-full">
           <img class="mr-5" src="{{ asset('/Icon-svg/dana.svg') }}" alt="logo">
           <span>History Pembiayaan Usaha</span>
         </a>

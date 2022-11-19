@@ -65,6 +65,9 @@ class AdminController extends Controller
         'badan_usaha.foto_alat_produksi',
         'badan_usaha.foto_ruang_produksi',
         'produk.foto as produk',
+        'data_tambahan.ktp',
+        'data_tambahan.kk',
+        'data_tambahan.ktp_pasangan',
 
     ];
     private $fields = [
@@ -140,6 +143,9 @@ class AdminController extends Controller
         'foto_alat_produksi',
         'foto_ruang_produksi',
         'produk',
+        'ktp',
+        'kk',
+        'ktp_pasangan',
         // 'created_at',
         // 'updated_at'
     ];
@@ -270,6 +276,7 @@ class AdminController extends Controller
                             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                             ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
                             ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->where("badan_usaha.id", $id)
                             ->get($this->fieldBadanUsaha);
                         // dd($BadanUsaha[0]);
@@ -324,7 +331,9 @@ class AdminController extends Controller
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->where("pengajuan_dana.status", "Menunggu")
-                            ->select('badan_usaha.nama_usaha', 'badan_usaha.nik', 'badan_usaha.nama_direktur', 'badan_usaha.id as id_badan_usaha', 'kabupaten.name as kabupaten', 'pengajuan_dana.*')->orderBy('created_at', 'desc')->get();
+                            ->where("pengajuan_dana.alasan", null)
+                            ->select('badan_usaha.nama_usaha', 'badan_usaha.nik', 'badan_usaha.nama_direktur', 'badan_usaha.id as id_badan_usaha', 'kabupaten.name as kabupaten', 'pengajuan_dana.*')
+                            ->orderBy('created_at', 'desc')->get();
                         // dd($PengajuanDana);
 
                         $params = [
@@ -355,9 +364,12 @@ class AdminController extends Controller
                                 'data_tambahan.ktp',
                                 'data_tambahan.kk',
                             )
-                            ->where("pengajuan_dana.status", "Diterima")
-                            ->orWhere("pengajuan_dana.status", "Ditolak")
-                            ->orderBy('created_at', 'desc')->get();
+                            // ->where("pengajuan_dana.status", "Diterima")
+                            ->Where("pengajuan_dana.alasan", '!=', "")
+                            // ->orWhere("pengajuan_dana.status", "Ditolak")
+                            // ->orWhere("pengajuan_dana.status", "Menunggu")
+                            // ->orWhere("pengajuan_dana.alasan", "Pembiayaan Usaha Anda diterima Dinas Perindustrian")
+                            ->orderBy('dana_created_at', 'desc')->get();
                         // dd($PengajuanDana);
 
                         $params = [
@@ -531,12 +543,13 @@ class AdminController extends Controller
 
         $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
 
-        // dd($BadanUsaha);
+        // dd($r);
 
         if ($status == "Ditolak") {
             $PengajuanDana->alasan = $r->input('alasan');
         } else {
             $PengajuanDana->alasan = "Pembiayaan Usaha Anda diterima Dinas Perindustrian";
+            $PengajuanDana->created_at = date("Y-m-d H:i:s");
         }
 
         $PengajuanDana->status = $status;

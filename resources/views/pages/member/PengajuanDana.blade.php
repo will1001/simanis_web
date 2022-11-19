@@ -67,7 +67,7 @@ $baseUrl = env('APP_URL') . '/';
     <td class="text-center p-4 ">{{number_format($item->jumlah_dana)}}</td>
     <td class="text-center p-4 ">{{$item->waktu_pinjaman}}</td>
     <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
-    <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status != 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
+    <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status == 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
     <td class="text-center p-4 ">{{$item->nama}}</td>
     <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-4 ">

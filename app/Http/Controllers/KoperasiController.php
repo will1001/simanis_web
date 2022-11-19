@@ -62,7 +62,9 @@ class KoperasiController extends Controller
         'badan_usaha.foto_alat_produksi',
         'badan_usaha.foto_ruang_produksi',
         'produk.foto as produk',
-
+        'data_tambahan.ktp',
+        'data_tambahan.kk',
+        'data_tambahan.ktp_pasangan',
     ];
     private $fields = [
         // 'id',
@@ -105,6 +107,9 @@ class KoperasiController extends Controller
         'foto_alat_produksi',
         'foto_ruang_produksi',
         'produk',
+        'ktp',
+        'kk',
+        'ktp_pasangan',
         // 'created_at',
         // 'updated_at'
     ];
@@ -143,6 +148,7 @@ class KoperasiController extends Controller
                             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                             ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
                             ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->where("badan_usaha.id", $id)
                             ->get($this->fieldBadanUsaha);
                         $params = [

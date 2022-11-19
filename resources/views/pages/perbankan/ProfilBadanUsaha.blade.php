@@ -52,6 +52,9 @@ $fieldTitles = [
     'FOTO ALAT PRODUKSI',
     'FOTO RUANG PRODUKSI',
     'PRODUK',
+    'KTP',
+    'KK',
+    'KTP PASANGAN',
     'FILE DOKUMEN BENTUK USAHA',
     'FILE DOKUMEN NIB',
     'FILE SERTIFIKAT HALAL',
@@ -64,7 +67,7 @@ $fieldTitles = [
     <h2>Profil Badan Usaha</h2>
     <span class="mr-2"><a href="/perbankan/dashboard/ProfilBadanUsaha/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">1. Profil Badan Usaha</a></span>
     <span><a href="/perbankan/dashboard/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
-    <span><a href="/perbankan/dashboard/dataTambahan/{{$BadanUsaha->id}}">3. Data Tambahan</a></span>
+    <!-- <span><a href="/perbankan/dashboard/dataTambahan/{{$BadanUsaha->id}}">3. Data Tambahan</a></span> -->
 </div>
 <div class="bg-black w-[100%] h-[1px] mt-2"></div>
 <br>
@@ -94,6 +97,9 @@ $field == 'sertifikat_merek_file'
 @elseif(
 $field == 'foto_alat_produksi' ||
 $field == 'foto_ruang_produksi' ||
+$field == 'ktp_pasangan' ||
+$field == 'kk' ||
+$field == 'ktp' ||
 $field == 'produk'
 )
 <div>

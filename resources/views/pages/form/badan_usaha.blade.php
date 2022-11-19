@@ -15,6 +15,10 @@ $bentukUsaha = [
         "name" => "UD"
     ),
     (object)array(
+        "id" => "Perorangan",
+        "name" => "Perorangan"
+    ),
+    (object)array(
         "id" => "Lainnya",
         "name" => "Lainnya"
     ),
@@ -149,7 +153,7 @@ $forms = array(
         "type" => "text",
         "placeholder" => "NOMOR SERTIFIKAT HALAL/ TAHUN",
         "prop" => "nomor_sertifikat_halal_tahun",
-        "required" => "true"
+        "required" => "false"
     ),
     (object)array(
         "type" => "file",
@@ -161,7 +165,7 @@ $forms = array(
         "type" => "text",
         "placeholder" => "SERTIFIKAT MEREK/TAHUN",
         "prop" => "sertifikat_merek_tahun",
-        "required" => "true"
+        "required" => "false"
     ),
     (object)array(
         "type" => "file",
@@ -173,13 +177,13 @@ $forms = array(
         "type" => "text",
         "placeholder" => "NOMOR TEST REPORT/TAHUN",
         "prop" => "nomor_test_report_tahun",
-        "required" => "true"
+        "required" => "false"
     ),
     (object)array(
         "type" => "text",
         "placeholder" => "SNI/TAHUN",
         "prop" => "sni_tahun",
-        "required" => "true"
+        "required" => "false"
     ),
     (object)array(
         "type" => "file",
@@ -328,6 +332,13 @@ $forms = array(
         "placeholder" => "KK",
         "prop" => "kk",
         "required" => "true"
+    ),
+    (object)array(
+        "id" => "ktp_pasangan",
+        "type" => "image",
+        "placeholder" => "ktp_pasangan",
+        "prop" => "ktp_pasangan",
+        "required" => "false"
     ),
 
 )

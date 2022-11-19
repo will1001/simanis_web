@@ -175,7 +175,7 @@
         <input class="border-2 border-gray-300 w-[73%] p-1 rounded-md" type="number" name="harga">
       </div>
       <br>
-      <div class="flex justify-between items-center">
+      <!-- <div class="flex justify-between items-center">
         <span>No Sertifikat Halal</span>
         <input class="border-2 border-gray-300 p-1 ml-[77px] w-[40%] rounded-md" type="number" name="sertifikat_halal_no">
         <span>Tahun</span>
@@ -195,7 +195,7 @@
         <span>Tahun</span>
         <input class="border-2 border-gray-300 p-1 rounded-md" type="number" name="sertifikat_sni_thn">
       </div>
-      <br>
+      <br> -->
       <div class="flex items-center justify-between">
         <span>Deskripsi Produk</span>
         <textarea class="border-2 border-gray-300 w-[73%] rounded-md" name="deskripsi" rows="7"></textarea>

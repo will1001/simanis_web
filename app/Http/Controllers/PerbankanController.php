@@ -66,6 +66,9 @@ class PerbankanController extends Controller
         'badan_usaha.foto_alat_produksi',
         'badan_usaha.foto_ruang_produksi',
         'produk.foto as produk',
+        'data_tambahan.ktp',
+        'data_tambahan.kk',
+        'data_tambahan.ktp_pasangan',
 
     ];
     private $fields = [
@@ -109,6 +112,9 @@ class PerbankanController extends Controller
         'foto_alat_produksi',
         'foto_ruang_produksi',
         'produk',
+        'ktp',
+        'kk',
+        'ktp_pasangan',
         // 'created_at',
         // 'updated_at'
     ];
@@ -157,10 +163,10 @@ class PerbankanController extends Controller
 
                         // dd($user);
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
-                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
-                        ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
-                        ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
-                        ->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                            ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
+                            ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
+                            ->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         // $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                         // dd($PengajuanDana);
                         $params = [
@@ -180,10 +186,10 @@ class PerbankanController extends Controller
                         $user = User::where('nik', $BadanUsaha[0]->nik)->first();
                         $surat = Surat::find(1);
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
-                        ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
-                        ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
-                        ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
-                       ->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+                            ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
+                            ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
+                            ->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         // $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                         // dd($PengajuanDana);
                         $params = [
@@ -205,6 +211,7 @@ class PerbankanController extends Controller
                             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                             ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
                             ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->where("badan_usaha.id", $id)
                             ->get($this->fieldBadanUsaha);
                         $params = [
@@ -248,6 +255,7 @@ class PerbankanController extends Controller
                             )
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.status", "Menunggu")
+                            ->where("pengajuan_dana.alasan", "!=", "Ditolak Admin")
                             ->whereNotNull("data_tambahan.ktp")
                             ->whereNotNull("data_tambahan.kk")
                             ->latest('dana_created_at')->get();
@@ -284,6 +292,7 @@ class PerbankanController extends Controller
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.status", "Diterima")
                             ->orWhere("pengajuan_dana.status", "Ditolak")
+                            ->where("pengajuan_dana.alasan", "not like", "%Ditolak Admin%")
                             ->orderBy('created_at', 'desc')->get();
                         // dd($PengajuanDana);
                         $params = [
