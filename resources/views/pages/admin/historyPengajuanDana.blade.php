@@ -130,7 +130,7 @@
         <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
         <td class="text-center p-2  cursor-pointer">
             <div class="flex ml-2 gap-1 justify-start items-center ">
-                <form method="GET" action="/admin/dashboard/ProfilBadanUsaha/{{$item->id}}">
+                <form method="GET" action="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$item->id}}">
                     <button>
                         <img class="w-[60px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                     </button>
