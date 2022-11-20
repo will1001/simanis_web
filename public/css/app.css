@@ -986,9 +986,6 @@ video {
 .w-\[700px\] {
   width: 700px;
 }
-.w-\[1050px\] {
-  width: 1050px;
-}
 .w-\[60px\] {
   width: 60px;
 }
@@ -1039,6 +1036,9 @@ video {
 }
 .w-\[65px\] {
   width: 65px;
+}
+.w-\[1050px\] {
+  width: 1050px;
 }
 .max-w-6xl {
   max-width: 72rem;

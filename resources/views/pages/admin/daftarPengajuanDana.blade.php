@@ -132,8 +132,8 @@
             <td class="text-center "><span class="flex text-center my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
             <td class="text-center text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
             <td class="text-center text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
-            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at))}}</td>
-            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at)) == date('d-m-Y', strtotime($item->dana_updated_at)) && $item->status == 'Menunggu' ?'':date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
+            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
+            <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status == 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
             <td class="text-center p-2">{{$item->instansi}}</td>
             <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
             <td class="text-center p-2">{{$item->alasan}}</td>
