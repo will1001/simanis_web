@@ -260,11 +260,20 @@ class PerbankanController extends Controller
                             ->whereNotNull("data_tambahan.kk")
                             ->latest('dana_created_at')->get();
                         // dd($PengajuanDana[0]);
+                        $JumlahPinjaman = JumlahPinjaman::all();
+                        $JangkaWaktu = JangkaWaktu::all();
+                        $SimulasiAngsuran = SimulasiAngsuran::all();
+                        $Instansi = Instansi::all();
+
                         $params = [
                             'PengajuanDana' => $PengajuanDana,
                             'pages' => $pages,
                             'Notifikasi' => $Notifikasi,
-                            'fields' => $this->fields
+                            'fields' => $this->fields,
+                            'JumlahPinjaman' => $JumlahPinjaman,
+                            'JangkaWaktu' => $JangkaWaktu,
+                            'Instansi' => $Instansi,
+                            'SimulasiAngsuran' => $SimulasiAngsuran,
                         ];
                     }
                     if ($pages == "historyPengajuanDana") {
@@ -463,6 +472,17 @@ class PerbankanController extends Controller
             ]);
 
             $notifikasi->save();
+
+            // dd($r);
+            if ($r->input('jumlah_dana_bank') != null || $r->input('jangka_waktu_bank') != null) {
+                $JumlahPinjaman = JumlahPinjaman::find($r->input("jumlah_dana_bank"));
+                $JangkaWaktu = JangkaWaktu::find($r->input("jangka_waktu_bank"));
+                $jumlah_dana = $JumlahPinjaman->jumlah;
+                $waktu_pinjaman = $JangkaWaktu->waktu;
+                $PengajuanDana->jumlah_dana = $jumlah_dana;
+                $PengajuanDana->waktu_pinjaman = $waktu_pinjaman;
+                $PengajuanDana->save();
+            }
         }
         if ($status == "Ditolak" || $status == "Menunggu") {
             $notifikasi = new Notifikasi([

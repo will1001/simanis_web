@@ -552,6 +552,8 @@ class AdminController extends Controller
             $PengajuanDana->created_at = date("Y-m-d H:i:s");
         }
 
+
+
         $PengajuanDana->status = $status;
 
         $PengajuanDana->save();
@@ -575,6 +577,7 @@ class AdminController extends Controller
             ]);
 
             $notifikasi->save();
+           
         }
         if ($status == "Ditolak") {
             $notifikasi = new Notifikasi([

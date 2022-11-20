@@ -129,8 +129,8 @@
         <td class="text-left "><span class="flex text-left my-auto ml-5 w-[120px]">{{$item->kabupaten}}</span></td>
         <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
         <td class="text-left text-slate-700 font-bold"><span class="flex justify-center gap-1 my-auto ">{{$item->waktu_pinjaman}}</span></td>
-        <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at))}}</td>
-        <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->created_at)) == date('d-m-Y', strtotime($item->updated_at)) && $item->status != 'Menunggu' ?'':date('d-m-Y', strtotime($item->updated_at))}}</td>
+        <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at))}}</td>
+        <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at)) == date('d-m-Y', strtotime($item->dana_updated_at)) && $item->status == 'Menunggu' ?'':date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
         <td class="text-left p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
         <td class="text-center p-2 w-[200px] cursor-pointer">
             <div class="flex ml-2 gap-1 justify-start items-center ">
@@ -142,12 +142,11 @@
                 <form action="#">
                     <button onclick="openPopUpProses('{{$item->dana_id}}')" class="bg-orange-400 text-white p-1 rounded-lg"><img class="w-[60px]" src="{{ asset('/Icon-svg/sand-clock.svg') }}" alt="icon"></button>
                 </form>
-                <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
-                <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
+                <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get">
+                    <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <!-- <button onclick="openPopUpTerima('{{$item->dana_id}}')"><img class="icon-size" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button> -->
-                    <button><img class="icon-size" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                    <button onclick="openPopUpTerima('{{$item->dana_id}}','{{$item->id_instansi}}')"><img class="icon-size" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
                 </form>
                 <form action="#">
                     <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
@@ -227,9 +226,48 @@
     </form>
 
 </div>
+<div style="visibility: collapse;" id="detailPopUpTerima" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
+    <h4>Penerimaan Pembiayaan</h4>
+    <br />
+    <form action="#" method="post" id="formTerima">
+        @csrf
+
+
+        <div class="flex justify-between items-center" id="jmlDanaSelect" style="visibility: collapse;">
+            <span>Jumlah Pembiayaan</span>
+            <select onchange="pinjamanChange()" id="jmlDanaSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jumlah_dana_bank">
+                <option value="" disabled selected>Pilih Jumlah Pinjaman</option>
+            </select>
+        </div>
+        <br>
+        <div class="flex justify-between items-center" style="visibility: collapse;" id="waktuPinjamanSelect">
+            <span>Jangka Waktu</span>
+            <select onchange="jangkaWaktuChange()" id="waktuPinjamanSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jangka_waktu_bank">
+                <option value="" disabled selected>Pilih Jangka Waktu</option>
+            </select>
+        </div>
+        <br>
+        <div class="flex justify-between items-center" id="angsuranDiv" style="visibility: collapse;">
+            <span>Angsuran Perbulan : </span><span id="angsuranValue"></span>
+        </div>
+
+
+        <div class="flex items-center justify-end mt-[100px]">
+            <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
+            <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
+        </div>
+    </form>
+
+</div>
 
 @endsection
 <script>
+    const JumlahPinjaman = @json($JumlahPinjaman);
+    const JangkaWaktu = @json($JangkaWaktu);
+    const SimulasiAngsuran = @json($SimulasiAngsuran);
+    const Instansi = @json($Instansi);
+
+
     const openPopUp = (id_pengajuan_dana) => {
 
         const blackBg = document.getElementById('detailPopUpBlackbg');
@@ -250,14 +288,86 @@
         formProses.action = `/bank/dana/${id_pengajuan_dana}/status/Menunggu`;
 
     }
+    const openPopUpTerima = (id_pengajuan_dana, instansiuser_id) => {
+
+        const blackBg = document.getElementById('detailPopUpBlackbg');
+        const detailPopUpProses = document.getElementById('detailPopUpTerima');
+        const formTerima = document.getElementById('formTerima');
+        const jmlDanaSelect = document.getElementById("jmlDanaSelect");
+        const waktuPinjamanSelect = document.getElementById("waktuPinjamanSelect");
+        const angsuranDiv = document.getElementById("angsuranDiv");
+        blackBg.style.visibility = "visible";
+        detailPopUpProses.style.visibility = "visible";
+        formTerima.action = `/bank/dana/${id_pengajuan_dana}/status/Diterima`;
+
+        jmlDanaSelect.style.visibility = "visible";
+        waktuPinjamanSelect.style.visibility = "visible";
+        angsuranDiv.style.visibility = "visible";
+        // const instansi_user_id = Instansi.filter(e => e.user_id === instansiuser_id);
+        // console.log(instansi_user_id);
+        const numberFormatter = Intl.NumberFormat('en-US');
+        for (const item of JumlahPinjaman.filter(e => e.id_instansi === Instansi.id).sort((a, b) => a.jumlah - b.jumlah)) {
+            let opt = document.createElement('option');
+            opt.value = item.id;
+            opt.innerHTML = numberFormatter.format(item.jumlah);
+            jmlDanaSelectChild.appendChild(opt);
+        }
+        for (const item of JangkaWaktu.filter(e => e.id_instansi === Instansi.id).sort((a, b) => a.waktu - b.waktu)) {
+            let opt = document.createElement('option');
+            opt.value = item.id;
+            opt.innerHTML = item.waktu;
+            waktuPinjamanSelectChild.appendChild(opt);
+        }
+
+    }
     const closeDetails = () => {
         const blackBg = document.getElementById('detailPopUpBlackbg');
         const detailPopUp = document.getElementById('detailPopUp');
         const detailPopUpProses = document.getElementById('detailPopUpProses');
+        const detailPopUpTerima = document.getElementById('detailPopUpTerima');
+        const jmlDanaSelect = document.getElementById("jmlDanaSelect");
+        const waktuPinjamanSelect = document.getElementById("waktuPinjamanSelect");
+        const angsuranDiv = document.getElementById("angsuranDiv");
+        const angsuranValue = document.getElementById('angsuranValue');
+
+        jmlDanaSelectChild.innerHTML = `<option value="" disabled  selected>Pilih Jumlah Pinjaman</option>`;
+        waktuPinjamanSelectChild.innerHTML = `<option value="" disabled  selected>Pilih Jangka Waktu</option>`;
+        angsuranValue.innerHTML = "";
 
         blackBg.style.visibility = "collapse";
         detailPopUp.style.visibility = "collapse";
         detailPopUpProses.style.visibility = "collapse";
+        detailPopUpTerima.style.visibility = "collapse";
+        jmlDanaSelect.style.visibility = "collapse";
+        waktuPinjamanSelect.style.visibility = "collapse";
+        angsuranDiv.style.visibility = "collapse";
 
+    }
+
+    const pinjamanChange = () => {
+
+        const angsuranValue = document.getElementById('angsuranValue');
+
+        const waktuPinjamanSelectChild = document.getElementById('waktuPinjamanSelectChild');
+
+        waktuPinjamanSelectChild.value = "";
+        angsuranValue.innerHTML = "";
+
+    }
+    const jangkaWaktuChange = () => {
+
+        const angsuranValue = document.getElementById('angsuranValue');
+
+        const jmlDanaSelectChild = document.getElementById('jmlDanaSelectChild');
+        const waktuPinjamanSelectChild = document.getElementById('waktuPinjamanSelectChild');
+
+        // const instansi_user_id = Instansi.filter(e => e.user_id === instansiSelect.value);
+
+        const simulasi = SimulasiAngsuran.filter(e => e.id_instansi === Instansi.id && e.id_jml_pinjaman === jmlDanaSelectChild.value && e.id_jangka_waktu === waktuPinjamanSelectChild.value)
+        // console.log(simulasi);
+        angsuranValue.className = "border-1 border-gray-500 w-[70%] p-2";
+        const numberFormatter = Intl.NumberFormat('en-US');
+
+        angsuranValue.innerHTML = numberFormatter.format(Number(simulasi[0].angsuran)).toString();
     }
 </script>
