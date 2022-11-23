@@ -133,8 +133,8 @@ $index = 0;
         <td class="text-center p-4 ">{{$item->nik}}</td>
         <td class="text-center p-4 ">{{$item->kabupaten}}</td>
         <td class="text-center p-4 flex items-center">
-          <form method="GET" action="" class="mr-2">
-            <button onclick="lihatDetails('{{$item->id}}',event)" type="button">
+          <form method="GET" action="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$item->id}}" class="mr-2">
+            <button type="submit">
               <img class="h-[32px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
             </button>
           </form>
