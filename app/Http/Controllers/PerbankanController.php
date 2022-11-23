@@ -474,15 +474,18 @@ class PerbankanController extends Controller
             $notifikasi->save();
 
             // dd($r);
-            if ($r->input('jumlah_dana_bank') != null || $r->input('jangka_waktu_bank') != null) {
-                $JumlahPinjaman = JumlahPinjaman::find($r->input("jumlah_dana_bank"));
-                $JangkaWaktu = JangkaWaktu::find($r->input("jangka_waktu_bank"));
-                $jumlah_dana = $JumlahPinjaman->jumlah;
-                $waktu_pinjaman = $JangkaWaktu->waktu;
-                $PengajuanDana->jumlah_dana = $jumlah_dana;
-                $PengajuanDana->waktu_pinjaman = $waktu_pinjaman;
-                $PengajuanDana->save();
-            }
+            // if ($r->input('jumlah_dana_bank') != null || $r->input('jangka_waktu_bank') != null) {
+            //     $JumlahPinjaman = JumlahPinjaman::find($r->input("jumlah_dana_bank"));
+            //     $JangkaWaktu = JangkaWaktu::find($r->input("jangka_waktu_bank"));
+            //     $jumlah_dana = $JumlahPinjaman->jumlah;
+            //     $waktu_pinjaman = $JangkaWaktu->waktu;
+            //     $PengajuanDana->jumlah_dana = $jumlah_dana;
+            //     $PengajuanDana->waktu_pinjaman = $waktu_pinjaman;
+            //     $PengajuanDana->save();
+            // }
+            $PengajuanDana->jumlah_dana = $r->input('jumlah_dana_bank');
+            $PengajuanDana->waktu_pinjaman = $r->input('jangka_waktu_bank');
+            $PengajuanDana->save();
         }
         if ($status == "Ditolak" || $status == "Menunggu") {
             $notifikasi = new Notifikasi([

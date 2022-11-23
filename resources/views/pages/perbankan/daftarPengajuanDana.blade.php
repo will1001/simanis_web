@@ -233,23 +233,20 @@
         @csrf
 
 
-        <div class="flex justify-between items-center" id="jmlDanaSelect" style="visibility: collapse;">
+        <div class="flex flex-col justify-start items-start" id="jmlDanaSelect" style="visibility: collapse;">
             <span>Jumlah Pembiayaan</span>
-            <select onchange="pinjamanChange()" id="jmlDanaSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jumlah_dana_bank">
-                <option value="" disabled selected>Pilih Jumlah Pinjaman</option>
-            </select>
+            <input class="border-2 border-gray-300" type="text" value="" name="jumlah_dana_bank" id="input_no_surat">
         </div>
         <br>
-        <div class="flex justify-between items-center" style="visibility: collapse;" id="waktuPinjamanSelect">
+        <div class="flex flex-col justify-start items-start" style="visibility: collapse;" id="waktuPinjamanSelect">
             <span>Jangka Waktu</span>
-            <select onchange="jangkaWaktuChange()" id="waktuPinjamanSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jangka_waktu_bank">
-                <option value="" disabled selected>Pilih Jangka Waktu</option>
-            </select>
+
+            <input class="border-2 border-gray-300" type="text" value="" name="jangka_waktu_bank" id="input_no_surat">
         </div>
         <br>
-        <div class="flex justify-between items-center" id="angsuranDiv" style="visibility: collapse;">
+        <!-- <div class="flex justify-between items-center" id="angsuranDiv" style="visibility: collapse;">
             <span>Angsuran Perbulan : </span><span id="angsuranValue"></span>
-        </div>
+        </div> -->
 
 
         <div class="flex items-center justify-end mt-[100px]">

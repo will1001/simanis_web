@@ -215,7 +215,7 @@
         </form>
 
     </div>
-    <div style="visibility: collapse;" id="detailPopUpProses" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
+    <div style="visibility: collapse;" id="detailPopUpProses" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-30">
         <h4>Terima Pembiayaan</h4>
         <br />
         <form action="" method="post" id="formTerima">
@@ -267,7 +267,7 @@
             const formTerima = document.getElementById('formTerima');
             blackBg.style.visibility = "visible";
             detailPopUpProses.style.visibility = "visible";
-            formTerima.action = `/dana/${id_pengajuan_dana}/status/Diterima`;
+            formTerima.action = `/dana/${id_pengajuan_dana}/status/Menunggu`;
 
         }
     </script>
