@@ -9,7 +9,7 @@
 <?php
 $baseUrl = env('APP_URL');
 $fieldTitles = [
-  'id',
+  // 'id',
   'NOMOR INDUK KEPENDUDUKAN (NIK)',
   'NAMA',
   'KAB/KOTA',
@@ -19,20 +19,27 @@ $fieldTitles = [
   'NO. HP',
   'NAMA USAHA',
   'BENTUK USAHA',
+  'FILE DOKUMEN BENTUK USAHA',
   'TAHUN BERDIRI',
-  'LEGALITAS USAHA',
+  // 'LEGALITAS USAHA',
   'NIB/TAHUN',
+  'FILE DOKUMEN NIB',
   'NOMOR SERTIFIKAT HALAL/ TAHUN',
+  'FILE SERTIFIKAT HALAL',
   'SERTIFIKAT MEREK/TAHUN',
+  'FILE SERTIFIKAT MEREK',
   'NOMOR TEST REPORT/TAHUN',
   'SNI/TAHUN',
+  'FILE SERTIFIKAT SNI',
   'JENIS USAHA',
+  'MEREK USAHA',
   'CABANG INDUSTRI',
   'SUB CABANG INDUSTRI',
   'KBLI',
   'INVESTASI/ MODAL ',
   'JUMLAH TENAGA KERJA PRIA',
   'JUMLAH TENAGA KERJA WANITA',
+  'RATA RATA PENDIDIKAN TENAGA KERJA',
   'KAPASITAS PRODUKSI ',
   'SATUAN PRODUKSI',
   'NILAI PRODUKSI ',
@@ -42,6 +49,10 @@ $fieldTitles = [
   'MEDIA SOSIAL',
   'FOTO ALAT PRODUKSI',
   'FOTO RUANG PRODUKSI',
+  'PRODUK',
+  'KTP',
+  'KK',
+  'KTP PASANGAN',
 ];
 ?>
 
@@ -151,10 +162,10 @@ $index = 0;
 <div onclick="closeDetails(event)" style="visibility: collapse;" id="PopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
 
-<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 flex overflow-scroll p-3">
+<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 flex overflow-scroll p-3  ">
   <div>
     <h3>Detail Badan Usaha</h3>
-    <div id="listDataBadanUsaha" class="w-[500px] h-[300px] px-3 pb-[100px] overflow-auto"></div>
+    <div id="listDataBadanUsaha" class="w-[780px] h-[300px] px-3 pb-[100px] overflow-auto"></div>
     <div class="flex justify-center">
       <button onclick="closeDetails(event)" class="bg-buttonColor-900 px-4 py-2 text-white">OK</button>
     </div>
@@ -203,7 +214,7 @@ $index = 0;
     let i = 0;
     const badan_usaha_by_id = BadanUsaha.data.filter(e => e.id === id);
     // console.log(BadanUsaha.data);
-    console.log(badan_usaha_by_id);
+    // console.log(badan_usaha_by_id);
     listDataBadanUsaha.innerHTML = ``;
     for (const field of fields) {
       console.log(field);
@@ -213,14 +224,41 @@ $index = 0;
         let span = document.createElement('span');
 
         listDataBadanUsaha.appendChild(span);
-      } else if (field == 'foto_alat_produksi' || field == 'foto_ruang_produksi') {
+      } else if (
+        field == 'foto_alat_produksi' ||
+        field == 'foto_ruang_produksi' ||
+        field == 'produk' ||
+        field == 'kk' ||
+        field == 'ktp' ||
+        field == 'ktp_pasangan'
+      ) {
         let div = document.createElement('div');
         let h5 = document.createElement('h5');
         let img = document.createElement('img');
         h5.innerHTML = fieldTitles[i];
         img.src = baseUrl + badan_usaha_by_id[0][field];
+        img.style.height = '100px';
         div.appendChild(h5);
         div.appendChild(img);
+        listDataBadanUsaha.appendChild(div);
+
+
+
+      } else if (
+        field == 'nib_file' ||
+        field == 'bentuk_usaha_file' ||
+        field == 'sertifikat_halal_file' ||
+        field == 'sertifikat_sni_file' ||
+        field == 'sertifikat_merek_file'
+      ) {
+        let div = document.createElement('div');
+        let p = document.createElement('p');
+        let a = document.createElement('a');
+        p.innerHTML = fieldTitles[i];
+        a.innerHTML = "Lihat dokumen";
+        a.href = baseUrl + badan_usaha_by_id[0][field];
+        div.appendChild(p);
+        div.appendChild(a);
         listDataBadanUsaha.appendChild(div);
 
 
@@ -234,7 +272,7 @@ $index = 0;
 
         span.innerHTML = fieldTitles[i] + " : ";
         console.log(badan_usaha_by_id[0][field])
-        strong.innerHTML = badan_usaha_by_id[0][field];
+        strong.innerHTML = badan_usaha_by_id[0][field] === undefined ? '' : badan_usaha_by_id[0][field];
 
         p.appendChild(span);
         p.appendChild(strong);

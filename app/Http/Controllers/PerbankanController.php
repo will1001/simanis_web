@@ -302,7 +302,7 @@ class PerbankanController extends Controller
                             ->where("pengajuan_dana.status", "Diterima")
                             ->orWhere("pengajuan_dana.status", "Ditolak")
                             ->where("pengajuan_dana.alasan", "not like", "%Ditolak Admin%")
-                            ->orderBy('created_at', 'desc')->get();
+                            ->orderBy('dana_created_at', 'desc')->get();
                         // dd($PengajuanDana);
                         $params = [
                             'PengajuanDana' => $PengajuanDana,

@@ -33,11 +33,11 @@
         <input value="{{$surat->alamat}}" class="border-2 border-gray-300 w-[300px] p-1 rounded-md ml-2" type="text" name="alamat">
     </div>
     <br>
-    <div class="flex justify-between items-center">
+    <!-- <div class="flex justify-between items-center">
         <span>Nomor Surat</span>
         <input value="{{$surat->nomor_surat}}" class="border-2 border-gray-300 w-[300px] p-1 rounded-md ml-2" type="text" name="nomor_surat">
     </div>
-    <br>
+    <br> -->
     <div class="flex justify-between items-center">
         <span>Tanda Tangan</span>
         <input accept="image/x-png,image/gif,image/jpeg" name="ttd" type="file" />

@@ -300,10 +300,21 @@ class AdminController extends Controller
                         ->select('badan_usaha.*', 'instansi.*', 'users.*', 'users.nik as nik')
                         ->get();
                     if ($pages == "tabel") {
-                        $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                        // $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                        //     ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                        //     ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                        //     ->paginate(100, $this->fields);
+                        $BadanUsaha = BadanUsaha::leftJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
+                            ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+                            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
                             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-                            ->paginate(100, $this->fields);
+                            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                            ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
+                            ->paginate(100, $this->fieldBadanUsaha);
+                        // dd($BadanUsaha);
                         $Kabupaten = Kabupaten::all();
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
