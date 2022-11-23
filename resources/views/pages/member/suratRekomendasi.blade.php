@@ -47,7 +47,7 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
         <div class="flex justify-center">
             <div class="text-center flex flex-col">
                 <span class="font-bold text-black">SURAT REKOMENDASI</span>
-                <span>Nomor : {{$Surat->nomor_surat}}/{{$kopBulan.$kopTanggal}}/01.IND/{{$kopBulanRomawi}}/{{$kopTahun}} </span>
+                <span>Nomor : {{$Surat->nomor_surat}}/{{$PengajuanDana->no_surat}}/01.IND/{{$kopBulanRomawi}}/{{$kopTahun}} </span>
             </div>
         </div>
 

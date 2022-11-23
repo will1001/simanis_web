@@ -273,8 +273,8 @@ class MemberController extends Controller
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
                             ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
-                            ->where('pengajuan_dana.user_id', Auth::id())->where('pengajuan_dana.status', "Menunggu")
-                            ->where('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                            ->where('pengajuan_dana.user_id', Auth::id())->orWhere('pengajuan_dana.status', "Menunggu")
+                            ->orWhere('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         $surat = Surat::find(1);
 
                         // dd($PengajuanDana);

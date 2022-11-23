@@ -92,9 +92,9 @@
       <th class="text-center p-2 ">Foto Poduk</th>
       <th class="text-center p-2 ">Nama</th>
       <th class="text-center p-2 ">Harga</th>
-      <th class="text-center p-2 ">Halal</th>
-      <th class="text-center p-2 ">SNI</th>
-      <th class="text-center p-2 ">Haki</th>
+      <!-- <th class="text-center p-2 ">Halal</th> -->
+      <!-- <th class="text-center p-2 ">SNI</th> -->
+      <!-- <th class="text-center p-2 ">Haki</th> -->
       <th class="text-center p-2 rounded-tr-xl">Aksi</th>
     </tr>
     @php
@@ -108,9 +108,9 @@
       <td class="text-center p-1 imgSize"><img src="{{ asset($item->foto) }}" alt=""></td>
       <td class="text-center p-4 ">{{$item->nama}}</td>
       <td class="text-center p-4 ">{{$item->harga}}</td>
-      <td class="text-center p-4 "><span class="bg-halalBgColor text-halalTextColor p-2 rounded-xl">{{is_null($item->sertifikat_halal)?"Tidak Ada":"Ada"}}</span></td>
-      <td class="text-center p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">{{is_null($item->sertifikat_haki)?"Tidak Ada":"Ada"}}</span></td>
-      <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">{{is_null($item->sertifikat_sni)?"Tidak Ada":"Ada"}}</span></td>
+      <!-- <td class="text-center p-4 "><span class="bg-halalBgColor text-halalTextColor p-2 rounded-xl">{{is_null($item->sertifikat_halal)?"Tidak Ada":"Ada"}}</span></td> -->
+      <!-- <td class="text-center p-2"><span class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">{{is_null($item->sertifikat_haki)?"Tidak Ada":"Ada"}}</span></td> -->
+      <!-- <td class="text-center p-2"><span class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">{{is_null($item->sertifikat_sni)?"Tidak Ada":"Ada"}}</span></td> -->
       <td class=" flex items-center justify-center text-center p-4 text-disetujuiTextColor cursor-pointer">
         <form onclick="lihatDetails({{$index++}})" action="#" class="mr-3">Lihat Detail</form>
         <form method="GET" action="/user/hapus_produk/{{$item->id}}" class="p-2 bg-buttonDelete rounded-md">
@@ -148,9 +148,9 @@
     <img id="fotoProduk" class="h-[400px] w-[400px] object-fill" src="{{ asset('/images/placeholder-image.png') }}" alt="">
     <div class="p-4">
       <h3 id="nama">Sepatu Kain Tenun</h3>
-      <div class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat Halal</span> <span id="sertifikat_halal" class="bg-halalBgColor text-halalTextColor p-2 rounded-xl">Ada</span></div>
-      <div class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat HAKI</span> <span id="sertifikat_sni" class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Ada</span></div>
-      <div class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat SNI</span> <span id="sertifikat_haki" class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Ada</span></div>
+      <!-- <div class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat Halal</span> <span id="sertifikat_halal" class="bg-halalBgColor text-halalTextColor p-2 rounded-xl">Ada</span></div> -->
+      <!-- <div class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat HAKI</span> <span id="sertifikat_sni" class="bg-menungguBgColor text-menungguTextColor p-2 rounded-xl">Ada</span></div> -->
+      <!-- <div class="mt-3 mb-3 flex justify-between items-center mr-7 w-[400px]"><span>Sertifikat SNI</span> <span id="sertifikat_haki" class="bg-disetujuiBgColor text-disetujuiTextColor p-2 rounded-xl">Ada</span></div> -->
       <h5>Deskripsi Produk</h5>
       <p id="deskripsi"></p>
       <div onclick="closeDetails()" class="flex justify-end items-center mt-5 cursor-pointer">
@@ -243,15 +243,15 @@
     const detailPopUp = document.getElementById('detailPopUp');
     const foto = document.getElementById('fotoProduk');
     const nama = document.getElementById('nama');
-    const sertifikat_halal = document.getElementById('sertifikat_halal');
-    const sertifikat_sni = document.getElementById('sertifikat_sni');
-    const sertifikat_haki = document.getElementById('sertifikat_haki');
+    // const sertifikat_halal = document.getElementById('sertifikat_halal');
+    // const sertifikat_sni = document.getElementById('sertifikat_sni');
+    // const sertifikat_haki = document.getElementById('sertifikat_haki');
     const deskripsi = document.getElementById('deskripsi');
     foto.src = baseUrl + produk[index].foto;
     nama.innerHTML = produk[index].nama;
-    sertifikat_halal.innerHTML = produk[index].sertifikat_halal ? "Ada" : "Tidak Ada";
-    sertifikat_sni.innerHTML = produk[index].sertifikat_sni ? "Ada" : "Tidak Ada";
-    sertifikat_haki.innerHTML = produk[index].sertifikat_haki ? "Ada" : "Tidak Ada";
+    // sertifikat_halal.innerHTML = produk[index].sertifikat_halal ? "Ada" : "Tidak Ada";
+    // sertifikat_sni.innerHTML = produk[index].sertifikat_sni ? "Ada" : "Tidak Ada";
+    // sertifikat_haki.innerHTML = produk[index].sertifikat_haki ? "Ada" : "Tidak Ada";
     deskripsi.innerHTML = produk[index].deskripsi;
 
 

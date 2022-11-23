@@ -144,10 +144,9 @@
                             <img class="w-[250px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">
                         </button>
                     </form>
-                    <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex " action="/dana/{{$item->id}}/status/Menunggu" method="post">
+                    <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex " action="#" method="get">
                         @csrf
-                        <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                        <button><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon" class="w-[150px]"></button>
+                        <button onclick="openPopUpTerima('{{$item->id}}')"><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon" class="w-[150px]"></button>
                     </form>
                     <form class="bg-ditolakTextColor text-white p-1 rounded-lg" action="/dana/{{$item->id}}/status/Ditolak" method="post">
                         @csrf
@@ -216,6 +215,25 @@
         </form>
 
     </div>
+    <div style="visibility: collapse;" id="detailPopUpProses" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
+        <h4>Terima Pembiayaan</h4>
+        <br />
+        <form action="" method="post" id="formTerima">
+            @csrf
+
+            <div class="flex flex-col items-start justify-between">
+                <span>Nomor Surat</span>
+                <br>
+                <input class="border-2 border-gray-300" type="text" value="" name="no_surat" id="input_no_surat">
+            </div>
+
+            <div class="flex items-center justify-end mt-[100px]">
+                <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
+                <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
+            </div>
+        </form>
+
+    </div>
 
     @endsection
     <script>
@@ -240,5 +258,16 @@
 
         const clickbuttonSearch = () => {
             document.getElementById('buttonSearch').click();
+        }
+
+        const openPopUpTerima = (id_pengajuan_dana) => {
+
+            const blackBg = document.getElementById('detailPopUpBlackbg');
+            const detailPopUpProses = document.getElementById('detailPopUpProses');
+            const formTerima = document.getElementById('formTerima');
+            blackBg.style.visibility = "visible";
+            detailPopUpProses.style.visibility = "visible";
+            formTerima.action = `/dana/${id_pengajuan_dana}/status/Diterima`;
+
         }
     </script>

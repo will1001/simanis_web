@@ -1,6 +1,6 @@
 @extends('layouts.member')
 @section('content')
-@if($userDataProgress[0] === 100)
+@if($userDataProgress[0] >= 100)
 <div>
 <div class="flex bg-white rounded-xl p-4">
     <div>
