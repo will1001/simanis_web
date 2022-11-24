@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 <style>
   .actionContainer {
-    width: 1000px;
+    width: 1170px;
   }
 </style>
 @section('content')
