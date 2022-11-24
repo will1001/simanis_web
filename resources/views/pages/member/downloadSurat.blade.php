@@ -33,7 +33,7 @@
         <div class="flex justify-center">
             <div class="text-center flex flex-col">
                 <span class="font-bold text-black">SURAT REKOMENDASI</span>
-                <span>Nomor : 1726/DPK-NTB/{{$kopBulan}}/{{$kopTahun}}/</span>
+                <span>Nomor : {{$PengajuanDana->no_surat}}</span>
             </div>
         </div>
 

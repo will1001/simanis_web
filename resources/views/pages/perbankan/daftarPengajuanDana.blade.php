@@ -142,11 +142,17 @@
                 <form action="#">
                     <button onclick="openPopUpProses('{{$item->dana_id}}')" class="bg-orange-400 text-white p-1 rounded-lg"><img class="w-[60px]" src="{{ asset('/Icon-svg/sand-clock.svg') }}" alt="icon"></button>
                 </form>
-                <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get">
+                <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button onclick="openPopUpTerima('{{$item->dana_id}}','{{$item->id_instansi}}')"><img class="icon-size" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                    <button type="submit"><img class="icon-size" src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon"></button>
+                </form>
+                <form class="bg-green-600 text-white p-1 rounded-lg flex" action="#" method="get">
+                    <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
+                    @csrf
+                    <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
+                    <button onclick="openPopUpTerima('{{$item->dana_id}}','{{$item->id_instansi}}')"><img class="icon-size" src="{{ asset('/Icon-svg/edit.svg') }}" alt="icon"></button>
                 </form>
                 <form action="#">
                     <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
@@ -227,11 +233,11 @@
 
 </div>
 <div style="visibility: collapse;" id="detailPopUpTerima" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
-    <h4>Penerimaan Pembiayaan</h4>
+    <h4>Edit Pembiayaan</h4>
     <br />
     <form action="#" method="post" id="formTerima">
         @csrf
-
+        <input type="text" name="alasan" value="Pembiayaan Usaha Anda diterima Dinas Perindustrian" style="display:none;">
 
         <div class="flex flex-col justify-start items-start" id="jmlDanaSelect" style="visibility: collapse;">
             <span>Jumlah Pembiayaan</span>
@@ -295,7 +301,7 @@
         const angsuranDiv = document.getElementById("angsuranDiv");
         blackBg.style.visibility = "visible";
         detailPopUpProses.style.visibility = "visible";
-        formTerima.action = `/bank/dana/${id_pengajuan_dana}/status/Diterima`;
+        formTerima.action = `/bank/dana/${id_pengajuan_dana}/status/Menunggu`;
 
         jmlDanaSelect.style.visibility = "visible";
         waktuPinjamanSelect.style.visibility = "visible";

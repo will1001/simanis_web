@@ -6,19 +6,21 @@ use App\Models\BadanUsaha;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class BadanUsahaExport implements FromCollection,WithHeadings
+class BadanUsahaExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
         return BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
             ->get([
                 'badan_usaha.nik',
                 'badan_usaha.nama_direktur',
                 'kabupaten.name as kabupaten',
-                'badan_usaha.kecamatan',
-                'badan_usaha.kelurahan',
+                'kecamatan.name as kecamatan',
+                'kelurahan.name as kelurahan',
                 'badan_usaha.alamat_lengkap',
                 'badan_usaha.no_hp',
                 'badan_usaha.nama_usaha',
@@ -30,7 +32,7 @@ class BadanUsahaExport implements FromCollection,WithHeadings
                 'badan_usaha.nomor_test_report_tahun',
                 'badan_usaha.sni_tahun',
                 'badan_usaha.jenis_usaha',
-                'badan_usaha.cabang_industri',
+                'cabang_industri.name as cabang_industri',
                 'badan_usaha.investasi_modal',
                 'badan_usaha.jumlah_tenaga_kerja_pria',
                 'badan_usaha.jumlah_tenaga_kerja_wanita',
