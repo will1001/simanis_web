@@ -146,7 +146,7 @@
                     </form>
                     <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex " action="#" method="get">
                         @csrf
-                        <button onclick="openPopUpTerima('{{$item->id}}')"><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon" class="w-[150px]"></button>
+                        <button onclick="openPopUpTerima('{{$item->id}}',event)"><img src="{{ asset('/Icon-svg/ceklist.svg') }}" alt="icon" class="w-[150px]"></button>
                     </form>
                     <form class="bg-ditolakTextColor text-white p-1 rounded-lg" action="/dana/{{$item->id}}/status/Ditolak" method="post">
                         @csrf
@@ -224,7 +224,7 @@
             <div class="flex flex-col items-start justify-between">
                 <span>Nomor Surat</span>
                 <br>
-                <input class="border-2 border-gray-300" type="text" value="" name="no_surat" id="input_no_surat">
+                <input class="border-2 border-gray-300" type="text" value="" name="no_surat" id="input_no_surat" required>
             </div>
 
             <div class="flex items-center justify-end mt-[100px]">
@@ -250,7 +250,11 @@
         const closeDetails = () => {
             const blackBg = document.getElementById('detailPopUpBlackbg');
             const detailPopUp = document.getElementById('detailPopUp');
+            const formTerima = document.getElementById('formTerima');
+            const detailPopUpProses = document.getElementById('detailPopUpProses');
 
+            detailPopUpProses.style.visibility = "collapse";
+            formTerima.style.visibility = "collapse";
             blackBg.style.visibility = "collapse";
             detailPopUp.style.visibility = "collapse";
 
@@ -260,13 +264,14 @@
             document.getElementById('buttonSearch').click();
         }
 
-        const openPopUpTerima = (id_pengajuan_dana) => {
-
+        const openPopUpTerima = (id_pengajuan_dana, e) => {
+            e.preventDefault();
             const blackBg = document.getElementById('detailPopUpBlackbg');
             const detailPopUpProses = document.getElementById('detailPopUpProses');
             const formTerima = document.getElementById('formTerima');
             blackBg.style.visibility = "visible";
             detailPopUpProses.style.visibility = "visible";
+            formTerima.style.visibility = "visible";
             formTerima.action = `/dana/${id_pengajuan_dana}/status/Menunggu`;
 
         }

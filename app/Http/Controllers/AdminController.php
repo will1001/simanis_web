@@ -107,9 +107,9 @@ class AdminController extends Controller
         'badan_usaha.foto_alat_produksi',
         'badan_usaha.foto_ruang_produksi',
         'produk.foto as produk',
-        'data_tambahan.ktp',
-        'data_tambahan.kk',
-        'data_tambahan.ktp_pasangan',
+        // 'data_tambahan.ktp',
+        // 'data_tambahan.kk',
+        // 'data_tambahan.ktp_pasangan',
     ];
 
     private $fields2 = [
@@ -318,7 +318,7 @@ class AdminController extends Controller
                             // ->rightJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
                             ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
                             ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
-                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
+                            // ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->paginate(100, $this->fields);
                         // $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         //     ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
@@ -453,8 +453,12 @@ class AdminController extends Controller
 
 
         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+        ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+        ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+        ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+        ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+        ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+        ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
             ->where('badan_usaha.nik', 'LIKE', "%{$keyword}%");
 
 
@@ -463,7 +467,7 @@ class AdminController extends Controller
         }
 
         $BadanUsaha = $BadanUsaha->paginate(100, $this->fields);
-
+       
         return view(
             'pages.admin.tabel',
             [

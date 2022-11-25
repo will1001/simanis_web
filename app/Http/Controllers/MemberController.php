@@ -137,12 +137,9 @@ class MemberController extends Controller
             } else if (Auth::user()->role === "OJK") {
                 return redirect('/ojk/dashboard');
             } else {
-                // dd(Auth::user()->nik);
                 $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
                 $userDataProgress = array();
-                // dd(count($this->fields));
-                // dd(!$BadanUsaha->first());
-                // dd(empty($BadanUsaha));
+               
                 if (!$BadanUsaha->first()) {
                     $NewBadanUsaha = new BadanUsaha;
                     $NewBadanUsaha->id = (string) Str::uuid();
@@ -162,7 +159,6 @@ class MemberController extends Controller
                     ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                     ->where("nik", Auth::user()->nik)
                     ->get($this->fieldBadanUsaha);
-                // dd($BadanUsaha);
 
                 foreach ($badan_usaha as $key => &$item) {
                     $userDataProgress[$key] = 0;
@@ -188,12 +184,9 @@ class MemberController extends Controller
                         ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                         ->where("badan_usaha.id", $id)
                         ->get($this->fieldBadanUsaha);
-                    // dd($badan_usaha[0]);
                 }
                 if ($subPages != "") {
-                    // dd($userDataProgress);
-                    // dd($totalnull);
-                    // dd(count($this->fields));
+                    
                     return view("pages.member.{$subPages}", ['BadanUsaha' => $badan_usaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()]);
                 } else {
                     $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields];
@@ -203,7 +196,6 @@ class MemberController extends Controller
                         $CabangIndustri = CabangIndustri::where('name', $BadanUsaha[0]->cabang_industri)->first();
                         $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
                         $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
-                        // dd($BadanUsaha);
                         $params = ['BadanUsaha' => $BadanUsaha];
                     }
                     if ($pages == "downloadKartu") {
@@ -230,7 +222,6 @@ class MemberController extends Controller
                         $SimulasiAngsuran = SimulasiAngsuran::all();
                         $Instansi = Instansi::all();
                         $DataPendukung = DataPendukung::where('id_badan_usaha', $BadanUsaha[0]->id)->first();
-                        // dd($BadanUsaha);
 
 
                         $params = [
@@ -248,7 +239,6 @@ class MemberController extends Controller
 
                         $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
                         $Produk = Produk::where('id_badan_usaha', $BadanUsaha[0]->id)->get();
-                        // dd($Produk);
 
                         $params = ['Produk' => $Produk, 'BadanUsaha' => $BadanUsaha];
                     }
@@ -277,7 +267,6 @@ class MemberController extends Controller
                             ->orWhere('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         $surat = Surat::find(1);
 
-                        // dd($PengajuanDana);
                         $params = [
                             'BadanUsaha' => $BadanUsaha,
                             'PengajuanDana' => $PengajuanDana,
@@ -291,8 +280,8 @@ class MemberController extends Controller
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
                             ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
-                            ->where('pengajuan_dana.user_id', Auth::id())->where('pengajuan_dana.status', "Menunggu")
-                            ->where('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
+                            ->where('pengajuan_dana.user_id', Auth::id())
+                            ->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         // $PengajuanDana = PengajuanDana::where('user_id', Auth::id())->orderBy('created_at', 'desc')->first();
                         // dd($PengajuanDana);
                         $surat = Surat::find(1);
@@ -324,11 +313,9 @@ class MemberController extends Controller
     }
     function ajukan_dana(Request $r)
     {
-        // dd($r);
         $instansi = User::find($r->input("instansi"));
         $jumlah_dana = null;
         $waktu_pinjaman = null;
-        // dd($r->input("jumlah_dana_bank") != null);
 
         if ($r->input("jumlah_dana_bank") != null) {
             $JumlahPinjaman = JumlahPinjaman::find($r->input("jumlah_dana_bank"));
@@ -339,7 +326,6 @@ class MemberController extends Controller
             $jumlah_dana = $r->input("jumlah_dana");
             $waktu_pinjaman = $r->input("waktu_pinjaman");
         }
-        // dd($waktu_pinjaman);
 
         $pengajuanDana = new PengajuanDana([
             'id' => (string) Str::uuid(),
@@ -352,7 +338,6 @@ class MemberController extends Controller
             'instansi' => $instansi->role,
             'jenis_pengajuan' => $r->input("jenis_pengajuan"),
         ]);
-        // dd($pengajuanDana);
 
         $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->first();
 
@@ -364,10 +349,8 @@ class MemberController extends Controller
             'user_role' => "ADMIN",
         ]);
 
-        // dd($notifikasi);
 
         // BUAT USER
-        // dd($BadanUsaha->nama_usaha);
 
         $notifikasi->save();
         if ($instansi == "BANK") {
@@ -432,7 +415,6 @@ class MemberController extends Controller
             $file->move(public_path('images/'), $filename);
             $data['foto'] = '/images/' . $filename;
         }
-        // dd($data);
 
 
 
@@ -471,7 +453,6 @@ class MemberController extends Controller
             // $data['foto']= 'images/'.$filename;
 
         }
-        // dd($data);
 
 
 
@@ -484,21 +465,14 @@ class MemberController extends Controller
     }
     function uploadDataPendukung(Request $r)
     {
-        // dd($r);
         $filenameKTP = null;
         $filenameKK = null;
         $User = User::find(Auth::id());
         $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
         // $DataPendukung = DataPendukung::where('id_badan_usaha',$BadanUsaha->id)->first();
-        // dd($r);
 
 
-        // if (!empty($DataPendukung)) {
-        //     dd("data ada");
-        // }else{
-        //     dd("data kosong");
-
-        // }
+      
 
 
         if (!empty($r->file('ktp'))) {
@@ -510,7 +484,6 @@ class MemberController extends Controller
             // $data['foto']= 'images/'.$filename;
 
         }
-        // dd($data);
 
 
 
@@ -523,11 +496,7 @@ class MemberController extends Controller
             // $data['foto']= 'images/'.$filename;
 
         }
-        // dd($data);
-
-
-        // dd($filenameKTP);
-        // dd($filenameKK);
+        
 
         $data = array(
             'id' => (string) Str::uuid(),
@@ -535,7 +504,6 @@ class MemberController extends Controller
             'ktp' => 'data_tambahan/' . $filenameKTP,
             'kk' => 'data_tambahan/' . $filenameKK,
         );
-        // dd($data);
         $DataPendukung = new DataPendukung($data);
         $DataPendukung->save();
 

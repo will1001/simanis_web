@@ -140,7 +140,7 @@
                     </button>
                 </form>
                 <form action="#">
-                    <button onclick="openPopUpProses('{{$item->dana_id}}')" class="bg-orange-400 text-white p-1 rounded-lg"><img class="w-[60px]" src="{{ asset('/Icon-svg/sand-clock.svg') }}" alt="icon"></button>
+                    <button onclick="openPopUpProses('{{$item->dana_id}}',event)" class="bg-orange-400 text-white p-1 rounded-lg"><img class="w-[60px]" src="{{ asset('/Icon-svg/sand-clock.svg') }}" alt="icon"></button>
                 </form>
                 <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
@@ -152,7 +152,7 @@
                     <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button onclick="openPopUpTerima('{{$item->dana_id}}','{{$item->id_instansi}}')"><img class="icon-size" src="{{ asset('/Icon-svg/edit.svg') }}" alt="icon"></button>
+                    <button onclick="openPopUpTerima('{{$item->dana_id}}','{{$item->id_instansi}}',event)"><img class="icon-size" src="{{ asset('/Icon-svg/edit.svg') }}" alt="icon"></button>
                 </form>
                 <form action="#">
                     <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
@@ -281,7 +281,8 @@
         formPenolakan.action = `/bank/dana/${id_pengajuan_dana}/status/Ditolak`;
 
     }
-    const openPopUpProses = (id_pengajuan_dana) => {
+    const openPopUpProses = (id_pengajuan_dana, e) => {
+        e.preventDefault();
 
         const blackBg = document.getElementById('detailPopUpBlackbg');
         const detailPopUpProses = document.getElementById('detailPopUpProses');
@@ -291,7 +292,8 @@
         formProses.action = `/bank/dana/${id_pengajuan_dana}/status/Menunggu`;
 
     }
-    const openPopUpTerima = (id_pengajuan_dana, instansiuser_id) => {
+    const openPopUpTerima = (id_pengajuan_dana, instansiuser_id, e) => {
+        e.preventDefault();
 
         const blackBg = document.getElementById('detailPopUpBlackbg');
         const detailPopUpProses = document.getElementById('detailPopUpTerima');
@@ -331,11 +333,12 @@
         const jmlDanaSelect = document.getElementById("jmlDanaSelect");
         const waktuPinjamanSelect = document.getElementById("waktuPinjamanSelect");
         const angsuranDiv = document.getElementById("angsuranDiv");
-        const angsuranValue = document.getElementById('angsuranValue');
+        // const angsuranValue = document.getElementById('angsuranValue');
+        // const jmlDanaSelectChild = document.getElementById('jmlDanaSelectChild');
 
-        jmlDanaSelectChild.innerHTML = `<option value="" disabled  selected>Pilih Jumlah Pinjaman</option>`;
-        waktuPinjamanSelectChild.innerHTML = `<option value="" disabled  selected>Pilih Jangka Waktu</option>`;
-        angsuranValue.innerHTML = "";
+        // jmlDanaSelectChild.innerHTML = `<option value="" disabled  selected>Pilih Jumlah Pinjaman</option>`;
+        // waktuPinjamanSelectChild.innerHTML = `<option value="" disabled  selected>Pilih Jangka Waktu</option>`;
+        // angsuranValue.innerHTML = "";
 
         blackBg.style.visibility = "collapse";
         detailPopUp.style.visibility = "collapse";
