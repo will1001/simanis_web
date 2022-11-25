@@ -234,7 +234,7 @@ class PerbankanController extends Controller
                     if ($pages == "daftarPengajuanDana") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
-                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
+                            // ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->select(
                                 'badan_usaha.*',
@@ -250,14 +250,14 @@ class PerbankanController extends Controller
                                 'pengajuan_dana.user_id',
                                 'pengajuan_dana.created_at as dana_created_at',
                                 'pengajuan_dana.updated_at as dana_updated_at',
-                                'data_tambahan.ktp',
-                                'data_tambahan.kk',
+                                // 'data_tambahan.ktp',
+                                // 'data_tambahan.kk',
                             )
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.status", "Menunggu")
                             ->where("pengajuan_dana.alasan", "!=", "Ditolak Admin")
-                            ->whereNotNull("data_tambahan.ktp")
-                            ->whereNotNull("data_tambahan.kk")
+                            // ->whereNotNull("data_tambahan.ktp")
+                            // ->whereNotNull("data_tambahan.kk")
                             ->latest('dana_created_at')->get();
                         // dd($PengajuanDana[0]);
                         $JumlahPinjaman = JumlahPinjaman::all();
