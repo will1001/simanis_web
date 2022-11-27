@@ -76,6 +76,7 @@ return [
             'query' => [
                 // ExampleQuery::class,
                 App\GraphQL\Queries\BadanUsahaQuery::class,
+                App\GraphQL\Queries\BadanUsahaByIDQuery::class,
                 App\GraphQL\Queries\CabangIndustriQuery::class,
                 App\GraphQL\Queries\SubCabangIndustriQuery::class,
                 App\GraphQL\Queries\KabupatenQuery::class,
@@ -115,6 +116,7 @@ return [
             'types' => [
                 // ExampleType::class,
                 App\GraphQL\Types\BadanUsahaType::class,
+                App\GraphQL\Types\BadanUsahaByIDType::class,
                 App\GraphQL\Types\CabangIndustriType::class,
                 App\GraphQL\Types\SubCabangIndustriType::class,
                 App\GraphQL\Types\KabupatenType::class,
