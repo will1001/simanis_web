@@ -90,7 +90,6 @@ class ProdukQuery extends Query
                 ->where('id_badan_usaha', $BadanUsaha->id)->get($fieldBadanUsaha);
         }
         return Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id')
-            ->get($fieldBadanUsaha)
-            ->paginate(50, ['*'], 'page', $args['page']);
+            ->paginate(50, $fieldBadanUsaha, 'page', $args['page']);
     }
 }
