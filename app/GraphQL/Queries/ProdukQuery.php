@@ -53,6 +53,10 @@ class ProdukQuery extends Query
             'foto' => [
                 'name' => 'foto',
                 'type' => Type::string(),
+            ],
+            'page' => [
+                'name' => 'page',
+                'type' => Type::int(),
             ]
         ];
     }
