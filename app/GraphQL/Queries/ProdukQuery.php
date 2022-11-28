@@ -72,7 +72,8 @@ class ProdukQuery extends Query
             "badan_usaha.nama_usaha as nama_usaha",
         ];
         if (isset($args['id'])) {
-            return Produk::where('id', $args['id'])->get();
+            return Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id')
+                ->where('produk.id', $args['id'])->get($fieldBadanUsaha);
         }
 
         if (isset($args['id_badan_usaha'])) {
