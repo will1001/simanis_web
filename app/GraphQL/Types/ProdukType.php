@@ -29,9 +29,17 @@ class ProdukType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The id_badan_usaha of the Produk',
             ],
+            'nama_usaha' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'The nama_usaha of the Produk',
+            ],
             'nama' => [
                 'type' => Type::string(),
                 'description' => 'The nama of Produk',
+            ],
+            'harga' => [
+                'type' => Type::string(),
+                'description' => 'The harga of Produk',
             ],
             'deskripsi' => [
                 'type' => Type::string(),

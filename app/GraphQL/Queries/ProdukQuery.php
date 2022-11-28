@@ -59,6 +59,18 @@ class ProdukQuery extends Query
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
+        $fieldBadanUsaha = [
+            "produk.id as id",
+            "produk.id_badan_usaha",
+            "produk.nama",
+            "produk.harga",
+            "produk.deskripsi",
+            "produk.foto",
+            "produk.sertifikat_halal",
+            "produk.sertifikat_haki",
+            "produk.sertifikat_sni",
+            "badan_usaha.nama_usaha as nama_usaha",
+        ];
         if (isset($args['id'])) {
             return Produk::where('id', $args['id'])->get();
         }
@@ -69,8 +81,11 @@ class ProdukQuery extends Query
         if (isset($args['user_id'])) {
             $users = User::find($args["user_id"]);
             $BadanUsaha = BadanUsaha::where('nik', $users->nik)->first();
-            return Produk::where('id_badan_usaha', $BadanUsaha->id)->get();
+            return Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id')
+                ->where('id_badan_usaha', $BadanUsaha->id)->get($fieldBadanUsaha);
         }
-        return Produk::all();
+        return Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id')
+            ->get($fieldBadanUsaha)
+            ->paginate(50, ['*'], 'page', $args['page']);
     }
 }
