@@ -117,6 +117,10 @@ class BadanUsahaType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The jumlah_tenaga_kerja_wanita of BadanUsaha',
             ],
+            'sni_tahun' => [
+                'type' => Type::string(),
+                'description' => 'The sni_tahun of BadanUsaha',
+            ],
             'kapasitas_produksi_perbulan' => [
                 'type' => Type::string(),
                 'description' => 'The kapasitas_produksi_perbulan of BadanUsaha',
@@ -124,6 +128,10 @@ class BadanUsahaType extends GraphQLType
             'satuan_produksi' => [
                 'type' => Type::string(),
                 'description' => 'The satuan_produksi of BadanUsaha',
+            ],
+            'nilai_produksi_perbulan' => [
+                'type' => Type::string(),
+                'description' => 'The nilai_produksi_perbulan of BadanUsaha',
             ],
             'nilai_bahan_baku_perbulan' => [
                 'type' => Type::string(),
