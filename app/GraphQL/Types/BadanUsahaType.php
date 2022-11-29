@@ -36,6 +36,10 @@ class BadanUsahaType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The id_kabupaten of BadanUsaha',
             ],
+            'kabupaten' => [
+                'type' => Type::string(),
+                'description' => 'The kabupaten of BadanUsaha',
+            ],
             'kecamatan' => [
                 'type' => Type::string(),
                 'description' => 'The kecamatan of BadanUsaha',
@@ -64,7 +68,7 @@ class BadanUsahaType extends GraphQLType
                 'type' => Type::int(),
                 'description' => 'The tahun_berdiri of BadanUsaha',
             ],
-           
+
             'nib_tahun' => [
                 'type' => Type::string(),
                 'description' => 'The nib_tahun of BadanUsaha',

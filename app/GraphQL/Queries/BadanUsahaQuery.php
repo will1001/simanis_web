@@ -190,9 +190,9 @@ class BadanUsahaQuery extends Query
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
 
-         $fieldBadanUsaha = [
+        $fieldBadanUsaha = [
             'badan_usaha.id as id',
-            'badan_usaha_documents.id as badan_usaha_documents_id',
+            // 'badan_usaha_documents.id as badan_usaha_documents_id',
             'badan_usaha.nik',
             'badan_usaha.nama_direktur',
             'kabupaten.name as kabupaten',
@@ -221,18 +221,18 @@ class BadanUsahaQuery extends Query
             'badan_usaha.satuan_produksi',
             'badan_usaha.nilai_produksi_perbulan',
             'badan_usaha.nilai_bahan_baku_perbulan',
-            'badan_usaha_documents.nib_file',
-            'badan_usaha_documents.bentuk_usaha_file',
-            'badan_usaha_documents.sertifikat_halal_file',
-            'badan_usaha_documents.sertifikat_sni_file',
-            'badan_usaha_documents.sertifikat_merek_file',
+            // 'badan_usaha_documents.nib_file',
+            // 'badan_usaha_documents.bentuk_usaha_file',
+            // 'badan_usaha_documents.sertifikat_halal_file',
+            // 'badan_usaha_documents.sertifikat_sni_file',
+            // 'badan_usaha_documents.sertifikat_merek_file',
             'badan_usaha.foto_alat_produksi',
             'badan_usaha.foto_ruang_produksi',
-            'produk.foto as produk',
-            'data_tambahan.ktp',
-            'data_tambahan.kk',
-            'data_tambahan.ktp_pasangan',
-    
+            // 'produk.foto as produk',
+            // 'data_tambahan.ktp',
+            // 'data_tambahan.kk',
+            // 'data_tambahan.ktp_pasangan',
+
         ];
 
         $yearNow = Carbon::now()->year;
@@ -306,13 +306,19 @@ class BadanUsahaQuery extends Query
                 ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
                 ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                 ->where('nik', $args['nik'])
-                ->get($this->fieldBadanUsaha);
+                ->get($fieldBadanUsaha);
         }
 
         if (isset($args['offset'])) {
             $badanUsaha = $badanUsaha->limit($args['offset']);
         }
 
-        return $badanUsaha->paginate(50, ['*'], 'page', $args['page']);
+        return BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+            ->paginate(50,  $fieldBadanUsaha, 'page', $args['page']);
     }
 }
