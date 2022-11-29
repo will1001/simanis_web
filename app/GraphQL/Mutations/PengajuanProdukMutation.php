@@ -113,6 +113,7 @@ class PengajuanProdukMutation extends Mutation
             'sertifikat_haki' => $cek_sertifikat_haki ? null : json_encode($sertifikat_haki),
             'sertifikat_sni' => $cek_sertifikat_sni ? null : json_encode($sertifikat_sni),
             'nama' => $args["nama"],
+            'harga' => $args["harga"],
             'deskripsi' => $args["deskripsi"],
         );
 
