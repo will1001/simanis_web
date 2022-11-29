@@ -67,6 +67,10 @@ class PengajuanProdukMutation extends Mutation
                 'name' => 'nama',
                 'type' => Type::nonNull(Type::string()),
             ],
+            'harga' => [
+                'name' => 'harga',
+                'type' => Type::nonNull(Type::string()),
+            ],
             'deskripsi' => [
                 'name' => 'deskripsi',
                 'type' => Type::nonNull(Type::string()),
@@ -76,7 +80,7 @@ class PengajuanProdukMutation extends Mutation
                 'type' => Type::nonNull(GraphQL::type('Upload')),
                 'rules' => ['required', 'image', 'max:1500'],
             ],
-            
+
         ];
     }
 
