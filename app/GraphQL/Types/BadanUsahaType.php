@@ -48,6 +48,10 @@ class BadanUsahaType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The kelurahan of BadanUsaha',
             ],
+            'produk' => [
+                'type' => Type::string(),
+                'description' => 'The produk of BadanUsaha',
+            ],
             'alamat_lengkap' => [
                 'type' => Type::string(),
                 'description' => 'The alamat_lengkap of BadanUsaha',

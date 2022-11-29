@@ -228,7 +228,7 @@ class BadanUsahaQuery extends Query
             // 'badan_usaha_documents.sertifikat_merek_file',
             'badan_usaha.foto_alat_produksi',
             'badan_usaha.foto_ruang_produksi',
-            // 'produk.foto as produk',
+            'produk.foto as produk',
             // 'data_tambahan.ktp',
             // 'data_tambahan.kk',
             // 'data_tambahan.ktp_pasangan',
@@ -319,6 +319,7 @@ class BadanUsahaQuery extends Query
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
             ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+            ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
             ->paginate(50,  $fieldBadanUsaha, 'page', $args['page']);
     }
 }
