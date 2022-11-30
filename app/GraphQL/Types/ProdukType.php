@@ -61,6 +61,18 @@ class ProdukType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The sertifikat_sni of Produk',
             ],
+            'nama_direktur' => [
+                'type' => Type::string(),
+                'description' => 'The nama_direktur of Produk',
+            ],
+            'no_hp' => [
+                'type' => Type::string(),
+                'description' => 'The no_hp of Produk',
+            ],
+            'alamat_lengkap' => [
+                'type' => Type::string(),
+                'description' => 'The alamat_lengkap of Produk',
+            ],
         ];
     }
 }
