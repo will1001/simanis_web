@@ -74,6 +74,9 @@ class ProdukQuery extends Query
             "produk.sertifikat_haki",
             "produk.sertifikat_sni",
             "badan_usaha.nama_usaha as nama_usaha",
+            "badan_usaha.nama_direktur",
+            "badan_usaha.no_hp",
+            "badan_usaha.alamat_lengkap",
         ];
         if (isset($args['id'])) {
             return Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id')

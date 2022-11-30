@@ -8,6 +8,7 @@ use Closure;
 use App\Models\User;
 use App\Models\BadanUsaha;
 use App\Models\BadanUsahaDocuments;
+use App\Models\DataPendukung;
 
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -189,6 +190,18 @@ class BadanUsahaMutation extends Mutation
                 'name' => 'foto_ruang_produksi_file',
                 'type' => GraphQL::type('Upload'),
             ],
+            'ktp' => [
+                'name' => 'ktp',
+                'type' => GraphQL::type('Upload'),
+            ],
+            'kk' => [
+                'name' => 'kk',
+                'type' => GraphQL::type('Upload'),
+            ],
+            'ktp_pasangan' => [
+                'name' => 'ktp_pasangan',
+                'type' => GraphQL::type('Upload'),
+            ],
         ];
     }
 
@@ -198,6 +211,9 @@ class BadanUsahaMutation extends Mutation
         $User = User::find($args['user_id']);
         $badan_usaha = BadanUsaha::where('nik', $User->nik)->first();
         $badan_usaha_documents = BadanUsahaDocuments::where("id_badan_usaha", $badan_usaha->id);
+        $data_tambahan = DataPendukung::where("id_badan_usaha", $badan_usaha->id)->first();
+
+
 
         if (!empty($badan_usaha_documents)) {
             $badan_usaha_documents = new BadanUsahaDocuments([
@@ -279,6 +295,32 @@ class BadanUsahaMutation extends Mutation
 
             $badan_usaha_documents->sertifikat_sni_file = '/storage/dokumen/' . $name1;
         };
+        if ($args['ktp'] != null) {
+            $ext = $args['ktp']->getClientOriginalExtension();
+            $name1 = 'ktp' . $badan_usaha->id . '.' . $ext;
+
+            $args['ktp']->storeAs('public/dokumen', $name1);
+
+            $data_tambahan->ktp = '/storage/dokumen/' . $name1;
+        };
+        if ($args['kk'] != null) {
+            $ext = $args['kk']->getClientOriginalExtension();
+            $name1 = 'kk' . $badan_usaha->id  . '.' . $ext;
+
+            $args['kk']->storeAs('public/dokumen', $name1);
+
+            $data_tambahan->kk = '/storage/dokumen/' . $name1;
+        };
+        if ($args['ktp_pasangan'] != null) {
+            $ext = $args['ktp_pasangan']->getClientOriginalExtension();
+            $name1 = 'ktp_pasangan' . $badan_usaha->id  . '.' . $ext;
+
+            $args['ktp_pasangan']->storeAs('public/dokumen', $name1);
+
+            $data_tambahan->ktp_pasangan = '/storage/dokumen/' . $name1;
+        };
+
+        $data_tambahan->save();
         $badan_usaha->fill($args)->save();
         $badan_usaha_documents->save();
 
