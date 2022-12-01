@@ -242,8 +242,8 @@ class BadanUsahaQuery extends Query
             ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
-            // ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha');
+            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id');
+        // ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha');
 
         if (isset($args['id'])) {
             $badanUsaha = $badanUsaha->where('id', $args['id'])->get();
