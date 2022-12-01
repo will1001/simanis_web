@@ -237,7 +237,13 @@ class BadanUsahaQuery extends Query
 
         $yearNow = Carbon::now()->year;
 
-        $badanUsaha = DB::table('badan_usaha');
+        $badanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+            ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha');
 
         if (isset($args['id'])) {
             $badanUsaha = $badanUsaha->where('id', $args['id'])->get();
@@ -302,7 +308,6 @@ class BadanUsahaQuery extends Query
                 ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
                 ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                 ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
-                ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
                 ->where('nik', $args['nik'])
                 ->get($fieldBadanUsaha);
         }
@@ -311,13 +316,6 @@ class BadanUsahaQuery extends Query
             $badanUsaha = $badanUsaha->limit($args['offset']);
         }
 
-        return BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
-            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
-            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
-            ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
-            ->paginate(50,  $fieldBadanUsaha, 'page', $args['page']);
+        return  $badanUsaha->paginate(50,  $fieldBadanUsaha, 'page', $args['page']);
     }
 }
