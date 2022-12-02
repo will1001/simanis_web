@@ -214,6 +214,17 @@ class BadanUsahaMutation extends Mutation
         $data_tambahan = DataPendukung::where("id_badan_usaha", $badan_usaha->id)->first();
 
 
+        if ($data_tambahan) {
+            $data_tambahan = new DataPendukung([
+                'id' =>  Str::uuid(36),
+                'id_badan_usaha' => $badan_usaha->id,
+                'ktp' => '',
+                'kk' => '',
+                'ktp_pasangan' => ''
+            ]);
+        }
+
+
 
         if (!empty($badan_usaha_documents)) {
             $badan_usaha_documents = new BadanUsahaDocuments([
