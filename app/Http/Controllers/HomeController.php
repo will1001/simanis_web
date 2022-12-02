@@ -178,11 +178,11 @@ class HomeController extends Controller
         if ($chartId == 2) {
             $data = $data->where('tahun_berdiri', $yearNow);
         } else if ($chartId == 3) {
-            $data = $data->where('investasi_modal', '<=', 1000000);
+            $data = $data->where('investasi_modal', '<=', 1000000000);
         } else if ($chartId == 4) {
-            $data = $data->whereBetween('investasi_modal', [1000000 + 1, 15000000 - 1]);
+            $data = $data->whereBetween('investasi_modal', [1000000000 + 1, 15000000000 - 1]);
         } else if ($chartId == 5) {
-            $data = $data->where('investasi_modal', '>=', 15000000);
+            $data = $data->where('investasi_modal', '>=', 15000000000);
         } else if ($chartId == 6) {
             $data = $data->whereNotNull('nomor_sertifikat_halal_tahun');
         } else if ($chartId == 7) {
@@ -255,11 +255,11 @@ class HomeController extends Controller
             ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id');
         if (str_contains($title, 'Industri Kecil')) {
-            $data = $data->where('investasi_modal', '<', 1000000);
+            $data = $data->where('investasi_modal', '<', 1000000000);
         } else if (str_contains($title, 'Industri Menengah')) {
-            $data = $data->whereBetween('investasi_modal', [1000000, 15000000]);
+            $data = $data->whereBetween('investasi_modal', [1000000000, 15000000000]);
         } else if (str_contains($title, 'Industri Besar')) {
-            $data = $data->where('investasi_modal', '>', 15000000);
+            $data = $data->where('investasi_modal', '>', 15000000000);
         }
 
         foreach ($filter as &$field) {

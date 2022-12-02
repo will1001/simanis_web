@@ -180,6 +180,10 @@ class BadanUsahaQuery extends Query
                 'name' => 'kelurahan',
                 'type' => Type::string(),
             ],
+            'filter' => [
+                'name' => 'filter',
+                'type' => Type::string(),
+            ],
             'page' => [
                 'name' => 'page',
                 'type' => Type::nonNull(Type::int()),
@@ -244,6 +248,46 @@ class BadanUsahaQuery extends Query
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
             ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id');
         // ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha');
+
+        if (isset($args['filter'])) {
+            switch ($args['filter']) {
+                case '2':
+                    $badanUsaha = $badanUsaha->where('tahun_berdiri', $yearNow);
+                    break;
+                case '3':
+                    $badanUsaha = $badanUsaha->where('investasi_modal', '<=', 1000000000);
+                    break;
+                case '4':
+                    $badanUsaha = $badanUsaha->whereBetween('investasi_modal', [1000000000 + 1, 15000000000 - 1]);
+                    break;
+                case '5':
+                    $badanUsaha = $badanUsaha->where('investasi_modal', '>=', 15000000000);
+                    break;
+                case '6':
+                    $badanUsaha = $badanUsaha->whereNotNull('nomor_sertifikat_halal_tahun');
+                    break;
+                case '7':
+                    $badanUsaha = $badanUsaha->whereNotNull('sertifikat_merek_tahun');
+                    break;
+                case '8':
+                    $badanUsaha = $badanUsaha->whereNotNull('sni_tahun');
+                    break;
+                case '9':
+                    $badanUsaha = $badanUsaha->whereNotNull('nomor_test_report_tahun');
+                    break;
+                case '10':
+                    $badanUsaha = $badanUsaha->whereNotNull('nib_tahun');
+                    break;
+                case '11':
+                    $badanUsaha = $badanUsaha->whereNull('nib_tahun');
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            
+        }
 
         if (isset($args['id'])) {
             $badanUsaha = $badanUsaha->where('id', $args['id'])->get();
