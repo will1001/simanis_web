@@ -171,7 +171,6 @@ class MemberController extends Controller
                     }
                     $userDataProgress[$key] = ((count($this->fields) - ($totalnull - 9)) / (count($this->fields))) * 100;
                 }
-                dd($userDataProgress);
 
                 if ($id != "") {
 
