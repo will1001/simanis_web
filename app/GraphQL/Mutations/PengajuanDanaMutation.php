@@ -94,7 +94,6 @@ class PengajuanDanaMutation extends Mutation
             'status' => "Menunggu",
             'jumlah_dana' => $jumlah_dana,
             'waktu_pinjaman' => $waktu_pinjaman,
-            'alasan' => $args["alasan"],
             'instansi' => $instansi->role,
             'jenis_pengajuan' => $args["jenis_pengajuan"],
         ]);
