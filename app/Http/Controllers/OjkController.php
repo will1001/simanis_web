@@ -234,6 +234,8 @@ class OjkController extends Controller
                             )
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.alasan", "not like", "%Ditolak Admin%")
+                            ->where("alasan", "!=", "")
+                            ->where("alasan", "!=", null)
                             // ->where("pengajuan_dana.status","Diterima")
                             // ->where("pengajuan_dana.alasan","Selamat Pembiayaan Usaha Anda diterima")
                             // ->where("pengajuan_dana.alasan", 'LIKE', "%Pembiayaan Usaha Anda diterima Dinas Perindustrian%")

@@ -253,6 +253,8 @@ class PerbankanController extends Controller
                                 // 'data_tambahan.ktp',
                                 // 'data_tambahan.kk',
                             )
+                            ->where("alasan", "!=", "")
+                            ->where("alasan", "!=", null)
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.status", "Menunggu")
                             ->where("pengajuan_dana.alasan", "!=", "Ditolak Admin")
