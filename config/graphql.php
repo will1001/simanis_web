@@ -97,6 +97,7 @@ return [
                 App\GraphQL\Queries\SimulasiAngsuranQuery::class,
                 App\GraphQL\Queries\DataPendukungQuery::class,
                 App\GraphQL\Queries\KartuQuery::class,
+                App\GraphQL\Queries\userDataProgressQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -110,6 +111,7 @@ return [
                 App\GraphQL\Mutations\KartuMutation::class,
                 App\GraphQL\Mutations\NotifikasiMutation::class,
                 App\GraphQL\Mutations\BadanUsahaMutation::class,
+                App\GraphQL\Mutations\userDataProgressMutation::class,
 
             ],
             // The types only available in this schema
@@ -141,6 +143,7 @@ return [
                 App\GraphQL\Types\SimulasiAngsuranType::class,
                 App\GraphQL\Types\DataPendukungType::class,
                 App\GraphQL\Types\KartuType::class,
+                App\GraphQL\Types\userDataProgressType::class,
             ],
 
             // Laravel HTTP middleware

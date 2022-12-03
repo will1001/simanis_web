@@ -139,7 +139,7 @@ class MemberController extends Controller
             } else {
                 $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->get();
                 $userDataProgress = array();
-               
+
                 if (!$BadanUsaha->first()) {
                     $NewBadanUsaha = new BadanUsaha;
                     $NewBadanUsaha->id = (string) Str::uuid();
@@ -171,6 +171,7 @@ class MemberController extends Controller
                     }
                     $userDataProgress[$key] = ((count($this->fields) - ($totalnull - 9)) / (count($this->fields))) * 100;
                 }
+                dd($userDataProgress);
 
                 if ($id != "") {
 
@@ -186,7 +187,7 @@ class MemberController extends Controller
                         ->get($this->fieldBadanUsaha);
                 }
                 if ($subPages != "") {
-                    
+
                     return view("pages.member.{$subPages}", ['BadanUsaha' => $badan_usaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()]);
                 } else {
                     $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields];
@@ -472,7 +473,7 @@ class MemberController extends Controller
         // $DataPendukung = DataPendukung::where('id_badan_usaha',$BadanUsaha->id)->first();
 
 
-      
+
 
 
         if (!empty($r->file('ktp'))) {
@@ -496,7 +497,7 @@ class MemberController extends Controller
             // $data['foto']= 'images/'.$filename;
 
         }
-        
+
 
         $data = array(
             'id' => (string) Str::uuid(),
