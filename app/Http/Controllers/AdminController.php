@@ -358,6 +358,7 @@ class AdminController extends Controller
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->where("pengajuan_dana.status", "Menunggu")
                             ->where("pengajuan_dana.alasan", null)
+                            ->orWhere("pengajuan_dana.alasan", '')
                             ->select('badan_usaha.nama_usaha', 'badan_usaha.nik', 'badan_usaha.nama_direktur', 'badan_usaha.id as id_badan_usaha', 'kabupaten.name as kabupaten', 'pengajuan_dana.*')
                             ->orderBy('created_at', 'desc')->get();
                         // dd($PengajuanDana);
@@ -453,12 +454,12 @@ class AdminController extends Controller
 
 
         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
-        ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
-        ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
-        ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
-        ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
-        ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
-        ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+            ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
             ->where('badan_usaha.nik', 'LIKE', "%{$keyword}%");
 
 
@@ -467,7 +468,7 @@ class AdminController extends Controller
         }
 
         $BadanUsaha = $BadanUsaha->paginate(100, $this->fields);
-       
+
         return view(
             'pages.admin.tabel',
             [
