@@ -49,7 +49,7 @@ class PengajuanDanaMutation extends Mutation
             ],
             'alasan' => [
                 'name' => 'alasan',
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
             ],
             'instansi' => [
                 'name' => 'instansi',
