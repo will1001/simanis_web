@@ -405,9 +405,10 @@ $forms = array(
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px) (Max : 5MB)</p>
                     </div>
-                    <input onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data" />
+                    <input oninvalid="invalid('{{$form->prop}}','Wajib di Isi')" onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" />
                 </label>
                 <h5 id="{{$form->prop}}_info"></h5>
+                <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
                 @elseif($form->type == 'label')
                 <a class="text-blue font-blue" target="_blank" href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik Disini</a>
                 @elseif($form->type == 'number')

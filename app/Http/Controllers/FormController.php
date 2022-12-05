@@ -53,6 +53,8 @@ class FormController extends Controller
         'badan_usaha.satuan_produksi',
         'badan_usaha.nilai_produksi_perbulan',
         'badan_usaha.nilai_bahan_baku_perbulan',
+        'badan_usaha.foto_alat_produksi',
+        'badan_usaha.foto_ruang_produksi',
         'badan_usaha_documents.nib_file',
         'badan_usaha_documents.bentuk_usaha_file',
         'badan_usaha_documents.sertifikat_halal_file',
@@ -101,30 +103,29 @@ class FormController extends Controller
             $badan_usaha = null;
             $badan_usaha_documents = null;
             $data_tambahan = null;
-
             if ($id != null) {
                 $badan_usaha = BadanUsaha::find($id);
                 $badan_usaha_documents = BadanUsahaDocuments::where("id_badan_usaha", $id)->first();
                 $data_tambahan = DataPendukung::where("id_badan_usaha", $id)->first();
 
-                // if (!empty($badan_usaha_documents) || !empty($data_tambahan)) {
-                //     $badan_usaha_documents = new BadanUsahaDocuments([
-                //         'id' =>  Str::uuid(36),
-                //         'id_badan_usaha' => $badan_usaha->id,
-                //         'nib_file' => '',
-                //         'bentuk_usaha_file' => '',
-                //         'sertifikat_halal_file' => '',
-                //         'sertifikat_sni_file' => '',
-                //         'sertifikat_merek_file' => ''
-                //     ]);
-                //     $data_tambahan = new DataPendukung([
-                //         'id' =>  Str::uuid(36),
-                //         'id_badan_usaha' => $badan_usaha->id,
-                //         'ktp' => '',
-                //         'kk' => '',
-                //         'ktp_pasangan' => ''
-                //     ]);
-                // }
+                if (empty($badan_usaha_documents) || empty($data_tambahan)) {
+                    $badan_usaha_documents = new BadanUsahaDocuments([
+                        'id' =>  Str::uuid(36),
+                        'id_badan_usaha' => $badan_usaha->id,
+                        'nib_file' => '',
+                        'bentuk_usaha_file' => '',
+                        'sertifikat_halal_file' => '',
+                        'sertifikat_sni_file' => '',
+                        'sertifikat_merek_file' => ''
+                    ]);
+                    $data_tambahan = new DataPendukung([
+                        'id' =>  Str::uuid(36),
+                        'id_badan_usaha' => $badan_usaha->id,
+                        'ktp' => '',
+                        'kk' => '',
+                        'ktp_pasangan' => ''
+                    ]);
+                }
             } else {
                 $badan_usaha = new BadanUsaha;
 
@@ -275,6 +276,7 @@ class FormController extends Controller
             // dd($r->all());
             // dd($input);
             $badan_usaha->fill($input)->save();
+            // dd($badan_usaha_documents);
             $badan_usaha_documents->save();
             $data_tambahan->save();
 
