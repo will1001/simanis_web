@@ -364,6 +364,10 @@ $forms = array(
         width: 50%
     }
 </style>
+<?php
+$baseUrl = env('APP_URL');
+
+?>
 @section('content')
 <form method="POST" action="/form/{$userType}/{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->id : ''}}" enctype="multipart/form-data">
     @csrf
@@ -396,7 +400,9 @@ $forms = array(
                     <input onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->prop}}" accept="application/pdf" name="{{$form->prop}}" type="file" class="hidden" id="{{$form->prop}}" />
                 </label>
                 <h5 id="{{$form->prop}}_info"></h5>
-
+                @if(!empty($BadanUsaha[0]->{$form->prop}))
+                    <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat File</a>
+                @endif
                 @elseif($form->type == 'image')
                 <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
                 <label for="{{$form->id}}" class="flex flex-col justify-center items-center w-[340px] h-[150px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -414,9 +420,12 @@ $forms = array(
                     id="{{$form->prop}}" 
                     enctype="multipart/form-data" 
                     value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}"  
-                    {{$form->required == 'true'?'required':''}}  />
+                      />
                 </label>
                 <h5 id="{{$form->prop}}_info"></h5>
+                @if(!empty($BadanUsaha[0]->{$form->prop}))
+                    <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat Gambar</a>
+                @endif
                 <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
                 @elseif($form->type == 'label')
                 <a class="text-blue font-blue" target="_blank" href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik Disini</a>

@@ -91,7 +91,9 @@ $field == 'sertifikat_merek_file'
 )
 <div class="flex">
     <p class="w-[400px]">{{$fieldTitles[$key]}}</p>
-    <a target="_blank" href="{{$baseUrl.$BadanUsaha->$field}}">Lihat Dokumen</a>
+    < @if(!empty($BadanUsaha[0]->$field))
+        <a target="_blank" href="{{$baseUrl.$BadanUsaha[0]->$field}}">Lihat Dokumen</a>
+    @endif
 </div>
 @elseif(
 $field == 'foto_alat_produksi' ||
