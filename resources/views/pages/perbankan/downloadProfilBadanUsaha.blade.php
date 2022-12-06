@@ -1,4 +1,13 @@
-@extends('layouts.ojk')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <title>Simanis</title>
+</head>
+<body>
 <style>
     .badan_usaha_container,
     p,
@@ -22,17 +31,17 @@ $fieldTitles = [
     'NO. HP',
     'NAMA USAHA',
     'BENTUK USAHA',
-    'FILE DOKUMEN',
+    // 'FILE DOKUMEN',
     'TAHUN BERDIRI',
     'NIB/TAHUN',
-    'FILE DOKUMEN',
+    // 'FILE DOKUMEN',
     'NOMOR SERTIFIKAT HALAL/ TAHUN',
-    'FILE DOKUMEN',
+    // 'FILE DOKUMEN',
     'SERTIFIKAT MEREK/TAHUN',
-    'FILE DOKUMEN',
+    // 'FILE DOKUMEN',
     'NOMOR TEST REPORT/TAHUN',
     'SNI/TAHUN',
-    'FILE DOKUMEN',
+    // 'FILE DOKUMEN',
     'JENIS USAHA',
     'MEREK USAHA',
     'CABANG INDUSTRI',
@@ -62,26 +71,21 @@ $fieldTitles = [
     'FILE SERTIFIKAT SNI',
 ];
 ?>
-@section('content')
-<div>
-    <h2>Profil Badan Usaha</h2>
-    <span class="mr-2"><a href="/ojk/dashboard/ProfilBadanUsaha/{{$BadanUsaha->id}}" class="text-disetujuiTextColor">1. Profil Badan Usaha</a></span>
-    <span><a href="/ojk/dashboard/suratRekomendasi/{{$BadanUsaha->id}}">2. Surat Rekomendasi</a></span>
-    <!-- <span><a href="/ojk/dashboard/dataTambahan/{{$BadanUsaha->id}}">3. Data Tambahan</a></span> -->
-</div>
-<div class="bg-black w-[100%] h-[1px] mt-2"></div>
-<br>
-<div>
-    <form action="/ojk/dashboard/downloadProfilBadanUsaha/{{$BadanUsaha->id}}" method="get">
-        <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
-    </form>
-</div>
 
-<br>
+
 @foreach($fields as $key => $field)
 @if($field == 'id')
 <span></span>
-
+@elseif($field == 'foto_alat_produksi' ||
+$field == 'foto_ruang_produksi' ||
+$field == 'ktp_pasangan' ||
+$field == 'kk' ||
+$field == 'ktp' ||
+$field == 'produk')
+<div>
+    <h5>{{$fieldTitles[$key]}}</h5>
+    <img class="h-[300px]" src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
+</div>
 @elseif(
 $field == 'nib_file' ||
 $field == 'bentuk_usaha_file' ||
@@ -91,21 +95,10 @@ $field == 'sertifikat_merek_file'
 )
 <div class="flex">
     <p class="w-[400px]">{{$fieldTitles[$key]}}</p>
+   
     @if(!empty($BadanUsaha[0]->$field))
         <a target="_blank" href="{{$baseUrl.$BadanUsaha[0]->$field}}">Lihat Dokumen</a>
     @endif
-</div>
-@elseif(
-$field == 'foto_alat_produksi' ||
-$field == 'foto_ruang_produksi' ||
-$field == 'ktp_pasangan' ||
-$field == 'kk' ||
-$field == 'ktp' ||
-$field == 'produk'
-)
-<div>
-    <h5>{{$fieldTitles[$key]}}</h5>
-    <img class="h-[200px]" src="{{$baseUrl.$BadanUsaha->$field}}" alt="img">
 </div>
 @elseif(
 $field == 'investasi_modal' ||
@@ -128,4 +121,8 @@ $field == 'nilai_bahan_baku_perbulan'
 </div>
 @endif
 @endforeach
-@endsection
+</body>
+<script>
+    print();
+</script>
+</html>

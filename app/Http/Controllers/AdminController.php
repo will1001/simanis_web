@@ -300,6 +300,30 @@ class AdminController extends Controller
 
                         $subPagesParams['BadanUsaha'] = $BadanUsaha[0];
                     }
+
+                    if ($subPages == "downloadProfilBadanUsaha") {
+                        $BadanUsaha = BadanUsaha::leftJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
+                            ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+                            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+                            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+                            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+                            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+                            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+                            ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+                            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
+                            ->where("badan_usaha.id", $id)
+                            ->get($this->fieldBadanUsaha);
+                        // dd($BadanUsaha[0]);
+                        // $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
+
+                        // $CabangIndustri = CabangIndustri::where('name', $BadanUsaha[0]->cabang_industri)->first();
+
+                        // $BadanUsaha[0]->kabupaten = $kabupaten ? $kabupaten->name : null;
+
+                        // $BadanUsaha[0]->id_cabang_industri = $CabangIndustri ? $CabangIndustri->id : null;
+
+                        $subPagesParams['BadanUsaha'] = $BadanUsaha[0];
+                    }
                     // dd($subPagesParams);
                     return view("pages.admin.{$subPages}", $subPagesParams);
                 } else {

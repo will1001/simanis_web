@@ -73,7 +73,7 @@ $fieldTitles = [
 <br>
 
 <div>
-    <form action="/export/badan_usaha/perbankan/{{$BadanUsaha->id}}" method="get">
+    <form action="/perbankan/dashboard/downloadProfilBadanUsaha/{{$BadanUsaha->id}}" method="get">
         <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download</button>
     </form>
 </div>
