@@ -155,7 +155,7 @@
                     <button onclick="openPopUpTerima('{{$item->dana_id}}','{{$item->id_instansi}}',event)"><img class="icon-size" src="{{ asset('/Icon-svg/edit.svg') }}" alt="icon"></button>
                 </form>
                 <form action="#">
-                    <button onclick="openPopUp('{{$item->dana_id}}')" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
+                    <button onclick="openPopUp('{{$item->dana_id}}',event)" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
                 </form>
             </div>
         </td>
@@ -271,7 +271,8 @@
     const Instansi = @json($Instansi);
 
 
-    const openPopUp = (id_pengajuan_dana) => {
+    const openPopUp = (id_pengajuan_dana, e) => {
+        e.preventDefault();
 
         const blackBg = document.getElementById('detailPopUpBlackbg');
         const detailPopUp = document.getElementById('detailPopUp');

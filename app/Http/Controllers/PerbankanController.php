@@ -188,7 +188,7 @@ class PerbankanController extends Controller
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
                             ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
-                            ->where('pengajuan_dana.user_id', $user->id)->where('pengajuan_dana.status', "Menunggu")
+                            ->where('pengajuan_dana.user_id', $user->id)
                             ->orderBy('pengajuan_dana.created_at', 'desc')->first();
                         // $PengajuanDana = PengajuanDana::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
                         // dd($PengajuanDana);
@@ -475,21 +475,21 @@ class PerbankanController extends Controller
 
             $notifikasi->save();
         }
-        if ($status == "Ditolak" || $status == "Menunggu") {
+        // if ($status == "Ditolak" || $status == "Menunggu") {
 
-            $PengajuanDana->jumlah_dana = $r->input('jumlah_dana_bank');
-            $PengajuanDana->waktu_pinjaman = $r->input('jangka_waktu_bank');
-            $PengajuanDana->save();
+        //     $PengajuanDana->jumlah_dana = $r->input('jumlah_dana_bank');
+        //     $PengajuanDana->waktu_pinjaman = $r->input('jangka_waktu_bank');
+        //     $PengajuanDana->save();
 
-            $notifikasi = new Notifikasi([
-                'id' => (string) Str::uuid(),
-                'nik' => $User->nik,
-                'deskripsi' => $r->input('alasan'),
-                'user_role' => "MEMBER",
-            ]);
+        //     $notifikasi = new Notifikasi([
+        //         'id' => (string) Str::uuid(),
+        //         'nik' => $User->nik,
+        //         'deskripsi' => $r->input('alasan'),
+        //         'user_role' => "MEMBER",
+        //     ]);
 
-            $notifikasi->save();
-        }
+        //     $notifikasi->save();
+        // }
 
 
 
