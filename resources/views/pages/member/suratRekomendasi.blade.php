@@ -60,15 +60,17 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
                 <div class="flex ml-10 ">
                     <div class="flex flex-col mr-7">
                         <span>Nama</span>
+                        <span>Pangkat/Gol. Ruang</span>
                         <span>NIP</span>
                         <span>Jabatan</span>
-                        <span>Alamat</span>
+                        <!-- <span>Alamat</span> -->
                     </div>
                     <div class="flex flex-col">
                         <span>: {{$Surat->nama_kadis}}</span>
+                        <span>: Pembina Utama Muda (IV/c)</span>
                         <span>: {{$Surat->nip}}</span>
                         <span>: {{$Surat->jabatan}}</span>
-                        <span>: {{$Surat->alamat}}</span>
+                        <!-- <span>: {{$Surat->alamat}}</span> -->
                     </div>
                 </div>
             </div>

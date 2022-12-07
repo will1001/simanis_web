@@ -41,13 +41,13 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
         <div class="flex justify-center mb-4">
             <img class="mr-[70px] h-[84px]" src="{{ asset('/images/Logo NTB 1.png') }}" />
             <div class="text-center flex flex-col justify-center">
-            <span class="font-normal text-black text-3xl">PEMERINTAH PROVINSI NUSA TENGGARA BARAT </span>
+                <span class="font-normal text-black text-3xl">PEMERINTAH PROVINSI NUSA TENGGARA BARAT </span>
                 <span class="font-bold text-black text-3xl">{{$Surat->judul_kop}}</span>
                 <!-- <span class="font-bold text-black">Dinas Pawriwisata Dan Kebudayaan</span> -->
                 <!-- <span>Jl. Langko No.70, Pejeruk, Kec. Ampenan, Kota Mataram,</span>
                 <span>Nusa Tenggara Bar. 83114</span> -->
                 <span class="text-black">{{$Surat->alamat_kop}}</span>
-                <span class="text-black">email : disperin@ntbprov.go.id    <span class="ml-[20px]">website: https://disperin.ntbprov.go.id</span></span>
+                <span class="text-black">email : disperin@ntbprov.go.id <span class="ml-[20px]">website: https://disperin.ntbprov.go.id</span></span>
             </div>
             <img class="ml-[70px] h-[84px]" src="{{ asset('/images/NTB Gemilang Logo 1.png') }}" />
         </div>
@@ -66,15 +66,17 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
                 <div class="flex ml-10 ">
                     <div class="flex flex-col mr-7">
                         <span>Nama</span>
+                        <span>Pangkat/Gol. Ruang</span>
                         <span>NIP</span>
                         <span>Jabatan</span>
-                        <span>Alamat</span>
+                        <!-- <span>Alamat</span> -->
                     </div>
                     <div class="flex flex-col">
                         <span>: {{$Surat->nama_kadis}}</span>
+                        <span>: Pembina Utama Muda (IV/c)</span>
                         <span>: {{$Surat->nip}}</span>
                         <span>: {{$Surat->jabatan}}</span>
-                        <span>: {{$Surat->alamat}}</span>
+                        <!-- <span>: {{$Surat->alamat}}</span> -->
                     </div>
                 </div>
             </div>
@@ -110,7 +112,7 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
                 <img class="h-[60px]" src="{{ asset($Surat->ttd) }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
-                <span >Pembina Utama Muda</span>
+                <span>Pembina Utama Muda</span>
                 <span>{{$Surat->nip}}</span>
             </div>
         </div>
