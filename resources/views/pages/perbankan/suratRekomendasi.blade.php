@@ -48,7 +48,8 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
                 <span class="text-black">{{$Surat->alamat_kop}}</span>
                 <span class="text-black">email : disperin@ntbprov.go.id <span class="ml-[20px]">website: https://disperin.ntbprov.go.id</span></span>
             </div>
-            <img class="ml-[70px] h-[84px]" src="{{ asset('/images/NTB Gemilang Logo 1.png') }}" />
+            <span class="ml-[120px] h-[84px]"></span>
+            <img class="ml-[100px] h-[84px] hidden" src="{{ asset('/images/NTB Gemilang Logo 1.png') }}" />
         </div>
         <div class="h-[4px] bg-black w-full mb-1"></div>
         <div class="h-[2px] bg-black w-full mb-2"></div>
