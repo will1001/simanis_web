@@ -34,13 +34,16 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
         <div class="flex justify-center mb-4">
             <img class="mr-[70px] h-[84px]" src="{{ asset('/images/Logo NTB 1.png') }}" />
             <div class="text-center flex flex-col justify-center">
-                <span class="font-bold text-black w-[320px]">{{$Surat->judul_kop}}</span>
+                <span class="font-normal text-black text-3xl">PEMERINTAH PROVINSI NUSA TENGGARA BARAT </span>
+                <span class="font-bold text-black text-3xl">{{$Surat->judul_kop}}</span>
                 <!-- <span class="font-bold text-black">Dinas Pawriwisata Dan Kebudayaan</span> -->
                 <!-- <span>Jl. Langko No.70, Pejeruk, Kec. Ampenan, Kota Mataram,</span>
                 <span>Nusa Tenggara Bar. 83114</span> -->
-                <span class="w-[320px]">{{$Surat->alamat_kop}}</span>
+                <span class="text-black">{{$Surat->alamat_kop}}</span>
+                <span class="text-black">email : disperin@ntbprov.go.id    <span class="ml-[20px]">website: https://disperin.ntbprov.go.id</span></span>
             </div>
-            <img class="ml-[70px] h-[84px]" src="{{ asset('/images/NTB Gemilang Logo 1.png') }}" />
+            <span class="ml-[120px] h-[84px]"></span>
+            <img class="ml-[100px] h-[84px] hidden" src="{{ asset('/images/NTB Gemilang Logo 1.png') }}" />
         </div>
         <div class="h-[4px] bg-black w-full mb-1"></div>
         <div class="h-[2px] bg-black w-full mb-2"></div>
@@ -90,17 +93,18 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
             </div>
         </div>
         <div class="flex justify-start mt-[50px]">
-            <div class="text-left flex flex-col">
+            <div class="text-center flex flex-col">
                 <span class="w-[700px]">Adalah IKM Binaan Dinas Perindustrian Provinsi NTB dan telah memenuhi persyaratan untuk mengajukan pembiayaan kepada PT {{$PengajuanDana->nama}}</span>
                 <span class="mt-[20px]">Demikian surat ini dibuat untuk digunakan sebagaimana mestinya</span>
             </div>
         </div>
         <div class="flex justify-end mt-[50px]">
-            <div class="text-left flex flex-col">
+            <div class="text-center flex flex-col">
                 <span>Mataram, {{date('d-m-Y', strtotime($PengajuanDana->updated_at))}} </span>
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
                 <img class="h-[60px]" src="{{ asset($Surat->ttd) }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
+                <span>Pembina Utama Muda</span>
                 <span>{{$Surat->nip}}</span>
             </div>
         </div>
