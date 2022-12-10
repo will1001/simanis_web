@@ -21,21 +21,21 @@ $baseUrl = env('APP_URL') . '/';
         </strong> untuk melengkapi</span>
     </div>
     <div class="flex">
-      <div onclick="" class="flex p-2 bg-blue-300 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
+      <div onclick="" class="flex p-2 bg-blue-300 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
     </div>
     @else
     <div>
 
     </div>
     <div class="flex">
-      <div onclick="lihatDetails()" class="flex p-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
+      <div onclick="lihatDetails()" class="flex p-2 bg-buttonColor-900 cursor-pointer text-white rounded-xl"><img class="mr-1" src="{{ asset('/Icon-svg/dana-white.svg') }}"> <span>Pembiayaan Usaha</span></div>
     </div>
     @endif
 
 
 </div>
 <div class="flex items-center actionContainer">
-  <h5>Histori Pembiayaan Usaha</h5>
+  <h5>Pembiayaan Usaha</h5>
 </div>
 <table class="actionContainer rounded-2xl">
   <tr class="bg-tableColor-900 text-center text-white p-2">
@@ -58,7 +58,7 @@ $baseUrl = env('APP_URL') . '/';
   if($item->status == "Ditolak"){
   $statusClass = 'bg-ditolakBgColor text-ditolakTextColor';
   }
-  if($item->status == "Diterima"){
+  if($item->status == "Diterima" || $item->status == "Lunas"){
   $statusClass = 'bg-disetujuiBgColor text-disetujuiTextColor';
   }
   @endphp
@@ -72,12 +72,12 @@ $baseUrl = env('APP_URL') . '/';
     <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
     <td class="text-center p-4 ">
       @if($item->instansi == "KOPERASI")
-        {{$item->alasan}} <br>
-        @if($item->status == "Diterima")
-        <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
-        @endif
+      {{$item->alasan}} <br>
+      @if($item->status == "Diterima" || $item->status == "Lunas")
+      <a class="underline text-blue-500" href="{{$baseUrl.$item->file_pinjaman}}"> Download di sini</a>
+      @endif
       @else
-        {{$item->alasan}} <br>
+      {{$item->alasan}} <br>
       @endif
       <!-- @if($item->alasan == "Pembiayaan Usaha Anda diterima Dinas Perindustrian")
       @if(empty($DataPendukung))
@@ -213,20 +213,43 @@ $baseUrl = env('APP_URL') . '/';
   const JangkaWaktu = @json($JangkaWaktu);
   const SimulasiAngsuran = @json($SimulasiAngsuran);
   const Instansi = @json($Instansi);
+  const PengajuanDana = @json($PengajuanDana);
 
 
 
 
   const lihatDetails = () => {
-    const blackBg = document.getElementById('detailPopUpBlackbg');
-    const detailPopUp = document.getElementById('detailPopUp');
-    if (badanUsaha.nama_usaha === null) {
-      alert("Isi nama Badan Usaha terlebih Dahulu");
-    } else {
+    var result = new Date(PengajuanDana[0].created_at);
+    result.setDate(result.getDate() + 14);
+    // var a = PengajuanDana[0].created_at;
+    var createDate = PengajuanDana[0].created_at;
+    var limitDate = result.toISOString()
+    // console.log(result.toISOString());
+    // console.log(PengajuanDana[0].alasan);
+    // console.log(PengajuanDana[0].alasan.includes("Dinas Perindustrian"));
+    if (PengajuanDana[0].status === 'Menunggu' || PengajuanDana[0].status === 'Diterima') {
+      if (PengajuanDana[0].status === 'Diterima') {
+        alert("Anda Memiliki Pinjaman yang Sedang Aktif");
+      } else {
+        if (createDate < limitDate) {
+          alert("Anda Harus Menunggu 14 Hari Untuk Mengajukan Pembiayaan Lagi");
+        }
+      }
 
-      blackBg.style.visibility = "visible";
-      detailPopUp.style.visibility = "visible";
+
+    } else {
+      const blackBg = document.getElementById('detailPopUpBlackbg');
+      const detailPopUp = document.getElementById('detailPopUp');
+      if (badanUsaha.nama_usaha === null) {
+        alert("Isi nama Badan Usaha terlebih Dahulu");
+      } else {
+
+        blackBg.style.visibility = "visible";
+        detailPopUp.style.visibility = "visible";
+      }
     }
+
+
 
   }
 

@@ -68,7 +68,7 @@
     if($item->status == "Ditolak"){
     $statusClass = 'bg-ditolakBgColor text-ditolakTextColor';
     }
-    if($item->status == "Diterima"){
+    if($item->status == "Diterima" || $item->status == "Lunas"){
     $statusClass = 'bg-disetujuiBgColor text-disetujuiTextColor';
     }
     @endphp
@@ -82,7 +82,7 @@
         <td class="text-center text-slate-700 font-bold"><span class="flex justify-center my-auto ">{{number_format($item->jumlah_dana)}}</span></td>
         <td class="text-center p-2  w-[10px]">{{$item->waktu_pinjaman}}</td>
         <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at))}}</td>
-    <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at)) == date('d-m-Y', strtotime($item->dana_updated_at)) && $item->status == 'Menunggu' ?'':date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
+        <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at)) == date('d-m-Y', strtotime($item->dana_updated_at)) && $item->status == 'Menunggu' ?'':date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
         <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
         <td class="text-center p-2">{{$item->alasan}}</td>
 

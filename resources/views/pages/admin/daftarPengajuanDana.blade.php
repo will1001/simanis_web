@@ -119,7 +119,7 @@
         if($item->status == "Ditolak"){
         $statusClass = 'bg-ditolakBgColor text-ditolakTextColor';
         }
-        if($item->status == "Diterima"){
+        if($item->status == "Diterima" || $item->status == "Lunas"){
         $statusClass = 'bg-disetujuiBgColor text-disetujuiTextColor';
         }
         @endphp
