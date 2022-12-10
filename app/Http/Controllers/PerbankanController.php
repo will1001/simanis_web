@@ -276,13 +276,13 @@ class PerbankanController extends Controller
                             )
                             ->where("alasan", "!=", "")
                             ->where("alasan", "!=", null)
-                            ->where("instansi", "BANK")
+                            ->where("id_instansi", Auth::id())
                             ->where("pengajuan_dana.status", "Menunggu")
                             ->where("pengajuan_dana.alasan", "!=", "Ditolak Admin")
                             // ->whereNotNull("data_tambahan.ktp")
                             // ->whereNotNull("data_tambahan.kk")
                             ->latest('dana_created_at')->get();
-                        // dd($PengajuanDana[0]);
+                        // dd($PengajuanDana);
                         $JumlahPinjaman = JumlahPinjaman::all();
                         $JangkaWaktu = JangkaWaktu::all();
                         $SimulasiAngsuran = SimulasiAngsuran::all();
@@ -324,6 +324,7 @@ class PerbankanController extends Controller
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.status", "Diterima")
                             ->orWhere("pengajuan_dana.status", "Ditolak")
+                            ->orWhere("pengajuan_dana.status", "Lunas")
                             ->where("pengajuan_dana.alasan", "not like", "%Ditolak Admin%")
                             ->orderBy('dana_created_at', 'desc')->get();
                         // dd($PengajuanDana);
@@ -469,7 +470,13 @@ class PerbankanController extends Controller
         if ($status == "Ditolak" || $status == "Menunggu") {
             $PengajuanDana->alasan = $r->input('alasan');
         } else {
-            $PengajuanDana->alasan = "Selamat Pembiayaan Usaha Anda diterima";
+            if ($status == "Lunas") {
+
+                $PengajuanDana->alasan = "Pembiayaan Usaha Anda Sudah Lunas";
+            } else {
+
+                $PengajuanDana->alasan = "Selamat Pembiayaan Usaha Anda diterima";
+            }
         }
 
         $PengajuanDana->status = $status;

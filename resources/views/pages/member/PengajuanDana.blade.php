@@ -219,24 +219,36 @@ $baseUrl = env('APP_URL') . '/';
 
 
   const lihatDetails = () => {
-    var result = new Date(PengajuanDana[0].created_at);
-    result.setDate(result.getDate() + 14);
-    // var a = PengajuanDana[0].created_at;
-    var createDate = PengajuanDana[0].created_at;
-    var limitDate = result.toISOString()
-    // console.log(result.toISOString());
-    // console.log(PengajuanDana[0].alasan);
-    // console.log(PengajuanDana[0].alasan.includes("Dinas Perindustrian"));
-    if (PengajuanDana[0].status === 'Menunggu' || PengajuanDana[0].status === 'Diterima') {
-      if (PengajuanDana[0].status === 'Diterima') {
-        alert("Anda Memiliki Pinjaman yang Sedang Aktif");
+    if (PengajuanDana.length !== 0) {
+      var result = new Date(PengajuanDana[0].created_at);
+      result.setDate(result.getDate() + 14);
+      // var a = PengajuanDana[0].created_at;
+      var createDate = PengajuanDana[0].created_at;
+      var limitDate = result.toISOString()
+      // console.log(result.toISOString());
+      // console.log(PengajuanDana[0].alasan);
+      // console.log(PengajuanDana[0].alasan.includes("Dinas Perindustrian"));
+      if (PengajuanDana[0].status === 'Menunggu' || PengajuanDana[0].status === 'Diterima') {
+        if (PengajuanDana[0].status === 'Diterima') {
+          alert("Anda Memiliki Pinjaman yang Sedang Aktif");
+        } else {
+          if (createDate < limitDate) {
+            alert("Anda Harus Menunggu 14 Hari Untuk Mengajukan Pembiayaan Lagi");
+          }
+        }
+
+
       } else {
-        if (createDate < limitDate) {
-          alert("Anda Harus Menunggu 14 Hari Untuk Mengajukan Pembiayaan Lagi");
+        const blackBg = document.getElementById('detailPopUpBlackbg');
+        const detailPopUp = document.getElementById('detailPopUp');
+        if (badanUsaha.nama_usaha === null) {
+          alert("Isi nama Badan Usaha terlebih Dahulu");
+        } else {
+
+          blackBg.style.visibility = "visible";
+          detailPopUp.style.visibility = "visible";
         }
       }
-
-
     } else {
       const blackBg = document.getElementById('detailPopUpBlackbg');
       const detailPopUp = document.getElementById('detailPopUp');
@@ -248,6 +260,7 @@ $baseUrl = env('APP_URL') . '/';
         detailPopUp.style.visibility = "visible";
       }
     }
+
 
 
 
@@ -319,6 +332,7 @@ $baseUrl = env('APP_URL') . '/';
       waktuPinjamanSelect.style.visibility = "visible";
       angsuranDiv.style.visibility = "visible";
       const numberFormatter = Intl.NumberFormat('en-US');
+      console.log(instansi_user_id[0].id);
       for (const item of JumlahPinjaman.filter(e => e.id_instansi === instansi_user_id[0].id).sort((a, b) => a.jumlah - b.jumlah)) {
         let opt = document.createElement('option');
         opt.value = item.id;
