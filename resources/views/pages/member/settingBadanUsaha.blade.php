@@ -144,6 +144,11 @@ $forms = array(
         "prop" => "nilai_bahan_baku_perbulan"
     ),
     (object)array(
+        "type" => "numberText",
+        "placeholder" => "OMSET ",
+        "prop" => "omset"
+    ),
+    (object)array(
         "type" => "number",
         "placeholder" => "Latitude",
         "prop" => "lat"

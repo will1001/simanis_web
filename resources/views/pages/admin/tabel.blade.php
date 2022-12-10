@@ -44,6 +44,7 @@ $fieldTitles = [
   'SATUAN PRODUKSI',
   'NILAI PRODUKSI ',
   'NILAI BAHAN BAKU ',
+  'OMSET',
   'LATITUDE',
   'LONGITUDE',
   'MEDIA SOSIAL',

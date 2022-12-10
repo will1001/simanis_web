@@ -46,6 +46,7 @@ $fieldTitles = [
     'SATUAN PRODUKSI',
     'NILAI PRODUKSI (RP.000)',
     'NILAI BAHAN BAKU (RP.000)',
+    'OMSET',
     'LATITUDE',
     'LONGITUDE',
     'MEDIA SOSIAL',
@@ -93,7 +94,7 @@ $field == 'sertifikat_merek_file'
 <div class="flex">
     <p class="w-[400px]">{{$fieldTitles[$key]}}</p>
     @if(!empty($BadanUsaha[0]->$field))
-        <a target="_blank" href="{{$baseUrl.$BadanUsaha[0]->$field}}">Lihat Dokumen</a>
+    <a target="_blank" href="{{$baseUrl.$BadanUsaha[0]->$field}}">Lihat Dokumen</a>
     @endif
 </div>
 @elseif(
@@ -114,7 +115,8 @@ $field == 'jumlah_tenaga_kerja_pria' ||
 $field == 'jumlah_tenaga_kerja_wanita' ||
 $field == 'kapasitas_produksi_perbulan' ||
 $field == 'nilai_produksi_perbulan' ||
-$field == 'nilai_bahan_baku_perbulan'
+$field == 'nilai_bahan_baku_perbulan' ||
+$field == 'omset'
 )
 <div class="flex justify-start text-textColor2">
     <p class="w-[400px]">{{$fieldTitles[$key]}}</p>

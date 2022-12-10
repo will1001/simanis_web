@@ -45,6 +45,7 @@ class BadanUsaha extends Model
         'satuan_produksi',
         'nilai_produksi_perbulan',
         'nilai_bahan_baku_perbulan',
+        'omset',
         'lat',
         'lng',
         'media_sosial',

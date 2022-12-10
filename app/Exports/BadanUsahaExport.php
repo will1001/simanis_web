@@ -40,6 +40,7 @@ class BadanUsahaExport implements FromCollection, WithHeadings
                 'badan_usaha.satuan_produksi',
                 'badan_usaha.nilai_produksi_perbulan',
                 'badan_usaha.nilai_bahan_baku_perbulan',
+                'badan_usaha.omset',
                 'badan_usaha.created_at',
                 'badan_usaha.updated_at',
             ]);

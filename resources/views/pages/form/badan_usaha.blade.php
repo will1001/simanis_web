@@ -282,6 +282,12 @@ $forms = array(
         "required" => "true"
     ),
     (object)array(
+        "type" => "numberText",
+        "placeholder" => "OMSET ",
+        "prop" => "omset",
+        "required" => "true"
+    ),
+    (object)array(
         "type" => "number",
         "placeholder" => "Latitude",
         "prop" => "lat",

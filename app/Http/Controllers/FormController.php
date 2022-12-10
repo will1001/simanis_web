@@ -53,6 +53,7 @@ class FormController extends Controller
         'badan_usaha.satuan_produksi',
         'badan_usaha.nilai_produksi_perbulan',
         'badan_usaha.nilai_bahan_baku_perbulan',
+        'badan_usaha.omset',
         'badan_usaha.foto_alat_produksi',
         'badan_usaha.foto_ruang_produksi',
         'badan_usaha_documents.nib_file',
@@ -273,6 +274,7 @@ class FormController extends Controller
             $input['kapasitas_produksi_perbulan'] = str_replace(',', '', $input['kapasitas_produksi_perbulan']);
             $input['nilai_produksi_perbulan'] = str_replace(',', '', $input['nilai_produksi_perbulan']);
             $input['nilai_bahan_baku_perbulan'] = str_replace(',', '', $input['nilai_bahan_baku_perbulan']);
+            $input['omset'] = str_replace(',', '', $input['omset']);
             // dd($r->all());
             // dd($input);
             $badan_usaha->fill($input)->save();

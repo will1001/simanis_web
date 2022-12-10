@@ -46,6 +46,7 @@ class BadanUsahaImport implements ToModel
             'satuan_produksi' => $row[21],
             'nilai_produksi_perbulan' => $row[22],
             'nilai_bahan_baku_perbulan' => $row[23],
+            'omset' => $row[24],
         ]);
     }
 }

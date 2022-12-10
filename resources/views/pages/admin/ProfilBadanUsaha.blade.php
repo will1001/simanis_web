@@ -46,6 +46,7 @@ $fieldTitles = [
     'SATUAN PRODUKSI',
     'NILAI PRODUKSI (RP.000)',
     'NILAI BAHAN BAKU (RP.000)',
+    'OMSET',
     'LATITUDE',
     'LONGITUDE',
     'MEDIA SOSIAL',
@@ -113,7 +114,8 @@ $field == 'jumlah_tenaga_kerja_pria' ||
 $field == 'jumlah_tenaga_kerja_wanita' ||
 $field == 'kapasitas_produksi_perbulan' ||
 $field == 'nilai_produksi_perbulan' ||
-$field == 'nilai_bahan_baku_perbulan'
+$field == 'nilai_bahan_baku_perbulan' ||
+$field == 'omset' 
 )
 <div class="flex justify-start text-textColor2">
     <p class="w-[400px]">{{$fieldTitles[$key]}}</p>

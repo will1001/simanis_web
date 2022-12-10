@@ -173,6 +173,9 @@
             <span class="my-auto">Nilai Bahan Baku Perbulan</span> <input type="text" class="inputText rounded-md border">
         </div>
         <div class="mlt32 flex justify-between mr-5 text-slate-800">
+            <span class="my-auto">OMSET</span> <input type="text" class="inputText rounded-md border">
+        </div>
+        <div class="mlt32 flex justify-between mr-5 text-slate-800">
             <span class="my-auto">IAT</span> <input type="text" class="inputText rounded-md border">
         </div>
         <div class="mlt32 flex justify-between mr-5 text-slate-800">

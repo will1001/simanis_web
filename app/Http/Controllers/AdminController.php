@@ -57,6 +57,7 @@ class AdminController extends Controller
         'badan_usaha.satuan_produksi',
         'badan_usaha.nilai_produksi_perbulan',
         'badan_usaha.nilai_bahan_baku_perbulan',
+        'badan_usaha.omset',
         'badan_usaha_documents.nib_file',
         'badan_usaha_documents.bentuk_usaha_file',
         'badan_usaha_documents.sertifikat_halal_file',
@@ -99,6 +100,7 @@ class AdminController extends Controller
         'badan_usaha.satuan_produksi',
         'badan_usaha.nilai_produksi_perbulan',
         'badan_usaha.nilai_bahan_baku_perbulan',
+        'badan_usaha.omset',
         // 'badan_usaha_documents.nib_file',
         // 'badan_usaha_documents.bentuk_usaha_file',
         // 'badan_usaha_documents.sertifikat_halal_file',
@@ -147,6 +149,7 @@ class AdminController extends Controller
         'satuan_produksi',
         'nilai_produksi_perbulan',
         'nilai_bahan_baku_perbulan',
+        'omset',
         'lat',
         'lng',
         'media_sosial',
@@ -184,6 +187,7 @@ class AdminController extends Controller
         'badan_usaha.satuan_produksi',
         'badan_usaha.nilai_produksi_perbulan',
         'badan_usaha.nilai_bahan_baku_perbulan',
+        'badan_usaha.omset',
     ];
     public function index($pages, $subPages = "", $id = "")
     {
