@@ -157,12 +157,7 @@
                 <form action="#">
                     <button onclick="openPopUp('{{$item->dana_id}}',event)" class="bg-ditolakTextColor text-white p-1 rounded-lg"><img class="w-[65px]" src="{{ asset('/Icon-svg/dilarang.svg') }}" alt="icon"></button>
                 </form>
-                <form class="bg-violet-600 text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Lunas" method="post">
-                    <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
-                    @csrf
-                    <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button type="submit"><img class="icon-size" src="{{ asset('/images/lunas.png') }}" alt="icon"></button>
-                </form>
+               
             </div>
         </td>
     </tr>

@@ -520,8 +520,13 @@ class PerbankanController extends Controller
         // }
 
 
+        if ($status == "Lunas") {
 
-        return redirect('/admin/daftarPengajuanDana');
+            return redirect('/perbankan/historyPengajuanDana');
+        } else {
+
+            return redirect('/perbankan/daftarPengajuanDana');
+        }
     }
 
     public function exportExcel()
