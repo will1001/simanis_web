@@ -282,7 +282,7 @@ class PerbankanController extends Controller
                             // ->whereNotNull("data_tambahan.ktp")
                             // ->whereNotNull("data_tambahan.kk")
                             ->latest('dana_created_at')->get();
-                        // dd($PengajuanDana);
+                        // dd($Auth::id());
                         $JumlahPinjaman = JumlahPinjaman::all();
                         $JangkaWaktu = JangkaWaktu::all();
                         $SimulasiAngsuran = SimulasiAngsuran::all();
@@ -321,13 +321,17 @@ class PerbankanController extends Controller
                                 // 'data_tambahan.ktp',
                                 // 'data_tambahan.kk',
                             )
-                            ->where("instansi", "BANK")
-                            ->where("pengajuan_dana.status", "Diterima")
-                            ->orWhere("pengajuan_dana.status", "Ditolak")
-                            ->orWhere("pengajuan_dana.status", "Lunas")
+                            // ->where("instansi", "BANK")
+                            ->where("id_instansi", Auth::id())
+                            // ->where("pengajuan_dana.status", "Diterima")
+                            // ->orWhere("pengajuan_dana.status", "Ditolak")
+                            // ->orWhere("pengajuan_dana.status", "Lunas")
+                            ->where("pengajuan_dana.status", "not like", "%Menunggu%")
                             ->where("pengajuan_dana.alasan", "not like", "%Ditolak Admin%")
                             ->orderBy('dana_created_at', 'desc')->get();
                         // dd($PengajuanDana);
+                        // dd(Auth::id());
+
                         $params = [
                             'PengajuanDana' => $PengajuanDana,
                             'pages' => $pages,
@@ -342,14 +346,15 @@ class PerbankanController extends Controller
                             ->leftJoin('instansi', 'simulasi_angsuran.id_instansi', '=', 'instansi.id')
                             ->select('list_jangka_waktu.*', 'list_jumlah_pinjaman.*', 'instansi.*', 'simulasi_angsuran.*', 'list_jangka_waktu.id as id_jangka_waktu', 'list_jumlah_pinjaman.id as id_jumlah_pinjaman', 'instansi.id as id_instansi', 'simulasi_angsuran.id as id')
                             ->where("instansi.user_id", Auth::id())
-                            ->orderByRaw('CONVERT(list_jangka_waktu.waktu, SIGNED) asc')
+                            // ->where("instansi.simulasi_angsuran", Auth::id())
+                            ->orderByRaw('CONVERT(list_jangka_waktu.waktu, SIGNED) desc')
                             ->get();
                         // dd($Simulasi);
 
 
                         $JangkaWaktu = JangkaWaktu::where("id_instansi", $Instansi->id)->orderBy('waktu', 'ASC')->get();
                         $JumlahPinjaman = JumlahPinjaman::where("id_instansi", $Instansi->id)->orderByRaw('CONVERT(jumlah, SIGNED) asc')->get();
-                        // dd($Simulasi);
+                        // dd($JangkaWaktu);
 
                         $params = [
                             'pages' => $pages,

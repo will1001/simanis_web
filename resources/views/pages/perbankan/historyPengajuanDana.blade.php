@@ -139,7 +139,7 @@
                     <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="#" method="get"> -->
                     @csrf
                     <input type="text" value="{{$item->nik}}" name="nik" style="display:none;">
-                    <button type="submit"><img class="icon-size" src="{{ asset('/images/lunas.png') }}" alt="icon"></button>
+                    <button onclick="openPopUp('{{$item->dana_id}}',event)" type="button"><img class="icon-size" src="{{ asset('/images/lunas.png') }}" alt="icon"></button>
                 </form>
                 <!-- <form class="bg-disetujuiTextColor text-white p-1 rounded-lg flex" action="/bank/dana/{{$item->dana_id}}/status/Diterima" method="post">
                     @csrf
@@ -189,17 +189,17 @@
 <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
 <div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
-    <h4>Penolakan Ajuan Dana</h4>
+    <h4>Melunasi Pembiayaan Usaha ?</h4>
     <br />
-    <form action="" method="post" id="formPenolakan">
+    <form action="" method="post" id="formLunas">
         @csrf
 
-        <div class="flex items-center justify-between">
+        <!-- <div class="flex items-center justify-between">
             <span>Alasan Penolakan</span>
             <textarea class="border-2 border-gray-300 w-[70%]" name="alasan" rows="7" required></textarea>
-        </div>
+        </div> -->
 
-        <div class="flex items-center justify-end mt-[100px]">
+        <div class="flex items-center justify-center mt-[10px]">
             <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
             <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
         </div>
@@ -213,10 +213,10 @@
 
         const blackBg = document.getElementById('detailPopUpBlackbg');
         const detailPopUp = document.getElementById('detailPopUp');
-        const formPenolakan = document.getElementById('formPenolakan');
+        const formLunas = document.getElementById('formLunas');
         blackBg.style.visibility = "visible";
         detailPopUp.style.visibility = "visible";
-        formPenolakan.action = `/bank/dana/${id_pengajuan_dana}/status/Ditolak`;
+        formLunas.action = `/bank/dana/${id_pengajuan_dana}/status/Lunas`;
 
     }
     const closeDetails = () => {
