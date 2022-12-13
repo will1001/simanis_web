@@ -4,7 +4,6 @@ namespace App\Imports;
 
 use App\Models\BadanUsaha;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Webpatser\Uuid\Uuid;
 use Illuminate\Support\Str;
 
 class BadanUsahaImport implements ToModel
@@ -21,7 +20,7 @@ class BadanUsahaImport implements ToModel
     {
 
         return new BadanUsaha([
-            'id' => Uuid::generate(),
+            'id' => (string) Str::uuid(),
             'nik'     => $row[0],
             'nama_direktur'    => $row[1],
             'id_kabupaten' => $row[2],
@@ -46,7 +45,8 @@ class BadanUsahaImport implements ToModel
             'satuan_produksi' => $row[21],
             'nilai_produksi_perbulan' => $row[22],
             'nilai_bahan_baku_perbulan' => $row[23],
-            'omset' => $row[24],
+            'id_kbli' => $row[24],
+            'omset' => $row[25],
         ]);
     }
 }
