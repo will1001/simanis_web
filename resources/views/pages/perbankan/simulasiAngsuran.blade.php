@@ -63,7 +63,7 @@ $jangka_Waktu = [
       @csrf
       <div class="flex justify-between items-center mr-[20px]">
         <span>Jumlah Pembiayaan</span>
-        <input class="border-1 border-gray-500  p-2" type="number" name="jumlah_dana" required>
+        <input onkeyup="keyup('jumlah_dana',event)" id="jumlah_dana" class="border-1 border-gray-500  p-2" type="text" name="jumlah_dana" required>
       </div>
       <br>
       <div class="flex justify-between items-center mr-[20px]">
@@ -79,7 +79,7 @@ $jangka_Waktu = [
       <br>
       <div class="flex justify-between items-center mr-[20px]">
         <span>Angsuran</span>
-        <input class="border-1 border-gray-500  p-2" type="number" name="angsuran" required>
+        <input onkeyup="keyup('angsuran',event)" id="angsuran" class="border-1 border-gray-500  p-2" type="text" name="angsuran" required>
       </div>
   </div>
   <div class="flex flex-row mx-auto gap-4">
@@ -187,14 +187,14 @@ $jangka_Waktu = [
     </tr>
     @foreach($JumlahPinjaman as $key1=>$item)
     <tr>
-      <th class="text-center p-2" scope="row">{{$item->jumlah}}</th>
+      <th class="text-center p-2" scope="row">{{number_format($item->jumlah)}}</th>
       @foreach($Simulasi as $key2=>$item2)
       @foreach($JangkaWaktu as $key3=>$item3)
       @if($item2->id_jml_pinjaman == $item->id)
       @if($item2->waktu == $item3->waktu)
       <td class="text-center">
         <div class="flex items-center">
-          <span class="mr-2 w-[70px]">{{ $item2->angsuran}}</span>
+          <span class="mr-2 w-[70px]">{{ $item2->angsuran != ''?number_format($item2->angsuran):$item2->angsuran}}</span>
           <!-- <a onclick="lihatDetailsEdit('{{ $item2->id}}')" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a> -->
         </div>
       </td>
@@ -294,6 +294,7 @@ $jangka_Waktu = [
     popUpDelete.style.visibility = "collapse";
 
   }
+
   const openPopUpStatus = (id, status) => {
 
     const blackBg = document.getElementById('detailPopUpBlackbg');
@@ -315,6 +316,18 @@ $jangka_Waktu = [
     blackBg.style.visibility = "visible";
     popUpDelete.style.visibility = "visible";
     formUserDelete.action = `/user/delete/${id}`;
+
+  }
+  const keyup = (id, e) => {
+    let val = e.target.value;
+    if (val === null || val === "") {
+      val = 0;
+    }
+    const a = new Intl.NumberFormat('en-US').format(parseFloat(val.replace(/,/g, '')));
+    const input = document.getElementById(id);
+
+    console.log(a);
+    input.value = a;
 
   }
 </script>

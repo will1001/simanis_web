@@ -394,14 +394,20 @@ class PerbankanController extends Controller
 
     function tambahSimulasiAngsuran(Request $r)
     {
+
+        $jumlah_dana_input = str_replace(',', '', $r->input("jumlah_dana"));
+        $angsuran = str_replace(',', '', $r->input("angsuran"));
+
+        // dd($jumlah_dana_input);
+
         $Instansi = Instansi::where("user_id", Auth::id())->first();
-        $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $r->input("jumlah_dana"))->first();
+        $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $jumlah_dana_input)->first();
         if (!$dana) {
             $id_dana = (string) Str::uuid();
             $JumlahPinjaman = new JumlahPinjaman([
                 'id' => $id_dana,
                 'id_instansi' => $Instansi->id,
-                'jumlah' => $r->input("jumlah_dana"),
+                'jumlah' => $jumlah_dana_input,
             ]);
 
             $JumlahPinjaman->save();
@@ -429,7 +435,7 @@ class PerbankanController extends Controller
         //     $JangkaWaktu->save();
         // }
 
-        $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $r->input("jumlah_dana"))->first();
+        $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $jumlah_dana_input)->first();
         $waktu = JangkaWaktu::where("id_instansi", $Instansi->id)->where("waktu", $r->input("jangka_waktu"))->first();
 
 
@@ -464,13 +470,13 @@ class PerbankanController extends Controller
                 'id_instansi' => $Instansi->id,
                 'id_jml_pinjaman' => $dana->id,
                 'id_jangka_waktu' => $waktu->id,
-                'angsuran' => $r->input("angsuran"),
+                'angsuran' => $angsuran,
             ]);
 
             $SimulasiAngsuran->save();
         } else {
 
-            $simulasi2->angsuran = $r->input("angsuran");
+            $simulasi2->angsuran = $angsuran;
             $simulasi2->save();
         }
 
