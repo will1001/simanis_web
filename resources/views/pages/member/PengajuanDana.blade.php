@@ -324,7 +324,8 @@ $baseUrl = env('APP_URL') . '/';
 
 
     } else {
-
+      jmlDanaSelectChild.innerHTML = `<option value="" disabled  selected>Pilih Jumlah Pinjaman</option>`;
+      waktuPinjamanSelectChild.innerHTML = `<option value="" disabled  selected>Pilih Jangka Waktu</option>`;
       detailKoperasi.style.visibility = "collapse";
       jmlPinjaman.style.visibility = "collapse";
       waktuPinjaman.style.visibility = "collapse";

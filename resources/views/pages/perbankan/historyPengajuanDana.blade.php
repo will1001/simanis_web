@@ -188,8 +188,8 @@
 
 <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
-<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-80">
-    <h4>Melunasi Pembiayaan Usaha ?</h4>
+<div style="visibility: collapse;" id="detailPopUp" class="bg-white rounded-xl popUpContainer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 w-30">
+    <h4 class="text-md">Apakah Pembiayaan Usaha IKM Lunas ?</h4>
     <br />
     <form action="" method="post" id="formLunas">
         @csrf
@@ -200,8 +200,8 @@
         </div> -->
 
         <div class="flex items-center justify-center mt-[10px]">
-            <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
-            <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Submit</button>
+            <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Tutup</div>
+            <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Lunas</button>
         </div>
     </form>
 

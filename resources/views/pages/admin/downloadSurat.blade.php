@@ -14,6 +14,24 @@
     @php
     $kopBulan=date("m",strtotime($PengajuanDana->updated_at));
     $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
+    $footTanggal=date("d",strtotime($PengajuanDana->created_at));
+    $footBulan=date("m",strtotime($PengajuanDana->created_at));
+    $footTahun=date("Y",strtotime($PengajuanDana->created_at));
+
+    $BulanIndo;
+
+    if($footBulan == 1) $BulanIndo = "JANUARI";
+    if($footBulan == 2) $BulanIndo = "FEBRUARI";
+    if($footBulan == 3) $BulanIndo = "MARET";
+    if($footBulan == 4) $BulanIndo = "APRIL";
+    if($footBulan == 5) $BulanIndo = "MEI";
+    if($footBulan == 6) $BulanIndo = "JUNI";
+    if($footBulan == 7) $BulanIndo = "JULI";
+    if($footBulan == 8) $BulanIndo = "AGUSTUS";
+    if($footBulan == 9) $BulanIndo = "SEPTEMBER";
+    if($footBulan == 10) $BulanIndo = "OKTOBER";
+    if($footBulan == 11) $BulanIndo = "NOVEMBER";
+    if($footBulan == 12) $BulanIndo = "DESEMBER";
     @endphp
     <div id="surat" class="">
         <div class="flex justify-center mb-4">
@@ -89,9 +107,9 @@
         </div>
         <div class="flex justify-end mt-[50px]">
             <div class="text-center flex flex-col">
-                <span>Mataram, {{date('d-m-Y', strtotime($PengajuanDana->updated_at))}} </span>
+                <span>Mataram, {{$footTanggal}}-{{$BulanIndo}}-{{$footTahun}} </span>
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
-                <img src="{{ asset('/images/signKadis.png') }}">
+                <img class="h-[60px]" src="{{ asset($Surat->ttd) }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
                 <span>Pembina Utama Muda</span>
 

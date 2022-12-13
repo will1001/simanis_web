@@ -6,6 +6,9 @@ $kopTanggal=date("d",strtotime($PengajuanDana->updated_at));
 $kopBulan=date("m",strtotime($PengajuanDana->updated_at));
 $kopTahun=date("Y",strtotime($PengajuanDana->updated_at));
 
+
+
+
 $kopBulanRomawi;
 
 if($kopBulan == 1) $kopBulanRomawi = "I";
@@ -20,6 +23,26 @@ if($kopBulan == 9) $kopBulanRomawi = "IX";
 if($kopBulan == 10) $kopBulanRomawi = "X";
 if($kopBulan == 11) $kopBulanRomawi = "XI";
 if($kopBulan == 12) $kopBulanRomawi = "XII";
+
+
+$footTanggal=date("d",strtotime($PengajuanDana->created_at));
+$footBulan=date("m",strtotime($PengajuanDana->created_at));
+$footTahun=date("Y",strtotime($PengajuanDana->created_at));
+
+$BulanIndo;
+
+if($footBulan == 1) $BulanIndo = "JANUARI";
+if($footBulan == 2) $BulanIndo = "FEBRUARI";
+if($footBulan == 3) $BulanIndo = "MARET";
+if($footBulan == 4) $BulanIndo = "APRIL";
+if($footBulan == 5) $BulanIndo = "MEI";
+if($footBulan == 6) $BulanIndo = "JUNI";
+if($footBulan == 7) $BulanIndo = "JULI";
+if($footBulan == 8) $BulanIndo = "AGUSTUS";
+if($footBulan == 9) $BulanIndo = "SEPTEMBER";
+if($footBulan == 10) $BulanIndo = "OKTOBER";
+if($footBulan == 11) $BulanIndo = "NOVEMBER";
+if($footBulan == 12) $BulanIndo = "DESEMBER";
 
 @endphp
 <div>
@@ -40,7 +63,7 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
                 <!-- <span>Jl. Langko No.70, Pejeruk, Kec. Ampenan, Kota Mataram,</span>
                 <span>Nusa Tenggara Bar. 83114</span> -->
                 <span class="text-black">{{$Surat->alamat_kop}}</span>
-                <span class="text-black">email : disperin@ntbprov.go.id    <span class="ml-[20px]">website: https://disperin.ntbprov.go.id</span></span>
+                <span class="text-black">email : disperin@ntbprov.go.id <span class="ml-[20px]">website: https://disperin.ntbprov.go.id</span></span>
             </div>
             <span class="ml-[120px] h-[84px]"></span>
             <img class="ml-[100px] h-[84px] hidden" src="{{ asset('/images/NTB Gemilang Logo 1.png') }}" />
@@ -102,7 +125,7 @@ if($kopBulan == 12) $kopBulanRomawi = "XII";
         </div>
         <div class="flex justify-end mt-[50px]">
             <div class="text-center flex flex-col">
-                <span>Mataram, {{date('d-m-Y', strtotime($PengajuanDana->updated_at))}} </span>
+                <span>Mataram, {{$footTanggal}}-{{$BulanIndo}}-{{$footTahun}} </span>
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
                 <img class="h-[60px]" src="{{ asset($Surat->ttd) }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>

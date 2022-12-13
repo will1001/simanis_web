@@ -191,7 +191,7 @@ class MemberController extends Controller
 
                     return view("pages.member.{$subPages}", ['BadanUsaha' => $badan_usaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()]);
                 } else {
-                    $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields];
+                    $params = ['BadanUsaha' => $BadanUsaha, 'userDataProgress' => $userDataProgress, 'pages' => $pages, 'fields' => $this->fields, 'user_id' => Auth::id()];
 
                     if ($pages == "kartu") {
                         $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);

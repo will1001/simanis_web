@@ -383,11 +383,12 @@ class AdminController extends Controller
                     if ($pages == "daftarPengajuanDana") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->where("pengajuan_dana.status", "Menunggu")
                             ->where("pengajuan_dana.alasan", null)
                             ->orWhere("pengajuan_dana.alasan", '')
-                            ->select('badan_usaha.nama_usaha', 'badan_usaha.nik', 'badan_usaha.nama_direktur', 'badan_usaha.id as id_badan_usaha', 'kabupaten.name as kabupaten', 'pengajuan_dana.*')
+                            ->select('badan_usaha.nama_usaha', 'badan_usaha.nik', 'badan_usaha.nama_direktur', 'badan_usaha.id as id_badan_usaha', 'kabupaten.name as kabupaten', 'pengajuan_dana.*', 'instansi.nama as nama_instansi')
                             ->orderBy('created_at', 'desc')->get();
                         // dd($PengajuanDana);
 
@@ -400,6 +401,7 @@ class AdminController extends Controller
                     if ($pages == "historyPengajuanDana") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->select(
@@ -418,6 +420,7 @@ class AdminController extends Controller
                                 'pengajuan_dana.updated_at as dana_updated_at',
                                 'data_tambahan.ktp',
                                 'data_tambahan.kk',
+                                'instansi.nama as nama_instansi',
                             )
                             // ->where("pengajuan_dana.status", "Diterima")
                             ->Where("pengajuan_dana.alasan", '!=', "")

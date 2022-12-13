@@ -55,6 +55,7 @@
         <th class="text-center p-2 "><span class="flex justify-center my-auto mx-1">Jangka Waktu</span></th>
         <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal Pengajuan</span></th>
         <th class="text-center p-2 "><span class="flex justify-center my-auto mx-3">Tanggal Diterima/Ditolak</span></th>
+        <th class="text-center p-2 "><span class="">Instansi</span></th>
         <th class="text-center p-2 "><span class="">Status</span></th>
         <th class="text-center p-2 "><span class="">Keterangan</span></th>
         <th class="rounded-tr-xl">Aksi</span></th>
@@ -83,6 +84,7 @@
         <td class="text-center p-2  w-[10px]">{{$item->waktu_pinjaman}}</td>
         <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at))}}</td>
         <td class="text-center p-4 whitespace-nowrap">{{date('d-m-Y', strtotime($item->dana_created_at)) == date('d-m-Y', strtotime($item->dana_updated_at)) && $item->status == 'Menunggu' ?'':date('d-m-Y', strtotime($item->dana_updated_at))}}</td>
+        <td class="text-center p-2">{{$item->nama_instansi}}</td>
         <td class="text-center p-2"><span class="{{$statusClass}} p-2 rounded-xl">{{$item->status}}</span></td>
         <td class="text-center p-2">{{$item->alasan}}</td>
 

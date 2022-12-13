@@ -297,6 +297,25 @@ class HomeController extends Controller
 
         return back();
     }
+    public function tampil_surat($user_id = null)
+    {
+        $User = User::find($user_id);
+        $BadanUsaha = BadanUsaha::where('nik', $User->nik)->get();
+        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.id_instansi', '=', 'users.id')
+            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+            ->select("pengajuan_dana.id as id", "instansi.*", "pengajuan_dana.*")
+            ->where('pengajuan_dana.user_id', $user_id)->orWhere('pengajuan_dana.status', "Menunggu")
+            ->orWhere('pengajuan_dana.alasan', 'LIKE', "%Dinas Perindustrian%")->orderBy('pengajuan_dana.created_at', 'desc')->first();
+        $surat = Surat::find(1);
+
+        $params = [
+            'BadanUsaha' => $BadanUsaha,
+            'PengajuanDana' => $PengajuanDana,
+            'Surat' => $surat,
+        ];
+
+        return view("pages.member.suratRekomendasi", $params);
+    }
     public function download_surat($user_id = null)
     {
 

@@ -255,6 +255,7 @@ class PerbankanController extends Controller
                     if ($pages == "daftarPengajuanDana") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             // ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->select(
@@ -271,6 +272,7 @@ class PerbankanController extends Controller
                                 'pengajuan_dana.user_id',
                                 'pengajuan_dana.created_at as dana_created_at',
                                 'pengajuan_dana.updated_at as dana_updated_at',
+                                'instansi.nama as nama_instansi',
                                 // 'data_tambahan.ktp',
                                 // 'data_tambahan.kk',
                             )
@@ -302,6 +304,7 @@ class PerbankanController extends Controller
                     if ($pages == "historyPengajuanDana") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             // ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->select(
@@ -318,6 +321,7 @@ class PerbankanController extends Controller
                                 'pengajuan_dana.user_id',
                                 'pengajuan_dana.created_at as dana_created_at',
                                 'pengajuan_dana.updated_at as dana_updated_at',
+                                'instansi.nama as nama_instansi',
                                 // 'data_tambahan.ktp',
                                 // 'data_tambahan.kk',
                             )

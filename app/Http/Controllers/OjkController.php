@@ -218,6 +218,7 @@ class OjkController extends Controller
                     if ($pages == "dashboard") {
                         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
                             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+                            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
                             ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
                             ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->select(
@@ -233,6 +234,7 @@ class OjkController extends Controller
                                 'pengajuan_dana.user_id',
                                 'pengajuan_dana.created_at as dana_created_at',
                                 'pengajuan_dana.updated_at as dana_updated_at',
+                                'instansi.nama as nama_instansi',
                             )
                             ->where("instansi", "BANK")
                             ->where("pengajuan_dana.alasan", "not like", "%Ditolak Admin%")
