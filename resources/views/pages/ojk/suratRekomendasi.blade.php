@@ -136,6 +136,31 @@ if($footBulan == 12) $BulanIndo = "DESEMBER";
                 <span>{{$Surat->nip}}</span>
             </div>
         </div>
+
+
+     
+
+
+    <div class="flex">
+        <div class="flex items-end">
+            <img class="h-[80px]" src="{{ asset('/images/logo_footer.png') }}">
+            <span class="mr-2">Industrialisasi dari NTB untuk Indonesia</span>
+        </div>
+
+        <div class="flex items-end">
+            <img class="h-[25px] mr-1" src="{{ asset('/images/logo_fb.png') }}">
+            <span class="mr-2">Dinas_perindustrianntb</span>
+        </div>
+
+        <div class="flex items-end">
+            <img class="h-[25px] mr-1" src="{{ asset('/images/logo_youtube.png') }}">
+            <span class="mr-2">Dinas Perindustrian Provinsi NTB</span>
+        </div>
+
+        <div class="flex items-end">
+            <img class="h-[25px] mr-1" src="{{ asset('/images/logo_instagram.png') }}">
+            <span class="mr-2">@dinas_perindustrianntb</span>
+        </div>
     </div>
 
     @endsection

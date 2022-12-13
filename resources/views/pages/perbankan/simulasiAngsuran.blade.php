@@ -23,11 +23,42 @@
 <div onclick="closeDetails()" style="visibility: collapse;" id="detailPopUpBlackbg" class="bg-black opacity-40 w-full h-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30">
 </div>
 
-
+<?php
+$jangka_Waktu = [
+  (object)array(
+    "id" => 1,
+    "waktu" => 6
+  ),
+  (object)array(
+    "id" => 2,
+    "waktu" => 12
+  ),
+  (object)array(
+    "id" => 3,
+    "waktu" => 18
+  ),
+  (object)array(
+    "id" => 4,
+    "waktu" => 24
+  ),
+  (object)array(
+    "id" => 5,
+    "waktu" => 36
+  ),
+  (object)array(
+    "id" => 6,
+    "waktu" => 48
+  ),
+  (object)array(
+    "id" => 7,
+    "waktu" => 60
+  )
+]
+?>
 <div style="visibility: collapse;" id="detailPopUp" class=" h-[400px] fixed boxer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white rounded-2xl">
   <div onclick="closeDetails()" class="flex-row-reverse flex cursor-pointer"><img src="{{ asset('/Icon-svg/exit.svg') }}" class="iconSize mt-3 mr-2" alt="close"></div>
-  <span class="font-extrabold text-xl translate-x-1 text-slate-800 ml-5 mt-2 ">Tambah Data</span>
-  <div class="flex-col ml-5">
+  <!-- <span class="font-extrabold text-xl translate-x-1 text-slate-800 ml-[100px] mt-2 ">Tambah Data</span> -->
+  <div class="flex-col ml-5 mt-2">
     <form action="/simulasi/angsuran" method="post">
       @csrf
       <div class="flex justify-between items-center mr-[20px]">
@@ -37,7 +68,13 @@
       <br>
       <div class="flex justify-between items-center mr-[20px]">
         <span>Jangka Waktu</span>
-        <input class="border-1 border-gray-500  p-2" type="number" name="jangka_waktu" required>
+        <!-- <input class="border-1 border-gray-500  p-2" type="number" name="jangka_waktu" required> -->
+        <select class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[200px]" data-live-search="true" name="jangka_waktu" required>
+          <option value="">Jangka Waktu</option>
+          @foreach($jangka_Waktu as $key=>$item)
+          <option value="{{$item->waktu}}">{{$item->waktu}}</option>
+          @endforeach
+        </select>
       </div>
       <br>
       <div class="flex justify-between items-center mr-[20px]">
@@ -138,35 +175,39 @@
 
     <tr class="bg-tableColor-900 text-white text-center h-16">
       <td rowspan="2">Platfond</td>
-      <th class="text-center border-1 border-white" colspan="{{count($JangkaWaktu)}}" scope="colgroup">Jangka Waktu</th>
+      <th class="text-center border-1 border-white" colspan="{{count($jangka_Waktu)}}" scope="colgroup">Jangka Waktu</th>
       <td rowspan="2">Hapus</td>
     </tr>
     <tr class="bg-tableColor-900 text-white text-center">
 
-      @foreach($JangkaWaktu as $key=>$item)
+      @foreach($jangka_Waktu as $key=>$item)
       <th class="text-center border-1 border-white p-2" scope="col">{{$item->waktu}}</th>
       @endforeach
 
     </tr>
     @foreach($JumlahPinjaman as $key1=>$item)
     <tr>
-      <th class="text-center p-2" scope="row">{{number_format($item->jumlah)}}</th>
+      <th class="text-center p-2" scope="row">{{$item->jumlah}}</th>
       @foreach($Simulasi as $key2=>$item2)
       @foreach($JangkaWaktu as $key3=>$item3)
-      @if($item2->id_jml_pinjaman == $item->id && $item2->id_jangka_waktu == $item3->id)
-        <td class="text-center">
-          <div class="flex items-center">
-            <span class="mr-2 w-[70px]">{{ number_format($item2->angsuran)}}</span>
-            <a onclick="lihatDetailsEdit('{{ $item2->id}}')" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a>
-          </div>
-        </td>
-    
+      @if($item2->id_jml_pinjaman == $item->id)
+      @if($item2->waktu == $item3->waktu)
+      <td class="text-center">
+        <div class="flex items-center">
+          <span class="mr-2 w-[70px]">{{ $item2->angsuran}}</span>
+          <!-- <a onclick="lihatDetailsEdit('{{ $item2->id}}')" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a> -->
+        </div>
+      </td>
+      @endif
       @endif
       @endforeach
       @endforeach
       <td class="text-center">
-        <div class="flex justify-center items-center">
 
+        <div class="flex justify-center items-center">
+          <form action="#">
+            <a onclick="lihatDetails()" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a>
+          </form>
           <form method="POST" action="/simulasi/angsuran/delete/{{$item->jumlah}}" class="p-2 bg-buttonDelete rounded-md">
             @csrf
             <button>

@@ -116,6 +116,29 @@
             </div>
         </div>
 
+
+        <div class="flex mt-[100px]">
+            <div class="flex items-end">
+                <img class="h-[30px]" src="{{ asset('/images/logo_footer.png') }}">
+                <span class="mr-2 text-[10px]">Industrialisasi dari NTB untuk Indonesia</span>
+            </div>
+
+            <div class="flex items-end">
+                <img class="h-[15px] mr-1" src="{{ asset('/images/logo_fb.png') }}">
+                <span class="mr-2 text-[10px]">Dinas_perindustrianntb</span>
+            </div>
+
+            <div class="flex items-end">
+                <img class="h-[15px] mr-1" src="{{ asset('/images/logo_youtube.png') }}">
+                <span class="mr-2 text-[10px]">Dinas Perindustrian Provinsi NTB</span>
+            </div>
+
+            <div class="flex items-end">
+                <img class="h-[15px] mr-1" src="{{ asset('/images/logo_instagram.png') }}">
+                <span class="mr-2 text-[10px]">@dinas_perindustrianntb</span>
+            </div>
+        </div>
+
         <!-- <div class="p-[100px]">
     <button onclick="printSurat()" class="rounded-xl px-4 py-2 bg-blue-500 text-white">Print</button>
     <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Download PDF</button>
