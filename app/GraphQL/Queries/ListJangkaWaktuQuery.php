@@ -39,6 +39,6 @@ class ListJangkaWaktuQuery extends Query
     {
         
 
-        return JangkaWaktu::where('id_instansi', $args['id_instansi'])->orderByRaw('CONVERT(waktu, SIGNED) asc')->get();
+        return JangkaWaktu::orderByRaw('CONVERT(waktu, SIGNED) asc')->get();
     }
 }
