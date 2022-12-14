@@ -170,6 +170,10 @@ class BadanUsahaMutation extends Mutation
                 'name' => 'nilai_bahan_baku_perbulan',
                 'type' => Type::string(),
             ],
+            'omset' => [
+                'name' => 'omset',
+                'type' => Type::string(),
+            ],
             'lat' => [
                 'name' => 'lat',
                 'type' => Type::string(),
