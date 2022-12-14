@@ -77,6 +77,22 @@ class PengajuanDanaMutation extends Mutation
         $jumlah_dana = null;
         $waktu_pinjaman = null;
 
+        $PengajuanDana = PengajuanDana::where('user_id', $args["user_id"])->first();
+
+        if ($PengajuanDana != null) {
+            if ($PengajuanDana->status != "Lunas") {
+                if ($PengajuanDana->status != "Menunggu") {
+                    return  (object)array(
+                        "messagges" => "Anda Harus Menunggu 14 Hari Untuk Mengajukan Pembiayaan Lagi",
+                    );
+                } else {
+                    return  (object)array(
+                        "messagges" => "Anda Memiliki Pinjaman yang Sedang Aktif",
+                    );
+                }
+            }
+        }
+
         if ($args["jumlah_dana_bank"] != "null") {
             $JumlahPinjaman = JumlahPinjaman::find($args["jumlah_dana_bank"]);
             $JangkaWaktu = JangkaWaktu::find($args["jangka_waktu_bank"]);
