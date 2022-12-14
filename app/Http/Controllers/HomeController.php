@@ -238,6 +238,10 @@ class HomeController extends Controller
 
             $data = $data->Where($field->prop, '=', "{$field->value}");
         }
+        $data = $data->whereNotNull("nama_direktur");
+        $data = $data->whereNotNull("alamat_lengkap");
+        $data = $data->whereNotNull("nama_usaha");
+        $data = $data->whereNotNull("jenis_usaha");
 
         $data = $data->paginate(50, $this->fields);
         return view('pages.chartDetails', ['data' => $data, 'title' => $title, 'keyword' => '', 'filter' => $filter]);
