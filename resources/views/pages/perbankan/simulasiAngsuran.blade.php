@@ -97,11 +97,38 @@ $jangka_Waktu = [
   <div onclick="closeDetails()" class="flex-row-reverse flex cursor-pointer"><img src="{{ asset('/Icon-svg/exit.svg') }}" class="iconSize mt-3 mr-2" alt="close"></div>
   <span class="font-extrabold text-xl translate-x-1 text-slate-800 ml-5 mt-2 ">Edit Data</span>
   <div class="flex-col ml-5">
-    <form id="formEdit" action="" method="post">
+    <form action="/simulasi/angsuran" method="post">
       @csrf
+      <!-- <div class="flex justify-between items-center mr-[20px]">
+        <span>Jumlah Pembiayaan</span>
+        <select class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[200px]" data-live-search="true" name="jumlah_dana" id="jumlah_dana_edit" required>
+          <option value="">Jumlah Pembiayaan</option>
+          @foreach($JumlahPinjaman as $key=>$item)
+          <option value="{{$item->jumlah}}">{{$item->jumlah}}</option>
+          @endforeach
+        </select>
+      </div> -->
+      <div class="flex justify-start items-center mr-[20px]">
+        <span class=" mr-3">Jumlah Pembiayaan</span>
+        <input class="hidden" type="text" id="jumlah_dana_edit" name="jumlah_dana">
+        <span id="jumlah_dana_edit_span"></span>
+      </div>
+
+      <br>
+      <div class="flex justify-between items-center mr-[20px]">
+        <span>Jangka Waktu</span>
+        <!-- <input class="border-1 border-gray-500  p-2" type="number" name="jangka_waktu" required> -->
+        <select class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[200px]" data-live-search="true" name="jangka_waktu" required>
+          <option value="">Jangka Waktu</option>
+          @foreach($jangka_Waktu as $key=>$item)
+          <option value="{{$item->waktu}}">{{$item->waktu}}</option>
+          @endforeach
+        </select>
+      </div>
+      <br>
       <div class="flex justify-between items-center mr-[20px]">
         <span>Angsuran</span>
-        <input id="angsuran_edit" class="border-1 border-gray-500  p-2" type="number" name="angsuran" required>
+        <input onkeyup="keyup('angsuran_edit',event)" id="angsuran_edit" class="border-1 border-gray-500  p-2" type="text" name="angsuran" required>
       </div>
   </div>
   <div class="flex flex-row mx-auto gap-4">
@@ -109,7 +136,7 @@ $jangka_Waktu = [
       <input onclick="closeDetails()" type="button" value="Cancel" class=" text-slate-10000 text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">
     </div>
     <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md">
-      <button type="submit" class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Submit</button>
+      <button type="submit" class=" text-white text-sm font-bold my-auto mx-auto h-[17px] ">Edit Data</button>
     </div>
   </div>
   </form>
@@ -206,7 +233,7 @@ $jangka_Waktu = [
 
         <div class="flex justify-center items-center">
           <form action="#">
-            <a onclick="lihatDetails()" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a>
+            <a onclick="lihatDetailsEdit('{{$item->jumlah}}')" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a>
           </form>
           <form method="POST" action="/simulasi/angsuran/delete/{{$item->jumlah}}" class="p-2 bg-buttonDelete rounded-md">
             @csrf
@@ -271,13 +298,19 @@ $jangka_Waktu = [
     blackBg.style.visibility = "visible";
     detailPopUp.style.visibility = "visible";
   }
-  const lihatDetailsEdit = (id) => {
+  const lihatDetailsEdit = (jumlah) => {
+    const jumlah_dana_edit = document.getElementById('jumlah_dana_edit');
+    const jumlah_dana_edit_span = document.getElementById('jumlah_dana_edit_span');
     const blackBg = document.getElementById('detailPopUpBlackbg');
     const detailPopUpEdit = document.getElementById('detailPopUpEdit');
     const formEdit = document.getElementById('formEdit');
     blackBg.style.visibility = "visible";
     detailPopUpEdit.style.visibility = "visible";
-    formEdit.action = "/simulasi/angsuran/edit/" + id;
+    const a = new Intl.NumberFormat('en-US').format(parseFloat(jumlah.replace(/,/g, '')));
+
+    jumlah_dana_edit_span.innerHTML = a;
+    jumlah_dana_edit.value = jumlah;
+    // formEdit.action = "/simulasi/angsuran/edit/" + id;
   }
   const closeDetails = () => {
     const blackBg = document.getElementById('detailPopUpBlackbg');

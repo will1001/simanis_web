@@ -166,7 +166,7 @@ $baseUrl = env('APP_URL') . '/';
     </div>
     <div class="flex justify-between items-center" id="jmlDanaSelect" style="visibility: collapse;">
       <span>Jumlah Pembiayaan</span>
-      <select onchange="pinjamanChange()" id="jmlDanaSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jumlah_dana_bank">
+      <select onchange="pinjamanChange()" id="jmlDanaSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jumlah_dana_bank" required>
         <option value="" disabled selected>Pilih Jumlah Pinjaman</option>
       </select>
     </div>
@@ -176,7 +176,7 @@ $baseUrl = env('APP_URL') . '/';
     </div>
     <div class="flex justify-between items-center" style="visibility: collapse;" id="waktuPinjamanSelect">
       <span>Jangka Waktu</span>
-      <select onchange="jangkaWaktuChange()" id="waktuPinjamanSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jangka_waktu_bank">
+      <select onchange="jangkaWaktuChange()" id="waktuPinjamanSelectChild" class="border-1 border-gray-500 w-[70%] p-2" name="jangka_waktu_bank" required>
         <option value="" disabled selected>Pilih Jangka Waktu</option>
       </select>
     </div>
@@ -200,7 +200,8 @@ $baseUrl = env('APP_URL') . '/';
     <br>
     <div class="flex items-center justify-end">
       <div onclick="closeDetails()" class=" cursor-pointer border-1 border-gray-400 rounded-xl px-4 py-2 mr-3">Batalkan</div>
-      <button class="rounded-xl px-4 py-2 bg-blue-500 text-white">Ajukan Sekarang</button>
+      <button onclick="checkAngsuran()" type="button" class="rounded-xl px-4 py-2 bg-blue-500 text-white">Ajukan Sekarang</button>
+      <button id="ajukan_dana_tombol" class="hidden rounded-xl px-4 py-2 bg-blue-500 text-white">Ajukan Sekarang</button>
     </div>
   </form>
 </div>
@@ -385,5 +386,15 @@ $baseUrl = env('APP_URL') . '/';
   const uploadKK = (e) => {
     const kkLabel = document.getElementById('kkLabel');
     kkLabel.innerHTML = e.target.value.split("\\").pop();
+  }
+  const checkAngsuran = (e) => {
+    const angsuranValue = document.getElementById('angsuranValue');
+    const ajukan_dana_tombol = document.getElementById('ajukan_dana_tombol');
+    console.log(angsuranValue.innerHTML === '0');
+    if (angsuranValue.innerHTML === '0') {
+      alert("Angsuran Tidak Tersedia,Silahkan Pilih Angsuran yang Lain");
+    }
+    ajukan_dana_tombol.click();
+    // console.log(angsuranValue.innerHTML);
   }
 </script>

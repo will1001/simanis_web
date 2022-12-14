@@ -398,7 +398,7 @@ class PerbankanController extends Controller
         $jumlah_dana_input = str_replace(',', '', $r->input("jumlah_dana"));
         $angsuran = str_replace(',', '', $r->input("angsuran"));
 
-        // dd($jumlah_dana_input);
+        // dd($r->input("jumlah_dana"));
 
         $Instansi = Instansi::where("user_id", Auth::id())->first();
         $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $jumlah_dana_input)->first();
