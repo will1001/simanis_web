@@ -347,13 +347,12 @@ class PerbankanController extends Controller
                     if ($pages == "simulasiAngsuran") {
 
                         $Instansi = Instansi::where('user_id', Auth::id())->first();
-                        $Simulasi = SimulasiAngsuran::leftJoin('list_jangka_waktu', 'simulasi_angsuran.id_jangka_waktu', '=', 'list_jangka_waktu.id')
-                            ->leftJoin('list_jumlah_pinjaman', 'simulasi_angsuran.id_jml_pinjaman', '=', 'list_jumlah_pinjaman.id')
+                        $Simulasi = SimulasiAngsuran::leftJoin('list_jumlah_pinjaman', 'simulasi_angsuran.id_jml_pinjaman', '=', 'list_jumlah_pinjaman.id')
                             ->leftJoin('instansi', 'simulasi_angsuran.id_instansi', '=', 'instansi.id')
-                            ->select('list_jangka_waktu.*', 'list_jumlah_pinjaman.*', 'instansi.*', 'simulasi_angsuran.*', 'list_jangka_waktu.id as id_jangka_waktu', 'list_jumlah_pinjaman.id as id_jumlah_pinjaman', 'instansi.id as id_instansi', 'simulasi_angsuran.id as id')
+                            ->select('list_jumlah_pinjaman.*', 'instansi.*', 'simulasi_angsuran.*', 'list_jumlah_pinjaman.id as id_jumlah_pinjaman', 'instansi.id as id_instansi', 'simulasi_angsuran.id as id')
                             ->where("instansi.user_id", Auth::id())
                             ->where("simulasi_angsuran.id_instansi", $Instansi->id)
-                            ->orderByRaw('CONVERT(list_jangka_waktu.waktu, SIGNED) asc')
+                            ->orderByRaw('CONVERT(simulasi_angsuran.id_jangka_waktu, SIGNED) asc')
                             ->get();
                         // dd($Simulasi);
 
@@ -397,88 +396,104 @@ class PerbankanController extends Controller
 
         $jumlah_dana_input = str_replace(',', '', $r->input("jumlah_dana"));
         $angsuran = str_replace(',', '', $r->input("angsuran"));
+        $type = $r->input("type"); 
+        $id_jumlah_dana_edit = $r->input("id_jumlah_dana_edit"); 
 
-        // dd($r->input("jumlah_dana"));
-
+        // dd($r->input("id_jumlah_dana_edit"));
         $Instansi = Instansi::where("user_id", Auth::id())->first();
-        $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $jumlah_dana_input)->first();
-        if (!$dana) {
-            $id_dana = (string) Str::uuid();
-            $JumlahPinjaman = new JumlahPinjaman([
-                'id' => $id_dana,
-                'id_instansi' => $Instansi->id,
-                'jumlah' => $jumlah_dana_input,
-            ]);
 
-            $JumlahPinjaman->save();
-
-            for ($i = 1; $i < 8; $i++) {
-                $SimulasiAngsuran = new SimulasiAngsuran([
-                    'id' => (string) Str::uuid(),
+        if ($type == 'edit') {
+            $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("id", $id_jumlah_dana_edit)->first();
+            $waktu = JangkaWaktu::where("waktu", $r->input("jangka_waktu"))->first();
+            $dana->jumlah = $jumlah_dana_input;
+            $dana->save();
+            $simulasi2 = SimulasiAngsuran::where("id_jml_pinjaman", $dana->id)
+                ->where("id_jangka_waktu", $waktu->id)
+                ->first();
+            $simulasi2->angsuran = $angsuran;
+            $simulasi2->save();
+        } else {
+            $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $jumlah_dana_input)->first();
+            if (!$dana) {
+                $id_dana = (string) Str::uuid();
+                $JumlahPinjaman = new JumlahPinjaman([
+                    'id' => $id_dana,
                     'id_instansi' => $Instansi->id,
-                    'id_jml_pinjaman' => $id_dana,
-                    'id_jangka_waktu' => $i,
-                    'angsuran' => "",
+                    'jumlah' => $jumlah_dana_input,
                 ]);
 
-                $SimulasiAngsuran->save();
+                $JumlahPinjaman->save();
+
+                for ($i = 1; $i < 8; $i++) {
+                    $SimulasiAngsuran = new SimulasiAngsuran([
+                        'id' => (string) Str::uuid(),
+                        'id_instansi' => $Instansi->id,
+                        'id_jml_pinjaman' => $id_dana,
+                        'id_jangka_waktu' => $i,
+                        'angsuran' => "",
+                    ]);
+
+                    $SimulasiAngsuran->save();
+                }
             }
-        }
-        $waktu = JangkaWaktu::where("id_instansi", $Instansi->id)->where("waktu", $r->input("jangka_waktu"))->first();
-        // if (!$waktu) {
-        //     $JangkaWaktu = new JangkaWaktu([
-        //         'id' => (string) Str::uuid(),
-        //         'id_instansi' => $Instansi->id,
-        //         'waktu' => $r->input("jangka_waktu"),
-        //     ]);
+            // $waktu = JangkaWaktu::wwhere("waktu", $r->input("jangka_waktu"))->first();
+            // if (!$waktu) {
+            //     $JangkaWaktu = new JangkaWaktu([
+            //         'id' => (string) Str::uuid(),
+            //         'id_instansi' => $Instansi->id,
+            //         'waktu' => $r->input("jangka_waktu"),
+            //     ]);
 
-        //     $JangkaWaktu->save();
-        // }
+            //     $JangkaWaktu->save();
+            // }
 
-        $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $jumlah_dana_input)->first();
-        $waktu = JangkaWaktu::where("id_instansi", $Instansi->id)->where("waktu", $r->input("jangka_waktu"))->first();
-
+            $dana = JumlahPinjaman::where("id_instansi", $Instansi->id)->where("jumlah", $jumlah_dana_input)->first();
+            $waktu = JangkaWaktu::where("waktu", $r->input("jangka_waktu"))->first();
 
 
 
 
-        $simulasi = SimulasiAngsuran::where("id_jml_pinjaman", $dana->id)
-            ->first();
-        if (!$simulasi) {
-            for ($i = 1; $i < 8; $i++) {
+
+            $simulasi = SimulasiAngsuran::where("id_jml_pinjaman", $dana->id)
+                ->first();
+            if (!$simulasi) {
+                for ($i = 1; $i < 8; $i++) {
+                    $SimulasiAngsuran = new SimulasiAngsuran([
+                        'id' => (string) Str::uuid(),
+                        'id_instansi' => $Instansi->id,
+                        'id_jml_pinjaman' => $dana->id,
+                        'id_jangka_waktu' => $i,
+                        'angsuran' => "",
+                    ]);
+
+                    $SimulasiAngsuran->save();
+                }
+            }
+
+
+            $simulasi2 = SimulasiAngsuran::where("id_jml_pinjaman", $dana->id)
+                ->where("id_jangka_waktu", $waktu->id)
+                ->first();
+
+            if (!$simulasi2) {
+
                 $SimulasiAngsuran = new SimulasiAngsuran([
                     'id' => (string) Str::uuid(),
                     'id_instansi' => $Instansi->id,
                     'id_jml_pinjaman' => $dana->id,
-                    'id_jangka_waktu' => $i,
-                    'angsuran' => "",
+                    'id_jangka_waktu' => $waktu->id,
+                    'angsuran' => $angsuran,
                 ]);
 
                 $SimulasiAngsuran->save();
+            } else {
+
+                $simulasi2->angsuran = $angsuran;
+                $simulasi2->save();
             }
         }
 
 
-        $simulasi2 = SimulasiAngsuran::where("id_jml_pinjaman", $dana->id)
-            ->where("id_jangka_waktu", $waktu->id)
-            ->first();
-
-        if (!$simulasi2) {
-
-            $SimulasiAngsuran = new SimulasiAngsuran([
-                'id' => (string) Str::uuid(),
-                'id_instansi' => $Instansi->id,
-                'id_jml_pinjaman' => $dana->id,
-                'id_jangka_waktu' => $waktu->id,
-                'angsuran' => $angsuran,
-            ]);
-
-            $SimulasiAngsuran->save();
-        } else {
-
-            $simulasi2->angsuran = $angsuran;
-            $simulasi2->save();
-        }
 
         return redirect('/perbankan/simulasiAngsuran');
 
@@ -517,7 +532,7 @@ class PerbankanController extends Controller
         $User = User::find($PengajuanDana->user_id);
 
         $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
-        // dd($status);
+        // dd($status == "Menunggu");   
         // dd($r->input('alasan'));
 
         if ($status == "Ditolak" || $status == "Menunggu") {
@@ -556,21 +571,21 @@ class PerbankanController extends Controller
 
             $notifikasi->save();
         }
-        // if ($status == "Ditolak" || $status == "Menunggu") {
+        if ($status == "Menunggu" && $r->input('jumlah_dana_bank') != null) {
+            $PengajuanDana->jumlah_dana = $r->input('jumlah_dana_bank');
+            $PengajuanDana->waktu_pinjaman = $r->input('jangka_waktu_bank');
+            // dd($PengajuanDana);
+            $PengajuanDana->save();
 
-        //     $PengajuanDana->jumlah_dana = $r->input('jumlah_dana_bank');
-        //     $PengajuanDana->waktu_pinjaman = $r->input('jangka_waktu_bank');
-        //     $PengajuanDana->save();
+            $notifikasi = new Notifikasi([
+                'id' => (string) Str::uuid(),
+                'nik' => $User->nik,
+                'deskripsi' => $r->input('alasan'),
+                'user_role' => "MEMBER",
+            ]);
 
-        //     $notifikasi = new Notifikasi([
-        //         'id' => (string) Str::uuid(),
-        //         'nik' => $User->nik,
-        //         'deskripsi' => $r->input('alasan'),
-        //         'user_role' => "MEMBER",
-        //     ]);
-
-        //     $notifikasi->save();
-        // }
+            $notifikasi->save();
+        }
 
 
         if ($status == "Lunas") {

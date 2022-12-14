@@ -108,7 +108,7 @@
     <tr class="bg-tableColor-900 text-white text-center h-16">
       <!-- <th class="text-center p-3 rounded-tl-xl"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
       <th class="text-center p-2 rounded-tl-xl">No</th>
-      <th class="text-left pr-[250px]">NIK</th>
+      <th class="text-left pr-[1px]">NIK</th>
       <th class="text-left pr-[100px]">Nama Akun</th>
       <th class="text-left  ">Role</th>
       <th class="text-left  ">Status</th>
@@ -198,11 +198,13 @@
     const detailPopUp = document.getElementById('detailPopUp');
     const popUpStatus = document.getElementById('popUpStatus');
     const popUpDelete = document.getElementById('popUpDelete');
+    const namaInstansiInput = document.getElementById('namaInstansiInput');
 
     blackBg.style.visibility = "collapse";
     detailPopUp.style.visibility = "collapse";
     popUpStatus.style.visibility = "collapse";
     popUpDelete.style.visibility = "collapse";
+    namaInstansiInput.style.visibility = "collapse";
 
   }
   const openPopUpStatus = (id, status) => {

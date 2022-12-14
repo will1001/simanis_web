@@ -108,11 +108,17 @@ $jangka_Waktu = [
           @endforeach
         </select>
       </div> -->
-      <div class="flex justify-start items-center mr-[20px]">
+      <!-- <div class="flex justify-start items-center mr-[20px]">
         <span class=" mr-3">Jumlah Pembiayaan</span>
         <input class="hidden" type="text" id="jumlah_dana_edit" name="jumlah_dana">
         <span id="jumlah_dana_edit_span"></span>
+      </div> -->
+
+      <div class="flex justify-between items-center mr-[20px]">
+        <span>Jumlah Pembiayaan</span>
+        <input onkeyup="keyup('jumlah_dana',event)" id="jumlah_dana" class="border-1 border-gray-500  p-2" type="text" name="jumlah_dana" required>
       </div>
+      <br>
 
       <br>
       <div class="flex justify-between items-center mr-[20px]">
@@ -126,6 +132,8 @@ $jangka_Waktu = [
         </select>
       </div>
       <br>
+      <input type="text" name="type" class="hidden" value="edit">
+      <input type="text" name="id_jumlah_dana_edit" id="id_jumlah_dana_edit" class="hidden">
       <div class="flex justify-between items-center mr-[20px]">
         <span>Angsuran</span>
         <input onkeyup="keyup('angsuran_edit',event)" id="angsuran_edit" class="border-1 border-gray-500  p-2" type="text" name="angsuran" required>
@@ -216,9 +224,9 @@ $jangka_Waktu = [
     <tr>
       <th class="text-center p-2" scope="row">{{number_format($item->jumlah)}}</th>
       @foreach($Simulasi as $key2=>$item2)
-      @foreach($JangkaWaktu as $key3=>$item3)
+      @foreach($jangka_Waktu as $key3=>$item3)
       @if($item2->id_jml_pinjaman == $item->id)
-      @if($item2->waktu == $item3->waktu)
+      @if($item2->id_jangka_waktu == $item3->id)
       <td class="text-center">
         <div class="flex items-center">
           <span class="mr-2 w-[70px]">{{ $item2->angsuran != ''?number_format($item2->angsuran):$item2->angsuran}}</span>
@@ -233,7 +241,7 @@ $jangka_Waktu = [
 
         <div class="flex justify-center items-center">
           <form action="#">
-            <a onclick="lihatDetailsEdit('{{$item->jumlah}}')" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a>
+            <a onclick="lihatDetailsEdit('{{$item->jumlah}}','{{$item->id}}')" href="#" class="bg-buttonColor-900 px-[15px] py-[5px] rounded-xl text-white mr-2">Edit</a>
           </form>
           <form method="POST" action="/simulasi/angsuran/delete/{{$item->jumlah}}" class="p-2 bg-buttonDelete rounded-md">
             @csrf
@@ -298,7 +306,8 @@ $jangka_Waktu = [
     blackBg.style.visibility = "visible";
     detailPopUp.style.visibility = "visible";
   }
-  const lihatDetailsEdit = (jumlah) => {
+  const lihatDetailsEdit = (jumlah, id) => {
+    const id_jumlah_dana_edit = document.getElementById('id_jumlah_dana_edit');
     const jumlah_dana_edit = document.getElementById('jumlah_dana_edit');
     const jumlah_dana_edit_span = document.getElementById('jumlah_dana_edit_span');
     const blackBg = document.getElementById('detailPopUpBlackbg');
@@ -306,10 +315,11 @@ $jangka_Waktu = [
     const formEdit = document.getElementById('formEdit');
     blackBg.style.visibility = "visible";
     detailPopUpEdit.style.visibility = "visible";
-    const a = new Intl.NumberFormat('en-US').format(parseFloat(jumlah.replace(/,/g, '')));
-
-    jumlah_dana_edit_span.innerHTML = a;
-    jumlah_dana_edit.value = jumlah;
+    // const a = new Intl.NumberFormat('en-US').format(parseFloat(jumlah.replace(/,/g, '')));
+    // jumlah_dana_edit_span.innerHTML = a;
+    // jumlah_dana_edit.value = jumlah;
+    id_jumlah_dana_edit.value = id;
+    console.log(id_jumlah_dana_edit);
     // formEdit.action = "/simulasi/angsuran/edit/" + id;
   }
   const closeDetails = () => {

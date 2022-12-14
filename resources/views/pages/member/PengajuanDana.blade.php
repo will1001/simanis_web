@@ -334,14 +334,13 @@ $baseUrl = env('APP_URL') . '/';
       waktuPinjamanSelect.style.visibility = "visible";
       angsuranDiv.style.visibility = "visible";
       const numberFormatter = Intl.NumberFormat('en-US');
-      console.log(instansi_user_id[0].id);
       for (const item of JumlahPinjaman.filter(e => e.id_instansi === instansi_user_id[0].id).sort((a, b) => a.jumlah - b.jumlah)) {
         let opt = document.createElement('option');
         opt.value = item.id;
         opt.innerHTML = numberFormatter.format(item.jumlah);
         jmlDanaSelectChild.appendChild(opt);
       }
-      for (const item of JangkaWaktu.filter(e => e.id_instansi === instansi_user_id[0].id).sort((a, b) => a.waktu - b.waktu)) {
+      for (const item of JangkaWaktu) {
         let opt = document.createElement('option');
         opt.value = item.id;
         opt.innerHTML = item.waktu;
@@ -393,8 +392,10 @@ $baseUrl = env('APP_URL') . '/';
     console.log(angsuranValue.innerHTML === '0');
     if (angsuranValue.innerHTML === '0') {
       alert("Angsuran Tidak Tersedia,Silahkan Pilih Angsuran yang Lain");
+    } else {
+
+      ajukan_dana_tombol.click();
     }
-    ajukan_dana_tombol.click();
     // console.log(angsuranValue.innerHTML);
   }
 </script>

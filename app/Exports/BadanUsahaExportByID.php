@@ -80,6 +80,7 @@ class BadanUsahaExportByID implements FromCollection, WithHeadings
             'satuan_produksi',
             'nilai_produksi_perbulan',
             'nilai_bahan_baku_perbulan',
+            'omset',
             'created_at',
             'updated_at',
         ];

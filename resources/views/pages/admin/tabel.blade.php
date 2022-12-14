@@ -113,27 +113,27 @@ $index = 0;
 @endphp
 
 <div class="Container-Table">
-  <div class="table-responsive m-2 " style="max-height:500px;">
+  <div class="table-responsive m-21 " style="max-height:500px;">
     <table class="actionContainer rounded-2xl whitespace-nowrap">
       <tr class="bg-tableColor-900 text-center text-white p-2">
         <!-- <th class="text-center p-2 rounded-tl-xl">#</th> -->
-        <th class="text-center p-2 rounded-tl-xl">No</th>
-        <th class="text-center p-2 ">Nama Pemilik</th>
-        <th class="text-center p-2 ">Nama Usaha</th>
-        <th class="text-center p-2 ">NIK</th>
-        <th class="text-center p-2 ">Kab/Kota</th>
-        <th class="text-center p-2 rounded-tr-xl">Aksi</th>
+        <th class="text-center p-4 rounded-tl-xl">No</th>
+        <th class="text-center p-4 ">Nama Pemilik</th>
+        <th class="text-center p-4 ">Nama Usaha</th>
+        <th class="text-center p-4 ">NIK</th>
+        <th class="text-center p-4 ">Kab/Kota</th>
+        <th class="text-center p-4 rounded-tr-xl">Aksi</th>
       </tr>
       @foreach($BadanUsaha as $key=>$item)
 
       <tr>
 
-        <td class="text-center p-4 ">{{ (++$key + (100* ((int)$BadanUsaha->currentPage() -1) ) ) }}</td>
-        <td class="text-center p-4 ">{{$item->nama_direktur}}</td>
-        <td class="text-center p-4 ">{{$item->nama_usaha}}</td>
-        <td class="text-center p-4 ">{{$item->nik}}</td>
-        <td class="text-center p-4 ">{{$item->kabupaten}}</td>
-        <td class="text-center p-4 flex items-center">
+        <td class="text-center p-1 ">{{ (++$key + (100* ((int)$BadanUsaha->currentPage() -1) ) ) }}</td>
+        <td class="text-center p-1 ">{{$item->nama_direktur}}</td>
+        <td class="text-center p-1 ">{{$item->nama_usaha}}</td>
+        <td class="text-center p-1 ">{{$item->nik}}</td>
+        <td class="text-center p-1 ">{{$item->kabupaten}}</td>
+        <td class="text-center p-1 flex items-center">
           <form method="GET" action="/admin/daftarPengajuanDana/ProfilBadanUsaha/{{$item->id}}" class="mr-2">
             <button type="submit">
               <img class="h-[32px]" src="{{ asset('/Icon-svg/mata.svg') }}" alt="icon">

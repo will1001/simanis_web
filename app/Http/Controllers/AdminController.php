@@ -542,7 +542,7 @@ class AdminController extends Controller
         $filter = $r->except(['_token']);
         // unset($filter['KABUPATEN_LOMBOK_BARAT']);
         $BadanUsaha = BadanUsaha::whereIn('id_kabupaten', $filter)->get();
-        dd($BadanUsaha);
+        // dd($BadanUsaha);
 
         // $BadanUsaha->delete();
 
