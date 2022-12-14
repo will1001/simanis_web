@@ -80,6 +80,7 @@ class BadanUsahaByIDQuery extends Query
             'badan_usaha.satuan_produksi',
             'badan_usaha.nilai_produksi_perbulan',
             'badan_usaha.nilai_bahan_baku_perbulan',
+            'badan_usaha.omset',
             'badan_usaha_documents.nib_file',
             'badan_usaha_documents.bentuk_usaha_file',
             'badan_usaha_documents.sertifikat_halal_file',

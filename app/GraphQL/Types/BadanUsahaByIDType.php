@@ -221,6 +221,10 @@ class BadanUsahaByIDType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The messagges of BadanUsaha',
             ],
+            'omset' => [
+                'type' => Type::string(),
+                'description' => 'The omset of BadanUsaha',
+            ],
         ];
     }
 }
