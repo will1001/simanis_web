@@ -81,7 +81,7 @@ class PengajuanDanaMutation extends Mutation
 
         if ($PengajuanDana != null) {
             if ($PengajuanDana->status != "Lunas") {
-                if ($PengajuanDana->status != "Menunggu") {
+                if ($PengajuanDana->status == "Menunggu") {
                     return  (object)array(
                         "messagges" => "Anda Harus Menunggu 14 Hari Untuk Mengajukan Pembiayaan Lagi",
                     );
