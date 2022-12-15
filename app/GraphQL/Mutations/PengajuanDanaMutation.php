@@ -95,7 +95,7 @@ class PengajuanDanaMutation extends Mutation
         } else {
 
             $SimulasiAngsuran = SimulasiAngsuran::where('id_jml_pinjaman', $args["jumlah_dana_bank"])
-                ->where('id_jml_pinjaman', $args["jangka_waktu_bank"])
+                ->where('id_jangka_waktu', $args["jangka_waktu_bank"])
                 ->first();
             if ($SimulasiAngsuran->angsuran == "") {
                 return  (object)array(
