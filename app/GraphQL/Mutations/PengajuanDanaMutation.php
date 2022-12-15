@@ -11,6 +11,7 @@ use App\Models\JangkaWaktu;
 use App\Models\PengajuanDana;
 use App\Models\BadanUsaha;
 use App\Models\Notifikasi;
+use App\Models\SimulasiAngsuran;
 
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -92,6 +93,15 @@ class PengajuanDanaMutation extends Mutation
                 }
             }
         } else {
+
+            $SimulasiAngsuran = SimulasiAngsuran::where('id_jml_pinjaman', $args["jumlah_dana_bank"])
+                ->where('id_jml_pinjaman', $args["jangka_waktu_bank"])
+                ->first();
+            if ($SimulasiAngsuran . angsuran == "") {
+                return  (object)array(
+                    "messagges" => "Angsuran Tidak Tersedia,Silahkan Pilih Angsuran yang Lain",
+                );
+            }
             if ($args["jumlah_dana_bank"] != "null") {
                 $JumlahPinjaman = JumlahPinjaman::find($args["jumlah_dana_bank"]);
                 $JangkaWaktu = JangkaWaktu::find($args["jangka_waktu_bank"]);
