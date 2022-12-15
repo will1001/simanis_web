@@ -9,6 +9,7 @@
 </div>
 <div class="bg-black w-[100%] h-[1px] mt-2"></div>
 <br>
+@if($PengajuanDana)
 @php
 $kopTanggal=date("d",strtotime($PengajuanDana->updated_at));
 $kopBulan=date("m",strtotime($PengajuanDana->updated_at));
@@ -163,5 +164,10 @@ if($footBulan == 12) $BulanIndo = "DESEMBER";
             <span class="mr-2">@dinas_perindustrianntb</span>
         </div>
     </div>
+    @else
+    <div>
+        <h1>Belum Ada Surat Rekomendasi</h1>
+    </div>
+    @endif
 
     @endsection
