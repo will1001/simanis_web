@@ -91,55 +91,55 @@ class PengajuanDanaMutation extends Mutation
                     );
                 }
             }
-        }
-
-        if ($args["jumlah_dana_bank"] != "null") {
-            $JumlahPinjaman = JumlahPinjaman::find($args["jumlah_dana_bank"]);
-            $JangkaWaktu = JangkaWaktu::find($args["jangka_waktu_bank"]);
-            $jumlah_dana = $JumlahPinjaman->jumlah;
-            $waktu_pinjaman = $JangkaWaktu->waktu;
         } else {
-            $jumlah_dana = $args["jumlah_dana"];
-            $waktu_pinjaman = $args["waktu_pinjaman"];
-        }
+            if ($args["jumlah_dana_bank"] != "null") {
+                $JumlahPinjaman = JumlahPinjaman::find($args["jumlah_dana_bank"]);
+                $JangkaWaktu = JangkaWaktu::find($args["jangka_waktu_bank"]);
+                $jumlah_dana = $JumlahPinjaman->jumlah;
+                $waktu_pinjaman = $JangkaWaktu->waktu;
+            } else {
+                $jumlah_dana = $args["jumlah_dana"];
+                $waktu_pinjaman = $args["waktu_pinjaman"];
+            }
 
-        $pengajuanDana = new PengajuanDana([
-            'id' => (string) Str::uuid(),
-            'id_instansi' => $args["instansi"],
-            'user_id' => $args["user_id"],
-            'status' => "Menunggu",
-            'jumlah_dana' => $jumlah_dana,
-            'waktu_pinjaman' => $waktu_pinjaman,
-            'instansi' => $instansi->role,
-            'jenis_pengajuan' => $args["jenis_pengajuan"],
-        ]);
+            $pengajuanDana = new PengajuanDana([
+                'id' => (string) Str::uuid(),
+                'id_instansi' => $args["instansi"],
+                'user_id' => $args["user_id"],
+                'status' => "Menunggu",
+                'jumlah_dana' => $jumlah_dana,
+                'waktu_pinjaman' => $waktu_pinjaman,
+                'instansi' => $instansi->role,
+                'jenis_pengajuan' => $args["jenis_pengajuan"],
+            ]);
 
-        $BadanUsaha = BadanUsaha::where('nik', $user->nik)->first();
+            $BadanUsaha = BadanUsaha::where('nik', $user->nik)->first();
 
 
-        $notifikasi = new Notifikasi([
-            'id' => (string) Str::uuid(),
-            "nik" => "00000000",
-            'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
-            'user_role' => "ADMIN",
-        ]);
-
-        $notifikasi->save();
-        if ($instansi == "BANK") {
             $notifikasi = new Notifikasi([
                 'id' => (string) Str::uuid(),
-                'nik' => "33333333",
+                "nik" => "00000000",
                 'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
-                'user_role' => "OJK",
+                'user_role' => "ADMIN",
             ]);
 
             $notifikasi->save();
+            if ($instansi == "BANK") {
+                $notifikasi = new Notifikasi([
+                    'id' => (string) Str::uuid(),
+                    'nik' => "33333333",
+                    'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
+                    'user_role' => "OJK",
+                ]);
+
+                $notifikasi->save();
+            }
+
+            $pengajuanDana->save();
+
+            return  (object)array(
+                "messagges" => "success",
+            );
         }
-
-        $pengajuanDana->save();
-
-        return  (object)array(
-            "messagges" => "success",
-        );
     }
 }
