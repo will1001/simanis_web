@@ -88,18 +88,18 @@ class StatistikQuery extends Query
 
         return $badanUsaha
             ->select(DB::raw('
-            count(*) as total_ikm,
+            count(case when nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_ikm,
             sum(jumlah_tenaga_kerja_pria)+sum(jumlah_tenaga_kerja_wanita) as total_tenaga_kerja,
-            count(case when investasi_modal <= 1000000000 then 1 end) as total_industri_kecil,
-            count(case when investasi_modal between 1000000000+1 and 15000000000-1 then 1 end) as total_industri_menengah,
-            count(case when investasi_modal >= 15000000000 then 1 end) as total_industri_besar,
-            count(case when tahun_berdiri = YEAR(NOW()) then 1 end) as total_ikm_baru,
-            count(case when nomor_sertifikat_halal_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_halal,
-            count(case when sertifikat_merek_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_haki,
-            count(case when sni_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_sni,
-            count(case when nomor_test_report_tahun IS NOT NULL then 1 end) as total_ikm_sertifikat_test_report,
-            count(case when nib_tahun IS NOT NULL  then 1 end) as total_ikm_formal,
-            count(case when nib_tahun IS NULL  then 1 end) as total_ikm_informal
+            count(case when investasi_modal <= 1000000000 and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_industri_kecil,
+            count(case when investasi_modal between 1000000000+1 and 15000000000-1 and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_industri_menengah,
+            count(case when investasi_modal >= 15000000000 and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_industri_besar,
+            count(case when tahun_berdiri = YEAR(NOW()) and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_ikm_baru,
+            count(case when nomor_sertifikat_halal_tahun IS NOT NULL and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_ikm_sertifikat_halal,
+            count(case when sertifikat_merek_tahun IS NOT NULL and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_ikm_sertifikat_haki,
+            count(case when sni_tahun IS NOT NULL and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_ikm_sertifikat_sni,
+            count(case when nomor_test_report_tahun IS NOT NULL and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL then 1 end) as total_ikm_sertifikat_test_report,
+            count(case when nib_tahun IS NOT NULL and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL  then 1 end) as total_ikm_formal,
+            count(case when nib_tahun IS NULL and nama_direktur IS NOT NULL and alamat_lengkap IS NOT NULL and nama_usaha IS NOT NULL and jenis_usaha IS NOT NULL  then 1 end) as total_ikm_informal
             '))
             ->get();
     }

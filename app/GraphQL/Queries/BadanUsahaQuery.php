@@ -188,6 +188,10 @@ class BadanUsahaQuery extends Query
                 'name' => 'page',
                 'type' => Type::nonNull(Type::int()),
             ],
+            'keyword' => [
+                'name' => 'keyword',
+                'type' => Type::string(),
+            ],
         ];
     }
 
@@ -239,6 +243,34 @@ class BadanUsahaQuery extends Query
 
         ];
 
+        $orWhere = [
+            'badan_usaha.nama_direktur',
+            'badan_usaha.id_kabupaten',
+            'badan_usaha.kecamatan',
+            'badan_usaha.kelurahan',
+            'badan_usaha.alamat_lengkap',
+            'badan_usaha.no_hp',
+            'badan_usaha.nama_usaha',
+            'badan_usaha.bentuk_usaha',
+            'badan_usaha.tahun_berdiri',
+            'badan_usaha.nib_tahun',
+            'badan_usaha.nomor_sertifikat_halal_tahun',
+            'badan_usaha.sertifikat_merek_tahun',
+            'badan_usaha.nomor_test_report_tahun',
+            'badan_usaha.sni_tahun',
+            'badan_usaha.jenis_usaha',
+            'badan_usaha.cabang_industri',
+            'badan_usaha.sub_cabang_industri',
+            'badan_usaha.investasi_modal',
+            'badan_usaha.jumlah_tenaga_kerja_pria',
+            'badan_usaha.jumlah_tenaga_kerja_wanita',
+            'badan_usaha.kapasitas_produksi_perbulan',
+            'badan_usaha.satuan_produksi',
+            'badan_usaha.nilai_produksi_perbulan',
+            'badan_usaha.nilai_bahan_baku_perbulan',
+            'badan_usaha.omset',
+        ];
+
         $yearNow = Carbon::now()->year;
 
         $badanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
@@ -248,6 +280,16 @@ class BadanUsahaQuery extends Query
             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
             ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id');
         // ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha');
+
+
+        if (isset($args['keyword'])) {
+            $badanUsaha = $badanUsaha->where('badan_usaha.nik', 'LIKE', "%{$args['keyword']}%");
+
+            foreach ($orWhere as &$field) {
+                $badanUsaha = $badanUsaha->orWhere($field, 'LIKE', "%{$args['keyword']}%");
+            }
+        }
+
 
         if (isset($args['filter'])) {
             switch ($args['filter']) {
@@ -281,12 +323,11 @@ class BadanUsahaQuery extends Query
                 case '11':
                     $badanUsaha = $badanUsaha->whereNull('nib_tahun');
                     break;
-                
+
                 default:
                     # code...
                     break;
             }
-            
         }
 
         if (isset($args['id'])) {

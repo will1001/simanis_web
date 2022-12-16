@@ -599,9 +599,6 @@ video {
 .m-2 {
   margin: 0.5rem;
 }
-.m-1 {
-  margin: 0.25rem;
-}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1438,8 +1435,8 @@ video {
 .pt-1 {
   padding-top: 0.25rem;
 }
-.pr-\[250px\] {
-  padding-right: 250px;
+.pr-\[1px\] {
+  padding-right: 1px;
 }
 .pr-\[100px\] {
   padding-right: 100px;
@@ -1470,18 +1467,6 @@ video {
 }
 .pr-\[150px\] {
   padding-right: 150px;
-}
-.pr-\[200px\] {
-  padding-right: 200px;
-}
-.pr-\[50px\] {
-  padding-right: 50px;
-}
-.pr-\[0px\] {
-  padding-right: 0px;
-}
-.pr-\[1px\] {
-  padding-right: 1px;
 }
 .text-left {
   text-align: left;
