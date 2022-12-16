@@ -57,13 +57,17 @@ class ProdukQuery extends Query
             'page' => [
                 'name' => 'page',
                 'type' => Type::int(),
-            ]
+            ],
+            'keyword' => [
+                'name' => 'keyword',
+                'type' => Type::string(),
+            ],
         ];
     }
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        $fieldBadanUsaha = [
+        $fieldProduk = [
             "produk.id as id",
             "produk.id_badan_usaha",
             "produk.nama",
@@ -78,10 +82,16 @@ class ProdukQuery extends Query
             "badan_usaha.no_hp",
             "badan_usaha.alamat_lengkap",
         ];
-
+        $orWhere = [
+            "produk.harga",
+            "produk.deskripsi",
+            "badan_usaha.nama_usaha",
+            "badan_usaha.nama_direktur",
+        ];
+        $produk = Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id');
         if (isset($args['id'])) {
             return Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id')
-                ->where('produk.id', $args['id'])->get($fieldBadanUsaha);
+                ->where('produk.id', $args['id'])->get($fieldProduk);
         }
 
         if (isset($args['id_badan_usaha'])) {
@@ -91,9 +101,18 @@ class ProdukQuery extends Query
             $users = User::find($args["user_id"]);
             $BadanUsaha = BadanUsaha::where('nik', $users->nik)->first();
             return Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id')
-                ->where('id_badan_usaha', $BadanUsaha->id)->get($fieldBadanUsaha);
+                ->where('id_badan_usaha', $BadanUsaha->id)->get($fieldProduk);
         }
-        return Produk::leftJoin('badan_usaha', 'produk.id_badan_usaha', '=', 'badan_usaha.id')
-            ->paginate(50, $fieldBadanUsaha, 'page', $args['page']);
+
+        if (isset($args['keyword'])) {
+            $produk  = $produk->where('produk.nama', 'LIKE', "%{$args['keyword']}%");
+
+            foreach ($orWhere as &$field) {
+                $produk  = $produk->orWhere($field, 'LIKE', "%{$args['keyword']}%");
+            }
+        }
+
+        return
+            $produk->paginate(50, $fieldProduk, 'page', $args['page']);
     }
 }
