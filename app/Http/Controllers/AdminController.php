@@ -733,6 +733,7 @@ class AdminController extends Controller
         $surat->nama_kadis = $r->nama_kadis;
         $surat->nip = $r->nip;
         $surat->jabatan = $r->jabatan;
+        $surat->golongan = $r->golongan;
         $surat->alamat = $r->alamat;
         $surat->nomor_surat = $r->nomor_surat;
         if (!empty($r->file('ttd'))) {

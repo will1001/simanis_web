@@ -29,6 +29,11 @@
     </div>
     <br>
     <div class="flex justify-between items-center">
+        <span>Golongan</span>
+        <input value="{{$Surat->golongan}}}" class="border-2 border-gray-300 w-[300px] p-1 rounded-md ml-2" type="text" name="golongan">
+    </div>
+    <br>
+    <div class="flex justify-between items-center">
         <span>Alamat</span>
         <input value="{{$surat->alamat}}" class="border-2 border-gray-300 w-[300px] p-1 rounded-md ml-2" type="text" name="alamat">
     </div>

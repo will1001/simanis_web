@@ -22,5 +22,6 @@ class Surat extends Model
         'alamat',
         'nomor_surat',
         'ttd',
+        'golongan',
     ];
 }

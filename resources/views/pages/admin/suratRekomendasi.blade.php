@@ -94,7 +94,7 @@ if($footBulan == 12) $BulanIndo = "DESEMBER";
                     </div>
                     <div class="flex flex-col">
                         <span>: {{$Surat->nama_kadis}}</span>
-                        <span>: Pembina Utama Muda (IV/c)</span>
+                        <span>: {{$Surat->golongan}} (IV/c)</span>
                         <span>: {{$Surat->nip}}</span>
                         <span>: {{$Surat->jabatan}}</span>
                         <!-- <span>: {{$Surat->alamat}}</span> -->
@@ -133,41 +133,41 @@ if($footBulan == 12) $BulanIndo = "DESEMBER";
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
                 <img class="h-[60px]" src="{{ asset($Surat->ttd) }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
-                <span>Pembina Utama Muda</span>
+                <span>{{$Surat->golongan}}</span>
                 <span>{{$Surat->nip}}</span>
             </div>
         </div>
 
 
-        
 
 
 
-    <div class="flex">
-        <div class="flex items-end">
-            <img class="h-[80px]" src="{{ asset('/images/logo_footer.png') }}">
-            <span class="mr-2">Industrialisasi dari NTB untuk Indonesia</span>
+
+        <div class="flex">
+            <div class="flex items-end">
+                <img class="h-[80px]" src="{{ asset('/images/logo_footer.png') }}">
+                <span class="mr-2">Industrialisasi dari NTB untuk Indonesia</span>
+            </div>
+
+            <div class="flex items-end">
+                <img class="h-[25px] mr-1" src="{{ asset('/images/logo_fb.png') }}">
+                <span class="mr-2">Dinas_perindustrianntb</span>
+            </div>
+
+            <div class="flex items-end">
+                <img class="h-[25px] mr-1" src="{{ asset('/images/logo_youtube.png') }}">
+                <span class="mr-2">Dinas Perindustrian Provinsi NTB</span>
+            </div>
+
+            <div class="flex items-end">
+                <img class="h-[25px] mr-1" src="{{ asset('/images/logo_instagram.png') }}">
+                <span class="mr-2">@dinas_perindustrianntb</span>
+            </div>
         </div>
-
-        <div class="flex items-end">
-            <img class="h-[25px] mr-1" src="{{ asset('/images/logo_fb.png') }}">
-            <span class="mr-2">Dinas_perindustrianntb</span>
+        @else
+        <div>
+            <h1>Belum Ada Surat Rekomendasi</h1>
         </div>
+        @endif
 
-        <div class="flex items-end">
-            <img class="h-[25px] mr-1" src="{{ asset('/images/logo_youtube.png') }}">
-            <span class="mr-2">Dinas Perindustrian Provinsi NTB</span>
-        </div>
-
-        <div class="flex items-end">
-            <img class="h-[25px] mr-1" src="{{ asset('/images/logo_instagram.png') }}">
-            <span class="mr-2">@dinas_perindustrianntb</span>
-        </div>
-    </div>
-    @else
-    <div>
-        <h1>Belum Ada Surat Rekomendasi</h1>
-    </div>
-    @endif
-
-    @endsection
+        @endsection

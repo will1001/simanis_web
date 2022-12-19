@@ -92,7 +92,7 @@ if($footBulan == 12) $BulanIndo = "DESEMBER";
                     </div>
                     <div class="flex flex-col">
                         <span>: {{$Surat->nama_kadis}}</span>
-                        <span>: Pembina Utama Muda (IV/c)</span>
+                        <span>: {{$Surat->golongan}} (IV/c)</span>
                         <span>: {{$Surat->nip}}</span>
                         <span>: {{$Surat->jabatan}}</span>
                         <!-- <span>: {{$Surat->alamat}}</span> -->
@@ -131,7 +131,7 @@ if($footBulan == 12) $BulanIndo = "DESEMBER";
                 <span>Kepala Dinas Perindustrian <br> Provinsi Nusa Tenggara Barat</span>
                 <img class="h-[60px]" src="{{ asset($Surat->ttd) }}">
                 <span class="font-bold text-black">{{$Surat->nama_kadis}}</span>
-                <span>Pembina Utama Muda</span>
+                <span>{{$Surat->golongan}}</span>
                 <span>{{$Surat->nip}}</span>
             </div>
         </div>

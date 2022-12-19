@@ -403,4 +403,9 @@ class HomeController extends Controller
 
         return view("pages.member.downloadSurat", $params);
     }
+    public function privacyPolicy()
+    {
+
+        return view("pages.privacyPolicy");
+    }
 }
