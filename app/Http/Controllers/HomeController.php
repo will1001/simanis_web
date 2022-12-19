@@ -406,6 +406,6 @@ class HomeController extends Controller
     public function privacyPolicy()
     {
 
-        return view("pages.privacyPolicy");
+        return view("pages.PrivacyPolicy");
     }
 }
