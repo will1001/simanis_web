@@ -145,10 +145,10 @@ $forms = array(
             <div class="w-[300px] text-gray-700">
                 <span>{{$form->placeholder}} </span>
             </div>
-            
+
             <div class="w-[500px]">
                 @if($form->type == 'select')
-                <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 pr-[150px] py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}" >
+                <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 pr-[150px] py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->prop}}" id="{{$form->prop}}">
                     <option value="" disabled selected>pilih</option>
                     @foreach($form->options as $key=>$option)
                     <option value="{{$option['id']}}">{{$option["name"]}}</option>
@@ -162,17 +162,17 @@ $forms = array(
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px)</p>
                     </div>
-                    <input id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="{{$form->prop}}_file" type="file" class="hidden" id="{{$form->prop}}"/>
+                    <input id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="{{$form->prop}}_file" type="file" class="hidden" id="{{$form->prop}}" />
                 </label>
                 @else
-                <input class="border-1 border-gray-400 pl-2 pr-[150px] py-2 text-black mb-2" type="{{$form->type}}" name="{{$form->prop}}" >
+                <input class="border-1 border-gray-400 pl-2 pr-[150px] py-2 text-black mb-2" type="{{$form->type}}" name="{{$form->prop}}">
                 @endif
             </div>
         </div>
     </div>
     @endforeach
     <div class="flex justify-end">
-     <button class="bg-buttonColor-900 text-white p-3 mr-[150px] mt-3 rounded-xl" type="submit">Simpan Perubahan</button>
+        <button class="bg-buttonColor-900 text-white p-3 mr-[150px] mt-3 rounded-xl" type="submit">Simpan Perubahan</button>
     </div>
 </form>
 @endsection
@@ -182,11 +182,9 @@ $forms = array(
     const Kabupaten = @json($Kabupaten["return"]);
 
     $.ajax({
-        url: "http://localhost:8000/coba/todos/1",
-        headers: {"Authorization": "Bearer WugT0v7UAXRWB5SFCYjFtv6j9XuSbRVc",
-            "Access-Control-Allow-Origin": "http://localhost:8000",
-            "Access-Control-Allow-Methods": "any",
-            "Access-Control-Allow-Credentials": "true",
+        url: "https://absensinow.id/api/city",
+        headers: {
+            "signature": "mns-1275151"
         },
         type: 'GET',
         dataType: 'json', // added data type
@@ -216,13 +214,11 @@ $forms = array(
         const idKabupaten = kabupatenFilter.options[kabupatenFilter.selectedIndex].value;
         console.log(idKabupaten);
         const xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", "https://absensinow.id/api/district/"+idKabupaten, true ); // false for synchronous request
+        xmlHttp.open("GET", "https://absensinow.id/api/district/" + idKabupaten, true); // false for synchronous request
         xmlHttp.setRequestHeader("signature", "mns-1275151");
         // xmlHttp.setRequestHeader("Content-Type", "application/json");
-        xmlHttp.send( null );
+        xmlHttp.send(null);
         console.log(xmlHttp.responseText);
-       
-    }
 
-    
+    }
 </script>

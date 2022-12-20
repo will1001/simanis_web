@@ -33,7 +33,6 @@ class PerdaganganController extends Controller
                 return redirect('/ojk/dashboard');
             } else {
                 if ($id != "") {
-                    
                     $BadanUsaha = BadanUsaha::find($id);
                 }
                 if ($subPages != "") {
