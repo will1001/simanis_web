@@ -403,7 +403,7 @@ class BadanUsahaQuery extends Query
 
 
 
-        $badanUsaha = $badanUsaha->whereNotNull('nib_tahun')
+        $badanUsaha = $badanUsaha
             ->whereNotNull("nama_direktur")
             ->whereNotNull("alamat_lengkap")
             ->whereNotNull("nama_usaha")
