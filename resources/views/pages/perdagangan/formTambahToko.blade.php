@@ -155,7 +155,6 @@ $forms = array(
                     @endforeach
                 </select>
                 @elseif($form->type == 'file')
-                <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
                 <label for="dropzone-file" class="flex flex-col justify-center items-center w-[340px] h-32 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                     <div class="flex flex-col justify-center items-center pt-5 pb-6">
                         <img src="{{ asset('/Icon-svg/file.svg') }}" />
@@ -175,24 +174,30 @@ $forms = array(
         <button class="bg-buttonColor-900 text-white p-3 mr-[150px] mt-3 rounded-xl" type="submit">Simpan Perubahan</button>
     </div>
 </form>
+
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script>
-    const Kabupaten = @json($Kabupaten["return"]);
+    // const Kabupaten = @json($Kabupaten["return"]);
 
-    $.ajax({
-        url: "https://absensinow.id/api/city",
-        headers: {
-            "signature": "mns-1275151"
-        },
-        type: 'GET',
-        dataType: 'json', // added data type
-        success: function(res) {
-            console.log(res);
-            // alert(res);
-        }
-    });
+    // $.ajax({
+    //     url: "https://absensinow.id/api/city",
+    //     headers: {
+    //         "signature": "mns-1275151",
+    //         'Access-Control-Allow-Origin': '*',
+    //         'Access-Control-Allow-Headers': '*',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     contentType: 'application/json',
+    //     type: 'GET',
+    //     crossDomain: true,
+    //     dataType: 'json', // added data type
+    //     success: function(res) {
+    //         console.log(res);
+    //         // alert(res);
+    //     }
+    // });
 
     // window.axios = require('axios');
     // const axios = require('axios');
