@@ -401,11 +401,13 @@ class BadanUsahaQuery extends Query
             $badanUsaha = $badanUsaha->limit($args['offset']);
         }
 
-        $badanUsaha = $badanUsaha->where('badan_usaha.nik', 'LIKE', "%{$args['keyword']}%");
 
-        foreach ($orWhere as &$field) {
-            $badanUsaha = $badanUsaha->orWhere($field, 'LIKE', "%{$args['keyword']}%");
-        }
+
+        $badanUsaha = $badanUsaha->whereNotNull('nib_tahun')
+            ->whereNotNull("nama_direktur")
+            ->whereNotNull("alamat_lengkap")
+            ->whereNotNull("nama_usaha")
+            ->whereNotNull("jenis_usaha");
 
         return  $badanUsaha->paginate(50,  $fieldBadanUsaha, 'page', $args['page']);
     }
