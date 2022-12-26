@@ -67,6 +67,7 @@ Route::post('/member/data/pendukung', [MemberController::class, 'uploadDataPendu
 Route::get('/perbankan/{pages}/{subPages?}/{id?}', [PerbankanController::class, 'index']);
 Route::get('/koperasi/{pages}/{subPages?}/{id?}', [KoperasiController::class, 'index'])->name('koperasi');
 Route::get('/perdagangan/{pages}/{subPages?}/{id?}', [PerdaganganController::class, 'index'])->name('perdagangan');
+Route::get('/ntbmall/updateDataLokasi', [PerdaganganController::class, 'updateDataLokasi']);
 Route::get('/ojk/{pages}/{subPages?}/{id?}', [OjkController::class, 'index'])->name('ojk');
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
