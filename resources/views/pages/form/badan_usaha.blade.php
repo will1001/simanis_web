@@ -407,7 +407,7 @@ $baseUrl = env('APP_URL');
                 </label>
                 <h5 id="{{$form->prop}}_info"></h5>
                 @if(!empty($BadanUsaha[0]->{$form->prop}))
-                    <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat File</a>
+                <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat File</a>
                 @endif
                 @elseif($form->type == 'image')
                 <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
@@ -417,20 +417,11 @@ $baseUrl = env('APP_URL');
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px) (Max : 5MB)</p>
                     </div>
-                    <input  
-                    oninvalid="invalid('{{$form->prop}}','Wajib di Isi')" 
-                    onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->id}}" 
-                    accept="image/x-png,image/gif,image/jpeg" 
-                    name="{{$form->id}}" 
-                    type="file" class="hidden" 
-                    id="{{$form->prop}}" 
-                    enctype="multipart/form-data" 
-                    value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}"  
-                      />
+                    <input oninvalid="invalid('{{$form->prop}}','Wajib di Isi')" onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" />
                 </label>
                 <h5 id="{{$form->prop}}_info"></h5>
                 @if(!empty($BadanUsaha[0]->{$form->prop}))
-                    <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat Gambar</a>
+                <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat Gambar</a>
                 @endif
                 <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
                 @elseif($form->type == 'label')
@@ -439,6 +430,12 @@ $baseUrl = env('APP_URL');
                 <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="number" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 @elseif($form->type == 'numberText')
                 <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}" placeholder="{{$form->placeholder}}">
+                @if($form->prop == 'jumlah_tenaga_kerja_pria' ||
+                $form->prop == 'jumlah_tenaga_kerja_wanita'
+                )
+                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}" placeholder="{{$form->placeholder}}" maxlength="3">
+
+                @endif
                 @else
                 <input id="{{$form->prop}}" {{$form->required == 'true'?'required':''}} oninvalid="invalid('{{$form->prop}}','Wajib di Isi')" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>

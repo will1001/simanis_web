@@ -80,8 +80,8 @@
 <div id="popUpBlackbg" class="bg-slate-50 container max-w-full max-h-full actinContainer">
   <h3 class="mt-14 font-extrabold w-[192px] h-[37px] text-slate-800">Daftar Akun</h3>
   <div class="flex justify-between items-center actionContainer">
-    <div class="flex">
-      <div class="invisible flex w-[263px] h-[52px] bg-white rounded-lg bg-cover mt-4 shadow-md">
+    <div class="flex items-center justify-between">
+      <!-- <div class="invisible flex w-[263px] h-[52px] bg-white rounded-lg bg-cover mt-4 shadow-md">
         <img src="{{ asset('/Icon-svg/medium.svg') }}" alt="search" class="h-8 w-8 ml-[18.5px] my-auto">
         <input type="text" placeholder="Cari NIK" class="my-auto h-6 w-[205px] ml-3 placeholder:text-sm ">
       </div>
@@ -91,6 +91,18 @@
           <input type="radio" id="role" name="role" class="hidden">
           <img src="{{ asset('/Icon-svg/icon.svg') }}" alt="role" class="flex ml-[18.5px] my-auto">
         </div>
+      </div> -->
+      <div class="mr-[100px] mt-[10px]">
+        <form name="cariForm" action="{{route('admin_search_user')}}" method="post" enctype="multipart/form-data">
+          @csrf
+          <div class="flex">
+            <div class="flex items-center shadow-md py-1 px-2 rounded-xl mr-2">
+              <i class="fa fa-search mr-3"></i>
+              <input style="width:200px" type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari . . ." aria-label="Nama Badan Usaha" aria-describedby="button-addon2">
+            </div>
+            <button class="bg-buttonColor-900 px-[30px] py-[10px] rounded-xl text-white" type="submit" id="button-addon2">Cari</button>
+          </div>
+        </form>
       </div>
       <div class="flex w-[140px] h-[52px] bg-blue-400 rounded-lg bg-cover mt-4 shadow-md ml-[350px]">
         <input onclick="lihatDetails()" type="button" value="Tambah Akun" class=" text-white text-sm font-bold my-auto mx-auto h-[17px] w-[85px]">

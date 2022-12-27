@@ -145,7 +145,7 @@ $index = 0;
           </form>
           <form method="GET" action="/form/badan_usaha/delete/{{$item->id}}" class="p-2 bg-buttonDelete rounded-md">
             <button>
-              <img class="h-[21px]" src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
+              <img onclick="return konfirmasiHapus()" class="h-[21px]" src="{{ asset('/Icon-svg/delete.svg') }}" alt="icon">
             </button>
           </form>
         </td>
@@ -326,5 +326,17 @@ $index = 0;
 
     blackBg.style.visibility = "visible";
     detailPopUpHapusBadanUsaha.style.visibility = "visible";
+  }
+  const konfirmasiHapus = () => {
+    var r = confirm("Apakah Anda Akan Menghapus Badan Usaha Ini ?");
+    if (r == true) {
+      // window.location="postDeleteUser.php";
+      return true;
+    } else {
+      // alert("You pressed Cancel!");
+      window.location = "/admin/tabel"
+      // return false here
+      return false;
+    }
   }
 </script>

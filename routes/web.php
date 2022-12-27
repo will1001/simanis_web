@@ -48,6 +48,7 @@ Route::post('/changePassword/{pages}', [AuthController::class, 'changePassword']
 
 Route::get('/admin/{pages}/{subPages?}/{id?}', [AdminController::class, 'index'])->name('admin');
 Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha'])->name('admin_search');
+Route::post('/admin/searchUser', [AdminController::class, 'searchUser'])->name('admin_search_user');
 Route::post('/admin/surat', [AdminController::class, 'settingSurat'])->name('setting_surat');
 Route::post('/admin/search/pengajuanDana/{pages}', [AdminController::class, 'searchPengajuanDana'])->name('searchPengajuanDana');
 Route::get('/admin/delete/deleteAll', [AdminController::class, 'deleteAllBadanUsaha'])->name('admin_delete_all');

@@ -294,8 +294,10 @@ class FormController extends Controller
     function deleteBadanUsahaById($id = null)
     {
         $badan_usaha = BadanUsaha::find($id);
+        $user = User::where('nik', $badan_usaha->nik);
 
         $badan_usaha->delete();
+        $user->delete();
         return redirect('/admin/tabel');
     }
 }

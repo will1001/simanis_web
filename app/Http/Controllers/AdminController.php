@@ -481,6 +481,49 @@ class AdminController extends Controller
     }
 
 
+    public function searchUser(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
+        // $Kabupaten = Kabupaten::all();
+
+
+
+        // $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+        //     ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+        //     ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+        //     ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+        //     ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+        //     ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+        //     ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+        //     ->where('badan_usaha.nik', 'LIKE', "%{$keyword}%");
+
+
+        // foreach ($this->orWhere as &$field) {
+        //     $BadanUsaha = $BadanUsaha->orWhere($field, 'LIKE', "%{$keyword}%");
+        // }
+
+        // $BadanUsaha = $BadanUsaha->paginate(100, $this->fields);
+
+        $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+            ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
+            ->select('badan_usaha.*', 'instansi.*', 'users.*', 'users.nik as nik')
+            ->where('users.nik', 'LIKE', "%{$keyword}%")
+            ->get();
+
+        return view(
+            'pages.admin.daftarAkun',
+            [
+                // 'BadanUsaha' => $BadanUsaha,
+                'User' => $User,
+                'keyword' => $keyword,
+                'pages' => 'daftarAkun',
+                'Notifikasi' => $Notifikasi,
+                // 'Kabupaten' => $Kabupaten,
+                'fields' => $this->fields2
+            ]
+        );
+    }
     public function searchBadanUsaha(Request $request)
     {
         $keyword = $request->input('keyword');
