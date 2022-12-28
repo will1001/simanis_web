@@ -166,6 +166,7 @@ class AdminController extends Controller
     private $orWhere = [
         'badan_usaha.nama_direktur',
         'badan_usaha.id_kabupaten',
+        'kabupaten.name',
         'badan_usaha.kecamatan',
         'badan_usaha.kelurahan',
         'badan_usaha.alamat_lengkap',
