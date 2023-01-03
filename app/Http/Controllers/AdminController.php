@@ -113,6 +113,48 @@ class AdminController extends Controller
         // 'data_tambahan.kk',
         // 'data_tambahan.ktp_pasangan',
     ];
+    private $fieldsDashboard = [
+        'badan_usaha.id',
+        'badan_usaha.nik',
+        'badan_usaha.nama_direktur',
+        'kabupaten.name as kabupaten',
+        'kecamatan.name as kecamatan',
+        'kelurahan.name as kelurahan',
+        'badan_usaha.alamat_lengkap',
+        'badan_usaha.no_hp',
+        'badan_usaha.nama_usaha',
+        'badan_usaha.bentuk_usaha',
+        'badan_usaha.tahun_berdiri',
+        'badan_usaha.nib_tahun',
+        'badan_usaha.nomor_sertifikat_halal_tahun',
+        'badan_usaha.sertifikat_merek_tahun',
+        'badan_usaha.nomor_test_report_tahun',
+        'badan_usaha.sni_tahun',
+        'badan_usaha.jenis_usaha',
+        'badan_usaha.merek_usaha',
+        'cabang_industri.name as cabang_industri',
+        'sub_cabang_industri.name as sub_cabang_industri',
+        'badan_usaha.investasi_modal',
+        'badan_usaha.jumlah_tenaga_kerja_pria',
+        'badan_usaha.jumlah_tenaga_kerja_wanita',
+        'badan_usaha.rata_rata_pendidikan_tenaga_kerja',
+        'badan_usaha.kapasitas_produksi_perbulan',
+        'badan_usaha.satuan_produksi',
+        'badan_usaha.nilai_produksi_perbulan',
+        'badan_usaha.nilai_bahan_baku_perbulan',
+        'badan_usaha.omset',
+        // 'badan_usaha_documents.nib_file',
+        // 'badan_usaha_documents.bentuk_usaha_file',
+        // 'badan_usaha_documents.sertifikat_halal_file',
+        // 'badan_usaha_documents.sertifikat_sni_file',
+        // 'badan_usaha_documents.sertifikat_merek_file',
+        'badan_usaha.foto_alat_produksi',
+        'badan_usaha.foto_ruang_produksi',
+        // 'produk.foto as produk',
+        // 'data_tambahan.ktp',
+        // 'data_tambahan.kk',
+        // 'data_tambahan.ktp_pasangan',
+    ];
 
     private $fields2 = [
         // 'id',
@@ -351,9 +393,9 @@ class AdminController extends Controller
                             ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
                             // ->rightJoin('badan_usaha_documents', 'badan_usaha.id', '=', 'badan_usaha_documents.id_badan_usaha')
                             ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
-                            ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
+                            // ->leftJoin('produk', 'badan_usaha.id', '=', 'produk.id_badan_usaha')
                             // ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
-                            ->paginate(100, $this->fields);
+                            ->paginate(100, $this->fieldsDashboard);
                         // $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                         //     ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
                         //     ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
