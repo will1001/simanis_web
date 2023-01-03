@@ -707,6 +707,9 @@ video {
 .ml-\[18\.5px\] {
   margin-left: 18.5px;
 }
+.mr-\[100px\] {
+  margin-right: 100px;
+}
 .ml-\[350px\] {
   margin-left: 350px;
 }
@@ -754,9 +757,6 @@ video {
 }
 .mr-\[150px\] {
   margin-right: 150px;
-}
-.mr-\[100px\] {
-  margin-right: 100px;
 }
 .mr-\[110px\] {
   margin-right: 110px;
@@ -1255,6 +1255,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 }
+.bg-buttonColor-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(58 160 248 / var(--tw-bg-opacity));
+}
 .bg-slate-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
@@ -1270,10 +1274,6 @@ video {
 .bg-ditolakTextColor {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-.bg-buttonColor-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(58 160 248 / var(--tw-bg-opacity));
 }
 .bg-menungguBgColor {
   --tw-bg-opacity: 1;
@@ -1394,6 +1394,14 @@ video {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
+.px-\[30px\] {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.py-\[10px\] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1402,17 +1410,9 @@ video {
   padding-left: 25px;
   padding-right: 25px;
 }
-.py-\[10px\] {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
-}
-.px-\[30px\] {
-  padding-left: 30px;
-  padding-right: 30px;
 }
 .px-\[10px\] {
   padding-left: 10px;

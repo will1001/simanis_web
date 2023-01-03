@@ -589,11 +589,22 @@ class AdminController extends Controller
     {
         // dd(count($r->request));
         $filter = $r->except(['_token']);
+        // dd($filter);
         // unset($filter['KABUPATEN_LOMBOK_BARAT']);
         $BadanUsaha = BadanUsaha::whereIn('id_kabupaten', $filter)->get();
         // dd($BadanUsaha);
+        $niks = [];
 
-        // $BadanUsaha->delete();
+        foreach ($BadanUsaha as &$field) {
+            $temp = (object)array(
+                "nik" => $field->nik,
+            );
+            array_push($niks, $temp);
+        }
+        // dd($niks);
+        $User = User::whereIn('nik',  $niks)->get();
+        $User->delete();
+        $BadanUsaha->delete();
 
         return redirect('/admin/tabel');
     }
