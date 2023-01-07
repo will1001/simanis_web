@@ -159,7 +159,7 @@ $field == 'omset'
                 <div class="text-left flex justify-start items-start">: {{$BadanUsaha->alamat_lengkap}}</div>
                 <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nama_usaha}}</div>
                 <div class="text-left flex justify-start items-start">: {{$BadanUsaha->kabupaten}}</div>
-                <div class="text-left flex justify-start items-start">: {{$User->nik}}</div>
+                <div class="text-left flex justify-start items-start">: {{$BadanUsaha->nik}}</div>
             </div>
         </div>
 

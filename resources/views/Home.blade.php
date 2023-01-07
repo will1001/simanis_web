@@ -747,7 +747,7 @@ $baseUrl = env('APP_URL');
         const textCabangIndsutri = cabangIndustriFilter.options[cabangIndustriFilter.selectedIndex].text;
 
         renderSubCabangIndustriSelectFilter(idCabangIndsutri);
-        cabangIndustriFilterApply = textCabangIndsutri;
+        cabangIndustriFilterApply = idCabangIndsutri;
         subCabangIndustriFilterApply = "";
         applyFilter(
             idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply, tahunFilterApply
@@ -842,10 +842,9 @@ $baseUrl = env('APP_URL');
         let sertifikatTestReportUpdate = badanUsaha.filter(e => e.nomor_test_report_tahun !== null);
         let formalUpdate = badanUsaha.filter(e => e.nib_tahun !== null);
         let informalUpdate = badanUsaha.filter(e => e.nib_tahun === null);
-        console.log(formalUpdate);
-        console.log(informalUpdate);
 
         for (let filterData of filters) {
+            console.log(filterData.value);
             totalIKMUpdate = totalIKMUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             industriKecilUpdate = industriKecilUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             industriMenengahUpdate = industriMenengahUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
