@@ -234,18 +234,21 @@ $forms = array(
         "type" => "numberText",
         "placeholder" => "INVESTASI/ MODAL",
         "prop" => "investasi_modal",
+        "maxLength" => 20,
         "required" => "true"
     ),
     (object)array(
         "type" => "numberText",
         "placeholder" => "JUMLAH TENAGA KERJA PRIA",
         "prop" => "jumlah_tenaga_kerja_pria",
+        "maxLength" => 3,
         "required" => "true"
     ),
     (object)array(
         "type" => "numberText",
         "placeholder" => "JUMLAH TENAGA KERJA WANITA",
         "prop" => "jumlah_tenaga_kerja_wanita",
+        "maxLength" => 3,
         "required" => "true"
     ),
     (object)array(
@@ -261,6 +264,7 @@ $forms = array(
         "type" => "numberText",
         "placeholder" => "KAPASITAS PRODUKSI / Tahun",
         "prop" => "kapasitas_produksi_perbulan",
+        "maxLength" => 20,
         "required" => "true"
     ),
     (object)array(
@@ -273,18 +277,21 @@ $forms = array(
         "type" => "numberText",
         "placeholder" => "NILAI PRODUKSI ",
         "prop" => "nilai_produksi_perbulan",
+        "maxLength" => 20,
         "required" => "true"
     ),
     (object)array(
         "type" => "numberText",
         "placeholder" => "NILAI BAHAN BAKU ",
         "prop" => "nilai_bahan_baku_perbulan",
+        "maxLength" => 20,
         "required" => "true"
     ),
     (object)array(
         "type" => "numberText",
         "placeholder" => "OMSET ",
         "prop" => "omset",
+        "maxLength" => 20,
         "required" => "true"
     ),
     (object)array(
@@ -429,13 +436,8 @@ $baseUrl = env('APP_URL');
                 @elseif($form->type == 'number')
                 <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="number" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 @elseif($form->type == 'numberText')
-                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}" placeholder="{{$form->placeholder}}">
-                @if($form->prop == 'jumlah_tenaga_kerja_pria' ||
-                $form->prop == 'jumlah_tenaga_kerja_wanita'
-                )
-                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}" placeholder="{{$form->placeholder}}" maxlength="3">
-
-                @endif
+                <input maxlength="{{$form->maxLength}}" id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}" placeholder="{{$form->placeholder}}">
+                
                 @else
                 <input id="{{$form->prop}}" {{$form->required == 'true'?'required':''}} oninvalid="invalid('{{$form->prop}}','Wajib di Isi')" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
                 <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
