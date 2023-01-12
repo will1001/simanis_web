@@ -1,35 +1,23 @@
 @extends("layouts.perdagangan")
 
 <?php
-$bentukUsaha = [
-    (object)array(
-        "id" => "PT",
-        "name" => "PT"
-    ),
-    (object)array(
-        "id" => "CV",
-        "name" => "CV"
-    ),
-    (object)array(
-        "id" => "UD",
-        "name" => "UD"
-    )
-];
-$legalitasUsaha = [
-    (object)array(
-        "id" => "FORMAL",
-        "name" => "FORMAL"
-    ),
-    (object)array(
-        "id" => "INFORMAL",
-        "name" => "INFORMAL"
-    )
-];
+
+
 $forms = array(
     (object)array(
         "type" => "text",
         "placeholder" => "Nama Toko",
         "prop" => "name"
+    ),
+    (object)array(
+        "type" => "text",
+        "placeholder" => "Email",
+        "prop" => "email"
+    ),
+    (object)array(
+        "type" => "text",
+        "placeholder" => "Nomor HP",
+        "prop" => "phone"
     ),
     (object)array(
         "type" => "text",
@@ -46,53 +34,53 @@ $forms = array(
         "placeholder" => "Store Information",
         "prop" => "store_information"
     ),
-    (object)array(
-        "type" => "text",
-        "placeholder" => "ID Provinsi",
-        "prop" => "province_id"
-    ),
-    (object)array(
-        "type" => "select",
-        "placeholder" => "Provinsi",
-        "prop" => "province_val",
-        "options" => $Kabupaten["return"],
-        "change" => "return changeKabupaten()",
-    ),
-    (object)array(
-        "type" => "text",
-        "placeholder" => "ID Kota",
-        "prop" => "city_id"
-    ),
+    // (object)array(
+    //     "type" => "text",
+    //     "placeholder" => "ID Provinsi",
+    //     "prop" => "province_id"
+    // ),
+    // (object)array(
+    //     "type" => "select",
+    //     "placeholder" => "Provinsi",
+    //     "prop" => "province_val",
+    //     "options" => $Provinsi,
+    //     "change" => "",
+    // ),
+    // (object)array(
+    //     "type" => "text",
+    //     "placeholder" => "ID Kota",
+    //     "prop" => "city_id"
+    // ),
     (object)array(
         "type" => "select",
         "placeholder" => "Kabupaten / Kota",
         "prop" => "city_val",
-        "options" => $Kabupaten["return"],
+        "options" => $Kabupaten,
         "change" => "return changeKabupaten()",
     ),
-    (object)array(
-        "type" => "text",
-        "placeholder" => "ID Kecamatan",
-        "prop" => "district_id"
-    ),
+    // (object)array(
+    //     "type" => "text",
+    //     "placeholder" => "ID Kecamatan",
+    //     "prop" => "district_id"
+    // ),
     (object)array(
         "type" => "select",
         "placeholder" => "Kecamatan",
         "prop" => "district_val",
-        "options" => $Kabupaten["return"],
-        "change" => "return changeKabupaten()",
+        "options" => [],
+        "change" => "return changeKecamatan()",
     ),
-    (object)array(
-        "type" => "text",
-        "placeholder" => "ID Desa",
-        "prop" => "district_id"
-    ),
+    // (object)array(
+    //     "type" => "text",
+    //     "placeholder" => "ID Desa",
+    //     "prop" => "district_id"
+    // ),
     (object)array(
         "type" => "select",
         "placeholder" => "Desa",
-        "prop" => "village_id",
-        "options" => $Kabupaten["return"],
-        "change" => "return changeKabupaten()",
+        "prop" => "village_val",
+        "options" => [],
+        "change" => "",
     ),
     (object)array(
         "type" => "text",
@@ -105,11 +93,11 @@ $forms = array(
         "prop" => "address"
     ),
     (object)array(
-        "type" => "select",
+        "type" => "checkbox",
         "placeholder" => "Kurir",
         "prop" => "courier",
-        "options" => $Kabupaten["return"],
-        "change" => "return changeKabupaten()",
+        "options" => $Courier,
+        "change" => "",
     ),
 
 )
@@ -134,9 +122,69 @@ $forms = array(
         word-wrap: break-word;
         width: 50%
     }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
 </style>
 @section('content')
-<form method="POST" action="/" enctype="multipart/form-data">
+<form method="POST" action="/ntbmall/buatToko" enctype="multipart/form-data">
     @csrf
     <h3 class="text-gray-400">Tambah Toko</h3>
     @foreach($forms as $key=>$form)
@@ -163,6 +211,18 @@ $forms = array(
                     </div>
                     <input id="dropzone-file" accept="image/x-png,image/gif,image/jpeg" name="{{$form->prop}}_file" type="file" class="hidden" id="{{$form->prop}}" />
                 </label>
+                @elseif($form->type == 'checkbox')
+                <div class="grid grid-flow-row-dense grid-cols-2">
+                    @foreach($form->options as $key=>$option)
+                    <div class="flex justify-between items-center w-[170px]">
+                        <label class="switch">
+                            <input type="checkbox" name="{{$option->id}}">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="mr-[10px]">{{$option->name}}</span>
+                    </div>
+                    @endforeach
+                </div>
                 @else
                 <input class="border-1 border-gray-400 pl-2 pr-[150px] py-2 text-black mb-2" type="{{$form->type}}" name="{{$form->prop}}">
                 @endif
@@ -179,51 +239,39 @@ $forms = array(
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script>
-    // const Kabupaten = @json($Kabupaten["return"]);
-
-    // $.ajax({
-    //     url: "https://absensinow.id/api/city",
-    //     headers: {
-    //         "signature": "mns-1275151",
-    //         'Access-Control-Allow-Origin': '*',
-    //         'Access-Control-Allow-Headers': '*',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     contentType: 'application/json',
-    //     type: 'GET',
-    //     crossDomain: true,
-    //     dataType: 'json', // added data type
-    //     success: function(res) {
-    //         console.log(res);
-    //         // alert(res);
-    //     }
-    // });
-
-    // window.axios = require('axios');
-    // const axios = require('axios');
-    // console.log(babik);
-    // window.axios.get('https://jsonplaceholder.typicode.com/todos')
-    //     .then(res => console.log(res.data))
-    //     .catch(err => console.log(err));  
-
-
-    // const xmlHttp = new XMLHttpRequest();
-    // xmlHttp.open( "GET", "https://dev.lallo.id/v0/fast_boat/locationPorts?type=departure", false ); // false for synchronous request
-    // // xmlHttp.setRequestHeader("signature", "mns-1275151");
-    // // xmlHttp.setRequestHeader("Content-Type", "application/json");
-    // xmlHttp.send( null );
-    // console.log(xmlHttp.responseText);
+    const Kabupaten = @json($Kabupaten);
+    const Kecamatan = @json($Kecamatan);
+    const Kelurahan = @json($Kelurahan);
 
     const changeKabupaten = () => {
-        const kabupatenFilter = document.getElementById('province_val');
+        const kabupatenFilter = document.getElementById('city_val');
         const idKabupaten = kabupatenFilter.options[kabupatenFilter.selectedIndex].value;
-        console.log(idKabupaten);
-        const xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "https://absensinow.id/api/district/" + idKabupaten, true); // false for synchronous request
-        xmlHttp.setRequestHeader("signature", "mns-1275151");
-        // xmlHttp.setRequestHeader("Content-Type", "application/json");
-        xmlHttp.send(null);
-        console.log(xmlHttp.responseText);
+        renderKecamatan(idKabupaten)
+    }
 
+    const renderKecamatan = (idKabupaten) => {
+        var str = `<option value=''>Semua</option>`
+        const kecamatanList = Kecamatan.filter(e => e.id_kabupaten == idKabupaten);
+        for (let item of kecamatanList) {
+            str += `<option value='${item.id}'>` + item.name + "</option>"
+        }
+
+        document.getElementById("district_val").innerHTML = str;
+    }
+
+    const changeKecamatan = () => {
+        const KecamatanFilter = document.getElementById('district_val');
+        const idKecamatan = KecamatanFilter.options[KecamatanFilter.selectedIndex].value;
+        renderKelurahan(idKecamatan)
+    }
+
+    const renderKelurahan = (idKecamatan) => {
+        var str = `<option value=''>Semua</option>`
+        const kelurahanList = Kelurahan.filter(e => e.id_kecamatan == idKecamatan);
+
+        for (let item of kelurahanList) {
+            str += `<option value='${item.id}'>` + item.name + "</option>"
+        }
+        document.getElementById("village_val").innerHTML = str;
     }
 </script>

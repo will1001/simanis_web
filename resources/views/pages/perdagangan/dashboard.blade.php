@@ -78,7 +78,7 @@
     </div> -->
 </div>
 
-<div class="ml-4 my-5 flex justify-between badan_usaha_container">
+<!-- <div class="ml-4 my-5 flex justify-between badan_usaha_container">
     <div class="boxProduk flex flex-col bg-slate-200 border shadow-md px-3 py-3 rounded-md cursor-pointer">
         <span class="my-auto font-bold text-xl text-slate-800">248</span>
         <span class="text-slate-800 font-semibold">Pengajuan Produk</span>
@@ -95,7 +95,7 @@
         <span class="my-auto font-bold text-xl text-white">185</span>
         <span class="text-white font-semibold">Menunggu Respon</span>
     </div>
-</div>
+</div> -->
 
 <div class="ml-4 mt-4 bg-white flex flex-col items-center badan_usaha_container rounded-2xl">
     <span class="badan_usaha_container  hTabel ml-5"><h5 class="mt-4">Produk Baru</h5></span>

@@ -758,7 +758,7 @@ $baseUrl = env('APP_URL');
         const subCabangIndustriFilter = document.getElementById('subCabangIndustriFilter');
         const idSubCabangIndsutri = subCabangIndustriFilter.options[subCabangIndustriFilter.selectedIndex].value;
         const textSubCabangIndsutri = subCabangIndustriFilter.options[subCabangIndustriFilter.selectedIndex].text;
-        subCabangIndustriFilterApply = textSubCabangIndsutri;
+        subCabangIndustriFilterApply = idSubCabangIndsutri;
         applyFilter(
             idKabupatenFilterApply, kecamatanFilterApply, kelurahanFilterApply, cabangIndustriFilterApply, subCabangIndustriFilterApply, tahunFilterApply
         )

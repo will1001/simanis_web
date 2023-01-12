@@ -643,12 +643,19 @@ class AdminController extends Controller
             $temp = (object)array(
                 "nik" => $field->nik,
             );
-            array_push($niks, $temp);
+            // dd($temp->nik);
+
+            array_push($niks, $temp->nik);
         }
         // dd($niks);
         $User = User::whereIn('nik',  $niks)->get();
-        $User->delete();
-        $BadanUsaha->delete();
+        // dd($User);
+        $User->each(function ($msg) {
+            $msg->delete();
+        });
+        $BadanUsaha->each(function ($msg) {
+            $msg->delete();
+        });;
 
         return redirect('/admin/tabel');
     }

@@ -69,6 +69,8 @@ Route::get('/perbankan/{pages}/{subPages?}/{id?}', [PerbankanController::class, 
 Route::get('/koperasi/{pages}/{subPages?}/{id?}', [KoperasiController::class, 'index'])->name('koperasi');
 Route::get('/perdagangan/{pages}/{subPages?}/{id?}', [PerdaganganController::class, 'index'])->name('perdagangan');
 Route::get('/ntbmall/updateDataLokasi', [PerdaganganController::class, 'updateDataLokasi']);
+Route::get('/ntbmall/updateDataKategori', [PerdaganganController::class, 'updateDataKategori']);
+Route::post('/ntbmall/buatToko', [PerdaganganController::class, 'buatToko']);
 Route::get('/ojk/{pages}/{subPages?}/{id?}', [OjkController::class, 'index'])->name('ojk');
 
 Route::match(['get', 'post'], '/form/{userType}/{id?}', [FormController::class, 'badan_usaha']);
