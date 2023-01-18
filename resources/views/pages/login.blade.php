@@ -156,7 +156,7 @@
             <form class="form-horizontal" method="POST" action="{{url('login')}}">
               @csrf
               <h3 class="title">Simanis</h3>
-              <!-- build ulang -->
+              <!-- build ulang #3 -->
 
               <div class="flex items-center">
                 <span class="mr-2 mb-4 w-[100px]">NIK : </span>
