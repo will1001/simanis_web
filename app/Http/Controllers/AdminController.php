@@ -386,7 +386,7 @@ class AdminController extends Controller
                     $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
                         ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
                         ->select('badan_usaha.*', 'instansi.*', 'users.*', 'users.nik as nik')
-                        ->get();
+                        ->paginate(50);
                     if ($pages == "tabel") {
                         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
                             ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')

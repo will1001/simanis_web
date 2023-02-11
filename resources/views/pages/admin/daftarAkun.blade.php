@@ -130,7 +130,7 @@
 
     <tr class="bg-white">
       <!-- <td class="text-center p-3"><span class="py-auto px-1 border-2 rounded-md"><input type="checkbox" name="all" id="all" class=" invisible "></span></th> -->
-      <td class="text-center text-slate-700 rounded-md">{{++$key}}</td>
+      <td class="text-center text-slate-700 rounded-md">{{ (++$key + (100* ((int)$User->currentPage() -1) ) ) }}</td>
       <td class="text-left text-slate-700 ">{{$item->nik}}</td>
       @if($item->role == 'KOPERASI' || $item->role == 'BANK')
       <td class="text-left text-slate-700 ">{{$item->nama}}</td>
@@ -154,7 +154,8 @@
     @endforeach
 
   </table>
-  <div class="flex actionContainer bg-white mt-1">
+  {{ $User->links() }}
+  <!-- <div class="flex actionContainer bg-white mt-1">
     <div class="flex  actionContainer">
       <div class="flex bg-white rounded-lg mt-4 shadow-md w-48 h-9 border-slate-200">
         <div class="flex border px-3 rounded-md">
@@ -181,7 +182,7 @@
         <button><img src="{{ asset('/Icon-svg/skip.svg') }}" alt="icon"></button>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 
