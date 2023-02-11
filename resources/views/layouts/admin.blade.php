@@ -102,14 +102,14 @@
               <a class="flex items-center bg-white rounded-xl px-3 py-2 border-1 border-gray-400 w-[170px]" href="{{ asset('/files/contah format import data.xlsx') }}">Contoh File Import</a>
             </div>
             @endif
-            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="flex items-center justify-between" id="navbar">
               <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group input-group-outline">
                   <!-- <label class="form-label">Type here...</label>
               <input type="text" class="form-control"> -->
                 </div>
               </div>
-              <ul class="navbar-nav  justify-content-end">
+              <ul class="navbar-nav justify-content-end">
 
                 <li class="nav-item dropdown pe-2 d-flex align-items-center">
                   @if($pages == "tabel")
