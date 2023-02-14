@@ -852,7 +852,7 @@ $baseUrl = env('APP_URL');
             // totalTenagaKerjaUpdate = totalTenagaKerjaUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             // totalTenagaKerjaUpdate = 10;
             totalIKMUpdate.forEach(e => {
-                // build ulang hack
+                // build ulang hack 2
                 // console.log(e);kkk
                 // console.log(parseInt(e.jumlah_tenaga_kerja_wanita));
                 totalTenagaKerjaUpdate += (parseInt(e.jumlah_tenaga_kerja_pria === null ? 0 : e.jumlah_tenaga_kerja_pria) + parseInt(e.jumlah_tenaga_kerja_wanita === null ? 0 : e.jumlah_tenaga_kerja_wanita));
