@@ -619,6 +619,7 @@ $baseUrl = env('APP_URL');
     let industriMenengah = @json($industriMenengah).length;
     let industriBesar = @json($industriBesar).length;
     let totalTenagaKerja = @json($totalTenagaKerja)[0]['total_tenaga_kerja'];
+    console.log(totalTenagaKerja);
     let totalIKMBaru = @json($totalIKMBaru)[0]['total_ikm_baru'];
     let sertifikatHalal = @json($sertifikatHalal).length;
     let sertifikatHaki = @json($sertifikatHaki).length;
@@ -852,7 +853,7 @@ $baseUrl = env('APP_URL');
             // totalTenagaKerjaUpdate = totalTenagaKerjaUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             // totalTenagaKerjaUpdate = 10;
             totalIKMUpdate.forEach(e => {
-                // build ulang hack 3
+                // build ulang not respon
                 // console.log(e);kkk
                 // console.log(parseInt(e.jumlah_tenaga_kerja_wanita));
                 totalTenagaKerjaUpdate += (parseInt(e.jumlah_tenaga_kerja_pria === null ? 0 : e.jumlah_tenaga_kerja_pria) + parseInt(e.jumlah_tenaga_kerja_wanita === null ? 0 : e.jumlah_tenaga_kerja_wanita));
