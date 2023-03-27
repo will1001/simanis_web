@@ -103,9 +103,9 @@ $field == 'sertifikat_merek_file'
 )
 <div class="flex">
     <p class="w-[400px]">{{$fieldTitles[$key]}}</p>
-   
+
     @if(!empty($BadanUsaha[0]->$field))
-        <a target="_blank" href="{{$baseUrl.$BadanUsaha[0]->$field}}">Lihat Dokumen</a>
+    <a target="_blank" href="{{$baseUrl.$BadanUsaha[0]->$field}}">Lihat Dokumen</a>
     @endif
 </div>
 @elseif(
@@ -115,12 +115,12 @@ $field == 'jumlah_tenaga_kerja_wanita' ||
 $field == 'kapasitas_produksi_perbulan' ||
 $field == 'nilai_produksi_perbulan' ||
 $field == 'nilai_bahan_baku_perbulan' ||
-$field == 'omset' 
+$field == 'omset'
 )
 <div class="flex justify-start text-textColor2">
     <p class="w-[400px]">{{$fieldTitles[$key]}}</p>
     <p class="w-[10px]">:</p>
-    <p class="w-[300px]"><strong>{{number_format($BadanUsaha->$field,0)}}</strong></p>
+    <p class="w-[300px]"><strong>{{$BadanUsaha->$field ? number_format($BadanUsaha->$field,0):""}}</strong></p>
 </div>
 @else
 <div class="flex justify-start text-textColor2">
