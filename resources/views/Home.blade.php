@@ -850,7 +850,7 @@ $baseUrl = env('APP_URL');
             industriKecilUpdate = industriKecilUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             industriMenengahUpdate = industriMenengahUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             industriBesarUpdate = industriBesarUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
-            // totalTenagaKerjaUpdate = totalTenagaKerjaUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
+            totalTenagaKerjaUpdate = totalTenagaKerjaUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             // totalTenagaKerjaUpdate = 10;
             totalIKMUpdate.forEach(e => {
                 // build ulang 30-03-2023
