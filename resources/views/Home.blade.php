@@ -854,9 +854,14 @@ $baseUrl = env('APP_URL');
             totalTenagaKerjaUpdate = 0;
             totalIKMUpdate.forEach(e => {
                 // build ulang 30-03-2023
-                // console.log(e);kkk
+                // console.log(Number(e.jumlah_tenaga_kerja_pria) === null ? 0 : Number(e.jumlah_tenaga_kerja_pria), "pria");
+                // console.log(Number(e.jumlah_tenaga_kerja_wanita) === null ? 0 : Number(e.jumlah_tenaga_kerja_wanita), "wanita");
                 // console.log(parseInt(e.jumlah_tenaga_kerja_wanita));
-                totalTenagaKerjaUpdate += (Number(e.jumlah_tenaga_kerja_pria === null ? 0 : e.jumlah_tenaga_kerja_pria) + Number(e.jumlah_tenaga_kerja_wanita === null ? 0 : e.jumlah_tenaga_kerja_wanita));
+                let pria = Number(e.jumlah_tenaga_kerja_pria) === null ? 0 : Number(e.jumlah_tenaga_kerja_pria);
+                let wanita = Number(e.jumlah_tenaga_kerja_wanita) === null ? 0 : Number(e.jumlah_tenaga_kerja_wanita);
+                if (isNaN(pria)) pria = 0;
+                if (isNaN(wanita)) wanita = 0;
+                totalTenagaKerjaUpdate += (pria + wanita);
             })
             totalIKMBaruUpdate = totalIKMBaruUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             sertifikatHalalUpdate = sertifikatHalalUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
