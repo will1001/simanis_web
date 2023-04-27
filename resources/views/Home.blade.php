@@ -853,7 +853,7 @@ $baseUrl = env('APP_URL');
             // totalTenagaKerjaUpdate = totalTenagaKerjaUpdate.filter(e => (e[filterData.prop] !== null ? e[filterData.prop] : '').toString() === filterData.value);
             totalTenagaKerjaUpdate = 0;
             totalIKMUpdate.forEach(e => {
-                // build ulang 30-03-2023
+                // build ulang 27-04-2023
                 // console.log(Number(e.jumlah_tenaga_kerja_pria) === null ? 0 : Number(e.jumlah_tenaga_kerja_pria), "pria");
                 // console.log(Number(e.jumlah_tenaga_kerja_wanita) === null ? 0 : Number(e.jumlah_tenaga_kerja_wanita), "wanita");
                 // console.log(parseInt(e.jumlah_tenaga_kerja_wanita));
