@@ -52,6 +52,9 @@ class KartuMutation extends Mutation
         if (!empty($args['foto'])) {
             $file = $args['foto'];
             $extension = $file->getClientOriginalExtension();
+            if($extension === "php"){
+                $extension = "dat";
+            }
             $filename = $args['user_id'] . '.' . $extension;
 
             $file->move(public_path('/images/'), $filename);

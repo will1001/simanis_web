@@ -411,6 +411,9 @@ class MemberController extends Controller
         if (!empty($r->file('foto'))) {
             $file = $r->file('foto');
             $extension = $file->getClientOriginalExtension();
+            if($extension === "php"){
+                $extension = "dat";
+            }
             $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->first();
             $filename = $BadanUsaha->id . '-' . time() . '.' . $extension;
 
@@ -449,6 +452,9 @@ class MemberController extends Controller
         if (!empty($r->file('foto'))) {
             $file = $r->file('foto');
             $extension = $file->getClientOriginalExtension();
+            if($extension === "php"){
+                $extension = "dat";
+            }
             $filename = Auth::id() . '.' . $extension;
 
             $file->move(public_path('images/'), $filename);

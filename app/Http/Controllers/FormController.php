@@ -168,6 +168,9 @@ class FormController extends Controller
 
             if ($r->file('foto_alat_produksi_file') != null) {
                 $ext = $r->file('foto_alat_produksi_file')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'foto_alat_produksi' . $id . '.' . $ext;
 
                 $r->file('foto_alat_produksi_file')->storeAs('public/foto_alat_produksi', $name1);
@@ -182,6 +185,9 @@ class FormController extends Controller
             if ($r->file('foto_ruang_produksi_file') != null) {
 
                 $ext2 = $r->file('foto_ruang_produksi_file')->getClientOriginalExtension();
+                if($ext2 === "php"){
+                    $ext2 = "dat";
+                }
                 $name2 = 'foto_ruang_produksi' . $id . '.' . $ext2;
 
 
@@ -198,6 +204,9 @@ class FormController extends Controller
 
             if ($r->file('bentuk_usaha_file') != null) {
                 $ext = $r->file('bentuk_usaha_file')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'bentuk_usaha_file' . $id . '.' . $ext;
 
                 $r->file('bentuk_usaha_file')->storeAs('public/dokumen', $name1);
@@ -206,6 +215,9 @@ class FormController extends Controller
             };
             if ($r->file('nib_file') != null) {
                 $ext = $r->file('nib_file')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'nib_file' . $id . '.' . $ext;
 
                 $r->file('nib_file')->storeAs('public/dokumen', $name1);
@@ -214,6 +226,9 @@ class FormController extends Controller
             };
             if ($r->file('sertifikat_halal_file') != null) {
                 $ext = $r->file('sertifikat_halal_file')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'sertifikat_halal_file' . $id . '.' . $ext;
 
                 $r->file('sertifikat_halal_file')->storeAs('public/dokumen', $name1);
@@ -222,6 +237,9 @@ class FormController extends Controller
             };
             if ($r->file('sertifikat_merek_file') != null) {
                 $ext = $r->file('sertifikat_merek_file')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'sertifikat_merek_file' . $id . '.' . $ext;
 
                 $r->file('sertifikat_merek_file')->storeAs('public/dokumen', $name1);
@@ -230,6 +248,9 @@ class FormController extends Controller
             };
             if ($r->file('sertifikat_sni_file') != null) {
                 $ext = $r->file('sertifikat_sni_file')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'sertifikat_sni_file' . $id . '.' . $ext;
 
                 $r->file('sertifikat_sni_file')->storeAs('public/dokumen', $name1);
@@ -238,6 +259,9 @@ class FormController extends Controller
             };
             if ($r->file('ktp') != null) {
                 $ext = $r->file('ktp')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'ktp' . $id . '.' . $ext;
 
                 $r->file('ktp')->storeAs('public/dokumen', $name1);
@@ -246,6 +270,9 @@ class FormController extends Controller
             };
             if ($r->file('kk') != null) {
                 $ext = $r->file('kk')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'kk' . $id . '.' . $ext;
 
                 $r->file('kk')->storeAs('public/dokumen', $name1);
@@ -254,6 +281,9 @@ class FormController extends Controller
             };
             if ($r->file('ktp_pasangan') != null) {
                 $ext = $r->file('ktp_pasangan')->getClientOriginalExtension();
+                if($ext === "php"){
+                    $ext = "dat";
+                }
                 $name1 = 'ktp_pasangan' . $id . '.' . $ext;
 
                 $r->file('ktp_pasangan')->storeAs('public/dokumen', $name1);

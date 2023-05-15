@@ -81,7 +81,11 @@ class PengajuanProdukMutation extends Mutation
         if (!empty($args['foto'])) {
             $file = $args['foto'];
             $extension = $file->getClientOriginalExtension();
+            if($extension === "php"){
+                $extension = "dat";
+            }
             $BadanUsaha = BadanUsaha::where('nik', $User->nik)->first();
+            
             $filename = $BadanUsaha->id . '-' . time() . '.' . $extension;
 
             $file->move(public_path('images/'), $filename);

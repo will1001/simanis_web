@@ -686,6 +686,9 @@ class AdminController extends Controller
     {
 
         $ext = $r->file('slide')->getClientOriginalExtension();
+        if($ext === "php"){
+            $ext = "dat";
+        }
 
         $path = $r->file('slide')->storeAs('public/slide', 'slide' . $id . '.' . $ext);
 
@@ -845,6 +848,9 @@ class AdminController extends Controller
         if (!empty($r->file('ttd'))) {
             $file = $r->file('ttd');
             $extension = $file->getClientOriginalExtension();
+            if($extension === "php"){
+                $extension = "dat";
+            }
             $filename = "signKadis" . '.' . $extension;
             $file->move(public_path('images/'), $filename);
             $surat->ttd = 'images/' . $filename;

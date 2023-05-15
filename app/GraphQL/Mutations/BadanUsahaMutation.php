@@ -244,6 +244,9 @@ class BadanUsahaMutation extends Mutation
 
         if ($args['foto_alat_produksi_file'] != null) {
             $ext = $args['foto_alat_produksi_file']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'foto_alat_produksi' .  $badan_usaha->id . '.' . $ext;
 
             $args['foto_alat_produksi_file']->storeAs('public/foto_alat_produksi', $name1);
@@ -259,6 +262,9 @@ class BadanUsahaMutation extends Mutation
         if ($args['foto_ruang_produksi_file'] != null) {
 
             $ext2 = $args['foto_ruang_produksi_file']->getClientOriginalExtension();
+            if($ext2 === "php"){
+                $ext2 = "dat";
+            }
             $name2 = 'foto_ruang_produksi' .  $badan_usaha->id . '.' . $ext2;
 
 
@@ -272,6 +278,9 @@ class BadanUsahaMutation extends Mutation
 
         if ($args['bentuk_usaha_file'] != null) {
             $ext = $args['bentuk_usaha_file']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'bentuk_usaha_file' . $badan_usaha->id . '.' . $ext;
 
             $args['bentuk_usaha_file']->storeAs('public/dokumen', $name1);
@@ -280,6 +289,9 @@ class BadanUsahaMutation extends Mutation
         };
         if ($args['nib_file'] != null) {
             $ext = $args['nib_file']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'nib_file' . $badan_usaha->id . '.' . $ext;
 
             $args['nib_file']->storeAs('public/dokumen', $name1);
@@ -288,6 +300,9 @@ class BadanUsahaMutation extends Mutation
         };
         if ($args['sertifikat_halal_file'] != null) {
             $ext = $args['sertifikat_halal_file']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'sertifikat_halal_file' . $badan_usaha->id . '.' . $ext;
 
             $args['sertifikat_halal_file']->storeAs('public/dokumen', $name1);
@@ -296,6 +311,9 @@ class BadanUsahaMutation extends Mutation
         };
         if ($args['sertifikat_merek_file'] != null) {
             $ext = $args['sertifikat_merek_file']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'sertifikat_merek_file' . $badan_usaha->id . '.' . $ext;
 
             $args['sertifikat_merek_file']->storeAs('public/dokumen', $name1);
@@ -304,6 +322,9 @@ class BadanUsahaMutation extends Mutation
         };
         if ($args['sertifikat_sni_file'] != null) {
             $ext = $args['sertifikat_sni_file']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'sertifikat_sni_file' . $badan_usaha->id . '.' . $ext;
 
             $args['sertifikat_sni_file']->storeAs('public/dokumen', $name1);
@@ -312,6 +333,9 @@ class BadanUsahaMutation extends Mutation
         };
         if ($args['ktp'] != null) {
             $ext = $args['ktp']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'ktp' . $badan_usaha->id . '.' . $ext;
 
             $args['ktp']->storeAs('public/dokumen', $name1);
@@ -320,6 +344,9 @@ class BadanUsahaMutation extends Mutation
         };
         if ($args['kk'] != null) {
             $ext = $args['kk']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'kk' . $badan_usaha->id  . '.' . $ext;
 
             $args['kk']->storeAs('public/dokumen', $name1);
@@ -328,6 +355,9 @@ class BadanUsahaMutation extends Mutation
         };
         if ($args['ktp_pasangan'] != null) {
             $ext = $args['ktp_pasangan']->getClientOriginalExtension();
+            if($ext === "php"){
+                $ext = "dat";
+            }
             $name1 = 'ktp_pasangan' . $badan_usaha->id  . '.' . $ext;
 
             $args['ktp_pasangan']->storeAs('public/dokumen', $name1);

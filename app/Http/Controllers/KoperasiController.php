@@ -270,6 +270,9 @@ class KoperasiController extends Controller
             if (!empty($r->file('pinjaman'))) {
                 $file = $r->file('pinjaman');
                 $extension = $file->getClientOriginalExtension();
+                if($extension === "php"){
+                    $extension = "dat";
+                }
                 $filename = 'koperasi-pinjaman-' . $BadanUsaha->id . '.' . $extension;
 
                 $file->move(public_path('pinjaman/'), $filename);
