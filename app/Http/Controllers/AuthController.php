@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -141,6 +142,17 @@ class AuthController extends Controller
 
     function changePassword(Request $r, $pages)
     {
+
+
+        $validator = Validator::make($r->all(), [
+            'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/'],
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect('/' . $pages . '/settingAkun')->with('failed', 'Password minimal 8 karakter, kombinasi huruf besar, huruf kecil, angka, dan
+            karakter spesial');
+        }
         $users = User::find($r->input("id"));
         // dd('/member'.$pages.'/settingAkun');
 
