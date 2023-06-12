@@ -26,8 +26,7 @@ use App\Models\DataPendukung;
 
 
 use Illuminate\Support\Str;
-
-
+use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
@@ -374,6 +373,17 @@ class MemberController extends Controller
     }
     function ajukan_produk(Request $r)
     {
+
+         $validator = Validator::make($r->all(), [
+            'foto' => 'required|file|mimes:jpeg,jpg,png|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('message', 'Format File Harus jpeg,jpg, atau png dan ukuran kurang dari 2 MB');
+        }
         $sertifikat_halal =
             (object)array(
                 "tahun" => $r->input("sertifikat_halal_thn"),
@@ -411,7 +421,7 @@ class MemberController extends Controller
         if (!empty($r->file('foto'))) {
             $file = $r->file('foto');
             $extension = $file->getClientOriginalExtension();
-            if($extension === "php"){
+            if ($extension === "php") {
                 $extension = "dat";
             }
             $BadanUsaha = BadanUsaha::where('nik', Auth::user()->nik)->first();
@@ -445,14 +455,27 @@ class MemberController extends Controller
     function ganti_foto(Request $r)
     {
 
+
+        $validator = Validator::make($r->all(), [
+            'foto' => 'required|file|mimes:jpeg,jpg,png|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('message', 'Format File Harus jpeg,jpg, atau png dan ukuran kurang dari 2 MB');
+        }
+
         $filename = null;
         $User = User::find(Auth::id());
+
 
 
         if (!empty($r->file('foto'))) {
             $file = $r->file('foto');
             $extension = $file->getClientOriginalExtension();
-            if($extension === "php"){
+            if ($extension === "php") {
                 $extension = "dat";
             }
             $filename = Auth::id() . '.' . $extension;

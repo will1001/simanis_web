@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 
@@ -100,6 +100,26 @@ class FormController extends Controller
                 'User' => Auth::user(),
             ]);
         } else {
+            $validator = Validator::make($r->all(), [
+                'foto_alat_produksi_file' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'foto_ruang_produksi_file' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'bentuk_usaha_file' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'nib_file' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'sertifikat_halal_file' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'sertifikat_merek_file' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'sertifikat_sni_file' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'ktp' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'kk' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+                'ktp_pasangan' => 'file|mimes:jpeg,jpg,png,pdf|max:5048',
+            ]);
+            // dd($validator->fails());
+            if ($validator->fails()) {
+                // return redirect()->back()
+                //     ->withErrors($validator)
+                //     ->withInput()
+                //     ->with('message', 'Format File Harus jpeg,jpg,png,atau pdf');
+                return redirect('/member/dashboard/ProfilBadanUsaha/' . $id)->with('message', 'Format File Harus jpeg,jpg,png,atau pdf');
+            }
 
             $badan_usaha = null;
             $badan_usaha_documents = null;
@@ -168,7 +188,7 @@ class FormController extends Controller
 
             if ($r->file('foto_alat_produksi_file') != null) {
                 $ext = $r->file('foto_alat_produksi_file')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'foto_alat_produksi' . $id . '.' . $ext;
@@ -185,7 +205,7 @@ class FormController extends Controller
             if ($r->file('foto_ruang_produksi_file') != null) {
 
                 $ext2 = $r->file('foto_ruang_produksi_file')->getClientOriginalExtension();
-                if($ext2 === "php"){
+                if ($ext2 === "php") {
                     $ext2 = "dat";
                 }
                 $name2 = 'foto_ruang_produksi' . $id . '.' . $ext2;
@@ -204,7 +224,7 @@ class FormController extends Controller
 
             if ($r->file('bentuk_usaha_file') != null) {
                 $ext = $r->file('bentuk_usaha_file')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'bentuk_usaha_file' . $id . '.' . $ext;
@@ -215,7 +235,7 @@ class FormController extends Controller
             };
             if ($r->file('nib_file') != null) {
                 $ext = $r->file('nib_file')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'nib_file' . $id . '.' . $ext;
@@ -226,7 +246,7 @@ class FormController extends Controller
             };
             if ($r->file('sertifikat_halal_file') != null) {
                 $ext = $r->file('sertifikat_halal_file')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'sertifikat_halal_file' . $id . '.' . $ext;
@@ -237,7 +257,7 @@ class FormController extends Controller
             };
             if ($r->file('sertifikat_merek_file') != null) {
                 $ext = $r->file('sertifikat_merek_file')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'sertifikat_merek_file' . $id . '.' . $ext;
@@ -248,7 +268,7 @@ class FormController extends Controller
             };
             if ($r->file('sertifikat_sni_file') != null) {
                 $ext = $r->file('sertifikat_sni_file')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'sertifikat_sni_file' . $id . '.' . $ext;
@@ -259,7 +279,7 @@ class FormController extends Controller
             };
             if ($r->file('ktp') != null) {
                 $ext = $r->file('ktp')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'ktp' . $id . '.' . $ext;
@@ -270,7 +290,7 @@ class FormController extends Controller
             };
             if ($r->file('kk') != null) {
                 $ext = $r->file('kk')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'kk' . $id . '.' . $ext;
@@ -281,7 +301,7 @@ class FormController extends Controller
             };
             if ($r->file('ktp_pasangan') != null) {
                 $ext = $r->file('ktp_pasangan')->getClientOriginalExtension();
-                if($ext === "php"){
+                if ($ext === "php") {
                     $ext = "dat";
                 }
                 $name1 = 'ktp_pasangan' . $id . '.' . $ext;

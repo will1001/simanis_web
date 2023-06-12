@@ -65,6 +65,7 @@ $fieldTitles = [
 ?>
 @section('content')
 <h1>Profil Badan Usaha</h1>
+<p class="text-danger">{{ session('message') }}</p>
 <form method="GET" action="/form/member/{{$BadanUsaha[0]->id}}" style="margin-right:10px">
     <button type="submit" class="rounded-lg text-white bg-blue-500 p-2">Edit Profil</button>
 </form>
