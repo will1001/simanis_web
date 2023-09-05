@@ -904,7 +904,6 @@ class AdminController extends Controller
 
         $params = [
             'pages' => 'setting',
-            'User' => User::all(),
             'Notifikasi' => $Notifikasi,
             'SlideShow' => SlideShow::all(),
             'Survei' => Survei::all()
@@ -919,11 +918,8 @@ class AdminController extends Controller
 
         $params = [
             'pages' => 'settingSurat',
-            'User' => User::all(),
             'Notifikasi' => $Notifikasi,
             'surat' => Surat::first(),
-            'Survei' => Survei::all()
-
         ];
         return view("pages.admin.settingSurat", $params);
     }
@@ -968,8 +964,6 @@ class AdminController extends Controller
             'pages' => 'daftarPengajuanDana',
             'User' => $User,
             'Notifikasi' => $Notifikasi,
-            'Survei' => Survei::all()
-
         ];
         return view("pages.admin.daftarPengajuanDana", $params);
     }
@@ -1012,7 +1006,6 @@ class AdminController extends Controller
             'pages' => 'historyPengajuanDana',
             'User' => $User,
             'Notifikasi' => $Notifikasi,
-            'Survei' => Survei::all()
 
         ];
         return view("pages.admin.historyPengajuanDana", $params);
@@ -1031,7 +1024,6 @@ class AdminController extends Controller
             'UserAdmin' => Auth::User(),
             'User' => $User,
             'Notifikasi' => $Notifikasi,
-            'Survei' => Survei::all()
 
         ];
         return view("pages.admin.settingAkun", $params);
