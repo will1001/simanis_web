@@ -99,7 +99,7 @@
             @endif
             @if($pages == "tabel")
             <div>
-              <a class="flex items-center bg-white rounded-xl px-3 py-2 border-1 border-gray-400 w-[170px]" href="{{ asset('/files/contah format import data.xlsx') }}">Contoh File Import</a>
+              <a class="flex items-center bg-white rounded-xl px-3 py-2 border-1 border-gray-400 w-[170px]" href="{{ asset('/files/contoh format import data.xlsx') }}">Contoh File Import</a>
             </div>
             @endif
             <div class="flex items-center justify-between" id="navbar">
