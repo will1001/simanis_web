@@ -47,6 +47,8 @@ class BadanUsahaImport implements ToModel
             'nilai_bahan_baku_perbulan' => $row[23],
             'id_kbli' => $row[24],
             'omset' => $row[25],
+            'lat' => $row[26],
+            'lng' => $row[27],
         ]);
     }
 }
