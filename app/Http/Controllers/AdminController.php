@@ -869,4 +869,31 @@ class AdminController extends Controller
 
         return redirect('/admin/daftarAkun');
     }
+
+    //New function
+    public function dashboard(){
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
+
+        $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+            ->paginate(100, $this->fieldsDashboard);
+
+        $Kabupaten = Kabupaten::all();
+        $params = [
+            'BadanUsaha' => $BadanUsaha,
+            'SlideShow' => SlideShow::all(),
+            'Survei' => Survei::all(),
+            'keyword' => "",
+            'pages' => 'tabel',
+            'Notifikasi' => $Notifikasi,
+            'Kabupaten' => $Kabupaten,
+            'fields' => $this->fields2
+
+        ];
+        return view("pages.admin.tabel", $params);
+    }
 }

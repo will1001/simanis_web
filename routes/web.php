@@ -28,7 +28,6 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 
-
 Route::get('/storageLink', function () {
     Artisan::call('storage:link');
 });
@@ -41,11 +40,15 @@ Route::get('/chartDetail/{chartId}/{title}/sjfi834t3htg84ht3ht98034ht3ht3h4t8h24
 Route::post('/chartDetail/search', [HomeController::class, 'chartDetailSearch'])->name('chartDetail_search');
 Route::post('/surveyChart/{id}', [HomeController::class, 'surveyChart'])->name('surveyChart');
 
-Route::match(['get', 'post'], '/login', [AuthController::class, 'login']);
+Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])->name('login');
 Route::match(['get', 'post'], '/daftar', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/changePassword/{pages}', [AuthController::class, 'changePassword'])->name('changePassword');
-
+//new
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');
+});
+//end enw
 Route::get('/admin/{pages}/{subPages?}/{id?}', [AdminController::class, 'index'])->name('admin');
 Route::post('/admin/search', [AdminController::class, 'searchBadanUsaha'])->name('admin_search');
 Route::post('/admin/searchUser', [AdminController::class, 'searchUser'])->name('admin_search_user');
