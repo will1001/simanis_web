@@ -62,6 +62,8 @@ class FormController extends Controller
         'badan_usaha_documents.sertifikat_sni_file',
         'badan_usaha_documents.sertifikat_merek_file',
         'badan_usaha.merek_usaha',
+        'badan_usaha.lat',
+        'badan_usaha.lng',
         'data_tambahan.ktp',
         'data_tambahan.kk',
 

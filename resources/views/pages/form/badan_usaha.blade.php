@@ -295,13 +295,13 @@ $forms = array(
         "required" => "true"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "text",
         "placeholder" => "Latitude",
         "prop" => "lat",
         "required" => "false"
     ),
     (object)array(
-        "type" => "number",
+        "type" => "text",
         "placeholder" => "Longitude",
         "prop" => "lng",
         "required" => "false"
