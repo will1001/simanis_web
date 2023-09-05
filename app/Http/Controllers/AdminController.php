@@ -656,7 +656,7 @@ class AdminController extends Controller
             $msg->delete();
         });;
 
-        return redirect('/admin/tabel');
+        return redirect('/admin-dashboard');
     }
 
     public function deleteAllBadanUsaha()
@@ -664,7 +664,7 @@ class AdminController extends Controller
 
         BadanUsaha::truncate();
 
-        return redirect('/admin/tabel');
+        return redirect('/admin-dashboard');
     }
 
     public function importExcel(Request $request)
@@ -807,7 +807,7 @@ class AdminController extends Controller
         }
         $users->save();
 
-        return redirect('/admin/daftarAkun');
+        return redirect('/admin-dashboard/daftar-akun');
     }
 
     public function ubahStatusUser($id, $status)
@@ -819,7 +819,7 @@ class AdminController extends Controller
         $user->save();
 
 
-        return redirect('/admin/daftarAkun');
+        return redirect('/admin-dashboard/daftar-akun');
     }
 
     public function hapusUser($id)
@@ -828,7 +828,7 @@ class AdminController extends Controller
         $res = User::where('id', $id)->delete();
 
 
-        return redirect('/admin/daftarAkun');
+        return redirect('/admin-dashboard/daftar-akun');
     }
 
     //
@@ -867,7 +867,7 @@ class AdminController extends Controller
 
         $User->save();
 
-        return redirect('/admin/daftarAkun');
+        return redirect('/admin-dashboard/daftar-akun');
     }
 
     //New function
@@ -926,12 +926,11 @@ class AdminController extends Controller
 
     public function daftarAkun()
     {
-        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
-        $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
-            ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
-            ->select('badan_usaha.*', 'instansi.*', 'users.*', 'users.nik as nik')
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")
+            ->where("nik", Auth::user()->nik)
+            ->where("status", "not read")->get();
+        $User = User::with('badan_usaha', 'instansi')
             ->paginate(50);
-
         $params = [
             'pages' => 'daftarAkun',
             'User' => $User,
@@ -945,10 +944,6 @@ class AdminController extends Controller
     public function daftarPengajuanDana()
     {
         $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
-        $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
-            ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
-            ->select('badan_usaha.*', 'instansi.*', 'users.*', 'users.nik as nik')
-            ->paginate(50);
         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
             ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
@@ -962,7 +957,6 @@ class AdminController extends Controller
         $params = [
             'PengajuanDana' => $PengajuanDana,
             'pages' => 'daftarPengajuanDana',
-            'User' => $User,
             'Notifikasi' => $Notifikasi,
         ];
         return view("pages.admin.daftarPengajuanDana", $params);
@@ -971,10 +965,6 @@ class AdminController extends Controller
     public function historyPengajuanDana()
     {
         $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
-        $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
-            ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
-            ->select('badan_usaha.*', 'instansi.*', 'users.*', 'users.nik as nik')
-            ->paginate(50);
         $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
             ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
             ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
@@ -1004,7 +994,6 @@ class AdminController extends Controller
         $params = [
             'PengajuanDana' => $PengajuanDana,
             'pages' => 'historyPengajuanDana',
-            'User' => $User,
             'Notifikasi' => $Notifikasi,
 
         ];
@@ -1014,15 +1003,10 @@ class AdminController extends Controller
     public function settingAkun()
     {
         $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
-        $User = User::leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
-            ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
-            ->select('badan_usaha.*', 'instansi.*', 'users.*', 'users.nik as nik')
-            ->paginate(50);
 
         $params = [
             'pages' => 'settingAkun',
             'UserAdmin' => Auth::User(),
-            'User' => $User,
             'Notifikasi' => $Notifikasi,
 
         ];

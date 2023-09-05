@@ -133,9 +133,9 @@
       <td class="text-center text-slate-700 rounded-md">{{ (++$key + (100* ((int)$User->currentPage() -1) ) ) }}</td>
       <td class="text-left text-slate-700 ">{{$item->nik}}</td>
       @if($item->role == 'KOPERASI' || $item->role == 'BANK')
-      <td class="text-left text-slate-700 ">{{$item->nama}}</td>
+      <td class="text-left text-slate-700 ">{{$item?->instansi?->name}}</td>
       @elseif($item->role == 'IKM')
-      <td class="text-left text-slate-700 ">{{$item->nama_direktur}}</td>
+      <td class="text-left text-slate-700 ">{{$item?->badan_usaha?->nama_direktur}}</td>
       @else
       <td class="text-left text-slate-700 ">{{$item->role}}</td>
       @endif
