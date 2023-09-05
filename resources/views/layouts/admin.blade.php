@@ -47,7 +47,7 @@
           <img class="h-[48px] mr-2" src="{{ asset('/images/Logo_Simanis.png') }}" alt="logo">
           <span>SIMANIS.</span>
         </div>
-        <a href="{{ url('/admin/tabel') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='tabel' || $pages=='admin'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
+        <a href="{{ url('/admin-dashboard') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='tabel' || $pages=='admin'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
           <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
           <span>Dashboard</span>
         </a>
