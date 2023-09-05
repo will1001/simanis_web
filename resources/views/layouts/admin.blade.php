@@ -47,33 +47,33 @@
           <img class="h-[48px] mr-2" src="{{ asset('/images/Logo_Simanis.png') }}" alt="logo">
           <span>SIMANIS.</span>
         </div>
-        <a href="{{ url('/admin/tabel') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='tabel' || $pages=='admin'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
+        <a href="{{ url('/admin-dashboard') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='tabel' || $pages=='admin'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
           <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
           <span>Dashboard</span>
         </a>
-        <a href="{{ url('/admin/setting') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='setting'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
+        <a href="{{ url('/admin-dashboard/setting') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='setting'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
           <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
           <span>Setting Slide</span>
         </a>
-        <a href="{{ url('/admin/settingSurat') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='settingSurat'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
+        <a href="{{ url('/admin-dashboard/setting-surat') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='settingSurat'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
           <img class="mr-5" src="{{ asset('/images/dashbord.png') }}" alt="logo">
           <span>Setting Surat</span>
         </a>
-        <a href="{{ url('/admin/daftarAkun') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='daftarAkun'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
+        <a href="{{ url('/admin-dashboard/daftar-akun') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 {{$pages=='daftarAkun'?'bg-blue-200 p-2 rounded-md':''}} p-2 rounded-md w-full">
           <img class="mr-5" src="{{ asset('/images/kartu.png') }}" alt="logo">
           <span>Daftar Akun</span>
         </a>
 
-        <a href="{{ url('/admin/daftarPengajuanDana') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='daftarPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}} w-full">
+        <a href="{{ url('/admin-dashboard/daftar-pengajuan-dana') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='daftarPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}} w-full">
           <img class="mr-5" src="{{ asset('/Icon-svg/dana.svg') }}" alt="logo">
           <span>Daftar Pembiayaan Usaha</span>
         </a>
-        <a href="{{ url('/admin/historyPengajuanDana') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='historyPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}} w-full">
+        <a href="{{ url('/admin-dashboard/history-pengajuan-dana') }}" class="flex justify-start items-center cursor-pointer mt-3 mb-3 p-1 {{$pages=='historyPengajuanDana'?'bg-blue-200 p-2 rounded-md':''}} w-full">
           <img class="mr-5" src="{{ asset('/Icon-svg/dana.svg') }}" alt="logo">
           <span>History Pembiayaan Usaha</span>
         </a>
         <hr class="w-full" />
-        <a href="{{ url('/admin/settingAkun') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
+        <a href="{{ url('/admin-dashboard/setting-akun') }}" class="flex justify-center items-center cursor-pointer mt-3 mb-3 p-1">
           <img class="mr-5" src="{{ asset('/Icon-svg/profil.svg') }}" alt="logo">
           <div class="flex flex-col">
             <span class="text-black">Admin</span>

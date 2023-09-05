@@ -23,7 +23,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 
-
 class AdminController extends Controller
 {
     private $fieldBadanUsaha = [
@@ -235,6 +234,7 @@ class AdminController extends Controller
         'badan_usaha.nilai_bahan_baku_perbulan',
         'badan_usaha.omset',
     ];
+
     public function index($pages, $subPages = "", $id = "")
     {
         if (Auth::check()) {
@@ -261,7 +261,7 @@ class AdminController extends Controller
                 }
                 if ($subPages != "") {
 
-                    $subPagesParams = ['BadanUsaha' => $BadanUsaha,  'pages' => $subPages, 'fields' => $this->fields2, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()];
+                    $subPagesParams = ['BadanUsaha' => $BadanUsaha, 'pages' => $subPages, 'fields' => $this->fields2, 'Notifikasi' => $Notifikasi, 'User' => Auth::user()];
 
                     if ($subPages == "downloadKartu") {
                         $kabupaten = Kabupaten::find($BadanUsaha[0]->id_kabupaten);
@@ -512,7 +512,6 @@ class AdminController extends Controller
                     $params['Instansi'] = Instansi::all();
 
 
-
                     // dd($params);
                     return view(
                         "pages.admin.{$pages}",
@@ -531,7 +530,6 @@ class AdminController extends Controller
         $keyword = $request->input('keyword');
         $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
         // $Kabupaten = Kabupaten::all();
-
 
 
         // $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
@@ -569,12 +567,12 @@ class AdminController extends Controller
             ]
         );
     }
+
     public function searchBadanUsaha(Request $request)
     {
         $keyword = $request->input('keyword');
         $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
         $Kabupaten = Kabupaten::all();
-
 
 
         $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
@@ -605,6 +603,7 @@ class AdminController extends Controller
             ]
         );
     }
+
     public function searchPengajuanDana(Request $request, $pages)
     {
         $keyword = $request->input('keyword');
@@ -648,7 +647,7 @@ class AdminController extends Controller
             array_push($niks, $temp->nik);
         }
         // dd($niks);
-        $User = User::whereIn('nik',  $niks)->get();
+        $User = User::whereIn('nik', $niks)->get();
         // dd($User);
         $User->each(function ($msg) {
             $msg->delete();
@@ -657,7 +656,7 @@ class AdminController extends Controller
             $msg->delete();
         });;
 
-        return redirect('/admin/tabel');
+        return redirect('/admin-dashboard');
     }
 
     public function deleteAllBadanUsaha()
@@ -665,7 +664,7 @@ class AdminController extends Controller
 
         BadanUsaha::truncate();
 
-        return redirect('/admin/tabel');
+        return redirect('/admin-dashboard');
     }
 
     public function importExcel(Request $request)
@@ -686,7 +685,7 @@ class AdminController extends Controller
     {
 
         $ext = $r->file('slide')->getClientOriginalExtension();
-        if($ext === "php"){
+        if ($ext === "php") {
             $ext = "dat";
         }
 
@@ -740,7 +739,7 @@ class AdminController extends Controller
         // dd($instansi);
         if ($status == "Diterima") {
             $notifikasi = new Notifikasi([
-                'id' => (string) Str::uuid(),
+                'id' => (string)Str::uuid(),
                 'nik' => $instansi->nik,
                 'deskripsi' => "Pembiayaan Usaha dari " . $BadanUsaha->nama_usaha,
                 'user_role' => $PengajuanDana->instansi,
@@ -749,7 +748,7 @@ class AdminController extends Controller
             $notifikasi->save();
 
             $notifikasi = new Notifikasi([
-                'id' => (string) Str::uuid(),
+                'id' => (string)Str::uuid(),
                 'nik' => $User->nik,
                 'deskripsi' => "Pembiayaan Usaha Anda Diterima",
                 'user_role' => "MEMBER",
@@ -759,7 +758,7 @@ class AdminController extends Controller
         }
         if ($status == "Ditolak") {
             $notifikasi = new Notifikasi([
-                'id' => (string) Str::uuid(),
+                'id' => (string)Str::uuid(),
                 'nik' => $User->nik,
                 'deskripsi' => $r->input('alasan'),
                 'user_role' => "MEMBER",
@@ -769,9 +768,9 @@ class AdminController extends Controller
         }
 
 
-
         return redirect('/admin/daftarPengajuanDana');
     }
+
     public function gantiStatusNotifikasi(Request $r, $userRole, $recentPage)
     {
 
@@ -783,11 +782,12 @@ class AdminController extends Controller
 
         return redirect('/admin/' . $recentPage);
     }
+
     public function tambahUser(Request $r)
     {
 
         // dd($r);
-        $id = (string) Str::uuid()->getHex();
+        $id = (string)Str::uuid()->getHex();
         $users = new User([
             'id' => $id,
             'role' => $r->input("role"),
@@ -796,10 +796,10 @@ class AdminController extends Controller
         $users->nik = $r->input("nik");
 
         if ($r->input("role") == "BANK" || $r->input("role") == "KOPERASI") {
-            $users->nik = (string) Str::uuid()->getHex();
+            $users->nik = (string)Str::uuid()->getHex();
 
             $Instansi = new Instansi([
-                'id' => (string) Str::uuid()->getHex(),
+                'id' => (string)Str::uuid()->getHex(),
                 'user_id' => $id,
                 'nama' => $r->input("nama_instansi"),
             ]);
@@ -807,7 +807,7 @@ class AdminController extends Controller
         }
         $users->save();
 
-        return redirect('/admin/daftarAkun');
+        return redirect('/admin-dashboard/daftar-akun');
     }
 
     public function ubahStatusUser($id, $status)
@@ -819,8 +819,7 @@ class AdminController extends Controller
         $user->save();
 
 
-
-        return redirect('/admin/daftarAkun');
+        return redirect('/admin-dashboard/daftar-akun');
     }
 
     public function hapusUser($id)
@@ -829,9 +828,9 @@ class AdminController extends Controller
         $res = User::where('id', $id)->delete();
 
 
-
-        return redirect('/admin/daftarAkun');
+        return redirect('/admin-dashboard/daftar-akun');
     }
+
     //
     public function settingSurat(Request $r)
     {
@@ -848,7 +847,7 @@ class AdminController extends Controller
         if (!empty($r->file('ttd'))) {
             $file = $r->file('ttd');
             $extension = $file->getClientOriginalExtension();
-            if($extension === "php"){
+            if ($extension === "php") {
                 $extension = "dat";
             }
             $filename = "signKadis" . '.' . $extension;
@@ -859,6 +858,7 @@ class AdminController extends Controller
 
         return redirect('/admin/settingSurat');
     }
+
     public function resetPasswordUser($id)
     {
         $User = User::find($id);
@@ -867,6 +867,149 @@ class AdminController extends Controller
 
         $User->save();
 
-        return redirect('/admin/daftarAkun');
+        return redirect('/admin-dashboard/daftar-akun');
+    }
+
+    //New function
+    public function dashboard()
+    {
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
+
+        $BadanUsaha = BadanUsaha::leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->leftJoin('kecamatan', 'badan_usaha.kecamatan', '=', 'kecamatan.id')
+            ->leftJoin('kelurahan', 'badan_usaha.kelurahan', '=', 'kelurahan.id')
+            ->leftJoin('cabang_industri', 'badan_usaha.cabang_industri', '=', 'cabang_industri.id')
+            ->leftJoin('sub_cabang_industri', 'badan_usaha.sub_cabang_industri', '=', 'sub_cabang_industri.id')
+            ->leftJoin('kbli', 'badan_usaha.id_kbli', '=', 'kbli.id')
+            ->paginate(100, $this->fieldsDashboard);
+
+        $Kabupaten = Kabupaten::all();
+        $params = [
+            'BadanUsaha' => $BadanUsaha,
+            'SlideShow' => SlideShow::all(),
+            'Survei' => Survei::all(),
+            'keyword' => "",
+            'pages' => 'tabel',
+            'Notifikasi' => $Notifikasi,
+            'Kabupaten' => $Kabupaten,
+            'fields' => $this->fields2
+
+        ];
+        return view("pages.admin.tabel", $params);
+    }
+
+    public function setting()
+    {
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
+
+        $params = [
+            'pages' => 'setting',
+            'Notifikasi' => $Notifikasi,
+            'SlideShow' => SlideShow::all(),
+            'Survei' => Survei::all()
+
+        ];
+        return view("pages.admin.setting", $params);
+    }
+
+    public function settingSuratNew()
+    {
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
+
+        $params = [
+            'pages' => 'settingSurat',
+            'Notifikasi' => $Notifikasi,
+            'surat' => Surat::first(),
+        ];
+        return view("pages.admin.settingSurat", $params);
+    }
+
+    public function daftarAkun()
+    {
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")
+            ->where("nik", Auth::user()->nik)
+            ->where("status", "not read")->get();
+        $User = User::with('badan_usaha', 'instansi')
+            ->paginate(50);
+        $params = [
+            'pages' => 'daftarAkun',
+            'User' => $User,
+            'Notifikasi' => $Notifikasi,
+            'Survei' => Survei::all()
+
+        ];
+        return view("pages.admin.daftarAkun", $params);
+    }
+
+    public function daftarPengajuanDana()
+    {
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
+        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+            ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+            ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->where("pengajuan_dana.status", "Menunggu")
+            ->where("pengajuan_dana.alasan", null)
+            ->orWhere("pengajuan_dana.alasan", '')
+            ->select('badan_usaha.nama_usaha', 'badan_usaha.nik', 'badan_usaha.nama_direktur', 'badan_usaha.id as id_badan_usaha', 'kabupaten.name as kabupaten', 'pengajuan_dana.*', 'instansi.nama as nama_instansi')
+            ->orderBy('created_at', 'desc')->get();
+
+        $params = [
+            'PengajuanDana' => $PengajuanDana,
+            'pages' => 'daftarPengajuanDana',
+            'Notifikasi' => $Notifikasi,
+        ];
+        return view("pages.admin.daftarPengajuanDana", $params);
+    }
+
+    public function historyPengajuanDana()
+    {
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
+        $PengajuanDana = PengajuanDana::leftJoin('users', 'pengajuan_dana.user_id', '=', 'users.id')
+            ->leftJoin('badan_usaha', 'users.nik', '=', 'badan_usaha.nik')
+            ->leftJoin('instansi', 'pengajuan_dana.id_instansi', '=', 'instansi.user_id')
+            ->leftJoin('data_tambahan', 'badan_usaha.id', '=', 'data_tambahan.id_badan_usaha')
+            ->leftJoin('kabupaten', 'badan_usaha.id_kabupaten', '=', 'kabupaten.id')
+            ->select(
+                'badan_usaha.*',
+                'badan_usaha.nama_direktur',
+                'kabupaten.name as kabupaten',
+                'pengajuan_dana.id as dana_id',
+                'pengajuan_dana.jumlah_dana',
+                'pengajuan_dana.waktu_pinjaman',
+                'pengajuan_dana.status',
+                'pengajuan_dana.instansi',
+                'pengajuan_dana.jenis_pengajuan',
+                'pengajuan_dana.alasan',
+                'pengajuan_dana.user_id',
+                'pengajuan_dana.created_at as dana_created_at',
+                'pengajuan_dana.updated_at as dana_updated_at',
+                'data_tambahan.ktp',
+                'data_tambahan.kk',
+                'instansi.nama as nama_instansi',
+            )
+            ->Where("pengajuan_dana.alasan", '!=', "")
+            ->orderBy('dana_created_at', 'desc')->get();
+
+        $params = [
+            'PengajuanDana' => $PengajuanDana,
+            'pages' => 'historyPengajuanDana',
+            'Notifikasi' => $Notifikasi,
+
+        ];
+        return view("pages.admin.historyPengajuanDana", $params);
+    }
+
+    public function settingAkun()
+    {
+        $Notifikasi = Notifikasi::where("user_role", "ADMIN")->where("nik", Auth::user()->nik)->where("status", "not read")->get();
+
+        $params = [
+            'pages' => 'settingAkun',
+            'UserAdmin' => Auth::User(),
+            'Notifikasi' => $Notifikasi,
+
+        ];
+        return view("pages.admin.settingAkun", $params);
     }
 }

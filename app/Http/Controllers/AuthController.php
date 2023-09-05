@@ -37,25 +37,25 @@ class AuthController extends Controller
                 return view('pages.login');
             }
         } else {
-            $nik = $r->input('nik');
-            $user = User::where('nik', $nik)->get();
-            if (!$user->isEmpty()) {
+//            $nik = $r->input('nik');
+//            $user = User::where('nik', $nik)->get();
+//            if (!$user->isEmpty()) {
                 $credentials = $r->only('nik', 'password');
                 if (Auth::attempt($credentials)) {
-                    $r->session()->regenerate();
+//                    $r->session()->regenerate();
 
-                    if ($user[0]->role === "ADMIN") {
-                        return redirect()->intended('/admin/tabel');
-                    } else if ($user[0]->role === "BANK") {
+                    if (\auth()->user()->role === "ADMIN") {
+                        return redirect()->intended('/admin-dashboard');
+                    } else if (\auth()->user()->role === "BANK") {
                         return redirect('/perbankan/daftarPengajuanDana');
-                    } else if ($user[0]->role === "KOPERASI") {
+                    } else if (\auth()->user()->role === "KOPERASI") {
                         return redirect('/koperasi/daftarPengajuanDana');
-                    } else if ($user[0]->role === "PERDAGANGAN") {
+                    } else if (\auth()->user()->role === "PERDAGANGAN") {
                         return redirect('/perdagangan/dashboard');
-                    } else if ($user[0]->role === "OJK") {
+                    } else if (\auth()->user()->role === "OJK") {
                         return redirect('/ojk/dashboard');
                     } else {
-                        if (Auth::user()->status == "Tidak Aktif") {
+                        if (\auth()->user()->status == "Tidak Aktif") {
                             return view('pages.login', ['msg' => "Akun Anda Di Non Aktifkan"]);
                         }
                         return redirect()->intended('/member/dashboard');
@@ -63,9 +63,9 @@ class AuthController extends Controller
                 } else {
                     return view('pages.login', ['msg' => "Password Salah"]);
                 }
-            } else {
-                return view('pages.login', ['msg' => "NIK Tidak Terdaftar, Silahkan Klik Daftar Terlebih Dahulu"]);
-            }
+//            } else {
+//                return view('pages.login', ['msg' => "NIK Tidak Terdaftar, Silahkan Klik Daftar Terlebih Dahulu"]);
+//            }
         }
     }
 
