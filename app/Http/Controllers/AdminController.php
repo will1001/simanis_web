@@ -552,7 +552,7 @@ class AdminController extends Controller
             ->leftJoin('instansi', 'users.id', '=', 'instansi.user_id')
             ->select('badan_usaha.*', 'instansi.*', 'users.*', 'users.nik as nik')
             ->where('users.nik', 'LIKE', "%{$keyword}%")
-            ->get();
+            ->paginate(50);
 
         return view(
             'pages.admin.daftarAkun',
