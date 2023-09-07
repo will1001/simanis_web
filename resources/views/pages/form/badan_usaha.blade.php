@@ -368,11 +368,11 @@ $forms = array(
 
     }
 
-    .inputstyle>select {
+    .inputstyle > select {
         width: 50px;
     }
 
-    .inputstyle>span {
+    .inputstyle > span {
         word-wrap: break-word;
         width: 50%
     }
@@ -382,74 +382,109 @@ $baseUrl = env('APP_URL');
 
 ?>
 @section('content')
-<form method="POST" action="/form/{$userType}/{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->id : ''}}" enctype="multipart/form-data">
-    @csrf
-    <h3 class="text-gray-400">Detail badan usaha</h3>
-    @foreach($forms as $key=>$form)
-    <div class="w-[1000px]">
-        <div class="flex justify-between items-center">
-            <div class="w-[300px] text-gray-700">
-                <span>{{$form->placeholder}} </span>
-            </div>
-
-            <div class="w-[500px]">
-
-                @if($form->type == 'select')
-
-                <select onchange="{{$form->change}}" class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true" name="{{$form->name}}" id="{{$form->prop}}" value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
-                    <option value="" disabled selected>pilih</option>
-                    @foreach($form->options as $key=>$option)
-                    <option value="{{$form->prop == 'kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'kabupaten'||$form->prop == 'kecamatan'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
-                    @endforeach
-                </select>
-                @elseif($form->type == 'file')
-                <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
-                <label for="{{$form->prop}}" class="flex flex-col justify-center items-center w-[340px] h-[150px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <div class="flex flex-col justify-center items-center pt-5 pb-6 h-[150px]">
-                        <img src="{{ asset('/Icon-svg/file.svg') }}" />
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-bold">UPLOAD FILE (MAX : 5MB)</p>
+    <form method="POST" action="/form/{{$userType}}/{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->id : ''}}"
+          enctype="multipart/form-data">
+        @csrf
+        <h3 class="text-gray-400">Detail badan usaha</h3>
+        @foreach($forms as $key=>$form)
+            <div class="w-[1000px]">
+                <div class="flex justify-between items-center">
+                    <div class="w-[300px] text-gray-700">
+                        <span>{{$form->placeholder}} </span>
                     </div>
-                    <input onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->prop}}" accept="application/pdf" name="{{$form->prop}}" type="file" class="hidden" id="{{$form->prop}}" />
-                </label>
-                <h5 id="{{$form->prop}}_info"></h5>
-                @if(!empty($BadanUsaha[0]->{$form->prop}))
-                <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat File</a>
-                @endif
-                @elseif($form->type == 'image')
-                <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
-                <label for="{{$form->id}}" class="flex flex-col justify-center items-center w-[340px] h-[150px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <div class="flex flex-col justify-center items-center pt-5 pb-6 h-[150px]">
-                        <img src="{{ asset('/Icon-svg/file.svg') }}" />
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px x 400px) (Max : 5MB)</p>
+
+                    <div class="w-[500px]">
+
+                        @if($form->type == 'select')
+
+                            <select onchange="{{$form->change}}"
+                                    class="border-1 border-gray-400 pl-2 py-2 mb-2 w-[340px]" data-live-search="true"
+                                    name="{{$form->name}}" id="{{$form->prop}}"
+                                    value="{{strtolower(!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : '')}}">
+                                <option value="" disabled selected>pilih</option>
+                                @foreach($form->options as $key=>$option)
+                                    <option
+                                        value="{{$form->prop == 'kabupaten'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name}}" {{!empty($BadanUsaha[0]) ? strtolower($BadanUsaha[0]->{$form->prop})==strtolower(($form->prop == 'kabupaten'||$form->prop == 'kecamatan'||$form->prop == 'id_kbli'||$form->prop == 'cabang_industri'?$option->id:$option->name))?'selected' : '' : ''}}>{{$option->name}}</option>
+                                @endforeach
+                            </select>
+                        @elseif($form->type == 'file')
+                        <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
+                            <label for="{{$form->prop}}"
+                                   class="flex flex-col justify-center items-center w-[340px] h-[150px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <div class="flex flex-col justify-center items-center pt-5 pb-6 h-[150px]">
+                                    <img src="{{ asset('/Icon-svg/file.svg') }}"/>
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">Click to upload</span> or drag and drop</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 font-bold">UPLOAD FILE (MAX :
+                                        5MB)</p>
+                                </div>
+                                <input onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->prop}}"
+                                       accept="application/pdf" name="{{$form->prop}}" type="file" class="hidden"
+                                       id="{{$form->prop}}"/>
+                            </label>
+                            <h5 id="{{$form->prop}}_info"></h5>
+                            @if(!empty($BadanUsaha[0]->{$form->prop}))
+                                <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat
+                                    File</a>
+                            @endif
+                        @elseif($form->type == 'image')
+                        <!-- <input type="file" enctype="multipart/form-data" name="{{$form->prop}}_file" id="{{$form->prop}}"> -->
+                            <label for="{{$form->id}}"
+                                   class="flex flex-col justify-center items-center w-[340px] h-[150px] bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <div class="flex flex-col justify-center items-center pt-5 pb-6 h-[150px]">
+                                    <img src="{{ asset('/Icon-svg/file.svg') }}"/>
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">Click to upload</span> or drag and drop</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, or JPG (Ukuran : 400px
+                                        x 400px) (Max : 5MB)</p>
+                                </div>
+                                <input oninvalid="invalid('{{$form->prop}}','Wajib di Isi')"
+                                       onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->id}}"
+                                       accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file"
+                                       class="hidden" id="{{$form->prop}}" enctype="multipart/form-data"
+                                       value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}"/>
+                            </label>
+                            <h5 id="{{$form->prop}}_info"></h5>
+                            @if(!empty($BadanUsaha[0]->{$form->prop}))
+                                <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat
+                                    Gambar</a>
+                            @endif
+                            <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
+                        @elseif($form->type == 'label')
+                            <a class="text-blue font-blue" target="_blank"
+                               href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik
+                                Disini</a>
+                        @elseif($form->type == 'number')
+                            <input id="{{$form->prop}}"
+                                   class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="number"
+                                   name="{{$form->prop}}"
+                                   value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}"
+                                   placeholder="{{$form->placeholder}}">
+                        @elseif($form->type == 'numberText')
+                            <input maxlength="{{$form->maxLength}}" id="{{$form->prop}}"
+                                   class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]"
+                                   onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}"
+                                   value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}"
+                                   placeholder="{{$form->placeholder}}">
+
+                        @else
+                            <input id="{{$form->prop}}"
+                                   {{$form->required == 'true'?'required':''}} oninvalid="invalid('{{$form->prop}}','Wajib di Isi')"
+                                   class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]"
+                                   type="{{$form->type}}" name="{{$form->prop}}"
+                                   value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}"
+                                   placeholder="{{$form->placeholder}}">
+                            <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
+                        @endif
                     </div>
-                    <input oninvalid="invalid('{{$form->prop}}','Wajib di Isi')" onchange="uploadFile('{{$form->prop}}_info',event)" id="{{$form->id}}" accept="image/x-png,image/gif,image/jpeg" name="{{$form->id}}" type="file" class="hidden" id="{{$form->prop}}" enctype="multipart/form-data" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" />
-                </label>
-                <h5 id="{{$form->prop}}_info"></h5>
-                @if(!empty($BadanUsaha[0]->{$form->prop}))
-                <a href="{{!empty($BadanUsaha[0]) ? $baseUrl . $BadanUsaha[0]->{$form->prop} : ''}}">Lihat Gambar</a>
-                @endif
-                <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
-                @elseif($form->type == 'label')
-                <a class="text-blue font-blue" target="_blank" href="https://www.youtube.com/watch?v=f3-B_xtKwU0&ab_channel=TensaitechAcademy">Klik Disini</a>
-                @elseif($form->type == 'number')
-                <input id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="number" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
-                @elseif($form->type == 'numberText')
-                <input maxlength="{{$form->maxLength}}" id="{{$form->prop}}" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" onkeyup="keyup('{{$form->prop}}',event)" type="text" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? number_format($BadanUsaha[0]->{$form->prop}) : ''}}" placeholder="{{$form->placeholder}}">
-                
-                @else
-                <input id="{{$form->prop}}" {{$form->required == 'true'?'required':''}} oninvalid="invalid('{{$form->prop}}','Wajib di Isi')" class="border-1 border-gray-400 pl-2 py-2 text-black mb-2 w-[340px]" type="{{$form->type}}" name="{{$form->prop}}" value="{{!empty($BadanUsaha[0]) ? $BadanUsaha[0]->{$form->prop} : ''}}" placeholder="{{$form->placeholder}}">
-                <p id="{{$form->prop}}_label" class="text-red-600" style="display: none;">Wajib di Isi *</p>
-                @endif
+                </div>
             </div>
+        @endforeach
+        <div class="flex justify-end">
+            <button class="bg-buttonColor-900 text-white p-3 mr-[150px] mt-3 rounded-xl" type="submit">Simpan Akun IKM
+            </button>
         </div>
-    </div>
-    @endforeach
-    <div class="flex justify-end">
-        <button class="bg-buttonColor-900 text-white p-3 mr-[150px] mt-3 rounded-xl" type="submit">Simpan Akun IKM</button>
-    </div>
-</form>
+    </form>
 @endsection
 
 <script>
@@ -461,7 +496,6 @@ $baseUrl = env('APP_URL');
     const Kbli = @json($Kbli);
     const BadanUsaha = @json($BadanUsaha);
     const forms = @json($forms);
-
 
 
     const changeCabangIndustri = () => {
@@ -568,7 +602,6 @@ $baseUrl = env('APP_URL');
     }
 
 
-
     // const changeSubCabangIndustri = () => {
     //     const subCabangIndustriFilter = document.getElementById('sub_cabang_industri');
     //     const nameSubCabangIndsutri = subCabangIndustriFilter.options[subCabangIndustriFilter.selectedIndex].value;
@@ -588,7 +621,7 @@ $baseUrl = env('APP_URL');
 
     // console.log(BadanUsaha[0].cabang_industri);
 
-    setTimeout(function() {
+    setTimeout(function () {
         if (BadanUsaha[0].kabupaten) {
             renderKecamatan(BadanUsaha[0].kabupaten);
             document.getElementById(forms[3].prop).value = BadanUsaha[0].kecamatan;

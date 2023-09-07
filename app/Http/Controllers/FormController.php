@@ -336,7 +336,7 @@ class FormController extends Controller
 
 
             if ($userType == 'admin') {
-                return redirect('/admin/tabel');
+                return redirect('/admin-dashboard');
             } else {
                 return redirect('/member/dashboard');
             }
@@ -350,6 +350,6 @@ class FormController extends Controller
 
         $badan_usaha->delete();
         $user->delete();
-        return redirect('/admin/tabel');
+        return redirect('/admin-dashboard');
     }
 }
