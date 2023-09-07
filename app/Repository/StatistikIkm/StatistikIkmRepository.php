@@ -192,4 +192,36 @@ class StatistikIkmRepository implements IStatistikIkmRepository
             ->where($condition);
         return $informal;
     }
+
+    public function getGeoSpacial($geospacial)
+    {
+        $features = [];
+        foreach ($geospacial as $row) {
+            $features[] = [
+                "type" => "Feature",
+                "geometry" => [
+                    'type' => 'Point',
+                    'coordinates' => [$row?->lng, $row?->lat]
+                ],
+                "properties" => [
+                    'id' => $row?->id,
+                    'icon' => $row?->icon,
+                    'alamat' => $row?->alamat_lengkap,
+                    'nama' => $row?->name,
+                    'nama_direktur' => $row?->nama_direktur,
+                    'nama_usaha' => $row?->nama_usaha,
+                    'kecamatan' => $row?->kecamatan,
+                    'kelurahan' => $row?->kelurahan,
+                    'jenis_usaha' => $row?->jenis_usaha,
+                ]
+            ];
+        }
+
+        return response()->json([
+            'data' => [
+                "type" => "FeatureCollection",
+                "features" => $features,
+            ]
+        ], 200);
+    }
 }

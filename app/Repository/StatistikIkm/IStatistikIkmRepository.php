@@ -29,4 +29,6 @@ interface IStatistikIkmRepository
     public function getFormal($condition);
 
     public function getInformal($condition);
+
+    public function getGeoSpacial($geospacial);
 }

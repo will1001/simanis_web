@@ -50,7 +50,6 @@ class IkmController extends Controller
         $sertifikat_test_report = $this->ikmRepository->getSertifikatTestReposrt($condition)->count();
         $formal = $this->ikmRepository->getFormal($condition)->count();
         $informal = $this->ikmRepository->getInformal($condition)->count();
-//        dd($condition);
 
         return response()->json(([
             'badan_usaha' => $badan_usaha,
@@ -66,5 +65,123 @@ class IkmController extends Controller
             'formal' => $formal,
             'informal' => $informal
         ]));
+    }
+
+    public function geoSpacial(Request $request)
+    {
+        try {
+            $condition = array();
+            if ($request->kabupaten) {
+                $condition['id_kabupaten'] = $request->kabupaten;
+            }
+            if ($request->kecamatan) {
+                $condition['kecamatan'] = $request->kecamatan;
+            }
+            if ($request->kelurahan) {
+                $condition['kelurahan'] = $request->kelurahan;
+            }
+            if ($request->cabang_industri) {
+                $condition['cabang_industri'] = $request->cabang_industri;
+            }
+            if ($request->sub_cabang_industri) {
+                $condition['sub_cabang_industri'] = $request->sub_cabang_industri;
+            }
+            if ($request->tahun_berdiri) {
+                $condition['tahun_berdiri'] = $request->tahun_berdiri;
+            }
+
+            $data = [];
+            if ($request->q == 'badan_usaha') {
+                $data = $this->ikmRepository->getBadanUsaha($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'usaha_kecil') {
+                $data = $this->ikmRepository->getIndustriKecil($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'usaha_menengah') {
+                $data = $this->ikmRepository->getIndustriMenengah($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'usaha_besar') {
+                $data = $this->ikmRepository->getIndustriBesar($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'total_tenaga_kerja') {
+                $data = $this->ikmRepository->getListTenagaKerja($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'total_ikm_baru') {
+                $data = $this->ikmRepository->getTotalIkmBaru($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'sertifikat_halal') {
+                $data = $this->ikmRepository->getSertifikatHalal($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'sertifikat_haki') {
+                $data = $this->ikmRepository->getSertifikatHaki($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'sertifikat_sni') {
+                $data = $this->ikmRepository->getSertifikatSni($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'sertifikat_test_report') {
+                $data = $this->ikmRepository->getSertifikatTestReposrt($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'formal') {
+                $data = $this->ikmRepository->getFormal($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            } elseif ($request->q == 'informal') {
+                $data = $this->ikmRepository->getInformal($condition)
+                    ->whereNotNull('lat')
+                    ->whereNotNull('lng')
+                    ->where('lat', '!=', '0')
+                    ->where('lng', '!=', '0')
+                    ->get();
+            }
+
+            return $this->ikmRepository->getGeoSpacial($data);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'Error internal server!'
+            ], 500);
+        }
     }
 }
