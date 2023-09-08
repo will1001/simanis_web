@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\IkmController;
-use App\Http\Controllers\API\StatistikIkmController;
-use App\Http\Controllers\API\DataMasterController;
+use App\Http\Controllers\Api\StatistikIkmController;
+use App\Http\Controllers\Api\DataMasterController;
 
 /*
 |--------------------------------------------------------------------------
