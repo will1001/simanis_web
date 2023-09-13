@@ -201,7 +201,7 @@ class StatistikIkmRepository implements IStatistikIkmRepository
                 "type" => "Feature",
                 "geometry" => [
                     'type' => 'Point',
-                    'coordinates' => [$row?->lng, $row?->lat]
+                    'coordinates' => [str_replace(',','',$row?->lng), str_replace(',','',$row?->lat)]
                 ],
                 "properties" => [
                     'id' => $row?->id,
