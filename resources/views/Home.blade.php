@@ -66,8 +66,8 @@
 
     .loginRegisterContainer {
         position: absolute;
-        top: 680px;
-        left: 108px;
+        top: 723px;
+        left: 160px;
     }
 
     .buttonreg {
